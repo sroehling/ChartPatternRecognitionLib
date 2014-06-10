@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include math/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -39,11 +40,14 @@ endif
 # All Target
 all: PatternRecognitionLibTest
 
+dependents:
+	-cd /Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug && $(MAKE) all
+
 # Tool invocations
-PatternRecognitionLibTest: $(OBJS) $(USER_OBJS)
+PatternRecognitionLibTest: $(OBJS) $(USER_OBJS) /Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug/libPatternRecognitionLib.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C++ Linker'
-	g++  -o "PatternRecognitionLibTest" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug" -L/usr/local/lib -o "PatternRecognitionLibTest" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -54,5 +58,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug/libPatternRecognitionLib.a:
 
 -include ../makefile.targets

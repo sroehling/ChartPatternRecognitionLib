@@ -4,17 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../RunTests.cpp 
+../math/LinearEquation.cpp \
+../math/XYCoord.cpp 
 
 OBJS += \
-./RunTests.o 
+./math/LinearEquation.o \
+./math/XYCoord.o 
 
 CPP_DEPS += \
-./RunTests.d 
+./math/LinearEquation.d \
+./math/XYCoord.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-%.o: ../%.cpp
+math/%.o: ../math/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
 	g++ -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math" -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

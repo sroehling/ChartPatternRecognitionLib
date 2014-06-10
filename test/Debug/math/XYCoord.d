@@ -1,4 +1,5 @@
-RunTests.d: ../RunTests.cpp /usr/local/include/boost/test/unit_test.hpp \
+math/XYCoord.d: ../math/XYCoord.cpp \
+  /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
   /usr/local/include/boost/test/tools/context.hpp \
   /usr/local/include/boost/test/utils/lazy_ostream.hpp \
@@ -344,7 +345,8 @@ RunTests.d: ../RunTests.cpp /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/utility/swap.hpp \
   /usr/local/include/boost/type.hpp \
   /usr/local/include/boost/test/tree/global_fixture.hpp \
-  /usr/local/include/boost/config/auto_link.hpp
+  /usr/local/include/boost/config/auto_link.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -1039,3 +1041,5 @@ RunTests.d: ../RunTests.cpp /usr/local/include/boost/test/unit_test.hpp \
 /usr/local/include/boost/test/tree/global_fixture.hpp:
 
 /usr/local/include/boost/config/auto_link.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
