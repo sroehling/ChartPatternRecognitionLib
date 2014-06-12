@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include patternScan/subdir.mk
 -include math/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -41,7 +42,7 @@ endif
 all: PatternRecognitionLibTest
 
 dependents:
-	-cd /Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug && $(MAKE) clean all
+	-cd /Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug && $(MAKE) all
 
 # Tool invocations
 PatternRecognitionLibTest: $(OBJS) $(USER_OBJS) /Users/sroehling/Development/workspace/PatternRecognitionLib/src/Debug/libPatternRecognitionLib.a

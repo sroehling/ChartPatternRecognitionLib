@@ -67,13 +67,11 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(
 	}
 
 	unsigned int minRemSegmentLen = minSegmentLength_;
-	unsigned int maxRemSegmentLen = std::max((unsigned int)remainingVals.size(),
+	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals.size(),
 					maxSegmentLength_);
 
 	for(unsigned int splitPos = minRemSegmentLen; splitPos < maxRemSegmentLen; splitPos++)
 	{
-		assert(splitPos < remainingVals.size());
-
 		PeriodValCltn leadingVals, trailingVals;
 		splitPeriodVals(remainingVals,splitPos,leadingVals,trailingVals);
 
