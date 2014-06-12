@@ -8,8 +8,13 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include quoteData/subdir.mk
+-include patternScan/subdir.mk
+-include patternMatch/subdir.mk
 -include math/subdir.mk
 -include date/subdir.mk
+-include chartSegmentList/subdir.mk
+-include chartSegment/subdir.mk
 -include subdir.mk
 -include objects.mk
 

@@ -346,7 +346,8 @@ math/LinearEquation.d: ../math/LinearEquation.cpp \
   /usr/local/include/boost/type.hpp \
   /usr/local/include/boost/test/tree/global_fixture.hpp \
   /usr/local/include/boost/config/auto_link.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -1043,3 +1044,5 @@ math/LinearEquation.d: ../math/LinearEquation.cpp \
 /usr/local/include/boost/config/auto_link.hpp:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:

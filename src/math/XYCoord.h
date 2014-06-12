@@ -17,8 +17,8 @@ private:
 public:
     XYCoord(double x, double y);
 
-    double x();
-    double y();
+    double x() const;
+    double y() const;
 
 };
 

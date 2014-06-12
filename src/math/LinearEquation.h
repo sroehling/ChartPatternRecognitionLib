@@ -8,6 +8,8 @@
 #ifndef LINEAREQUATION_H_
 #define LINEAREQUATION_H_
 
+#include <boost/shared_ptr.hpp>
+#include "XYCoord.h"
 
 class LinearEquation {
 
@@ -16,9 +18,12 @@ private:
     double b_;
 public:
     LinearEquation(double m, double b);
+    LinearEquation(const XYCoord &startPt, const XYCoord &endPt);
+
     double slope();
     double yVal(double x);
 };
 
+typedef boost::shared_ptr<LinearEquation> LinearEquationPtr;
 
 #endif /* LINEAREQUATION_H_ */

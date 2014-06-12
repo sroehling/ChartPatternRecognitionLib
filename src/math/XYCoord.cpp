@@ -14,12 +14,12 @@ XYCoord::XYCoord(double x, double y)
 
 }
 
-double XYCoord::x()
+double XYCoord::x() const
 {
     return x_;
 }
 
-double XYCoord::y()
+double XYCoord::y() const
 {
     return y_;
 }
