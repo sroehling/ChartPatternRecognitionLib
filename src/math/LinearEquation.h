@@ -20,8 +20,8 @@ public:
     LinearEquation(double m, double b);
     LinearEquation(const XYCoord &startPt, const XYCoord &endPt);
 
-    double slope();
-    double yVal(double x);
+    double slope() const;
+    double yVal(double x) const;
 };
 
 typedef boost::shared_ptr<LinearEquation> LinearEquationPtr;

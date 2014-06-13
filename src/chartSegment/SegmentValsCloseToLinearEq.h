@@ -11,8 +11,10 @@
 #include "SegmentConstraint.h"
 
 class SegmentValsCloseToLinearEq: public SegmentConstraint {
+private:
+	double maxDeltaPercVsEquation_;
 public:
-	SegmentValsCloseToLinearEq();
+	SegmentValsCloseToLinearEq(double maxDeltaPercVsEquation);
 
 	bool validSegment(const ChartSegment &segment);
 

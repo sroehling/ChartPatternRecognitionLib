@@ -6,6 +6,7 @@
  */
 
 #include <SlopeIncreasesConstraint.h>
+#include <limits>
 
 SlopeIncreasesConstraint::SlopeIncreasesConstraint() {
 	// TODO Auto-generated constructor stub
@@ -15,8 +16,19 @@ SlopeIncreasesConstraint::SlopeIncreasesConstraint() {
 
 bool SlopeIncreasesConstraint::validSegments(const ChartSegmentList &segments)
 {
+	double lastSlope = -1.0 * std::numeric_limits<double>::max();
+	for(ChartSegmentList::const_iterator segIter = segments.begin();
+			segIter != segments.end(); segIter++)
+	{
+		double currSlope = (*segIter)->slope();
+		if(currSlope < lastSlope)
+		{
+			return false;
+		}
+		lastSlope = currSlope;
+	}
 	return true;
-} // dummied-up
+}
 
 
 SlopeIncreasesConstraint::~SlopeIncreasesConstraint() {

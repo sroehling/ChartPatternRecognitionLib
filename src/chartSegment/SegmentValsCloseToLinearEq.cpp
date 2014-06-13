@@ -7,13 +7,22 @@
 
 #include "SegmentValsCloseToLinearEq.h"
 
-SegmentValsCloseToLinearEq::SegmentValsCloseToLinearEq() {
-	// TODO Auto-generated constructor stub
+SegmentValsCloseToLinearEq::SegmentValsCloseToLinearEq(double maxDeltaPercVsEquation)
+: maxDeltaPercVsEquation_(maxDeltaPercVsEquation)
+{
+	assert(maxDeltaPercVsEquation > 0.0);
 }
 
 bool SegmentValsCloseToLinearEq::validSegment(const ChartSegment &segment)
 {
-	return true; // stubbed out
+	if(segment.maxRelPercentVsLinearEq() <= maxDeltaPercVsEquation_)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 SegmentValsCloseToLinearEq::~SegmentValsCloseToLinearEq() {

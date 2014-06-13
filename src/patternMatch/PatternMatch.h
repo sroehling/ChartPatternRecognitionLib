@@ -17,6 +17,11 @@ private:
 	bool segmentsConnected(const ChartSegmentList &segments) const;
 public:
 	PatternMatch(const ChartSegmentList &segments);
+
+	const PeriodVal &firstValue() const;
+	const PeriodVal &lastValue() const;
+	unsigned int numSegements() const;
+
 	virtual ~PatternMatch();
 };
 

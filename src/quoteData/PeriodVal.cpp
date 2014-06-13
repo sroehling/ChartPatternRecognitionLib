@@ -17,3 +17,8 @@ PeriodVal::~PeriodVal() {
 	// TODO Auto-generated destructor stub
 }
 
+std::ostream& operator<<(std::ostream& os, const PeriodVal& perVal)
+{
+	os << "PeriodVal(" << perVal.periodTime_ << ", " << perVal.val_ << ")";
+	return os;
+}

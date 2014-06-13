@@ -17,12 +17,12 @@ LinearEquation::LinearEquation(const XYCoord &startPt, const XYCoord &endPt)
 	m_ = (endPt.y() - b_)/endPt.x();
 }
 
-double LinearEquation::slope()
+double LinearEquation::slope() const
 {
     return m_;
 }
 
-double LinearEquation::yVal(double x)
+double LinearEquation::yVal(double x) const
 {
     return m_ * x + b_;
 }

@@ -15,6 +15,23 @@ PatternMatch::PatternMatch(const ChartSegmentList &segments)
 }
 
 
+const PeriodVal &PatternMatch::firstValue() const
+{
+	return segments_.front()->firstPeriodVal();
+}
+
+const PeriodVal &PatternMatch::lastValue() const
+{
+	return segments_.back()->lastPeriodVal();
+}
+
+unsigned int PatternMatch::numSegements() const
+{
+	return segments_.size();
+}
+
+
+
 // This is a validation method to ensure when chart segments are "stitched together"
 // for purposes of forming patterns, the PeriodVal at the end of the preceding segment
 // is the same as the first PeriodVal in the next segment.

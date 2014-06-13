@@ -17,11 +17,15 @@ class ChartSegment {
 private:
 	PeriodValCltn segmentVals_;
 	LinearEquationPtr segmentEq_;
+
+	double absRelPercentVal(double comparisonVal, double baseVal) const;
 public:
 	ChartSegment(const PeriodValCltn &segmentVals);
 
 	const PeriodVal &lastPeriodVal() const;
 	const PeriodVal &firstPeriodVal() const;
+	double maxRelPercentVsLinearEq() const;
+	double slope() const;
 
 	virtual ~ChartSegment();
 };

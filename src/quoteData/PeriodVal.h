@@ -10,6 +10,7 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <list>
+#include <ostream>
 
 class PeriodVal {
 private:
@@ -21,6 +22,8 @@ public:
 
 	const boost::posix_time::ptime &periodTime() const { return periodTime_; }
 	double val() const { return val_; }
+
+	friend std::ostream& operator<<(std::ostream& os, const PeriodVal& perVal);
 
 	virtual ~PeriodVal();
 };

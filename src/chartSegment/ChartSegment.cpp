@@ -35,6 +35,39 @@ const PeriodVal &ChartSegment::firstPeriodVal() const
 	return segmentVals_.front();
 }
 
+double ChartSegment::slope() const
+{
+	return segmentEq_->slope();
+}
+
+double ChartSegment::absRelPercentVal(double comparisonVal, double baseVal) const
+{
+	double relPerc = (comparisonVal/baseVal - 1.0) * 100.0;
+	if(relPerc < 0.0)
+	{
+		relPerc *= -1.0;
+	}
+	return relPerc;
+}
+
+double ChartSegment::maxRelPercentVsLinearEq() const
+{
+	double maxPerc = -1.0 * std::numeric_limits<double>::max();
+	double currXVal = 0.0;
+	for(PeriodValCltn::const_iterator valIter = segmentVals_.begin();
+			valIter != segmentVals_.end(); valIter++)
+	{
+		double segYVal = (*valIter).val();
+		double eqYVal = segmentEq_->yVal(currXVal);
+		double relPerc = absRelPercentVal(eqYVal,segYVal);
+		if(relPerc > maxPerc)
+		{
+			maxPerc = relPerc;
+		}
+		currXVal += 1.0;
+	}
+	return maxPerc;
+}
 
 ChartSegment::~ChartSegment() {
 	// TODO Auto-generated destructor stub
