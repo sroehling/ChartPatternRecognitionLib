@@ -6,17 +6,20 @@
 CPP_SRCS += \
 ../chartSegment/ChartSegment.cpp \
 ../chartSegment/SegmentConstraint.cpp \
-../chartSegment/SegmentValsCloseToLinearEq.cpp 
+../chartSegment/SegmentValsCloseToLinearEq.cpp \
+../chartSegment/SlopeWithinRangeConstraint.cpp 
 
 OBJS += \
 ./chartSegment/ChartSegment.o \
 ./chartSegment/SegmentConstraint.o \
-./chartSegment/SegmentValsCloseToLinearEq.o 
+./chartSegment/SegmentValsCloseToLinearEq.o \
+./chartSegment/SlopeWithinRangeConstraint.o 
 
 CPP_DEPS += \
 ./chartSegment/ChartSegment.d \
 ./chartSegment/SegmentConstraint.d \
-./chartSegment/SegmentValsCloseToLinearEq.d 
+./chartSegment/SegmentValsCloseToLinearEq.d \
+./chartSegment/SlopeWithinRangeConstraint.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

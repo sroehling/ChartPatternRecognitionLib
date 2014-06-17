@@ -73,3 +73,13 @@ ChartSegment::~ChartSegment() {
 	// TODO Auto-generated destructor stub
 }
 
+
+std::ostream& operator<<(std::ostream& os, const ChartSegment& chartSeg)
+{
+	os << "ChartSegment(slope=" << chartSeg.slope()
+			<< ", first val = " << chartSeg.firstPeriodVal()
+			<< ", last val = " << chartSeg.lastPeriodVal() << ")";
+	return os;
+}
+
+

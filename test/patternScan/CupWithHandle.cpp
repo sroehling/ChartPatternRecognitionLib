@@ -50,14 +50,18 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
-	std::cerr << "Number of segments: " << thePatternMatch->numSegements() << std::endl;
-	BOOST_CHECK(thePatternMatch->numSegements() == 3);
+	std::cerr << "Number of segments: " << thePatternMatch->numSegments() << std::endl;
+	BOOST_CHECK(thePatternMatch->numSegments() == 3);
+
+	BOOST_CHECK(segListConstraint->validSegments(thePatternMatch->segments()) == true);
 
 	PeriodVal firstVal = thePatternMatch->firstValue();
 	PeriodVal lastVal = thePatternMatch->lastValue();
 
 	std::cerr << "First Period Value: " << firstVal << std::endl;
 	std::cerr << "Last Period Value: " << lastVal << std::endl;
+
+	std::cerr << "Cup with Handle: " << (*thePatternMatch) << std::endl;
 
 	BOOST_CHECK(ptime(date(2013,7,22)) == firstVal.periodTime());
 	BOOST_CHECK(ptime(date(2013,10,7)) == lastVal.periodTime());

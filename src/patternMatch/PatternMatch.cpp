@@ -25,7 +25,7 @@ const PeriodVal &PatternMatch::lastValue() const
 	return segments_.back()->lastPeriodVal();
 }
 
-unsigned int PatternMatch::numSegements() const
+unsigned int PatternMatch::numSegments() const
 {
 	return segments_.size();
 }
@@ -55,6 +55,34 @@ bool PatternMatch::segmentsConnected(const ChartSegmentList &segments) const
 	}
 	return true;
 }
+
+const ChartSegmentList &PatternMatch::segments() const
+{
+	return segments_;
+}
+
+std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
+{
+	os << "PatternMatch(num segments=" << patternMatch.numSegments()
+			<< ", segments = (";
+	bool firstSeg = true;
+	for(ChartSegmentList::const_iterator segIter = patternMatch.segments_.begin();
+			segIter != patternMatch.segments_.end();segIter++)
+	{
+		if(!firstSeg)
+		{
+			os << ", ";
+		}
+
+		// A ChartSegmentList is a list of smart pointers to chart segments,
+		// so we need to de-reference both the iterator and (smart) pointer.
+		os << **segIter;
+		firstSeg = false;
+	}
+	os		<< "))";
+	return os;
+}
+
 
 PatternMatch::~PatternMatch() {
 	// TODO Auto-generated destructor stub

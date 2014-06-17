@@ -20,7 +20,11 @@ public:
 
 	const PeriodVal &firstValue() const;
 	const PeriodVal &lastValue() const;
-	unsigned int numSegements() const;
+	unsigned int numSegments() const;
+	const ChartSegmentList &segments() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch);
+
 
 	virtual ~PatternMatch();
 };

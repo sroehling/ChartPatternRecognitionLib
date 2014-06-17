@@ -27,6 +27,9 @@ public:
 	double maxRelPercentVsLinearEq() const;
 	double slope() const;
 
+	friend std::ostream& operator<<(std::ostream& os, const ChartSegment& chartSeg);
+
+
 	virtual ~ChartSegment();
 };
 
