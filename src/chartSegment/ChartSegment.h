@@ -10,17 +10,17 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "PeriodVal.h"
+#include "PeriodValSegment.h"
 #include "LinearEquation.h"
 
 class ChartSegment {
 private:
-	PeriodValCltn segmentVals_;
+	PeriodValSegmentPtr segmentVals_;
 	LinearEquationPtr segmentEq_;
 
 	double absRelPercentVal(double comparisonVal, double baseVal) const;
 public:
-	ChartSegment(const PeriodValCltn &segmentVals);
+	ChartSegment(const PeriodValSegmentPtr &segmentVals);
 
 	const PeriodVal &lastPeriodVal() const;
 	const PeriodVal &firstPeriodVal() const;

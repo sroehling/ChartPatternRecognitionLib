@@ -35,6 +35,7 @@ patternMatch/PatternMatch.d: ../patternMatch/PatternMatch.cpp \
   /usr/local/include/boost/memory_order.hpp \
   /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
   /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
   /usr/local/include/boost/date_time/compiler_config.hpp \
@@ -708,6 +709,8 @@ patternMatch/PatternMatch.d: ../patternMatch/PatternMatch.cpp \
 /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
 

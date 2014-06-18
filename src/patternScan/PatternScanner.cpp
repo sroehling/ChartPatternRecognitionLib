@@ -21,45 +21,18 @@ PatternScanner::PatternScanner(const SegmentConstraintPtr &segmentConstraint,
 	maxSegmentLength_ = 200;
 }
 
-// Note the splitPeriodVals method on a list is 1 based: in other
-// words, for beforeSplitPos to have 3 elements
-// you'd call splitPeriodVals with a splitPos=3
-// TODO - This method should be setup as a utility method in the PeriodVal class.
-void PatternScanner::splitPeriodVals(const PeriodValCltn &srcCltn,
-			unsigned int splitPos, PeriodValCltn &beforeSplitPos,
-			PeriodValCltn &afterSplitPos)
-{
-	assert(splitPos <= srcCltn.size());
-
-	beforeSplitPos.clear();
-	afterSplitPos.clear();
-
-	unsigned int currPos = 0;
-	for(PeriodValCltn::const_iterator i = srcCltn.begin(); i != srcCltn.end(); i++)
-	{
-		if(currPos < splitPos)
-		{
-			beforeSplitPos.push_back(*i);
-		}
-		else
-		{
-			afterSplitPos.push_back(*i);
-		}
-		currPos++;
-	}
-}
 
 // scanPatternMatches is the recursive function for building up potential
 // pattern matches.
 PatternMatchListPtr PatternScanner::scanPatternMatches(
 		const ChartSegmentList &leadingSegments,
-		const PeriodValCltn &remainingVals)
+		const PeriodValSegmentPtr &remainingVals)
 {
 	// matchingPatterns remains empty, unless a pattern match is
 	// completed at this depth of recursion.
 	PatternMatchListPtr matchingPatterns = PatternMatchListPtr(new PatternMatchList());
 
-	if(remainingVals.size() < minSegmentLength_)
+	if(remainingVals->numVals() < minSegmentLength_)
 	{
 		// There's not enough values remaining to continue
 		// matching, so return an empty list of matches.
@@ -67,13 +40,14 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(
 	}
 
 	unsigned int minRemSegmentLen = minSegmentLength_;
-	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals.size(),
+	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals->numVals(),
 					maxSegmentLength_);
 
 	for(unsigned int splitPos = minRemSegmentLen; splitPos < maxRemSegmentLen; splitPos++)
 	{
-		PeriodValCltn leadingVals, trailingVals;
-		splitPeriodVals(remainingVals,splitPos,leadingVals,trailingVals);
+		PeriodValSegmentPair segmentSplit = remainingVals->split(splitPos);
+		PeriodValSegmentPtr leadingVals = segmentSplit.first;
+		PeriodValSegmentPtr trailingVals = segmentSplit.second;
 
 		// If the segment being created is not the first, it needs
 		// to include the last value from the previous segment. This
@@ -82,8 +56,7 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(
 		// the starting point for the next segment.
 		if(leadingSegments.size() > 0)
 		{
-			PeriodVal lastValFromPrevSeg = leadingSegments.back()->lastPeriodVal();
-			leadingVals.push_front(lastValFromPrevSeg);
+			leadingVals = leadingVals->moveSegBeginToPrev();
 		}
 
 		ChartSegmentPtr leadingSeg(new ChartSegment(leadingVals));
@@ -121,7 +94,7 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(
 	return matchingPatterns;
 }
 
-PatternMatchListPtr PatternScanner::scanPatternMatches(const PeriodValCltn &chartVals)
+PatternMatchListPtr PatternScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals)
 {
 	ChartSegmentList emptySegmentList;
 

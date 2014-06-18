@@ -8,31 +8,31 @@
 #include "ChartSegment.h"
 #include "XYCoord.h"
 
-ChartSegment::ChartSegment(const PeriodValCltn &segmentVals)
+ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 : segmentVals_(segmentVals)
 {
-	assert(segmentVals.size() >= 2);
+	assert(segmentVals->numVals() >= 2);
 
 	// For purposes of creating a LinearEquation based upon the
 	// dates and value we need to map the dates onto numerical values.
 	double startPtXVal = 0.0;
-	double endPtXVal = double(segmentVals_.size()-1);
+	double endPtXVal = double(segmentVals->numVals()-1);
 
-	XYCoord startPt(startPtXVal,segmentVals_.front().val());
-	XYCoord endPt(endPtXVal,segmentVals_.back().val());
+	XYCoord startPt(startPtXVal,segmentVals->firstVal().val());
+	XYCoord endPt(endPtXVal,segmentVals->lastVal().val());
 
 	segmentEq_ = LinearEquationPtr(new LinearEquation(startPt,endPt));
 }
 
 const PeriodVal &ChartSegment::lastPeriodVal() const
 {
-	return segmentVals_.back();
+	return segmentVals_->lastVal();
 }
 
 
 const PeriodVal &ChartSegment::firstPeriodVal() const
 {
-	return segmentVals_.front();
+	return segmentVals_->firstVal();
 }
 
 double ChartSegment::slope() const
@@ -54,8 +54,8 @@ double ChartSegment::maxRelPercentVsLinearEq() const
 {
 	double maxPerc = -1.0 * std::numeric_limits<double>::max();
 	double currXVal = 0.0;
-	for(PeriodValCltn::const_iterator valIter = segmentVals_.begin();
-			valIter != segmentVals_.end(); valIter++)
+	for(PeriodValCltn::const_iterator valIter = segmentVals_->segBegin();
+			valIter != segmentVals_->segEnd(); valIter++)
 	{
 		double segYVal = (*valIter).val();
 		double eqYVal = segmentEq_->yVal(currXVal);

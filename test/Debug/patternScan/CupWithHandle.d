@@ -716,6 +716,7 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
@@ -2158,6 +2159,8 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 

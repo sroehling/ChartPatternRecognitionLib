@@ -12,6 +12,7 @@
 #include "SegmentListConstraint.h"
 #include "PatternMatch.h"
 #include "PatternMatchValidator.h"
+#include "PeriodValSegment.h"
 
 class PatternScanner {
 private:
@@ -21,12 +22,9 @@ private:
 	unsigned int minSegmentLength_;
 	unsigned int maxSegmentLength_;
 
-	void splitPeriodVals(const PeriodValCltn &srcCltn,
-				unsigned int splitPos, PeriodValCltn &beforeSplitPos,
-				PeriodValCltn &afterSplitPos);
 	PatternMatchListPtr scanPatternMatches(
 			const ChartSegmentList &leadingSegments,
-			const PeriodValCltn &remainingVals);
+			const PeriodValSegmentPtr &remainingVals);
 public:
 	PatternScanner(const SegmentConstraintPtr &segmentConstraint,
 				const SegmentListConstraintPtr &segmentListConstraint,
@@ -34,7 +32,7 @@ public:
 
 	// Scan to find a pattern match(es) starting at the first value in chartVals.
 	// This is the main entry point for scanning (i.e., the top level of recursion).
-	PatternMatchListPtr scanPatternMatches(const PeriodValCltn &chartVals);
+	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals);
 
 	virtual ~PatternScanner();
 };

@@ -9,6 +9,7 @@
 #define PERIODVAL_H_
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/shared_ptr.hpp>
 #include <list>
 #include <ostream>
 
@@ -29,5 +30,7 @@ public:
 };
 
 typedef std::list<PeriodVal> PeriodValCltn;
+typedef boost::shared_ptr<PeriodValCltn> PeriodValCltnPtr;
+
 
 #endif /* PERIODVAL_H_ */
