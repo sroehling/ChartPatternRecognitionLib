@@ -8,6 +8,8 @@
 #ifndef PATTERNSCANNER_H_
 #define PATTERNSCANNER_H_
 
+#include <boost/shared_ptr.hpp>
+
 #include "SegmentConstraint.h"
 #include "SegmentListConstraint.h"
 #include "PatternMatch.h"
@@ -36,5 +38,8 @@ public:
 
 	virtual ~PatternScanner();
 };
+
+typedef boost::shared_ptr<PatternScanner> PatternScannerPtr;
+
 
 #endif /* PATTERNSCANNER_H_ */

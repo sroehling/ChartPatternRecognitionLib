@@ -4,18 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../chartSegment/ANDSegmentConstraint.cpp \
 ../chartSegment/ChartSegment.cpp \
 ../chartSegment/SegmentConstraint.cpp \
 ../chartSegment/SegmentValsCloseToLinearEq.cpp \
 ../chartSegment/SlopeWithinRangeConstraint.cpp 
 
 OBJS += \
+./chartSegment/ANDSegmentConstraint.o \
 ./chartSegment/ChartSegment.o \
 ./chartSegment/SegmentConstraint.o \
 ./chartSegment/SegmentValsCloseToLinearEq.o \
 ./chartSegment/SlopeWithinRangeConstraint.o 
 
 CPP_DEPS += \
+./chartSegment/ANDSegmentConstraint.d \
 ./chartSegment/ChartSegment.d \
 ./chartSegment/SegmentConstraint.d \
 ./chartSegment/SegmentValsCloseToLinearEq.d \

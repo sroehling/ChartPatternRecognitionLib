@@ -1,5 +1,7 @@
-patternScan/PatternScanner.d: ../patternScan/PatternScanner.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
+chartSegment/ANDSegmentConstraint.d: \
+  ../chartSegment/ANDSegmentConstraint.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ANDSegmentConstraint.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -34,7 +36,6 @@ patternScan/PatternScanner.d: ../patternScan/PatternScanner.cpp \
   /usr/local/include/boost/smart_ptr/detail/yield_k.hpp \
   /usr/local/include/boost/memory_order.hpp \
   /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
@@ -637,12 +638,11 @@ patternScan/PatternScanner.d: ../patternScan/PatternScanner.cpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ANDSegmentConstraint.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 
@@ -711,8 +711,6 @@ patternScan/PatternScanner.d: ../patternScan/PatternScanner.cpp \
 /usr/local/include/boost/memory_order.hpp:
 
 /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
 
@@ -1921,9 +1919,3 @@ patternScan/PatternScanner.d: ../patternScan/PatternScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:

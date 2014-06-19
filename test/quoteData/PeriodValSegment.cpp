@@ -52,4 +52,16 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
     BOOST_CHECK(splitTest4->firstVal().val() == 2.0);
     BOOST_CHECK(splitTest4->lastVal().val() == 5.0);
 
+    PeriodValSegmentPtr trailing = splitTest1.first->trailingVals();
+    BOOST_CHECK(trailing->numVals() == 3);
+    BOOST_CHECK(trailing->firstVal().val() == 3.0);
+    BOOST_CHECK(trailing->lastVal().val() == 5.0);
+
+    PeriodValSegmentPtr trailingWithLast = splitTest1.first->trailingValsWithLastVal();
+    BOOST_CHECK(trailingWithLast->numVals() == 4);
+    BOOST_CHECK(trailingWithLast->firstVal().val() == 2.0);
+    BOOST_CHECK(trailingWithLast->lastVal().val() == 5.0);
+
+
+
 }

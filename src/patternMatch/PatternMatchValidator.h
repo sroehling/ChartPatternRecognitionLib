@@ -24,5 +24,6 @@ public:
 };
 
 typedef boost::shared_ptr<PatternMatchValidator> PatternMatchValidatorPtr;
+typedef std::list<PatternMatchValidatorPtr> PatternMatchValidatorList;
 
 #endif /* PATTERNMATCHVALIDATOR_H_ */

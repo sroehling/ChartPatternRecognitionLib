@@ -25,6 +25,7 @@ public:
 	const PeriodVal &lastPeriodVal() const;
 	const PeriodVal &firstPeriodVal() const;
 	double maxRelPercentVsLinearEq() const;
+	const PeriodValSegmentPtr &perValSegment() const { return segmentVals_; }
 	double slope() const;
 
 	friend std::ostream& operator<<(std::ostream& os, const ChartSegment& chartSeg);

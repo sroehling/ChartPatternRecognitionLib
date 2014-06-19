@@ -41,6 +41,16 @@ public:
 
 	PeriodValSegmentPtr moveSegBeginToPrev() const;
 
+	// All the values in the underlying PeriodValCltn after
+	// the segment's end;
+	PeriodValSegmentPtr trailingVals() const;
+
+	// All the values in the underlying PeriodValCltn after
+	// the segment's end, and including the last value if there is one.
+	// This is used when multiple segments are "stitched together" for
+	// purposes of pattern matching.
+	PeriodValSegmentPtr trailingValsWithLastVal() const;
+
 	const PeriodValCltn::iterator &segBegin() const { return segBegin_; }
 	const PeriodValCltn::iterator &segEnd() const { return segEnd_; }
 

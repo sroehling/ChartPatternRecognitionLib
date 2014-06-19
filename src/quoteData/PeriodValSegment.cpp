@@ -62,6 +62,22 @@ PeriodValSegmentPair PeriodValSegment::split(unsigned int splitPos) const
 	return PeriodValSegmentPair(beforeSplit,afterSplit);
 }
 
+PeriodValSegmentPtr PeriodValSegment::trailingVals() const
+{
+	PeriodValSegmentPtr trailing(new PeriodValSegment(perValCltn_,segEnd_,perValCltn_->end()));
+	return trailing;
+}
+
+PeriodValSegmentPtr PeriodValSegment::trailingValsWithLastVal() const
+{
+	PeriodValCltn::iterator trailingStart = segEnd_;
+	if(segEnd_ != perValCltn_->begin())
+	{
+		trailingStart--;
+	}
+	PeriodValSegmentPtr trailing(new PeriodValSegment(perValCltn_,trailingStart,perValCltn_->end()));
+	return trailing;
+}
 
 unsigned int PeriodValSegment::numVals() const
 {

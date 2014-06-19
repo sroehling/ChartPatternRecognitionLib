@@ -31,6 +31,31 @@ unsigned int PatternMatch::numSegments() const
 }
 
 
+PeriodValSegmentPtr PatternMatch::trailingValsWithLastVal() const
+{
+	return segments_.back()->perValSegment()->trailingValsWithLastVal();
+}
+
+PatternMatchPtr PatternMatch::appendMatch(const PatternMatch &matchToAppend) const
+{
+	ChartSegmentList appendedSegments = segments_;
+	appendedSegments.insert(appendedSegments.end(),matchToAppend.segments().begin(),
+			matchToAppend.segments().end());
+	return PatternMatchPtr(new PatternMatch(appendedSegments));
+}
+
+PatternMatchListPtr PatternMatch::appendMatchList(const PatternMatchList &appendList) const
+{
+	PatternMatchListPtr appendedList(new PatternMatchList());
+	for(PatternMatchList::const_iterator appendIter = appendList.begin();
+			appendIter != appendList.end(); appendIter++)
+	{
+		appendedList->push_back(appendMatch(**appendIter));
+	}
+	return appendedList;
+}
+
+
 
 // This is a validation method to ensure when chart segments are "stitched together"
 // for purposes of forming patterns, the PeriodVal at the end of the preceding segment

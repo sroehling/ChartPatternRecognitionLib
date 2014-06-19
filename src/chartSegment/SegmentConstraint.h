@@ -18,5 +18,6 @@ public:
 };
 
 typedef boost::shared_ptr<SegmentConstraint> SegmentConstraintPtr;
+typedef std::list<SegmentConstraintPtr> SegmentConstraintList;
 
 #endif /* SEGMENTCONSTRAINT_H_ */

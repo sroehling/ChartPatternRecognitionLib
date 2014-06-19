@@ -106,7 +106,7 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(const PeriodValSegmentPtr
 	// An individual PatternScanner can be used to match different sub-patterns,
 	// then the sub-patterns can be strung together to form a larger pattern
 	// (e.g., match the base of cup with handle, then
-	// match the handle).Therefore, the end-point of these patterm matches
+	// match the handle).Therefore, the end-point of these pattern matches
 	// can serve as the starting point to match other sub-patterns.
 	return matchingPatterns;
 

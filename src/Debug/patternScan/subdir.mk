@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../patternScan/CupScanner.cpp \
 ../patternScan/PatternScanner.cpp 
 
 OBJS += \
+./patternScan/CupScanner.o \
 ./patternScan/PatternScanner.o 
 
 CPP_DEPS += \
+./patternScan/CupScanner.d \
 ./patternScan/PatternScanner.d 
 
 
