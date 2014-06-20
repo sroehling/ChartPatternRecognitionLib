@@ -6,11 +6,11 @@
  */
 
 #include <algorithm>
-#include "PatternScanner.h"
+#include "PatternScannerEngine.h"
 #include "ChartSegment.h"
 #include "PeriodVal.h"
 
-PatternScanner::PatternScanner(const SegmentConstraintPtr &segmentConstraint,
+PatternScannerEngine::PatternScannerEngine(const SegmentConstraintPtr &segmentConstraint,
 		const SegmentListConstraintPtr &segmentListConstraint,
 		const PatternMatchValidatorPtr &patternMatchValidator)
 : segmentConstraint_(segmentConstraint),
@@ -24,9 +24,9 @@ PatternScanner::PatternScanner(const SegmentConstraintPtr &segmentConstraint,
 
 // scanPatternMatches is the recursive function for building up potential
 // pattern matches.
-PatternMatchListPtr PatternScanner::scanPatternMatches(
+PatternMatchListPtr PatternScannerEngine::scanPatternMatches(
 		const ChartSegmentList &leadingSegments,
-		const PeriodValSegmentPtr &remainingVals)
+		const PeriodValSegmentPtr &remainingVals) const
 {
 	// matchingPatterns remains empty, unless a pattern match is
 	// completed at this depth of recursion.
@@ -94,7 +94,7 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(
 	return matchingPatterns;
 }
 
-PatternMatchListPtr PatternScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals)
+PatternMatchListPtr PatternScannerEngine::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 	ChartSegmentList emptySegmentList;
 
@@ -113,7 +113,7 @@ PatternMatchListPtr PatternScanner::scanPatternMatches(const PeriodValSegmentPtr
 }
 
 
-PatternScanner::~PatternScanner() {
+PatternScannerEngine::~PatternScannerEngine() {
 	// TODO Auto-generated destructor stub
 }
 

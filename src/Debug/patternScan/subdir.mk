@@ -5,15 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../patternScan/CupScanner.cpp \
-../patternScan/PatternScanner.cpp 
+../patternScan/PatternScannerEngine.cpp \
+../patternScan/TrendLineScanner.cpp \
+../patternScan/VScanner.cpp 
 
 OBJS += \
 ./patternScan/CupScanner.o \
-./patternScan/PatternScanner.o 
+./patternScan/PatternScannerEngine.o \
+./patternScan/TrendLineScanner.o \
+./patternScan/VScanner.o 
 
 CPP_DEPS += \
 ./patternScan/CupScanner.d \
-./patternScan/PatternScanner.d 
+./patternScan/PatternScannerEngine.d \
+./patternScan/TrendLineScanner.d \
+./patternScan/VScanner.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

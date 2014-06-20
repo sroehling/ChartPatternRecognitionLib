@@ -5,42 +5,21 @@
  *      Author: sroehling
  */
 
-#include <CupScanner.h>
-#include "SegmentConstraint.h"
-#include "SlopeWithinRangeConstraint.h"
-#include "SegmentValsCloseToLinearEq.h"
-#include "ANDSegmentConstraint.h"
-#include "AnySegmentListValidConstraint.h"
-#include "AnyPatternMatchValidator.h"
-#include "PeriodValSegment.h"
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
+#include "CupScanner.h"
+#include "TrendLineScanner.h"
 
 CupScanner::CupScanner() {
 
 }
 
-PatternScannerPtr trendLineScanner(double minSlope, double maxSlope)
-{
-	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(4.5));
-	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(minSlope,maxSlope));
-	SegmentConstraintList trendConstraints;
-	trendConstraints.push_back(valsCloseToEquation);
-	trendConstraints.push_back(trendSlope);
-	SegmentConstraintPtr trendSegConstraints(new ANDSegmentConstraint(trendConstraints));
-	SegmentListConstraintPtr trendSegListConstraint(new AnySegmentListValidConstraint());
-	PatternMatchValidatorPtr trendPatternMatchValidator(new AnyPatternMatchValidator());
-
-	PatternScannerPtr trendScanner(new PatternScanner(trendSegConstraints,trendSegListConstraint,trendPatternMatchValidator));
-
-	return trendScanner;
-}
 
 PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner = trendLineScanner(-1.2,-0.5);
-	PatternScannerPtr flatScanner = trendLineScanner(-0.5,0.5);
-	PatternScannerPtr uptrendScanner = trendLineScanner(0.5,1.2);
+	PatternScannerPtr downtrendScanner(new TrendLineScanner(-1.2,-0.5));
+	PatternScannerPtr flatScanner(new TrendLineScanner(-0.5,0.5));
+	PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,1.2));
 
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 

@@ -4,7 +4,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 #include "PeriodVal.h"
-#include "PatternScanner.h"
+#include "PatternScannerEngine.h"
 #include "SegmentConstraint.h"
 #include "SegmentValsCloseToLinearEq.h"
 #include "SegmentListConstraint.h"
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 	SegmentListConstraintPtr segListConstraint(new SlopeIncreasesConstraint());
 	PatternMatchValidatorPtr patternMatchValidator(new EndWithinPercentOfStart(3.0));
 
-	PatternScanner scanner(segConstraint,segListConstraint,patternMatchValidator);
+	PatternScannerEngine scanner(segConstraint,segListConstraint,patternMatchValidator);
 
 	PeriodValSegmentPtr chartData(new PeriodValSegment(saveTypical));
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);

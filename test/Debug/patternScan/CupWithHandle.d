@@ -713,7 +713,7 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
@@ -722,6 +722,7 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
@@ -2155,7 +2156,7 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
@@ -2172,6 +2173,8 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h:
 

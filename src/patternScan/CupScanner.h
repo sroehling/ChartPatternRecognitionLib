@@ -10,7 +10,7 @@
 
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
-#include "PatternScanner.h"
+#include "PatternScannerEngine.h"
 
 
 class CupScanner {
