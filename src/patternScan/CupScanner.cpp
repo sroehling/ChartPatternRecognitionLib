@@ -24,20 +24,15 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
-//	std::cerr << "Cup Scanner: downtrend matches = " << downtrendMatches->size() << std::endl;
-	unsigned int downtrendNum = 0;
 	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
-//		std::cerr << "Downtrend match: " << (**dtMatchIter) <<  std::endl;
 		PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal();
 		PatternMatchListPtr flatMatches = flatScanner->scanPatternMatches(valsForFlatScan);
 		PatternMatchListPtr downFlatMatches = (*dtMatchIter)->appendMatchList(*flatMatches);
-//		std::cerr << "Cup Scanner: down & flat trend matches = " << downFlatMatches->size() << std::endl;
 		for(PatternMatchList::const_iterator downFlatMatchIter = downFlatMatches->begin();
 				downFlatMatchIter!=downFlatMatches->end();downFlatMatchIter++)
 		{
-//			std::cerr << "Down and flat trend match: " << (**downFlatMatchIter) <<  std::endl;
 			PeriodValSegmentPtr valsForUptrendScan = (*downFlatMatchIter)->trailingValsWithLastVal();
 			PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 
@@ -59,8 +54,6 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 			}
 
 		} // For each combined down trend and flat area match
-
-		downtrendNum++;
 	} // For each down trend match
 
 	return cupMatches;

@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../quoteData/PeriodData.cpp \
 ../quoteData/PeriodValSegment.cpp 
 
 OBJS += \
+./quoteData/PeriodData.o \
 ./quoteData/PeriodValSegment.o 
 
 CPP_DEPS += \
+./quoteData/PeriodData.d \
 ./quoteData/PeriodValSegment.d 
 
 
