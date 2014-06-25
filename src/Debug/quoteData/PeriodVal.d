@@ -631,7 +631,54 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/date_time/time_facet.hpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
-  /usr/local/include/boost/date_time/posix_time/time_parsers.hpp
+  /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /usr/local/include/boost/format.hpp \
+  /usr/local/include/boost/format/detail/compat_workarounds.hpp \
+  /usr/local/include/boost/format/detail/config_macros.hpp \
+  /usr/local/include/boost/format/detail/workarounds_gcc-2_95.hpp \
+  /usr/local/include/boost/format/detail/workarounds_stlport.hpp \
+  /usr/local/include/boost/format/format_fwd.hpp \
+  /usr/local/include/boost/format/internals_fwd.hpp \
+  /usr/local/include/boost/format/internals.hpp \
+  /usr/local/include/boost/optional.hpp \
+  /usr/local/include/boost/optional/optional.hpp \
+  /usr/local/include/boost/type_traits/alignment_of.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp \
+  /usr/local/include/boost/mpl/size_t.hpp \
+  /usr/local/include/boost/mpl/size_t_fwd.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp \
+  /usr/local/include/boost/type_traits/has_nothrow_constructor.hpp \
+  /usr/local/include/boost/type_traits/has_trivial_constructor.hpp \
+  /usr/local/include/boost/type_traits/type_with_alignment.hpp \
+  /usr/local/include/boost/preprocessor/list/for_each_i.hpp \
+  /usr/local/include/boost/preprocessor/tuple/to_list.hpp \
+  /usr/local/include/boost/preprocessor/tuple/size.hpp \
+  /usr/local/include/boost/preprocessor/list/transform.hpp \
+  /usr/local/include/boost/preprocessor/list/append.hpp \
+  /usr/local/include/boost/detail/reference_content.hpp \
+  /usr/local/include/boost/type_traits/has_nothrow_copy.hpp \
+  /usr/local/include/boost/type_traits/has_trivial_copy.hpp \
+  /usr/local/include/boost/none.hpp /usr/local/include/boost/none_t.hpp \
+  /usr/local/include/boost/utility/compare_pointees.hpp \
+  /usr/local/include/boost/utility/in_place_factory.hpp \
+  /usr/local/include/boost/utility/detail/in_place_factory_prefix.hpp \
+  /usr/local/include/boost/preprocessor/punctuation/paren.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum.hpp \
+  /usr/local/include/boost/utility/detail/in_place_factory_suffix.hpp \
+  /usr/local/include/boost/optional/optional_fwd.hpp \
+  /usr/local/include/boost/format/alt_sstream.hpp \
+  /usr/local/include/boost/utility/base_from_member.hpp \
+  /usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/local/include/boost/format/alt_sstream_impl.hpp \
+  /usr/local/include/boost/format/format_class.hpp \
+  /usr/local/include/boost/format/exceptions.hpp \
+  /usr/local/include/boost/format/format_implementation.hpp \
+  /usr/local/include/boost/format/group.hpp \
+  /usr/local/include/boost/format/feed_args.hpp \
+  /usr/local/include/boost/format/detail/msvc_disambiguater.hpp \
+  /usr/local/include/boost/format/parsing.hpp \
+  /usr/local/include/boost/format/free_funcs.hpp \
+  /usr/local/include/boost/format/detail/unset_macros.hpp
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
 
@@ -1900,3 +1947,99 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/date_time/posix_time/conversion.hpp:
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
+
+/usr/local/include/boost/format.hpp:
+
+/usr/local/include/boost/format/detail/compat_workarounds.hpp:
+
+/usr/local/include/boost/format/detail/config_macros.hpp:
+
+/usr/local/include/boost/format/detail/workarounds_gcc-2_95.hpp:
+
+/usr/local/include/boost/format/detail/workarounds_stlport.hpp:
+
+/usr/local/include/boost/format/format_fwd.hpp:
+
+/usr/local/include/boost/format/internals_fwd.hpp:
+
+/usr/local/include/boost/format/internals.hpp:
+
+/usr/local/include/boost/optional.hpp:
+
+/usr/local/include/boost/optional/optional.hpp:
+
+/usr/local/include/boost/type_traits/alignment_of.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp:
+
+/usr/local/include/boost/mpl/size_t.hpp:
+
+/usr/local/include/boost/mpl/size_t_fwd.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp:
+
+/usr/local/include/boost/type_traits/has_nothrow_constructor.hpp:
+
+/usr/local/include/boost/type_traits/has_trivial_constructor.hpp:
+
+/usr/local/include/boost/type_traits/type_with_alignment.hpp:
+
+/usr/local/include/boost/preprocessor/list/for_each_i.hpp:
+
+/usr/local/include/boost/preprocessor/tuple/to_list.hpp:
+
+/usr/local/include/boost/preprocessor/tuple/size.hpp:
+
+/usr/local/include/boost/preprocessor/list/transform.hpp:
+
+/usr/local/include/boost/preprocessor/list/append.hpp:
+
+/usr/local/include/boost/detail/reference_content.hpp:
+
+/usr/local/include/boost/type_traits/has_nothrow_copy.hpp:
+
+/usr/local/include/boost/type_traits/has_trivial_copy.hpp:
+
+/usr/local/include/boost/none.hpp:
+
+/usr/local/include/boost/none_t.hpp:
+
+/usr/local/include/boost/utility/compare_pointees.hpp:
+
+/usr/local/include/boost/utility/in_place_factory.hpp:
+
+/usr/local/include/boost/utility/detail/in_place_factory_prefix.hpp:
+
+/usr/local/include/boost/preprocessor/punctuation/paren.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum.hpp:
+
+/usr/local/include/boost/utility/detail/in_place_factory_suffix.hpp:
+
+/usr/local/include/boost/optional/optional_fwd.hpp:
+
+/usr/local/include/boost/format/alt_sstream.hpp:
+
+/usr/local/include/boost/utility/base_from_member.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp:
+
+/usr/local/include/boost/format/alt_sstream_impl.hpp:
+
+/usr/local/include/boost/format/format_class.hpp:
+
+/usr/local/include/boost/format/exceptions.hpp:
+
+/usr/local/include/boost/format/format_implementation.hpp:
+
+/usr/local/include/boost/format/group.hpp:
+
+/usr/local/include/boost/format/feed_args.hpp:
+
+/usr/local/include/boost/format/detail/msvc_disambiguater.hpp:
+
+/usr/local/include/boost/format/parsing.hpp:
+
+/usr/local/include/boost/format/free_funcs.hpp:
+
+/usr/local/include/boost/format/detail/unset_macros.hpp:

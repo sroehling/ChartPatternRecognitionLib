@@ -13,24 +13,40 @@
 #include <list>
 #include <ostream>
 
+class PeriodVal;
+typedef std::list<PeriodVal> PeriodValCltn;
+typedef boost::shared_ptr<PeriodValCltn> PeriodValCltnPtr;
+
+
 class PeriodVal {
 private:
 	boost::posix_time::ptime periodTime_;
-	double val_;
+	double open_;
+	double high_;
+	double low_;
+	double close_;
+	unsigned int volume_;
 
 public:
-	PeriodVal(const boost::posix_time::ptime &periodTime, double val);
+	PeriodVal(boost::posix_time::ptime &periodTime,
+			double open, double high, double low, double close, unsigned int volume);
 
 	const boost::posix_time::ptime &periodTime() const { return periodTime_; }
-	double val() const { return val_; }
+	double open() const { return open_; }
+	double high() const { return high_; }
+	double low() const { return low_; }
+	double close() const { return close_; }
+	unsigned int volume() const { return volume_; }
+
+	static PeriodValCltnPtr readFromFile(const std::string &fileName);
+
+	double typicalPrice() const;
 
 	friend std::ostream& operator<<(std::ostream& os, const PeriodVal& perVal);
 
 	virtual ~PeriodVal();
 };
 
-typedef std::list<PeriodVal> PeriodValCltn;
-typedef boost::shared_ptr<PeriodValCltn> PeriodValCltnPtr;
 
 
 #endif /* PERIODVAL_H_ */

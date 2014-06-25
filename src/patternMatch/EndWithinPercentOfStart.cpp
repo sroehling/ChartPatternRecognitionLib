@@ -22,8 +22,8 @@ double EndWithinPercentOfStart::relativePercentVal(double comparisonVal, double 
 
 bool EndWithinPercentOfStart::validPattern(const PatternMatch &candidateMatch)
 {
-	double startingVal = candidateMatch.firstValue().val();
-	double endingVal = candidateMatch.lastValue().val();
+	double startingVal = candidateMatch.firstValue().high();
+	double endingVal = candidateMatch.lastValue().close();
 	double relPercResult = relativePercentVal(endingVal,startingVal);
 
 //	std::cerr << "EndWithinPercentOfStart: Relative Percent Val: start=" << startingVal << " end=" << endingVal

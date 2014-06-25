@@ -40,8 +40,8 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 
 			// Perform a final validation on the pattern as a whole.
 			PatternMatchValidatorList finalValidators;
-			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(5.0)));
-			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(-5.0)));
+			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(8.0)));
+			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(-3.0)));
 			ORPatternMatchValidator plusMinusWithinStart(finalValidators);
 			for(PatternMatchList::const_iterator overallIter = overallMatches->begin();
 						overallIter != overallMatches->end(); overallIter++)

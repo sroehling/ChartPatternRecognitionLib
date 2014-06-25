@@ -18,8 +18,8 @@ ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 	double startPtXVal = 0.0;
 	double endPtXVal = double(segmentVals->numVals()-1);
 
-	XYCoord startPt(startPtXVal,segmentVals->firstVal().val());
-	XYCoord endPt(endPtXVal,segmentVals->lastVal().val());
+	XYCoord startPt(startPtXVal,segmentVals->firstVal().typicalPrice());
+	XYCoord endPt(endPtXVal,segmentVals->lastVal().typicalPrice());
 
 	segmentEq_ = LinearEquationPtr(new LinearEquation(startPt,endPt));
 }
@@ -57,7 +57,7 @@ double ChartSegment::maxRelPercentVsLinearEq() const
 	for(PeriodValCltn::const_iterator valIter = segmentVals_->segBegin();
 			valIter != segmentVals_->segEnd(); valIter++)
 	{
-		double segYVal = (*valIter).val();
+		double segYVal = (*valIter).typicalPrice();
 		double eqYVal = segmentEq_->yVal(currXVal);
 		double relPerc = absRelPercentVal(eqYVal,segYVal);
 		if(relPerc > maxPerc)

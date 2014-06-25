@@ -1,4 +1,4 @@
-quoteData/PeriodData.d: ../quoteData/PeriodData.cpp \
+quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
   /usr/local/include/boost/test/tools/context.hpp \
@@ -712,7 +712,7 @@ quoteData/PeriodData.d: ../quoteData/PeriodData.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodData.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2140,4 +2140,4 @@ quoteData/PeriodData.d: ../quoteData/PeriodData.cpp \
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodData.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
