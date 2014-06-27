@@ -1,20 +1,8 @@
 #include <boost/test/unit_test.hpp>
 
-#include <boost/date_time/gregorian/gregorian.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-
-using namespace boost::posix_time;
-using namespace boost::gregorian;
-
-
 #include "PeriodValSegment.h"
-
-PeriodVal testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol)
-{
-	ptime perTime(date(year,month,day));
-	PeriodVal perVal(perTime,val,val,val,val,vol);
-	return perVal;
-}
+#include "PeriodVal.h"
+#include "TestHelper.h"
 
 BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
 {
@@ -68,7 +56,4 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
     BOOST_CHECK(trailingWithLast->numVals() == 4);
     BOOST_CHECK(trailingWithLast->firstVal().close() == 2.0);
     BOOST_CHECK(trailingWithLast->lastVal().close() == 5.0);
-
-
-
 }

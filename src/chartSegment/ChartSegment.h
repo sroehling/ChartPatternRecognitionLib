@@ -25,6 +25,7 @@ public:
 	const PeriodVal &lastPeriodVal() const;
 	const PeriodVal &firstPeriodVal() const;
 	double maxRelPercentVsLinearEq() const;
+	unsigned int numPeriods() const;
 	const PeriodValSegmentPtr &perValSegment() const { return segmentVals_; }
 	double slope() const;
 

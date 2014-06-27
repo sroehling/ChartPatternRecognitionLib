@@ -93,7 +93,10 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 			double low = lexical_cast<double>(vec[3]);
 			double close = lexical_cast<double>(vec[4]);
 			unsigned int vol = lexical_cast<unsigned int>(vec[5]);
-			double adjClose = lexical_cast<double>(vec[6]);
+
+			// TODO - Add adjusted closed to PeriodVal (along with adjustments to
+			// normalize/adjust open,high,low,close too.
+			// double adjClose = lexical_cast<double>(vec[6]);
 
 			// The data is read in reverse chronological order (most recent dates first),
 			// but needs to be be in chronological order for processing

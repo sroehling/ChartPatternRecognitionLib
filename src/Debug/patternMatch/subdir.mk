@@ -7,6 +7,8 @@ CPP_SRCS += \
 ../patternMatch/AnyPatternMatchValidator.cpp \
 ../patternMatch/EndWithinPercentOfStart.cpp \
 ../patternMatch/ORPatternMatchValidator.cpp \
+../patternMatch/PatternLengthAtLeast.cpp \
+../patternMatch/PatternLengthLessThanEqual.cpp \
 ../patternMatch/PatternMatch.cpp \
 ../patternMatch/PatternMatchValidator.cpp 
 
@@ -14,6 +16,8 @@ OBJS += \
 ./patternMatch/AnyPatternMatchValidator.o \
 ./patternMatch/EndWithinPercentOfStart.o \
 ./patternMatch/ORPatternMatchValidator.o \
+./patternMatch/PatternLengthAtLeast.o \
+./patternMatch/PatternLengthLessThanEqual.o \
 ./patternMatch/PatternMatch.o \
 ./patternMatch/PatternMatchValidator.o 
 
@@ -21,6 +25,8 @@ CPP_DEPS += \
 ./patternMatch/AnyPatternMatchValidator.d \
 ./patternMatch/EndWithinPercentOfStart.d \
 ./patternMatch/ORPatternMatchValidator.d \
+./patternMatch/PatternLengthAtLeast.d \
+./patternMatch/PatternLengthLessThanEqual.d \
 ./patternMatch/PatternMatch.d \
 ./patternMatch/PatternMatchValidator.d 
 

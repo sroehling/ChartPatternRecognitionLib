@@ -1,4 +1,4 @@
-quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
+patternMatch/PatternMatch.d: ../patternMatch/PatternMatch.cpp \
   /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
   /usr/local/include/boost/test/tools/context.hpp \
@@ -346,6 +346,8 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/type.hpp \
   /usr/local/include/boost/test/tree/global_fixture.hpp \
   /usr/local/include/boost/config/auto_link.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
   /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
@@ -714,6 +716,8 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h
 
 /usr/local/include/boost/test/unit_test.hpp:
@@ -1409,6 +1413,10 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 /usr/local/include/boost/test/tree/global_fixture.hpp:
 
 /usr/local/include/boost/config/auto_link.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
 
@@ -2145,5 +2153,9 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 /usr/local/include/boost/date_time/posix_time/conversion.hpp:
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:

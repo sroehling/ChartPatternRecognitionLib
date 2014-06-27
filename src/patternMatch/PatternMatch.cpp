@@ -86,6 +86,27 @@ const ChartSegmentList &PatternMatch::segments() const
 	return segments_;
 }
 
+unsigned int PatternMatch::numPeriods() const
+{
+	unsigned int totalPeriods = 0;
+	for(ChartSegmentList::const_iterator segIter = segments().begin();
+			segIter != segments().end(); segIter++)
+	{
+		totalPeriods += (*segIter)->numPeriods();
+	}
+	assert(segments().size() > 0);
+
+	// A PatternMatch consists of PeriodVal segments which are stitched together, meaning
+	// the ending value of one segment is the starting value for the next. The number
+	// of overlapping values is 0 if there is only 1 segment, or (number of segments) - 1
+	// if there is more than 1 segments.
+	unsigned int overlappingPeriodVals = segments().size() - 1;
+
+	assert(overlappingPeriodVals < totalPeriods);
+	totalPeriods -= overlappingPeriodVals;
+	return totalPeriods;
+}
+
 std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 {
 	os << "PatternMatch(num segments=" << patternMatch.numSegments()

@@ -27,6 +27,7 @@ public:
 	const PeriodVal &firstValue() const;
 	const PeriodVal &lastValue() const;
 	unsigned int numSegments() const;
+	unsigned int numPeriods() const;
 	const ChartSegmentList &segments() const;
 
 	// Return a segment containing all the PeriodVal's after this

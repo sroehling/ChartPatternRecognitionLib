@@ -35,6 +35,12 @@ const PeriodVal &ChartSegment::firstPeriodVal() const
 	return segmentVals_->firstVal();
 }
 
+unsigned int ChartSegment::numPeriods() const
+{
+	return segmentVals_->numVals();
+}
+
+
 double ChartSegment::slope() const
 {
 	return segmentEq_->slope();
