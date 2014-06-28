@@ -25,11 +25,11 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 	PeriodValCltnPtr cupData = PeriodVal::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
-	std::cerr << "CupWithHandle_SAVE_20130722" << std::endl;
+	BOOST_TEST_MESSAGE("CupWithHandle_SAVE_20130722");
 
 	for (PeriodValCltn::iterator cupDataIter = cupData->begin(); cupDataIter != cupData->end(); cupDataIter++)
 	{
-		std::cerr << " cup data: period data=" << (*cupDataIter) << std::endl;
+		BOOST_TEST_MESSAGE(" cup data: period data=" << (*cupDataIter));
 	}
 
 	SegmentConstraintPtr segConstraint(new SegmentValsCloseToLinearEq(3.0));
@@ -41,12 +41,12 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 	PeriodValSegmentPtr chartData(new PeriodValSegment(cupData));
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	std::cerr << "CupWithHandle_SAVE_20130722: Number of pattern matches: " << patternMatches->size() << std::endl;
+	BOOST_TEST_MESSAGE("CupWithHandle_SAVE_20130722: Number of pattern matches: " << patternMatches->size());
 	BOOST_REQUIRE(patternMatches->size() == 2);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
-	std::cerr << "Number of segments: " << thePatternMatch->numSegments() << std::endl;
+	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
 	BOOST_CHECK(thePatternMatch->numSegments() == 4);
 
 	BOOST_CHECK(segListConstraint->validSegments(thePatternMatch->segments()) == true);
@@ -54,10 +54,10 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 	PeriodVal firstVal = thePatternMatch->firstValue();
 	PeriodVal lastVal = thePatternMatch->lastValue();
 
-	std::cerr << "First Period Value: " << firstVal << std::endl;
-	std::cerr << "Last Period Value: " << lastVal << std::endl;
+	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
+	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
 
-	std::cerr << "Cup with Handle: " << (*thePatternMatch) << std::endl;
+	BOOST_TEST_MESSAGE("Cup with Handle: " << (*thePatternMatch));
 
 	BOOST_CHECK(ptime(date(2013,7,22)) == firstVal.periodTime());
 	BOOST_CHECK(ptime(date(2013,10,7)) == lastVal.periodTime());
@@ -75,20 +75,20 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_CHECK(patternMatches->size() == 5);
-	std::cerr << "Number of pattern matches: " << patternMatches->size() << std::endl;
+	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
-	std::cerr << "Number of segments: " << thePatternMatch->numSegments() << std::endl;
+	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
 	BOOST_CHECK(thePatternMatch->numSegments() == 3);
 
 	PeriodVal firstVal = thePatternMatch->firstValue();
 	PeriodVal lastVal = thePatternMatch->lastValue();
 
-	std::cerr << "First Period Value: " << firstVal << std::endl;
-	std::cerr << "Last Period Value: " << lastVal << std::endl;
+	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
+	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
 
-	std::cerr << "Cup pattern: " << (*thePatternMatch) << std::endl;
+	BOOST_TEST_MESSAGE("Cup pattern: " << (*thePatternMatch));
 
 	BOOST_CHECK(ptime(date(2013,7,22)) == firstVal.periodTime());
 	BOOST_CHECK(ptime(date(2013,10,7)) == lastVal.periodTime());
