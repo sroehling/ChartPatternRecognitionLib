@@ -6,17 +6,15 @@
  */
 
 #include <SlopeIncreasesConstraint.h>
-#include <limits>
+#include "MathHelper.h"
 
 SlopeIncreasesConstraint::SlopeIncreasesConstraint() {
-	// TODO Auto-generated constructor stub
-
 }
 
 
 bool SlopeIncreasesConstraint::validSegments(const ChartSegmentList &segments)
 {
-	double lastSlope = -1.0 * std::numeric_limits<double>::max();
+	double lastSlope = MathHelper::minDouble();
 	for(ChartSegmentList::const_iterator segIter = segments.begin();
 			segIter != segments.end(); segIter++)
 	{

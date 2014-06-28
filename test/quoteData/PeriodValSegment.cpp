@@ -57,3 +57,33 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
     BOOST_CHECK(trailingWithLast->firstVal().close() == 2.0);
     BOOST_CHECK(trailingWithLast->lastVal().close() == 5.0);
 }
+
+BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
+{
+	PeriodValCltnPtr testData(new PeriodValCltn());
+
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
+
+	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
+
+    BOOST_CHECK(testSeg->lowestLow() == 1.0);
+    BOOST_CHECK(testSeg->highestHigh() == 5.0);
+
+	PeriodValCltnPtr cupData = PeriodVal::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
+	PeriodValSegmentPtr cupSeg(new PeriodValSegment(cupData));
+
+	BOOST_TEST_MESSAGE( "Lowest low: " << cupSeg->lowestLow() );
+	BOOST_TEST_MESSAGE("Highest high: " << cupSeg->highestHigh());
+	BOOST_TEST_MESSAGE("Depth (points): " << cupSeg->depthPoints());
+	BOOST_TEST_MESSAGE("Depth (percent): " << cupSeg->depthPercent());
+	BOOST_CHECK_CLOSE(cupSeg->lowestLow(),29.65,0.0001);
+	BOOST_CHECK_CLOSE(cupSeg->highestHigh(),45.18,0.0001);
+    BOOST_CHECK_CLOSE( cupSeg->depthPoints(), 15.53, 0.0001 );
+    BOOST_CHECK_CLOSE( cupSeg->depthPercent(), 34.3736, 0.0001 );
+
+
+}

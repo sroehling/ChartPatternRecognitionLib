@@ -9,23 +9,20 @@
 BOOST_AUTO_TEST_CASE( PatternMatchNumPeriods )
 {
 
-	PeriodValCltnPtr seg1Data(new PeriodValCltn());
+	PeriodValCltnPtr testData(new PeriodValCltn());
 
-	seg1Data->push_back(testPeriodVal(2013,1,1,1.0,1));
-	seg1Data->push_back(testPeriodVal(2013,2,1,2.0,2));
-	seg1Data->push_back(testPeriodVal(2013,3,1,3.0,3));
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
 
-	PeriodValSegmentPtr seg1(new PeriodValSegment(seg1Data));
-	ChartSegmentPtr chartSeg1(new ChartSegment(seg1));
+	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
+    PeriodValSegmentPair splitTestSeg = testSeg->split(3);
 
-	PeriodValCltnPtr seg2Data(new PeriodValCltn());
 
-	seg2Data->push_back(testPeriodVal(2013,3,1,3.0,3));
-	seg2Data->push_back(testPeriodVal(2013,4,1,4.0,4));
-	seg2Data->push_back(testPeriodVal(2013,5,1,5.0,5));
-
-	PeriodValSegmentPtr seg2(new PeriodValSegment(seg2Data));
-	ChartSegmentPtr chartSeg2(new ChartSegment(seg2));
+	ChartSegmentPtr chartSeg1(new ChartSegment(splitTestSeg.first));
+	ChartSegmentPtr chartSeg2(new ChartSegment(splitTestSeg.second->moveSegBeginToPrev()));
 
 	ChartSegmentList matchSegments;
 	matchSegments.push_back(chartSeg1);

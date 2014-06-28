@@ -7,6 +7,7 @@
 
 #include "ChartSegment.h"
 #include "XYCoord.h"
+#include "MathHelper.h"
 
 ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 : segmentVals_(segmentVals)
@@ -46,15 +47,6 @@ double ChartSegment::slope() const
 	return segmentEq_->slope();
 }
 
-double ChartSegment::absRelPercentVal(double comparisonVal, double baseVal) const
-{
-	double relPerc = (comparisonVal/baseVal - 1.0) * 100.0;
-	if(relPerc < 0.0)
-	{
-		relPerc *= -1.0;
-	}
-	return relPerc;
-}
 
 double ChartSegment::maxRelPercentVsLinearEq() const
 {
@@ -65,7 +57,7 @@ double ChartSegment::maxRelPercentVsLinearEq() const
 	{
 		double segYVal = (*valIter).typicalPrice();
 		double eqYVal = segmentEq_->yVal(currXVal);
-		double relPerc = absRelPercentVal(eqYVal,segYVal);
+		double relPerc = MathHelper::absRelPercentVal(eqYVal,segYVal);
 		if(relPerc > maxPerc)
 		{
 			maxPerc = relPerc;

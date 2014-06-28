@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../math/LinearEquation.cpp \
+../math/MathHelper.cpp \
 ../math/XYCoord.cpp 
 
 OBJS += \
 ./math/LinearEquation.o \
+./math/MathHelper.o \
 ./math/XYCoord.o 
 
 CPP_DEPS += \
 ./math/LinearEquation.d \
+./math/MathHelper.d \
 ./math/XYCoord.d 
 
 

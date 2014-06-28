@@ -6,6 +6,7 @@
  */
 
 #include "PatternMatch.h"
+#include "MathHelper.h"
 
 PatternMatch::PatternMatch(const ChartSegmentList &segments)
 : segments_(segments)
@@ -68,8 +69,18 @@ bool PatternMatch::segmentsConnected(const ChartSegmentList &segments) const
 	}
 	else
 	{
+		PeriodValCltn::iterator firstSegBeginIter =
+					segments.front()->perValSegment()->perValCltn()->begin();
 		for(int segIndex = 1; segIndex < segments.size()-1; segIndex++)
 		{
+			// Segments must be point to the same underlying PeriodValCltn. This is
+			// necessary, since segments are implemented as flyweights for PeriodValCltn,
+			// and some of the calculations in this class are dependent on the
+			// segments referencing the same PeriodValCltn.
+			PeriodValCltn::iterator currSegBeginIter =
+					segments[segIndex]->perValSegment()->perValCltn()->begin();
+			assert(currSegBeginIter==firstSegBeginIter);
+
 			int prevSegIndex = segIndex - 1;
 			if(segments[prevSegIndex]->lastPeriodVal().periodTime() !=
 					segments[segIndex]->firstPeriodVal().periodTime())
@@ -86,26 +97,41 @@ const ChartSegmentList &PatternMatch::segments() const
 	return segments_;
 }
 
+PeriodValSegmentPtr PatternMatch::matchSegment() const
+{
+	PeriodValCltn::iterator matchSegBegin = segments().front()->perValSegment()->segBegin();
+	PeriodValCltn::iterator matchSegEnd = segments().back()->perValSegment()->segEnd();
+	PeriodValCltnPtr matchPerValCltn = segments().front()->perValSegment()->perValCltn();
+	PeriodValSegmentPtr combinedMatchSegment(new PeriodValSegment(matchPerValCltn,matchSegBegin,matchSegEnd));
+	return combinedMatchSegment;
+}
+
 unsigned int PatternMatch::numPeriods() const
 {
-	unsigned int totalPeriods = 0;
-	for(ChartSegmentList::const_iterator segIter = segments().begin();
-			segIter != segments().end(); segIter++)
-	{
-		totalPeriods += (*segIter)->numPeriods();
-	}
-	assert(segments().size() > 0);
-
-	// A PatternMatch consists of PeriodVal segments which are stitched together, meaning
-	// the ending value of one segment is the starting value for the next. The number
-	// of overlapping values is 0 if there is only 1 segment, or (number of segments) - 1
-	// if there is more than 1 segments.
-	unsigned int overlappingPeriodVals = segments().size() - 1;
-
-	assert(overlappingPeriodVals < totalPeriods);
-	totalPeriods -= overlappingPeriodVals;
-	return totalPeriods;
+	return matchSegment()->numVals();
 }
+
+double PatternMatch::lowestLow() const
+{
+	return matchSegment()->lowestLow();
+}
+
+double PatternMatch::highestHigh() const
+{
+	return matchSegment()->highestHigh();
+}
+
+
+double PatternMatch::depthPoints() const
+{
+	return matchSegment()->depthPoints();
+}
+
+double PatternMatch::depthPercent() const
+{
+	return matchSegment()->depthPercent();
+}
+
 
 std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 {

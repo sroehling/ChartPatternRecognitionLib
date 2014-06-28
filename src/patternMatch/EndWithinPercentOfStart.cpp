@@ -6,6 +6,7 @@
  */
 
 #include "EndWithinPercentOfStart.h"
+#include "MathHelper.h"
 
 EndWithinPercentOfStart::EndWithinPercentOfStart(double relPercent)
 : relPercent_(relPercent)
@@ -14,17 +15,12 @@ EndWithinPercentOfStart::EndWithinPercentOfStart(double relPercent)
 	assert(relPercent != 0.0);
 }
 
-double EndWithinPercentOfStart::relativePercentVal(double comparisonVal, double baseVal) const
-{
-	return (comparisonVal/baseVal - 1.0) * 100.0;
-}
-
 
 bool EndWithinPercentOfStart::validPattern(const PatternMatch &candidateMatch)
 {
 	double startingVal = candidateMatch.firstValue().high();
 	double endingVal = candidateMatch.lastValue().close();
-	double relPercResult = relativePercentVal(endingVal,startingVal);
+	double relPercResult = MathHelper::relativePercentVal(endingVal,startingVal);
 
 //	std::cerr << "EndWithinPercentOfStart: Relative Percent Val: start=" << startingVal << " end=" << endingVal
 //			<< " relPerc=" << relPercResult << std::endl;
@@ -56,6 +52,5 @@ bool EndWithinPercentOfStart::validPattern(const PatternMatch &candidateMatch)
 
 
 EndWithinPercentOfStart::~EndWithinPercentOfStart() {
-	// TODO Auto-generated destructor stub
 }
 

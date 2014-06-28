@@ -53,12 +53,18 @@ public:
 
 	const PeriodValCltn::iterator &segBegin() const { return segBegin_; }
 	const PeriodValCltn::iterator &segEnd() const { return segEnd_; }
+	const PeriodValCltnPtr perValCltn() const { return perValCltn_; }
 
 	PeriodValSegmentPair split(unsigned int splitPos) const;
 
 	unsigned int numVals() const;
 	const PeriodVal &firstVal() const;
 	const PeriodVal &lastVal() const;
+
+	double highestHigh() const; // Highest high within the segment
+	double lowestLow() const; // Lowest low value within the segment
+	double depthPoints() const; // depth in number of points ($, etc.)
+	double depthPercent() const; // depth from high to low, percent
 
 	virtual ~PeriodValSegment();
 };

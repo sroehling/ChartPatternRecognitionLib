@@ -7,6 +7,7 @@
 
 #include <PeriodValSegment.h>
 #include <iterator>
+#include "MathHelper.h"
 
 
 void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
@@ -98,6 +99,53 @@ const PeriodVal &PeriodValSegment::lastVal() const
 	lastValIter--;
 	return (*lastValIter);
 }
+
+double PeriodValSegment::highestHigh() const
+{
+	double maxVal = MathHelper::minDouble();
+	for(PeriodValCltn::const_iterator perValIter = segBegin();
+			perValIter != segEnd(); perValIter++)
+	{
+		if((*perValIter).high() > maxVal)
+		{
+			maxVal = (*perValIter).high();
+		}
+	}
+	assert(maxVal >= 0.0);
+	return maxVal;
+}
+
+double PeriodValSegment::lowestLow() const
+{
+	double minVal = MathHelper::maxDouble();
+	for(PeriodValCltn::const_iterator perValIter = segBegin();
+			perValIter != segEnd(); perValIter++)
+	{
+		if((*perValIter).low() < minVal)
+		{
+			minVal = (*perValIter).low();
+		}
+	}
+	assert(minVal >= 0.0);
+	return minVal;
+}
+
+double PeriodValSegment::depthPoints() const
+{
+	double depth = highestHigh()-lowestLow();
+	assert(depth >= -0.001); // greater than zero with a little tolerance
+	if(depth < 0.0) depth = 0.0;
+	return depth;
+
+}
+
+double PeriodValSegment::depthPercent() const // depth from high to low, percent
+{
+	double high = highestHigh();
+	double low = lowestLow();
+	return MathHelper::absRelPercentVal(low,high);
+}
+
 
 PeriodValSegment::~PeriodValSegment() {
 }
