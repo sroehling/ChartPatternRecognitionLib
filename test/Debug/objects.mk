@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lPatternRecognitionLib -lboost_date_time -lboost_unit_test_framework
+LIBS := -lboost_date_time -lboost_log-mt -lboost_log_setup-mt -lboost_unit_test_framework -lPatternRecognitionLib
 

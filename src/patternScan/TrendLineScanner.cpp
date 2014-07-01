@@ -18,9 +18,9 @@
 #include "ORPatternMatchValidator.h"
 
 
-TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope) {
-
-	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(4.5));
+void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope, const PatternMatchValidatorPtr &matchConstraint)
+{
+	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(7.0));
 	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(minSlope,maxSlope));
 
 	SegmentConstraintList trendConstraints;
@@ -30,11 +30,23 @@ TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope) {
 
 	SegmentListConstraintPtr trendSegListConstraint(new AnySegmentListValidConstraint());
 
-	PatternMatchValidatorPtr trendPatternMatchValidator(new AnyPatternMatchValidator());
+	PatternMatchValidatorPtr trendPatternMatchValidator(matchConstraint);
 
 	trendScanner_ = PatternScannerPtr(new PatternScannerEngine(trendSegConstraints,trendSegListConstraint,trendPatternMatchValidator));
 
 }
+
+TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope, const PatternMatchValidatorPtr &matchConstraint) {
+
+	initTrendScanner(minSlope,maxSlope,matchConstraint);
+
+}
+
+TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope) {
+
+	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()));
+}
+
 
 PatternMatchListPtr TrendLineScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {

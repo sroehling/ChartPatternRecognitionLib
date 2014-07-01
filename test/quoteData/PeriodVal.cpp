@@ -11,6 +11,8 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+#include "ClosePeriodValueRef.h"
+
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
@@ -21,11 +23,14 @@ BOOST_AUTO_TEST_CASE( PeriodValTest )
 {
 	// Read a valid quotes file and check some of the values
 	PeriodValCltnPtr periodData = PeriodVal::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
-	BOOST_CHECK(periodData->size()==27);
+	BOOST_CHECK(periodData->size()==26);
 
 	PeriodVal firstVal = periodData->front();
-	BOOST_CHECK_EQUAL(firstVal.volume(),1323000);
-	BOOST_CHECK_CLOSE(firstVal.close(),71.84,0.001);
+	BOOST_CHECK_EQUAL(firstVal.volume(),1469600);
+	BOOST_CHECK_CLOSE(firstVal.close(),66.68,0.001);
+
+	ClosePeriodValueRef closeRef;
+	BOOST_CHECK_CLOSE(closeRef.referencedVal(firstVal),66.68,0.001);
 
 	PeriodVal lastVal = periodData->back();
 	BOOST_CHECK_EQUAL(lastVal.volume(),3770100);

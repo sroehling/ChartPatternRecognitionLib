@@ -85,5 +85,7 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
     BOOST_CHECK_CLOSE( cupSeg->depthPoints(), 15.53, 0.0001 );
     BOOST_CHECK_CLOSE( cupSeg->depthPercent(), 34.3736, 0.0001 );
 
+    BOOST_CHECK_CLOSE( cupSeg->pointsAtPercentOfDepthBelowHigh(25.0),41.297,0.01);
+
 
 }

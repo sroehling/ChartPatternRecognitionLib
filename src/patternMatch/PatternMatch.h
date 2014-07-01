@@ -40,6 +40,8 @@ public:
 	double depthPoints() const; // depth from highest high to lowest low
 	double depthPercent() const; // depth from highest high to lowest low
 
+	double pointsAtPercentOfDepthBelowHigh(double percentFromHigh) const;
+
 	// Return a segment containing all the PeriodVal's after this
 	// pattern match, and including the last value. This is needed
 	// for matching sub-patterns, then putting/stitching together

@@ -15,8 +15,11 @@
 // Scan for V shaped patterns. This class is a building block
 // for double bottoms or other patterns with a V shape.
 class VScanner {
+private:
+	// Minimum amount of the downtrend the uptrend must recover.
+	double minUptrendPercentOfDowntrend_;
 public:
-	VScanner();
+	VScanner(double minUptrendPercentOfDowntrend);
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 	virtual ~VScanner();
 };

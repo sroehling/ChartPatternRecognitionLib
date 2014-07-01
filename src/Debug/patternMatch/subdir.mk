@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../patternMatch/AnyPatternMatchValidator.cpp \
 ../patternMatch/EndWithinPercentOfStart.cpp \
+../patternMatch/LastValueAbovePointValue.cpp \
 ../patternMatch/ORPatternMatchValidator.cpp \
 ../patternMatch/PatternLengthAtLeast.cpp \
 ../patternMatch/PatternLengthLessThanEqual.cpp \
@@ -15,6 +16,7 @@ CPP_SRCS += \
 OBJS += \
 ./patternMatch/AnyPatternMatchValidator.o \
 ./patternMatch/EndWithinPercentOfStart.o \
+./patternMatch/LastValueAbovePointValue.o \
 ./patternMatch/ORPatternMatchValidator.o \
 ./patternMatch/PatternLengthAtLeast.o \
 ./patternMatch/PatternLengthLessThanEqual.o \
@@ -24,6 +26,7 @@ OBJS += \
 CPP_DEPS += \
 ./patternMatch/AnyPatternMatchValidator.d \
 ./patternMatch/EndWithinPercentOfStart.d \
+./patternMatch/LastValueAbovePointValue.d \
 ./patternMatch/ORPatternMatchValidator.d \
 ./patternMatch/PatternLengthAtLeast.d \
 ./patternMatch/PatternLengthLessThanEqual.d \
@@ -35,7 +38,7 @@ CPP_DEPS += \
 patternMatch/%.o: ../patternMatch/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I/usr/local/include -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -DBOOST_LOG_DYN_LINK -I/usr/local/include -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch" -I"/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -1,8 +1,8 @@
 quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
-  /usr/local/include/boost/test/tools/context.hpp \
-  /usr/local/include/boost/test/utils/lazy_ostream.hpp \
+  /usr/local/include/boost/test/predicate_result.hpp \
+  /usr/local/include/boost/test/utils/class_properties.hpp \
   /usr/local/include/boost/test/detail/config.hpp \
   /usr/local/include/boost/config.hpp \
   /usr/local/include/boost/config/user.hpp \
@@ -16,9 +16,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/config/posix_features.hpp \
   /usr/local/include/boost/config/suffix.hpp \
   /usr/local/include/boost/detail/workaround.hpp \
-  /usr/local/include/boost/test/detail/suppress_warnings.hpp \
-  /usr/local/include/boost/test/detail/enable_warnings.hpp \
-  /usr/local/include/boost/test/tools/old/interface.hpp \
   /usr/local/include/boost/preprocessor/seq/for_each.hpp \
   /usr/local/include/boost/preprocessor/arithmetic/dec.hpp \
   /usr/local/include/boost/preprocessor/config/config.hpp \
@@ -40,18 +37,11 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/preprocessor/variadic/size.hpp \
   /usr/local/include/boost/preprocessor/tuple/rem.hpp \
   /usr/local/include/boost/preprocessor/variadic/elem.hpp \
-  /usr/local/include/boost/preprocessor/seq/to_tuple.hpp \
-  /usr/local/include/boost/preprocessor/seq/enum.hpp \
-  /usr/local/include/boost/test/tools/old/impl.hpp \
-  /usr/local/include/boost/test/unit_test_log.hpp \
-  /usr/local/include/boost/test/tree/observer.hpp \
-  /usr/local/include/boost/test/detail/fwd_decl.hpp \
-  /usr/local/include/boost/test/detail/global_typedef.hpp \
-  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp \
-  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp \
-  /usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp \
-  /usr/local/include/boost/type_traits/add_const.hpp \
-  /usr/local/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/local/include/boost/call_traits.hpp \
+  /usr/local/include/boost/detail/call_traits.hpp \
+  /usr/local/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/local/include/boost/type_traits/is_integral.hpp \
+  /usr/local/include/boost/type_traits/detail/bool_trait_def.hpp \
   /usr/local/include/boost/type_traits/detail/template_arity_spec.hpp \
   /usr/local/include/boost/mpl/int.hpp \
   /usr/local/include/boost/mpl/int_fwd.hpp \
@@ -61,6 +51,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/config/intel.hpp \
   /usr/local/include/boost/mpl/aux_/config/gcc.hpp \
   /usr/local/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/local/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/local/include/boost/mpl/aux_/config/nttp.hpp \
   /usr/local/include/boost/mpl/aux_/integral_wrapper.hpp \
   /usr/local/include/boost/mpl/integral_c_tag.hpp \
   /usr/local/include/boost/mpl/aux_/config/static_constant.hpp \
@@ -80,26 +72,12 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/config/ttp.hpp \
   /usr/local/include/boost/mpl/aux_/config/ctps.hpp \
   /usr/local/include/boost/mpl/aux_/config/overload_resolution.hpp \
-  /usr/local/include/boost/mpl/aux_/lambda_support.hpp \
-  /usr/local/include/boost/type_traits/detail/type_trait_undef.hpp \
-  /usr/local/include/boost/type_traits/remove_cv.hpp \
-  /usr/local/include/boost/type_traits/detail/cv_traits_impl.hpp \
-  /usr/local/include/boost/test/detail/workaround.hpp \
-  /usr/local/include/boost/test/detail/log_level.hpp \
-  /usr/local/include/boost/test/utils/wrap_stringstream.hpp \
-  /usr/local/include/boost/test/utils/trivial_singleton.hpp \
-  /usr/local/include/boost/test/tools/assertion_result.hpp \
-  /usr/local/include/boost/test/utils/class_properties.hpp \
-  /usr/local/include/boost/call_traits.hpp \
-  /usr/local/include/boost/detail/call_traits.hpp \
-  /usr/local/include/boost/type_traits/is_arithmetic.hpp \
-  /usr/local/include/boost/type_traits/is_integral.hpp \
-  /usr/local/include/boost/type_traits/detail/bool_trait_def.hpp \
   /usr/local/include/boost/type_traits/integral_constant.hpp \
   /usr/local/include/boost/mpl/bool.hpp \
   /usr/local/include/boost/mpl/bool_fwd.hpp \
   /usr/local/include/boost/mpl/integral_c.hpp \
   /usr/local/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/local/include/boost/mpl/aux_/lambda_support.hpp \
   /usr/local/include/boost/type_traits/detail/bool_trait_undef.hpp \
   /usr/local/include/boost/type_traits/is_float.hpp \
   /usr/local/include/boost/type_traits/detail/ice_or.hpp \
@@ -116,14 +94,26 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/type_traits/detail/ice_not.hpp \
   /usr/local/include/boost/type_traits/detail/ice_eq.hpp \
   /usr/local/include/boost/type_traits/is_volatile.hpp \
+  /usr/local/include/boost/type_traits/detail/cv_traits_impl.hpp \
   /usr/local/include/boost/type_traits/is_abstract.hpp \
   /usr/local/include/boost/type_traits/is_pointer.hpp \
   /usr/local/include/boost/type_traits/is_member_pointer.hpp \
   /usr/local/include/boost/type_traits/is_member_function_pointer.hpp \
   /usr/local/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/local/include/boost/type_traits/remove_cv.hpp \
+  /usr/local/include/boost/type_traits/broken_compiler_spec.hpp \
+  /usr/local/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/local/include/boost/type_traits/detail/type_trait_undef.hpp \
   /usr/local/include/boost/type_traits/add_pointer.hpp \
   /usr/local/include/boost/type_traits/remove_reference.hpp \
+  /usr/local/include/boost/type_traits/add_const.hpp \
   /usr/local/include/boost/utility/addressof.hpp \
+  /usr/local/include/boost/test/detail/suppress_warnings.hpp \
+  /usr/local/include/boost/test/detail/enable_warnings.hpp \
+  /usr/local/include/boost/test/utils/wrap_stringstream.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config/no_tr1/memory.hpp \
@@ -146,7 +136,51 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/smart_ptr/detail/yield_k.hpp \
   /usr/local/include/boost/memory_order.hpp \
   /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp \
-  /usr/local/include/boost/test/tools/floating_point_comparison.hpp \
+  /usr/local/include/boost/test/unit_test_log.hpp \
+  /usr/local/include/boost/test/test_observer.hpp \
+  /usr/local/include/boost/test/detail/fwd_decl.hpp \
+  /usr/local/include/boost/test/detail/global_typedef.hpp \
+  /usr/local/include/boost/test/detail/log_level.hpp \
+  /usr/local/include/boost/test/utils/trivial_singleton.hpp \
+  /usr/local/include/boost/noncopyable.hpp \
+  /usr/local/include/boost/test/utils/lazy_ostream.hpp \
+  /usr/local/include/boost/utility.hpp \
+  /usr/local/include/boost/utility/base_from_member.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/local/include/boost/preprocessor/control/while.hpp \
+  /usr/local/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/local/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/local/include/boost/preprocessor/list/adt.hpp \
+  /usr/local/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/local/include/boost/preprocessor/detail/check.hpp \
+  /usr/local/include/boost/preprocessor/logical/compl.hpp \
+  /usr/local/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/local/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/local/include/boost/preprocessor/list/reverse.hpp \
+  /usr/local/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/local/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/local/include/boost/utility/binary.hpp \
+  /usr/local/include/boost/preprocessor/control/deduce_d.hpp \
+  /usr/local/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/local/include/boost/preprocessor/seq/cat.hpp \
+  /usr/local/include/boost/preprocessor/seq/fold_left.hpp \
+  /usr/local/include/boost/preprocessor/seq/transform.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/mod.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+  /usr/local/include/boost/preprocessor/comparison/less_equal.hpp \
+  /usr/local/include/boost/preprocessor/logical/not.hpp \
+  /usr/local/include/boost/utility/enable_if.hpp \
+  /usr/local/include/boost/utility/identity_type.hpp \
+  /usr/local/include/boost/type_traits/function_traits.hpp \
+  /usr/local/include/boost/type_traits/is_function.hpp \
+  /usr/local/include/boost/type_traits/detail/false_result.hpp \
+  /usr/local/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/local/include/boost/next_prior.hpp \
+  /usr/local/include/boost/test/floating_point_comparison.hpp \
   /usr/local/include/boost/limits.hpp \
   /usr/local/include/boost/numeric/conversion/conversion_traits.hpp \
   /usr/local/include/boost/numeric/conversion/detail/conversion_traits.hpp \
@@ -154,6 +188,7 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/if.hpp \
   /usr/local/include/boost/mpl/aux_/value_wknd.hpp \
   /usr/local/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/local/include/boost/mpl/aux_/config/eti.hpp \
   /usr/local/include/boost/mpl/aux_/na_spec.hpp \
   /usr/local/include/boost/mpl/lambda_fwd.hpp \
   /usr/local/include/boost/mpl/void_fwd.hpp \
@@ -166,23 +201,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
   /usr/local/include/boost/mpl/limits/arity.hpp \
   /usr/local/include/boost/preprocessor/logical/and.hpp \
-  /usr/local/include/boost/preprocessor/logical/bitand.hpp \
   /usr/local/include/boost/preprocessor/identity.hpp \
-  /usr/local/include/boost/preprocessor/facilities/identity.hpp \
   /usr/local/include/boost/preprocessor/empty.hpp \
-  /usr/local/include/boost/preprocessor/arithmetic/add.hpp \
-  /usr/local/include/boost/preprocessor/control/while.hpp \
-  /usr/local/include/boost/preprocessor/list/fold_left.hpp \
-  /usr/local/include/boost/preprocessor/list/detail/fold_left.hpp \
-  /usr/local/include/boost/preprocessor/list/adt.hpp \
-  /usr/local/include/boost/preprocessor/detail/is_binary.hpp \
-  /usr/local/include/boost/preprocessor/detail/check.hpp \
-  /usr/local/include/boost/preprocessor/logical/compl.hpp \
-  /usr/local/include/boost/preprocessor/list/fold_right.hpp \
-  /usr/local/include/boost/preprocessor/list/detail/fold_right.hpp \
-  /usr/local/include/boost/preprocessor/list/reverse.hpp \
-  /usr/local/include/boost/preprocessor/control/detail/while.hpp \
-  /usr/local/include/boost/preprocessor/arithmetic/sub.hpp \
   /usr/local/include/boost/mpl/eval_if.hpp \
   /usr/local/include/boost/mpl/equal_to.hpp \
   /usr/local/include/boost/mpl/aux_/comparison_op.hpp \
@@ -195,12 +215,13 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/yes_no.hpp \
   /usr/local/include/boost/mpl/aux_/config/arrays.hpp \
   /usr/local/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/local/include/boost/mpl/aux_/config/msvc_typename.hpp \
   /usr/local/include/boost/preprocessor/array/elem.hpp \
   /usr/local/include/boost/preprocessor/array/data.hpp \
   /usr/local/include/boost/preprocessor/array/size.hpp \
-  /usr/local/include/boost/preprocessor/repetition/enum_params.hpp \
   /usr/local/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
   /usr/local/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_never_true.hpp \
   /usr/local/include/boost/mpl/aux_/config/use_preprocessed.hpp \
   /usr/local/include/boost/mpl/aux_/include_preprocessed.hpp \
   /usr/local/include/boost/mpl/aux_/config/compiler.hpp \
@@ -211,6 +232,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/has_tag.hpp \
   /usr/local/include/boost/mpl/aux_/numeric_cast_utils.hpp \
   /usr/local/include/boost/mpl/aux_/config/forwarding.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_eti_base.hpp \
+  /usr/local/include/boost/mpl/aux_/is_msvc_eti_arg.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp \
   /usr/local/include/boost/mpl/not.hpp \
   /usr/local/include/boost/mpl/aux_/nested_type_wknd.hpp \
@@ -233,58 +256,15 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/less.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/less.hpp \
   /usr/local/include/boost/static_assert.hpp \
-  /usr/local/include/boost/test/tools/detail/fwd.hpp \
+  /usr/local/include/boost/test/detail/workaround.hpp \
   /usr/local/include/boost/test/utils/basic_cstring/io.hpp \
-  /usr/local/include/boost/test/tools/detail/print_helper.hpp \
+  /usr/local/include/boost/preprocessor/seq/enum.hpp \
+  /usr/local/include/boost/type_traits/is_array.hpp \
   /usr/local/include/boost/mpl/or.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /usr/local/include/boost/type_traits/is_array.hpp \
-  /usr/local/include/boost/type_traits/is_function.hpp \
-  /usr/local/include/boost/type_traits/detail/false_result.hpp \
-  /usr/local/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
   /usr/local/include/boost/test/unit_test_suite.hpp \
-  /usr/local/include/boost/test/framework.hpp \
-  /usr/local/include/boost/test/tree/auto_registration.hpp \
-  /usr/local/include/boost/test/tree/decorator.hpp \
-  /usr/local/include/boost/test/tree/fixture.hpp \
-  /usr/local/include/boost/function/function0.hpp \
-  /usr/local/include/boost/function/detail/maybe_include.hpp \
-  /usr/local/include/boost/function/function_template.hpp \
-  /usr/local/include/boost/function/detail/prologue.hpp \
-  /usr/local/include/boost/config/no_tr1/functional.hpp \
-  /usr/local/include/boost/function/function_base.hpp \
-  /usr/local/include/boost/integer.hpp \
-  /usr/local/include/boost/integer_fwd.hpp \
-  /usr/local/include/boost/cstdint.hpp \
-  /usr/local/include/boost/integer_traits.hpp \
-  /usr/local/include/boost/type_traits/has_trivial_copy.hpp \
-  /usr/local/include/boost/type_traits/is_pod.hpp \
-  /usr/local/include/boost/type_traits/is_void.hpp \
-  /usr/local/include/boost/type_traits/is_scalar.hpp \
-  /usr/local/include/boost/type_traits/has_trivial_destructor.hpp \
-  /usr/local/include/boost/type_traits/is_const.hpp \
-  /usr/local/include/boost/type_traits/composite_traits.hpp \
-  /usr/local/include/boost/type_traits/is_union.hpp \
-  /usr/local/include/boost/ref.hpp \
-  /usr/local/include/boost/type_traits/alignment_of.hpp \
-  /usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp \
-  /usr/local/include/boost/mpl/size_t.hpp \
-  /usr/local/include/boost/mpl/size_t_fwd.hpp \
-  /usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp \
-  /usr/local/include/boost/utility/enable_if.hpp \
-  /usr/local/include/boost/function_equal.hpp \
-  /usr/local/include/boost/function/function_fwd.hpp \
-  /usr/local/include/boost/mem_fn.hpp \
-  /usr/local/include/boost/bind/mem_fn.hpp \
-  /usr/local/include/boost/get_pointer.hpp \
-  /usr/local/include/boost/bind/mem_fn_template.hpp \
-  /usr/local/include/boost/bind/mem_fn_cc.hpp \
-  /usr/local/include/boost/preprocessor/enum.hpp \
-  /usr/local/include/boost/preprocessor/repetition/enum.hpp \
-  /usr/local/include/boost/preprocessor/enum_params.hpp \
-  /usr/local/include/boost/detail/no_exceptions_support.hpp \
-  /usr/local/include/boost/test/tree/test_unit.hpp \
-  /usr/local/include/boost/test/tree/test_case_template.hpp \
+  /usr/local/include/boost/test/unit_test_suite_impl.hpp \
+  /usr/local/include/boost/test/utils/callback.hpp \
   /usr/local/include/boost/mpl/for_each.hpp \
   /usr/local/include/boost/mpl/is_sequence.hpp \
   /usr/local/include/boost/mpl/begin_end.hpp \
@@ -327,28 +307,39 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
   /usr/local/include/boost/mpl/deref.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_type.hpp \
   /usr/local/include/boost/mpl/aux_/unwrap.hpp \
+  /usr/local/include/boost/ref.hpp \
   /usr/local/include/boost/utility/value_init.hpp \
   /usr/local/include/boost/aligned_storage.hpp \
+  /usr/local/include/boost/type_traits/alignment_of.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp \
+  /usr/local/include/boost/mpl/size_t.hpp \
+  /usr/local/include/boost/mpl/size_t_fwd.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp \
   /usr/local/include/boost/type_traits/type_with_alignment.hpp \
   /usr/local/include/boost/preprocessor/list/for_each_i.hpp \
   /usr/local/include/boost/preprocessor/tuple/to_list.hpp \
-  /usr/local/include/boost/preprocessor/tuple/size.hpp \
   /usr/local/include/boost/preprocessor/list/transform.hpp \
   /usr/local/include/boost/preprocessor/list/append.hpp \
+  /usr/local/include/boost/type_traits/is_pod.hpp \
+  /usr/local/include/boost/type_traits/is_void.hpp \
+  /usr/local/include/boost/type_traits/is_scalar.hpp \
   /usr/local/include/boost/type_traits/cv_traits.hpp \
   /usr/local/include/boost/type_traits/add_volatile.hpp \
   /usr/local/include/boost/type_traits/add_cv.hpp \
+  /usr/local/include/boost/type_traits/is_const.hpp \
   /usr/local/include/boost/type_traits/remove_const.hpp \
   /usr/local/include/boost/type_traits/remove_volatile.hpp \
   /usr/local/include/boost/swap.hpp \
   /usr/local/include/boost/utility/swap.hpp \
   /usr/local/include/boost/type.hpp \
-  /usr/local/include/boost/test/tree/global_fixture.hpp \
+  /usr/local/include/boost/test/framework.hpp \
   /usr/local/include/boost/config/auto_link.hpp \
   /usr/local/include/boost/date_time/gregorian/gregorian.hpp \
   /usr/local/include/boost/date_time/compiler_config.hpp \
   /usr/local/include/boost/date_time/locale_config.hpp \
+  /usr/local/include/boost/cstdint.hpp \
   /usr/local/include/boost/date_time/gregorian/gregorian_types.hpp \
   /usr/local/include/boost/date_time/date.hpp \
   /usr/local/include/boost/operators.hpp \
@@ -394,6 +385,7 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/date_time/date_facet.hpp \
   /usr/local/include/boost/algorithm/string/replace.hpp \
   /usr/local/include/boost/algorithm/string/config.hpp \
+  /usr/local/include/boost/range/iterator_range.hpp \
   /usr/local/include/boost/range/iterator_range_core.hpp \
   /usr/local/include/boost/iterator/iterator_traits.hpp \
   /usr/local/include/boost/detail/iterator.hpp \
@@ -407,7 +399,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/detail/indirect_traits.hpp \
   /usr/local/include/boost/type_traits/remove_pointer.hpp \
   /usr/local/include/boost/iterator/detail/enable_if.hpp \
-  /usr/local/include/boost/iterator/detail/operator_brackets_dispatch.hpp \
   /usr/local/include/boost/mpl/always.hpp \
   /usr/local/include/boost/range/functions.hpp \
   /usr/local/include/boost/range/begin.hpp \
@@ -423,6 +414,18 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/range/size.hpp \
   /usr/local/include/boost/range/size_type.hpp \
   /usr/local/include/boost/range/difference_type.hpp \
+  /usr/local/include/boost/type_traits/make_unsigned.hpp \
+  /usr/local/include/boost/type_traits/is_signed.hpp \
+  /usr/local/include/boost/type_traits/is_unsigned.hpp \
+  /usr/local/include/boost/range/distance.hpp \
+  /usr/local/include/boost/range/empty.hpp \
+  /usr/local/include/boost/range/rbegin.hpp \
+  /usr/local/include/boost/range/reverse_iterator.hpp \
+  /usr/local/include/boost/iterator/reverse_iterator.hpp \
+  /usr/local/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/local/include/boost/type_traits/add_reference.hpp \
+  /usr/local/include/boost/range/rend.hpp \
+  /usr/local/include/boost/range/algorithm/equal.hpp \
   /usr/local/include/boost/range/concepts.hpp \
   /usr/local/include/boost/concept_check.hpp \
   /usr/local/include/boost/concept/assert.hpp \
@@ -437,24 +440,10 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/iterator/iterator_concepts.hpp \
   /usr/local/include/boost/range/value_type.hpp \
   /usr/local/include/boost/range/detail/misc_concept.hpp \
-  /usr/local/include/boost/type_traits/make_unsigned.hpp \
-  /usr/local/include/boost/type_traits/is_signed.hpp \
-  /usr/local/include/boost/type_traits/is_unsigned.hpp \
-  /usr/local/include/boost/range/distance.hpp \
-  /usr/local/include/boost/range/empty.hpp \
-  /usr/local/include/boost/range/rbegin.hpp \
-  /usr/local/include/boost/range/reverse_iterator.hpp \
-  /usr/local/include/boost/iterator/reverse_iterator.hpp \
-  /usr/local/include/boost/next_prior.hpp \
-  /usr/local/include/boost/iterator/iterator_adaptor.hpp \
-  /usr/local/include/boost/type_traits/add_reference.hpp \
-  /usr/local/include/boost/range/rend.hpp \
-  /usr/local/include/boost/range/algorithm/equal.hpp \
   /usr/local/include/boost/range/detail/safe_bool.hpp \
+  /usr/local/include/boost/range/iterator_range_io.hpp \
   /usr/local/include/boost/algorithm/string/find_format.hpp \
   /usr/local/include/boost/range/as_literal.hpp \
-  /usr/local/include/boost/range/iterator_range.hpp \
-  /usr/local/include/boost/range/iterator_range_io.hpp \
   /usr/local/include/boost/range/detail/str_types.hpp \
   /usr/local/include/boost/algorithm/string/concept.hpp \
   /usr/local/include/boost/algorithm/string/detail/find_format.hpp \
@@ -478,6 +467,7 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/date_time/string_parse_tree.hpp \
   /usr/local/include/boost/lexical_cast.hpp \
   /usr/local/include/boost/detail/lcast_precision.hpp \
+  /usr/local/include/boost/integer_traits.hpp \
   /usr/local/include/boost/array.hpp \
   /usr/local/include/boost/functional/hash_fwd.hpp \
   /usr/local/include/boost/functional/hash/hash_fwd.hpp \
@@ -632,35 +622,17 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/config/no_tr1/complex.hpp \
   /usr/local/include/boost/math/special_functions/detail/fp_traits.hpp \
   /usr/local/include/boost/detail/endian.hpp \
-  /usr/local/include/boost/predef/detail/endian_compat.h \
-  /usr/local/include/boost/predef/other/endian.h \
-  /usr/local/include/boost/predef/version_number.h \
-  /usr/local/include/boost/predef/make.h \
-  /usr/local/include/boost/predef/detail/test.h \
-  /usr/local/include/boost/predef/library/c/gnu.h \
-  /usr/local/include/boost/predef/library/c/_prefix.h \
-  /usr/local/include/boost/predef/detail/_cassert.h \
-  /usr/local/include/boost/predef/os/macos.h \
-  /usr/local/include/boost/predef/detail/os_detected.h \
-  /usr/local/include/boost/predef/os/bsd.h \
-  /usr/local/include/boost/predef/os/bsd/bsdi.h \
-  /usr/local/include/boost/predef/os/bsd/dragonfly.h \
-  /usr/local/include/boost/predef/os/bsd/free.h \
-  /usr/local/include/boost/predef/os/bsd/open.h \
-  /usr/local/include/boost/predef/os/bsd/net.h \
   /usr/local/include/boost/math/special_functions/fpclassify.hpp \
   /usr/local/include/boost/math/tools/real_cast.hpp \
   /usr/local/include/boost/container/container_fwd.hpp \
-  /usr/local/include/boost/detail/basic_pointerbuf.hpp \
-  /usr/local/include/boost/noncopyable.hpp \
+  /usr/local/include/boost/integer.hpp \
+  /usr/local/include/boost/integer_fwd.hpp \
   /usr/local/include/boost/algorithm/string/case_conv.hpp \
   /usr/local/include/boost/iterator/transform_iterator.hpp \
-  /usr/local/include/boost/type_traits/function_traits.hpp \
   /usr/local/include/boost/utility/result_of.hpp \
   /usr/local/include/boost/preprocessor/iteration/iterate.hpp \
   /usr/local/include/boost/preprocessor/slot/slot.hpp \
   /usr/local/include/boost/preprocessor/slot/detail/def.hpp \
-  /usr/local/include/boost/preprocessor/repetition/enum_binary_params.hpp \
   /usr/local/include/boost/preprocessor/repetition/enum_shifted_params.hpp \
   /usr/local/include/boost/preprocessor/facilities/intercept.hpp \
   /usr/local/include/boost/utility/declval.hpp \
@@ -712,15 +684,17 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
 /usr/local/include/boost/test/test_tools.hpp:
 
-/usr/local/include/boost/test/tools/context.hpp:
+/usr/local/include/boost/test/predicate_result.hpp:
 
-/usr/local/include/boost/test/utils/lazy_ostream.hpp:
+/usr/local/include/boost/test/utils/class_properties.hpp:
 
 /usr/local/include/boost/test/detail/config.hpp:
 
@@ -747,12 +721,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/config/suffix.hpp:
 
 /usr/local/include/boost/detail/workaround.hpp:
-
-/usr/local/include/boost/test/detail/suppress_warnings.hpp:
-
-/usr/local/include/boost/test/detail/enable_warnings.hpp:
-
-/usr/local/include/boost/test/tools/old/interface.hpp:
 
 /usr/local/include/boost/preprocessor/seq/for_each.hpp:
 
@@ -796,29 +764,15 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/preprocessor/variadic/elem.hpp:
 
-/usr/local/include/boost/preprocessor/seq/to_tuple.hpp:
+/usr/local/include/boost/call_traits.hpp:
 
-/usr/local/include/boost/preprocessor/seq/enum.hpp:
+/usr/local/include/boost/detail/call_traits.hpp:
 
-/usr/local/include/boost/test/tools/old/impl.hpp:
+/usr/local/include/boost/type_traits/is_arithmetic.hpp:
 
-/usr/local/include/boost/test/unit_test_log.hpp:
+/usr/local/include/boost/type_traits/is_integral.hpp:
 
-/usr/local/include/boost/test/tree/observer.hpp:
-
-/usr/local/include/boost/test/detail/fwd_decl.hpp:
-
-/usr/local/include/boost/test/detail/global_typedef.hpp:
-
-/usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp:
-
-/usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp:
-
-/usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp:
-
-/usr/local/include/boost/type_traits/add_const.hpp:
-
-/usr/local/include/boost/type_traits/detail/type_trait_def.hpp:
+/usr/local/include/boost/type_traits/detail/bool_trait_def.hpp:
 
 /usr/local/include/boost/type_traits/detail/template_arity_spec.hpp:
 
@@ -837,6 +791,10 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/mpl/aux_/config/gcc.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/workaround.hpp:
+
+/usr/local/include/boost/mpl/aux_/nttp_decl.hpp:
+
+/usr/local/include/boost/mpl/aux_/config/nttp.hpp:
 
 /usr/local/include/boost/mpl/aux_/integral_wrapper.hpp:
 
@@ -876,36 +834,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/mpl/aux_/config/overload_resolution.hpp:
 
-/usr/local/include/boost/mpl/aux_/lambda_support.hpp:
-
-/usr/local/include/boost/type_traits/detail/type_trait_undef.hpp:
-
-/usr/local/include/boost/type_traits/remove_cv.hpp:
-
-/usr/local/include/boost/type_traits/detail/cv_traits_impl.hpp:
-
-/usr/local/include/boost/test/detail/workaround.hpp:
-
-/usr/local/include/boost/test/detail/log_level.hpp:
-
-/usr/local/include/boost/test/utils/wrap_stringstream.hpp:
-
-/usr/local/include/boost/test/utils/trivial_singleton.hpp:
-
-/usr/local/include/boost/test/tools/assertion_result.hpp:
-
-/usr/local/include/boost/test/utils/class_properties.hpp:
-
-/usr/local/include/boost/call_traits.hpp:
-
-/usr/local/include/boost/detail/call_traits.hpp:
-
-/usr/local/include/boost/type_traits/is_arithmetic.hpp:
-
-/usr/local/include/boost/type_traits/is_integral.hpp:
-
-/usr/local/include/boost/type_traits/detail/bool_trait_def.hpp:
-
 /usr/local/include/boost/type_traits/integral_constant.hpp:
 
 /usr/local/include/boost/mpl/bool.hpp:
@@ -915,6 +843,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/mpl/integral_c.hpp:
 
 /usr/local/include/boost/mpl/integral_c_fwd.hpp:
+
+/usr/local/include/boost/mpl/aux_/lambda_support.hpp:
 
 /usr/local/include/boost/type_traits/detail/bool_trait_undef.hpp:
 
@@ -948,6 +878,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/type_traits/is_volatile.hpp:
 
+/usr/local/include/boost/type_traits/detail/cv_traits_impl.hpp:
+
 /usr/local/include/boost/type_traits/is_abstract.hpp:
 
 /usr/local/include/boost/type_traits/is_pointer.hpp:
@@ -958,11 +890,33 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp:
 
+/usr/local/include/boost/type_traits/remove_cv.hpp:
+
+/usr/local/include/boost/type_traits/broken_compiler_spec.hpp:
+
+/usr/local/include/boost/type_traits/detail/type_trait_def.hpp:
+
+/usr/local/include/boost/type_traits/detail/type_trait_undef.hpp:
+
 /usr/local/include/boost/type_traits/add_pointer.hpp:
 
 /usr/local/include/boost/type_traits/remove_reference.hpp:
 
+/usr/local/include/boost/type_traits/add_const.hpp:
+
 /usr/local/include/boost/utility/addressof.hpp:
+
+/usr/local/include/boost/test/detail/suppress_warnings.hpp:
+
+/usr/local/include/boost/test/detail/enable_warnings.hpp:
+
+/usr/local/include/boost/test/utils/wrap_stringstream.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp:
 
 /usr/local/include/boost/shared_ptr.hpp:
 
@@ -1008,7 +962,95 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp:
 
-/usr/local/include/boost/test/tools/floating_point_comparison.hpp:
+/usr/local/include/boost/test/unit_test_log.hpp:
+
+/usr/local/include/boost/test/test_observer.hpp:
+
+/usr/local/include/boost/test/detail/fwd_decl.hpp:
+
+/usr/local/include/boost/test/detail/global_typedef.hpp:
+
+/usr/local/include/boost/test/detail/log_level.hpp:
+
+/usr/local/include/boost/test/utils/trivial_singleton.hpp:
+
+/usr/local/include/boost/noncopyable.hpp:
+
+/usr/local/include/boost/test/utils/lazy_ostream.hpp:
+
+/usr/local/include/boost/utility.hpp:
+
+/usr/local/include/boost/utility/base_from_member.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_binary_params.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_params.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/add.hpp:
+
+/usr/local/include/boost/preprocessor/control/while.hpp:
+
+/usr/local/include/boost/preprocessor/list/fold_left.hpp:
+
+/usr/local/include/boost/preprocessor/list/detail/fold_left.hpp:
+
+/usr/local/include/boost/preprocessor/list/adt.hpp:
+
+/usr/local/include/boost/preprocessor/detail/is_binary.hpp:
+
+/usr/local/include/boost/preprocessor/detail/check.hpp:
+
+/usr/local/include/boost/preprocessor/logical/compl.hpp:
+
+/usr/local/include/boost/preprocessor/list/fold_right.hpp:
+
+/usr/local/include/boost/preprocessor/list/detail/fold_right.hpp:
+
+/usr/local/include/boost/preprocessor/list/reverse.hpp:
+
+/usr/local/include/boost/preprocessor/logical/bitand.hpp:
+
+/usr/local/include/boost/preprocessor/control/detail/while.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/sub.hpp:
+
+/usr/local/include/boost/utility/binary.hpp:
+
+/usr/local/include/boost/preprocessor/control/deduce_d.hpp:
+
+/usr/local/include/boost/preprocessor/facilities/identity.hpp:
+
+/usr/local/include/boost/preprocessor/seq/cat.hpp:
+
+/usr/local/include/boost/preprocessor/seq/fold_left.hpp:
+
+/usr/local/include/boost/preprocessor/seq/transform.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/mod.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/detail/div_base.hpp:
+
+/usr/local/include/boost/preprocessor/comparison/less_equal.hpp:
+
+/usr/local/include/boost/preprocessor/logical/not.hpp:
+
+/usr/local/include/boost/utility/enable_if.hpp:
+
+/usr/local/include/boost/utility/identity_type.hpp:
+
+/usr/local/include/boost/type_traits/function_traits.hpp:
+
+/usr/local/include/boost/type_traits/is_function.hpp:
+
+/usr/local/include/boost/type_traits/detail/false_result.hpp:
+
+/usr/local/include/boost/type_traits/detail/is_function_ptr_helper.hpp:
+
+/usr/local/include/boost/next_prior.hpp:
+
+/usr/local/include/boost/test/floating_point_comparison.hpp:
 
 /usr/local/include/boost/limits.hpp:
 
@@ -1023,6 +1065,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/mpl/aux_/value_wknd.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/integral.hpp:
+
+/usr/local/include/boost/mpl/aux_/config/eti.hpp:
 
 /usr/local/include/boost/mpl/aux_/na_spec.hpp:
 
@@ -1048,39 +1092,9 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/preprocessor/logical/and.hpp:
 
-/usr/local/include/boost/preprocessor/logical/bitand.hpp:
-
 /usr/local/include/boost/preprocessor/identity.hpp:
 
-/usr/local/include/boost/preprocessor/facilities/identity.hpp:
-
 /usr/local/include/boost/preprocessor/empty.hpp:
-
-/usr/local/include/boost/preprocessor/arithmetic/add.hpp:
-
-/usr/local/include/boost/preprocessor/control/while.hpp:
-
-/usr/local/include/boost/preprocessor/list/fold_left.hpp:
-
-/usr/local/include/boost/preprocessor/list/detail/fold_left.hpp:
-
-/usr/local/include/boost/preprocessor/list/adt.hpp:
-
-/usr/local/include/boost/preprocessor/detail/is_binary.hpp:
-
-/usr/local/include/boost/preprocessor/detail/check.hpp:
-
-/usr/local/include/boost/preprocessor/logical/compl.hpp:
-
-/usr/local/include/boost/preprocessor/list/fold_right.hpp:
-
-/usr/local/include/boost/preprocessor/list/detail/fold_right.hpp:
-
-/usr/local/include/boost/preprocessor/list/reverse.hpp:
-
-/usr/local/include/boost/preprocessor/control/detail/while.hpp:
-
-/usr/local/include/boost/preprocessor/arithmetic/sub.hpp:
 
 /usr/local/include/boost/mpl/eval_if.hpp:
 
@@ -1106,17 +1120,19 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/mpl/aux_/config/has_xxx.hpp:
 
+/usr/local/include/boost/mpl/aux_/config/msvc_typename.hpp:
+
 /usr/local/include/boost/preprocessor/array/elem.hpp:
 
 /usr/local/include/boost/preprocessor/array/data.hpp:
 
 /usr/local/include/boost/preprocessor/array/size.hpp:
 
-/usr/local/include/boost/preprocessor/repetition/enum_params.hpp:
-
 /usr/local/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/has_apply.hpp:
+
+/usr/local/include/boost/mpl/aux_/msvc_never_true.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/use_preprocessed.hpp:
 
@@ -1137,6 +1153,10 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/mpl/aux_/numeric_cast_utils.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/forwarding.hpp:
+
+/usr/local/include/boost/mpl/aux_/msvc_eti_base.hpp:
+
+/usr/local/include/boost/mpl/aux_/is_msvc_eti_arg.hpp:
 
 /usr/local/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp:
 
@@ -1182,109 +1202,23 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/static_assert.hpp:
 
-/usr/local/include/boost/test/tools/detail/fwd.hpp:
+/usr/local/include/boost/test/detail/workaround.hpp:
 
 /usr/local/include/boost/test/utils/basic_cstring/io.hpp:
 
-/usr/local/include/boost/test/tools/detail/print_helper.hpp:
+/usr/local/include/boost/preprocessor/seq/enum.hpp:
+
+/usr/local/include/boost/type_traits/is_array.hpp:
 
 /usr/local/include/boost/mpl/or.hpp:
 
 /usr/local/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
 
-/usr/local/include/boost/type_traits/is_array.hpp:
-
-/usr/local/include/boost/type_traits/is_function.hpp:
-
-/usr/local/include/boost/type_traits/detail/false_result.hpp:
-
-/usr/local/include/boost/type_traits/detail/is_function_ptr_helper.hpp:
-
 /usr/local/include/boost/test/unit_test_suite.hpp:
 
-/usr/local/include/boost/test/framework.hpp:
+/usr/local/include/boost/test/unit_test_suite_impl.hpp:
 
-/usr/local/include/boost/test/tree/auto_registration.hpp:
-
-/usr/local/include/boost/test/tree/decorator.hpp:
-
-/usr/local/include/boost/test/tree/fixture.hpp:
-
-/usr/local/include/boost/function/function0.hpp:
-
-/usr/local/include/boost/function/detail/maybe_include.hpp:
-
-/usr/local/include/boost/function/function_template.hpp:
-
-/usr/local/include/boost/function/detail/prologue.hpp:
-
-/usr/local/include/boost/config/no_tr1/functional.hpp:
-
-/usr/local/include/boost/function/function_base.hpp:
-
-/usr/local/include/boost/integer.hpp:
-
-/usr/local/include/boost/integer_fwd.hpp:
-
-/usr/local/include/boost/cstdint.hpp:
-
-/usr/local/include/boost/integer_traits.hpp:
-
-/usr/local/include/boost/type_traits/has_trivial_copy.hpp:
-
-/usr/local/include/boost/type_traits/is_pod.hpp:
-
-/usr/local/include/boost/type_traits/is_void.hpp:
-
-/usr/local/include/boost/type_traits/is_scalar.hpp:
-
-/usr/local/include/boost/type_traits/has_trivial_destructor.hpp:
-
-/usr/local/include/boost/type_traits/is_const.hpp:
-
-/usr/local/include/boost/type_traits/composite_traits.hpp:
-
-/usr/local/include/boost/type_traits/is_union.hpp:
-
-/usr/local/include/boost/ref.hpp:
-
-/usr/local/include/boost/type_traits/alignment_of.hpp:
-
-/usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp:
-
-/usr/local/include/boost/mpl/size_t.hpp:
-
-/usr/local/include/boost/mpl/size_t_fwd.hpp:
-
-/usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp:
-
-/usr/local/include/boost/utility/enable_if.hpp:
-
-/usr/local/include/boost/function_equal.hpp:
-
-/usr/local/include/boost/function/function_fwd.hpp:
-
-/usr/local/include/boost/mem_fn.hpp:
-
-/usr/local/include/boost/bind/mem_fn.hpp:
-
-/usr/local/include/boost/get_pointer.hpp:
-
-/usr/local/include/boost/bind/mem_fn_template.hpp:
-
-/usr/local/include/boost/bind/mem_fn_cc.hpp:
-
-/usr/local/include/boost/preprocessor/enum.hpp:
-
-/usr/local/include/boost/preprocessor/repetition/enum.hpp:
-
-/usr/local/include/boost/preprocessor/enum_params.hpp:
-
-/usr/local/include/boost/detail/no_exceptions_support.hpp:
-
-/usr/local/include/boost/test/tree/test_unit.hpp:
-
-/usr/local/include/boost/test/tree/test_case_template.hpp:
+/usr/local/include/boost/test/utils/callback.hpp:
 
 /usr/local/include/boost/mpl/for_each.hpp:
 
@@ -1370,11 +1304,25 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/mpl/deref.hpp:
 
+/usr/local/include/boost/mpl/aux_/msvc_type.hpp:
+
 /usr/local/include/boost/mpl/aux_/unwrap.hpp:
+
+/usr/local/include/boost/ref.hpp:
 
 /usr/local/include/boost/utility/value_init.hpp:
 
 /usr/local/include/boost/aligned_storage.hpp:
+
+/usr/local/include/boost/type_traits/alignment_of.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp:
+
+/usr/local/include/boost/mpl/size_t.hpp:
+
+/usr/local/include/boost/mpl/size_t_fwd.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp:
 
 /usr/local/include/boost/type_traits/type_with_alignment.hpp:
 
@@ -1382,17 +1330,23 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/preprocessor/tuple/to_list.hpp:
 
-/usr/local/include/boost/preprocessor/tuple/size.hpp:
-
 /usr/local/include/boost/preprocessor/list/transform.hpp:
 
 /usr/local/include/boost/preprocessor/list/append.hpp:
+
+/usr/local/include/boost/type_traits/is_pod.hpp:
+
+/usr/local/include/boost/type_traits/is_void.hpp:
+
+/usr/local/include/boost/type_traits/is_scalar.hpp:
 
 /usr/local/include/boost/type_traits/cv_traits.hpp:
 
 /usr/local/include/boost/type_traits/add_volatile.hpp:
 
 /usr/local/include/boost/type_traits/add_cv.hpp:
+
+/usr/local/include/boost/type_traits/is_const.hpp:
 
 /usr/local/include/boost/type_traits/remove_const.hpp:
 
@@ -1404,7 +1358,7 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/type.hpp:
 
-/usr/local/include/boost/test/tree/global_fixture.hpp:
+/usr/local/include/boost/test/framework.hpp:
 
 /usr/local/include/boost/config/auto_link.hpp:
 
@@ -1413,6 +1367,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/date_time/compiler_config.hpp:
 
 /usr/local/include/boost/date_time/locale_config.hpp:
+
+/usr/local/include/boost/cstdint.hpp:
 
 /usr/local/include/boost/date_time/gregorian/gregorian_types.hpp:
 
@@ -1504,6 +1460,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/algorithm/string/config.hpp:
 
+/usr/local/include/boost/range/iterator_range.hpp:
+
 /usr/local/include/boost/range/iterator_range_core.hpp:
 
 /usr/local/include/boost/iterator/iterator_traits.hpp:
@@ -1529,8 +1487,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/type_traits/remove_pointer.hpp:
 
 /usr/local/include/boost/iterator/detail/enable_if.hpp:
-
-/usr/local/include/boost/iterator/detail/operator_brackets_dispatch.hpp:
 
 /usr/local/include/boost/mpl/always.hpp:
 
@@ -1562,6 +1518,30 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/range/difference_type.hpp:
 
+/usr/local/include/boost/type_traits/make_unsigned.hpp:
+
+/usr/local/include/boost/type_traits/is_signed.hpp:
+
+/usr/local/include/boost/type_traits/is_unsigned.hpp:
+
+/usr/local/include/boost/range/distance.hpp:
+
+/usr/local/include/boost/range/empty.hpp:
+
+/usr/local/include/boost/range/rbegin.hpp:
+
+/usr/local/include/boost/range/reverse_iterator.hpp:
+
+/usr/local/include/boost/iterator/reverse_iterator.hpp:
+
+/usr/local/include/boost/iterator/iterator_adaptor.hpp:
+
+/usr/local/include/boost/type_traits/add_reference.hpp:
+
+/usr/local/include/boost/range/rend.hpp:
+
+/usr/local/include/boost/range/algorithm/equal.hpp:
+
 /usr/local/include/boost/range/concepts.hpp:
 
 /usr/local/include/boost/concept_check.hpp:
@@ -1590,41 +1570,13 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/range/detail/misc_concept.hpp:
 
-/usr/local/include/boost/type_traits/make_unsigned.hpp:
-
-/usr/local/include/boost/type_traits/is_signed.hpp:
-
-/usr/local/include/boost/type_traits/is_unsigned.hpp:
-
-/usr/local/include/boost/range/distance.hpp:
-
-/usr/local/include/boost/range/empty.hpp:
-
-/usr/local/include/boost/range/rbegin.hpp:
-
-/usr/local/include/boost/range/reverse_iterator.hpp:
-
-/usr/local/include/boost/iterator/reverse_iterator.hpp:
-
-/usr/local/include/boost/next_prior.hpp:
-
-/usr/local/include/boost/iterator/iterator_adaptor.hpp:
-
-/usr/local/include/boost/type_traits/add_reference.hpp:
-
-/usr/local/include/boost/range/rend.hpp:
-
-/usr/local/include/boost/range/algorithm/equal.hpp:
-
 /usr/local/include/boost/range/detail/safe_bool.hpp:
+
+/usr/local/include/boost/range/iterator_range_io.hpp:
 
 /usr/local/include/boost/algorithm/string/find_format.hpp:
 
 /usr/local/include/boost/range/as_literal.hpp:
-
-/usr/local/include/boost/range/iterator_range.hpp:
-
-/usr/local/include/boost/range/iterator_range_io.hpp:
 
 /usr/local/include/boost/range/detail/str_types.hpp:
 
@@ -1671,6 +1623,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/lexical_cast.hpp:
 
 /usr/local/include/boost/detail/lcast_precision.hpp:
+
+/usr/local/include/boost/integer_traits.hpp:
 
 /usr/local/include/boost/array.hpp:
 
@@ -1980,53 +1934,19 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 
 /usr/local/include/boost/detail/endian.hpp:
 
-/usr/local/include/boost/predef/detail/endian_compat.h:
-
-/usr/local/include/boost/predef/other/endian.h:
-
-/usr/local/include/boost/predef/version_number.h:
-
-/usr/local/include/boost/predef/make.h:
-
-/usr/local/include/boost/predef/detail/test.h:
-
-/usr/local/include/boost/predef/library/c/gnu.h:
-
-/usr/local/include/boost/predef/library/c/_prefix.h:
-
-/usr/local/include/boost/predef/detail/_cassert.h:
-
-/usr/local/include/boost/predef/os/macos.h:
-
-/usr/local/include/boost/predef/detail/os_detected.h:
-
-/usr/local/include/boost/predef/os/bsd.h:
-
-/usr/local/include/boost/predef/os/bsd/bsdi.h:
-
-/usr/local/include/boost/predef/os/bsd/dragonfly.h:
-
-/usr/local/include/boost/predef/os/bsd/free.h:
-
-/usr/local/include/boost/predef/os/bsd/open.h:
-
-/usr/local/include/boost/predef/os/bsd/net.h:
-
 /usr/local/include/boost/math/special_functions/fpclassify.hpp:
 
 /usr/local/include/boost/math/tools/real_cast.hpp:
 
 /usr/local/include/boost/container/container_fwd.hpp:
 
-/usr/local/include/boost/detail/basic_pointerbuf.hpp:
+/usr/local/include/boost/integer.hpp:
 
-/usr/local/include/boost/noncopyable.hpp:
+/usr/local/include/boost/integer_fwd.hpp:
 
 /usr/local/include/boost/algorithm/string/case_conv.hpp:
 
 /usr/local/include/boost/iterator/transform_iterator.hpp:
-
-/usr/local/include/boost/type_traits/function_traits.hpp:
 
 /usr/local/include/boost/utility/result_of.hpp:
 
@@ -2035,8 +1955,6 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/preprocessor/slot/slot.hpp:
 
 /usr/local/include/boost/preprocessor/slot/detail/def.hpp:
-
-/usr/local/include/boost/preprocessor/repetition/enum_binary_params.hpp:
 
 /usr/local/include/boost/preprocessor/repetition/enum_shifted_params.hpp:
 
@@ -2139,5 +2057,9 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/date_time/posix_time/conversion.hpp:
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:

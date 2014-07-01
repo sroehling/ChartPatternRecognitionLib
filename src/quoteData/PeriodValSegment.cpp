@@ -146,6 +146,20 @@ double PeriodValSegment::depthPercent() const // depth from high to low, percent
 	return MathHelper::absRelPercentVal(low,high);
 }
 
+double PeriodValSegment::pointsAtPercentOfDepthBelowHigh(double percentBelowHigh) const
+{
+	assert(percentBelowHigh >= 0.0);
+	assert(percentBelowHigh <= 100.0);
+	double high = highestHigh();
+	double depth = depthPoints();
+
+	double depthAtPerc = high - ((percentBelowHigh /100.0) * depth);
+	assert(depthAtPerc >= 0.0);
+
+	return depthAtPerc;
+}
+
+
 
 PeriodValSegment::~PeriodValSegment() {
 }

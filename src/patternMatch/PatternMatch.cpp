@@ -132,6 +132,11 @@ double PatternMatch::depthPercent() const
 	return matchSegment()->depthPercent();
 }
 
+double PatternMatch::pointsAtPercentOfDepthBelowHigh(double percentFromHigh) const
+{
+	return matchSegment()->pointsAtPercentOfDepthBelowHigh(percentFromHigh);
+}
+
 
 std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 {

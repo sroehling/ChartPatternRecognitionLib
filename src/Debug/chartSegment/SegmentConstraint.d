@@ -68,6 +68,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/aux_/config/workaround.hpp \
   /usr/local/include/boost/mpl/aux_/config/integral.hpp \
   /usr/local/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/local/include/boost/mpl/aux_/config/eti.hpp \
   /usr/local/include/boost/mpl/aux_/na_spec.hpp \
   /usr/local/include/boost/mpl/lambda_fwd.hpp \
   /usr/local/include/boost/mpl/void_fwd.hpp \
@@ -86,6 +87,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/aux_/config/ttp.hpp \
   /usr/local/include/boost/mpl/int.hpp \
   /usr/local/include/boost/mpl/int_fwd.hpp \
+  /usr/local/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/local/include/boost/mpl/aux_/config/nttp.hpp \
   /usr/local/include/boost/mpl/aux_/integral_wrapper.hpp \
   /usr/local/include/boost/preprocessor/cat.hpp \
   /usr/local/include/boost/preprocessor/config/config.hpp \
@@ -163,6 +166,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/type_traits/detail/cv_traits_impl.hpp \
   /usr/local/include/boost/type_traits/is_abstract.hpp \
   /usr/local/include/boost/type_traits/remove_cv.hpp \
+  /usr/local/include/boost/type_traits/broken_compiler_spec.hpp \
   /usr/local/include/boost/type_traits/detail/type_trait_def.hpp \
   /usr/local/include/boost/type_traits/detail/type_trait_undef.hpp \
   /usr/local/include/boost/type_traits/is_class.hpp \
@@ -203,6 +207,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/date_time/date_facet.hpp \
   /usr/local/include/boost/algorithm/string/replace.hpp \
   /usr/local/include/boost/algorithm/string/config.hpp \
+  /usr/local/include/boost/range/iterator_range.hpp \
   /usr/local/include/boost/range/iterator_range_core.hpp \
   /usr/local/include/boost/iterator/iterator_traits.hpp \
   /usr/local/include/boost/detail/iterator.hpp \
@@ -249,7 +254,9 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/type_traits/remove_reference.hpp \
   /usr/local/include/boost/type_traits/remove_pointer.hpp \
   /usr/local/include/boost/iterator/detail/enable_if.hpp \
-  /usr/local/include/boost/iterator/detail/operator_brackets_dispatch.hpp \
+  /usr/local/include/boost/type_traits/add_const.hpp \
+  /usr/local/include/boost/type_traits/add_pointer.hpp \
+  /usr/local/include/boost/type_traits/remove_const.hpp \
   /usr/local/include/boost/type_traits/is_pod.hpp \
   /usr/local/include/boost/type_traits/is_void.hpp \
   /usr/local/include/boost/type_traits/is_scalar.hpp \
@@ -257,11 +264,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/type_traits/is_integral.hpp \
   /usr/local/include/boost/type_traits/is_float.hpp \
   /usr/local/include/boost/type_traits/is_enum.hpp \
-  /usr/local/include/boost/type_traits/remove_const.hpp \
-  /usr/local/include/boost/type_traits/add_const.hpp \
-  /usr/local/include/boost/type_traits/add_pointer.hpp \
   /usr/local/include/boost/mpl/always.hpp \
-  /usr/local/include/boost/mpl/aux_/preprocessor/default_params.hpp \
   /usr/local/include/boost/mpl/apply.hpp \
   /usr/local/include/boost/mpl/apply_fwd.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
@@ -270,12 +273,14 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/has_xxx.hpp \
   /usr/local/include/boost/mpl/aux_/type_wrapper.hpp \
   /usr/local/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/local/include/boost/mpl/aux_/config/msvc_typename.hpp \
   /usr/local/include/boost/preprocessor/array/elem.hpp \
   /usr/local/include/boost/preprocessor/array/data.hpp \
   /usr/local/include/boost/preprocessor/array/size.hpp \
   /usr/local/include/boost/preprocessor/repetition/enum_params.hpp \
   /usr/local/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
   /usr/local/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_never_true.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
   /usr/local/include/boost/mpl/lambda.hpp \
   /usr/local/include/boost/mpl/bind.hpp \
@@ -312,6 +317,21 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/range/size.hpp \
   /usr/local/include/boost/range/size_type.hpp \
   /usr/local/include/boost/range/difference_type.hpp \
+  /usr/local/include/boost/utility/enable_if.hpp \
+  /usr/local/include/boost/type_traits/make_unsigned.hpp \
+  /usr/local/include/boost/type_traits/is_signed.hpp \
+  /usr/local/include/boost/type_traits/is_unsigned.hpp \
+  /usr/local/include/boost/type_traits/add_volatile.hpp \
+  /usr/local/include/boost/range/distance.hpp \
+  /usr/local/include/boost/range/empty.hpp \
+  /usr/local/include/boost/range/rbegin.hpp \
+  /usr/local/include/boost/range/reverse_iterator.hpp \
+  /usr/local/include/boost/iterator/reverse_iterator.hpp \
+  /usr/local/include/boost/next_prior.hpp \
+  /usr/local/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/local/include/boost/type_traits/add_reference.hpp \
+  /usr/local/include/boost/range/rend.hpp \
+  /usr/local/include/boost/range/algorithm/equal.hpp \
   /usr/local/include/boost/range/concepts.hpp \
   /usr/local/include/boost/concept_check.hpp \
   /usr/local/include/boost/concept/assert.hpp \
@@ -332,26 +352,10 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/iterator/iterator_concepts.hpp \
   /usr/local/include/boost/range/value_type.hpp \
   /usr/local/include/boost/range/detail/misc_concept.hpp \
-  /usr/local/include/boost/utility/enable_if.hpp \
-  /usr/local/include/boost/type_traits/make_unsigned.hpp \
-  /usr/local/include/boost/type_traits/is_signed.hpp \
-  /usr/local/include/boost/type_traits/is_unsigned.hpp \
-  /usr/local/include/boost/type_traits/add_volatile.hpp \
-  /usr/local/include/boost/range/distance.hpp \
-  /usr/local/include/boost/range/empty.hpp \
-  /usr/local/include/boost/range/rbegin.hpp \
-  /usr/local/include/boost/range/reverse_iterator.hpp \
-  /usr/local/include/boost/iterator/reverse_iterator.hpp \
-  /usr/local/include/boost/next_prior.hpp \
-  /usr/local/include/boost/iterator/iterator_adaptor.hpp \
-  /usr/local/include/boost/type_traits/add_reference.hpp \
-  /usr/local/include/boost/range/rend.hpp \
-  /usr/local/include/boost/range/algorithm/equal.hpp \
   /usr/local/include/boost/range/detail/safe_bool.hpp \
+  /usr/local/include/boost/range/iterator_range_io.hpp \
   /usr/local/include/boost/algorithm/string/find_format.hpp \
   /usr/local/include/boost/range/as_literal.hpp \
-  /usr/local/include/boost/range/iterator_range.hpp \
-  /usr/local/include/boost/range/iterator_range_io.hpp \
   /usr/local/include/boost/range/detail/str_types.hpp \
   /usr/local/include/boost/algorithm/string/concept.hpp \
   /usr/local/include/boost/algorithm/string/detail/find_format.hpp \
@@ -394,6 +398,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/aux_/has_tag.hpp \
   /usr/local/include/boost/mpl/aux_/numeric_cast_utils.hpp \
   /usr/local/include/boost/mpl/aux_/config/forwarding.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_eti_base.hpp \
+  /usr/local/include/boost/mpl/aux_/is_msvc_eti_arg.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp \
   /usr/local/include/boost/numeric/conversion/detail/int_float_mixture.hpp \
   /usr/local/include/boost/numeric/conversion/int_float_mixture_enum.hpp \
@@ -407,6 +413,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/aux_/arithmetic_op.hpp \
   /usr/local/include/boost/mpl/aux_/largest_int.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/times.hpp \
+  /usr/local/include/boost/mpl/aux_/preprocessor/default_params.hpp \
   /usr/local/include/boost/mpl/less.hpp \
   /usr/local/include/boost/mpl/aux_/preprocessed/gcc/less.hpp \
   /usr/local/include/boost/numeric/conversion/converter_policies.hpp \
@@ -459,6 +466,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/mpl/list/aux_/iterator.hpp \
   /usr/local/include/boost/mpl/iterator_tags.hpp \
   /usr/local/include/boost/mpl/deref.hpp \
+  /usr/local/include/boost/mpl/aux_/msvc_type.hpp \
   /usr/local/include/boost/mpl/aux_/lambda_spec.hpp \
   /usr/local/include/boost/mpl/list/aux_/include_preprocessed.hpp \
   /usr/local/include/boost/mpl/list/aux_/preprocessed/plain/list10.hpp \
@@ -565,29 +573,11 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
   /usr/local/include/boost/config/no_tr1/complex.hpp \
   /usr/local/include/boost/math/special_functions/detail/fp_traits.hpp \
   /usr/local/include/boost/detail/endian.hpp \
-  /usr/local/include/boost/predef/detail/endian_compat.h \
-  /usr/local/include/boost/predef/other/endian.h \
-  /usr/local/include/boost/predef/version_number.h \
-  /usr/local/include/boost/predef/make.h \
-  /usr/local/include/boost/predef/detail/test.h \
-  /usr/local/include/boost/predef/library/c/gnu.h \
-  /usr/local/include/boost/predef/library/c/_prefix.h \
-  /usr/local/include/boost/predef/detail/_cassert.h \
-  /usr/local/include/boost/predef/os/macos.h \
-  /usr/local/include/boost/predef/detail/os_detected.h \
-  /usr/local/include/boost/predef/os/bsd.h \
-  /usr/local/include/boost/predef/os/bsd/bsdi.h \
-  /usr/local/include/boost/predef/os/bsd/dragonfly.h \
-  /usr/local/include/boost/predef/os/bsd/free.h \
-  /usr/local/include/boost/predef/os/bsd/open.h \
-  /usr/local/include/boost/predef/os/bsd/net.h \
   /usr/local/include/boost/math/special_functions/fpclassify.hpp \
   /usr/local/include/boost/math/tools/real_cast.hpp \
   /usr/local/include/boost/container/container_fwd.hpp \
   /usr/local/include/boost/integer.hpp \
   /usr/local/include/boost/integer_fwd.hpp \
-  /usr/local/include/boost/detail/basic_pointerbuf.hpp \
-  /usr/local/include/boost/noncopyable.hpp \
   /usr/local/include/boost/algorithm/string/case_conv.hpp \
   /usr/local/include/boost/iterator/transform_iterator.hpp \
   /usr/local/include/boost/type_traits/function_traits.hpp \
@@ -776,6 +766,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/mpl/aux_/config/msvc.hpp:
 
+/usr/local/include/boost/mpl/aux_/config/eti.hpp:
+
 /usr/local/include/boost/mpl/aux_/na_spec.hpp:
 
 /usr/local/include/boost/mpl/lambda_fwd.hpp:
@@ -811,6 +803,10 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/mpl/int.hpp:
 
 /usr/local/include/boost/mpl/int_fwd.hpp:
+
+/usr/local/include/boost/mpl/aux_/nttp_decl.hpp:
+
+/usr/local/include/boost/mpl/aux_/config/nttp.hpp:
 
 /usr/local/include/boost/mpl/aux_/integral_wrapper.hpp:
 
@@ -966,6 +962,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/type_traits/remove_cv.hpp:
 
+/usr/local/include/boost/type_traits/broken_compiler_spec.hpp:
+
 /usr/local/include/boost/type_traits/detail/type_trait_def.hpp:
 
 /usr/local/include/boost/type_traits/detail/type_trait_undef.hpp:
@@ -1045,6 +1043,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/algorithm/string/replace.hpp:
 
 /usr/local/include/boost/algorithm/string/config.hpp:
+
+/usr/local/include/boost/range/iterator_range.hpp:
 
 /usr/local/include/boost/range/iterator_range_core.hpp:
 
@@ -1138,7 +1138,11 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/iterator/detail/enable_if.hpp:
 
-/usr/local/include/boost/iterator/detail/operator_brackets_dispatch.hpp:
+/usr/local/include/boost/type_traits/add_const.hpp:
+
+/usr/local/include/boost/type_traits/add_pointer.hpp:
+
+/usr/local/include/boost/type_traits/remove_const.hpp:
 
 /usr/local/include/boost/type_traits/is_pod.hpp:
 
@@ -1154,15 +1158,7 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/type_traits/is_enum.hpp:
 
-/usr/local/include/boost/type_traits/remove_const.hpp:
-
-/usr/local/include/boost/type_traits/add_const.hpp:
-
-/usr/local/include/boost/type_traits/add_pointer.hpp:
-
 /usr/local/include/boost/mpl/always.hpp:
-
-/usr/local/include/boost/mpl/aux_/preprocessor/default_params.hpp:
 
 /usr/local/include/boost/mpl/apply.hpp:
 
@@ -1180,6 +1176,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/mpl/aux_/config/has_xxx.hpp:
 
+/usr/local/include/boost/mpl/aux_/config/msvc_typename.hpp:
+
 /usr/local/include/boost/preprocessor/array/elem.hpp:
 
 /usr/local/include/boost/preprocessor/array/data.hpp:
@@ -1191,6 +1189,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
 
 /usr/local/include/boost/mpl/aux_/config/has_apply.hpp:
+
+/usr/local/include/boost/mpl/aux_/msvc_never_true.hpp:
 
 /usr/local/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
 
@@ -1264,6 +1264,36 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/range/difference_type.hpp:
 
+/usr/local/include/boost/utility/enable_if.hpp:
+
+/usr/local/include/boost/type_traits/make_unsigned.hpp:
+
+/usr/local/include/boost/type_traits/is_signed.hpp:
+
+/usr/local/include/boost/type_traits/is_unsigned.hpp:
+
+/usr/local/include/boost/type_traits/add_volatile.hpp:
+
+/usr/local/include/boost/range/distance.hpp:
+
+/usr/local/include/boost/range/empty.hpp:
+
+/usr/local/include/boost/range/rbegin.hpp:
+
+/usr/local/include/boost/range/reverse_iterator.hpp:
+
+/usr/local/include/boost/iterator/reverse_iterator.hpp:
+
+/usr/local/include/boost/next_prior.hpp:
+
+/usr/local/include/boost/iterator/iterator_adaptor.hpp:
+
+/usr/local/include/boost/type_traits/add_reference.hpp:
+
+/usr/local/include/boost/range/rend.hpp:
+
+/usr/local/include/boost/range/algorithm/equal.hpp:
+
 /usr/local/include/boost/range/concepts.hpp:
 
 /usr/local/include/boost/concept_check.hpp:
@@ -1304,45 +1334,13 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/range/detail/misc_concept.hpp:
 
-/usr/local/include/boost/utility/enable_if.hpp:
-
-/usr/local/include/boost/type_traits/make_unsigned.hpp:
-
-/usr/local/include/boost/type_traits/is_signed.hpp:
-
-/usr/local/include/boost/type_traits/is_unsigned.hpp:
-
-/usr/local/include/boost/type_traits/add_volatile.hpp:
-
-/usr/local/include/boost/range/distance.hpp:
-
-/usr/local/include/boost/range/empty.hpp:
-
-/usr/local/include/boost/range/rbegin.hpp:
-
-/usr/local/include/boost/range/reverse_iterator.hpp:
-
-/usr/local/include/boost/iterator/reverse_iterator.hpp:
-
-/usr/local/include/boost/next_prior.hpp:
-
-/usr/local/include/boost/iterator/iterator_adaptor.hpp:
-
-/usr/local/include/boost/type_traits/add_reference.hpp:
-
-/usr/local/include/boost/range/rend.hpp:
-
-/usr/local/include/boost/range/algorithm/equal.hpp:
-
 /usr/local/include/boost/range/detail/safe_bool.hpp:
+
+/usr/local/include/boost/range/iterator_range_io.hpp:
 
 /usr/local/include/boost/algorithm/string/find_format.hpp:
 
 /usr/local/include/boost/range/as_literal.hpp:
-
-/usr/local/include/boost/range/iterator_range.hpp:
-
-/usr/local/include/boost/range/iterator_range_io.hpp:
 
 /usr/local/include/boost/range/detail/str_types.hpp:
 
@@ -1430,6 +1428,10 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/mpl/aux_/config/forwarding.hpp:
 
+/usr/local/include/boost/mpl/aux_/msvc_eti_base.hpp:
+
+/usr/local/include/boost/mpl/aux_/is_msvc_eti_arg.hpp:
+
 /usr/local/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp:
 
 /usr/local/include/boost/numeric/conversion/detail/int_float_mixture.hpp:
@@ -1455,6 +1457,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/mpl/aux_/largest_int.hpp:
 
 /usr/local/include/boost/mpl/aux_/preprocessed/gcc/times.hpp:
+
+/usr/local/include/boost/mpl/aux_/preprocessor/default_params.hpp:
 
 /usr/local/include/boost/mpl/less.hpp:
 
@@ -1559,6 +1563,8 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/mpl/iterator_tags.hpp:
 
 /usr/local/include/boost/mpl/deref.hpp:
+
+/usr/local/include/boost/mpl/aux_/msvc_type.hpp:
 
 /usr/local/include/boost/mpl/aux_/lambda_spec.hpp:
 
@@ -1772,38 +1778,6 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 
 /usr/local/include/boost/detail/endian.hpp:
 
-/usr/local/include/boost/predef/detail/endian_compat.h:
-
-/usr/local/include/boost/predef/other/endian.h:
-
-/usr/local/include/boost/predef/version_number.h:
-
-/usr/local/include/boost/predef/make.h:
-
-/usr/local/include/boost/predef/detail/test.h:
-
-/usr/local/include/boost/predef/library/c/gnu.h:
-
-/usr/local/include/boost/predef/library/c/_prefix.h:
-
-/usr/local/include/boost/predef/detail/_cassert.h:
-
-/usr/local/include/boost/predef/os/macos.h:
-
-/usr/local/include/boost/predef/detail/os_detected.h:
-
-/usr/local/include/boost/predef/os/bsd.h:
-
-/usr/local/include/boost/predef/os/bsd/bsdi.h:
-
-/usr/local/include/boost/predef/os/bsd/dragonfly.h:
-
-/usr/local/include/boost/predef/os/bsd/free.h:
-
-/usr/local/include/boost/predef/os/bsd/open.h:
-
-/usr/local/include/boost/predef/os/bsd/net.h:
-
 /usr/local/include/boost/math/special_functions/fpclassify.hpp:
 
 /usr/local/include/boost/math/tools/real_cast.hpp:
@@ -1813,10 +1787,6 @@ chartSegment/SegmentConstraint.d: ../chartSegment/SegmentConstraint.cpp \
 /usr/local/include/boost/integer.hpp:
 
 /usr/local/include/boost/integer_fwd.hpp:
-
-/usr/local/include/boost/detail/basic_pointerbuf.hpp:
-
-/usr/local/include/boost/noncopyable.hpp:
 
 /usr/local/include/boost/algorithm/string/case_conv.hpp:
 

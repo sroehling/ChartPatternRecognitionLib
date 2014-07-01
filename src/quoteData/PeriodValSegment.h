@@ -66,6 +66,12 @@ public:
 	double depthPoints() const; // depth in number of points ($, etc.)
 	double depthPercent() const; // depth from high to low, percent
 
+	// Point value for a given percentage from high. For example, if
+	// the high value is 100.0, and 'percentFromHigh' is 25, this function
+	// will return 75. This is useful when constructing pattern recognition
+	// constraints.
+	double pointsAtPercentOfDepthBelowHigh(double percentBelowHigh) const;
+
 	virtual ~PeriodValSegment();
 };
 
