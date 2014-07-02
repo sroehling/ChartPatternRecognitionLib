@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 	PeriodValSegmentPtr chartData(new PeriodValSegment(cupData));
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	BOOST_CHECK(patternMatches->size() == 7);
+	BOOST_CHECK(patternMatches->size() == 3);
 	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();

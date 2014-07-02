@@ -629,11 +629,11 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h \
@@ -723,7 +723,8 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /usr/local/include/boost/log/detail/attachable_sstream_buf.hpp \
   /usr/local/include/boost/log/detail/code_conversion.hpp \
   /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
-  /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp
+  /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
@@ -1987,6 +1988,8 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h:
@@ -1994,8 +1997,6 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
 
@@ -2176,3 +2177,5 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /usr/local/include/boost/log/utility/string_literal_fwd.hpp:
 
 /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:

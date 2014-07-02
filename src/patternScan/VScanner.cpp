@@ -13,17 +13,32 @@
 #include "ClosePeriodValueRef.h"
 #include "AnyPatternMatchValidator.h"
 #include <boost/log/trivial.hpp>
+#include "ScannerHelper.h"
 
-VScanner::VScanner(double minUptrendPercentOfDowntrend)
-: minUptrendPercentOfDowntrend_(minUptrendPercentOfDowntrend)
+VScanner::VScanner(double minRHSBelowLHSofVPerc)
+: minRHSBelowLHSofVPerc_(minRHSBelowLHSofVPerc)
 {
-	assert(minUptrendPercentOfDowntrend_ >= 0.0);
-	assert(minUptrendPercentOfDowntrend_ <= 100);
+	assert(minRHSBelowLHSofVPerc_ >= 0.0);
+	assert(minRHSBelowLHSofVPerc_ <= 100);
+}
+
+PatternMatchValidatorPtr VScanner::uptrendPercOfDowntrendValidator(const PatternMatchPtr &downtrendMatch) const
+{
+	// Create a pattern match constraint for the up-trend's close to exceed a
+	// percentage threshold of the immediately preceding downtrend.
+	PeriodValueRefPtr closeRef(new ClosePeriodValueRef());
+	double thresholdValBelowHigh = downtrendMatch->pointsAtPercentOfDepthBelowHigh(minRHSBelowLHSofVPerc_);
+	BOOST_LOG_TRIVIAL(debug) << "VScanner: Threshold for last value (close) of uptrend (last value must exceed): "
+			<< thresholdValBelowHigh;
+	PatternMatchValidatorPtr uptrendPercOfDownTrend(new
+				LastValueAbovePointValue(closeRef,thresholdValBelowHigh));
+
+	return uptrendPercOfDownTrend;
 }
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(-3.0,-0.5));
+	PatternScannerPtr downtrendScanner(new TrendLineScanner(-10.0,-0.5));
 
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
 
@@ -31,26 +46,19 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
 	PatternMatchListPtr vMatches(new PatternMatchList());
 
-	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
+	for(PatternMatchList::iterator dtMatchIter = downtrendMatches->begin();
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
 		PeriodValSegmentPtr valsForUptrendScan = (*dtMatchIter)->trailingValsWithLastVal();
-		BOOST_LOG_TRIVIAL(debug) << "VScanner: downtrend match: " << (**dtMatchIter);
+		ScannerHelper::logMatchInfo("VScanner: downtrend match",**dtMatchIter);
 
-		// Create a pattern match constraint for the up-trend's close to exceed a
-		// percentage threshold of the immediately preceding downtrend.
-		PeriodValueRefPtr closeRef(new ClosePeriodValueRef());
-		double thresholdValBelowHigh = (*dtMatchIter)->pointsAtPercentOfDepthBelowHigh(minUptrendPercentOfDowntrend_);
-		PatternMatchValidatorPtr uptrendPercOfDownTrend(new
-					LastValueAbovePointValue(closeRef,thresholdValBelowHigh));
+		PatternMatchValidatorPtr uptrendPercOfDownTrend = uptrendPercOfDowntrendValidator(*dtMatchIter);
 
-		PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,3.0,uptrendPercOfDownTrend));
+		PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,10.0,uptrendPercOfDownTrend));
 
 		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 		BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << uptrendMatches->size();
-
 		PatternMatchListPtr downUpMatches = (*dtMatchIter)->appendMatchList(*uptrendMatches);
-		BOOST_LOG_TRIVIAL(debug) << "VScanner: down then uptrend matches: " << downUpMatches->size();
 
 		// Perform a final validation on the pattern as a whole.
 		PatternMatchValidatorList finalValidators;
@@ -59,9 +67,9 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		for(PatternMatchList::const_iterator overallIter = downUpMatches->begin();
 					overallIter != downUpMatches->end(); overallIter++)
 		{
-			BOOST_LOG_TRIVIAL(debug) << "VScanner: down and up trend match: " << (**overallIter);
 			if(overallMatchValidator.validPattern(**overallIter))
 			{
+				ScannerHelper::logMatchInfo("VScanner: down and up trend match",**overallIter);
 				vMatches->push_back(*overallIter);
 			}
 

@@ -698,7 +698,8 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2099,3 +2100,5 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:

@@ -5,6 +5,7 @@
  *      Author: sroehling
  */
 
+#include <boost/log/trivial.hpp>
 #include <SlopeWithinRangeConstraint.h>
 
 SlopeWithinRangeConstraint::SlopeWithinRangeConstraint(double minSlope, double maxSlope)
@@ -23,6 +24,12 @@ bool SlopeWithinRangeConstraint::validSegment(const ChartSegment &segment)
 	}
 	else
 	{
+		/*
+		BOOST_LOG_TRIVIAL(debug) <<
+				"SlopeWithinRangeConstraint: ChartSegment failed slope constraint (min,max) = ("
+				  << minSlope_ << "," << maxSlope_ << ") segment="
+				  << segment;
+				  */
 		return false;
 	}
 }

@@ -1,4 +1,5 @@
-date/DateValue.d: ../date/DateValue.cpp ../date/DateValue.h \
+date/DateValue.d: ../date/DateValue.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/DateValue.h \
   /usr/local/include/boost/date_time/gregorian/gregorian.hpp \
   /usr/local/include/boost/date_time/compiler_config.hpp \
   /usr/local/include/boost/config.hpp \
@@ -593,7 +594,7 @@ date/DateValue.d: ../date/DateValue.cpp ../date/DateValue.h \
   /usr/local/include/boost/iterator/detail/minimum_category.hpp \
   /usr/local/include/boost/token_functions.hpp
 
-../date/DateValue.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/DateValue.h:
 
 /usr/local/include/boost/date_time/gregorian/gregorian.hpp:
 

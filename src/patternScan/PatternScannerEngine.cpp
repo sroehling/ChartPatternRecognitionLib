@@ -17,7 +17,7 @@ PatternScannerEngine::PatternScannerEngine(const SegmentConstraintPtr &segmentCo
   segmentListConstraint_(segmentListConstraint),
   patternMatchValidator_(patternMatchValidator)
 {
-	minSegmentLength_ = 2;
+	minSegmentLength_ = 3;
 	maxSegmentLength_ = 200;
 }
 
@@ -32,18 +32,28 @@ PatternMatchListPtr PatternScannerEngine::scanPatternMatches(
 	// completed at this depth of recursion.
 	PatternMatchListPtr matchingPatterns = PatternMatchListPtr(new PatternMatchList());
 
-	if(remainingVals->numVals() < minSegmentLength_)
+	unsigned int minRemSegmentLen = minSegmentLength_;
+	if(leadingSegments.size()>0)
+	{
+		// If there's at least one leading segment, then minRemSegmentLen
+		// used to iterate and split the remaining period values can
+		// be decreased by one, since the leading segment will include
+		// the last value from the previous segment.
+		minRemSegmentLen--;
+	}
+	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals->numVals(),
+					maxSegmentLength_);
+
+	if(remainingVals->numVals() < minRemSegmentLen)
 	{
 		// There's not enough values remaining to continue
 		// matching, so return an empty list of matches.
 		return matchingPatterns;
 	}
 
-	unsigned int minRemSegmentLen = minSegmentLength_;
-	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals->numVals(),
-					maxSegmentLength_);
-
-	for(unsigned int splitPos = minRemSegmentLen; splitPos < maxRemSegmentLen; splitPos++)
+	// The for loop logic includes a '<=' since a splitPos for mxRemSegmentLen
+	// will return all the remaining values.
+	for(unsigned int splitPos = minRemSegmentLen; splitPos <= maxRemSegmentLen; splitPos++)
 	{
 		PeriodValSegmentPair segmentSplit = remainingVals->split(splitPos);
 		PeriodValSegmentPtr leadingVals = segmentSplit.first;
@@ -64,7 +74,7 @@ PatternMatchListPtr PatternScannerEngine::scanPatternMatches(
 		appendedSegments.push_back(leadingSeg);
 
 		// Both the individual segment and the appended list of segments must be valid
-		// for the matching/scanning to continue.Where these contraints
+		// for the matching/scanning to continue.Where these constraints
 		// are used to progressively test the pattern is well-formed,
 		// there's only a need to continue (recursively) scanning if
 		// the appendedSegments are valid for all constraints.

@@ -17,10 +17,10 @@
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 
-
-void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope, const PatternMatchValidatorPtr &matchConstraint)
+void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope,
+		const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation)
 {
-	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(7.0));
+	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(maxPercDistanceToLineEquation));
 	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(minSlope,maxSlope));
 
 	SegmentConstraintList trendConstraints;
@@ -36,15 +36,22 @@ void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope, const 
 
 }
 
+TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope, double maxPercDistToLineEquation)
+{
+	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),maxPercDistToLineEquation);
+
+}
+
+
 TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope, const PatternMatchValidatorPtr &matchConstraint) {
 
-	initTrendScanner(minSlope,maxSlope,matchConstraint);
+	initTrendScanner(minSlope,maxSlope,matchConstraint,7.0);
 
 }
 
 TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope) {
 
-	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()));
+	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),7.0);
 }
 
 
@@ -55,6 +62,5 @@ PatternMatchListPtr TrendLineScanner::scanPatternMatches(const PeriodValSegmentP
 
 
 TrendLineScanner::~TrendLineScanner() {
-	// TODO Auto-generated destructor stub
 }
 

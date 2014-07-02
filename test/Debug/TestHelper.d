@@ -621,8 +621,75 @@ TestHelper.d: ../TestHelper.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /usr/local/include/boost/test/unit_test.hpp \
+  /usr/local/include/boost/test/test_tools.hpp \
+  /usr/local/include/boost/test/predicate_result.hpp \
+  /usr/local/include/boost/test/utils/class_properties.hpp \
+  /usr/local/include/boost/test/detail/config.hpp \
+  /usr/local/include/boost/preprocessor/seq/for_each.hpp \
+  /usr/local/include/boost/call_traits.hpp \
+  /usr/local/include/boost/detail/call_traits.hpp \
+  /usr/local/include/boost/test/detail/suppress_warnings.hpp \
+  /usr/local/include/boost/test/detail/enable_warnings.hpp \
+  /usr/local/include/boost/test/utils/wrap_stringstream.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp \
+  /usr/local/include/boost/test/unit_test_log.hpp \
+  /usr/local/include/boost/test/test_observer.hpp \
+  /usr/local/include/boost/test/detail/fwd_decl.hpp \
+  /usr/local/include/boost/test/detail/global_typedef.hpp \
+  /usr/local/include/boost/test/detail/log_level.hpp \
+  /usr/local/include/boost/test/utils/trivial_singleton.hpp \
+  /usr/local/include/boost/noncopyable.hpp \
+  /usr/local/include/boost/test/utils/lazy_ostream.hpp \
+  /usr/local/include/boost/utility.hpp \
+  /usr/local/include/boost/utility/base_from_member.hpp \
+  /usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/local/include/boost/utility/binary.hpp \
+  /usr/local/include/boost/preprocessor/control/deduce_d.hpp \
+  /usr/local/include/boost/preprocessor/seq/cat.hpp \
+  /usr/local/include/boost/preprocessor/seq/fold_left.hpp \
+  /usr/local/include/boost/preprocessor/seq/transform.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/mod.hpp \
+  /usr/local/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+  /usr/local/include/boost/preprocessor/comparison/less_equal.hpp \
+  /usr/local/include/boost/preprocessor/logical/not.hpp \
+  /usr/local/include/boost/utility/identity_type.hpp \
+  /usr/local/include/boost/test/floating_point_comparison.hpp \
+  /usr/local/include/boost/test/detail/workaround.hpp \
+  /usr/local/include/boost/test/utils/basic_cstring/io.hpp \
+  /usr/local/include/boost/test/unit_test_suite.hpp \
+  /usr/local/include/boost/test/unit_test_suite_impl.hpp \
+  /usr/local/include/boost/test/utils/callback.hpp \
+  /usr/local/include/boost/mpl/for_each.hpp \
+  /usr/local/include/boost/mpl/is_sequence.hpp \
+  /usr/local/include/boost/mpl/aux_/unwrap.hpp \
+  /usr/local/include/boost/ref.hpp \
+  /usr/local/include/boost/utility/value_init.hpp \
+  /usr/local/include/boost/aligned_storage.hpp \
+  /usr/local/include/boost/type_traits/alignment_of.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp \
+  /usr/local/include/boost/mpl/size_t.hpp \
+  /usr/local/include/boost/mpl/size_t_fwd.hpp \
+  /usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp \
+  /usr/local/include/boost/type_traits/type_with_alignment.hpp \
+  /usr/local/include/boost/preprocessor/list/for_each_i.hpp \
+  /usr/local/include/boost/preprocessor/tuple/to_list.hpp \
+  /usr/local/include/boost/preprocessor/list/transform.hpp \
+  /usr/local/include/boost/preprocessor/list/append.hpp \
+  /usr/local/include/boost/type_traits/cv_traits.hpp \
+  /usr/local/include/boost/type_traits/add_cv.hpp \
+  /usr/local/include/boost/type_traits/remove_volatile.hpp \
+  /usr/local/include/boost/test/framework.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h
 
 /usr/local/include/boost/date_time/gregorian/gregorian.hpp:
 
@@ -1870,6 +1937,140 @@ TestHelper.d: ../TestHelper.cpp \
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
 
+/usr/local/include/boost/test/unit_test.hpp:
+
+/usr/local/include/boost/test/test_tools.hpp:
+
+/usr/local/include/boost/test/predicate_result.hpp:
+
+/usr/local/include/boost/test/utils/class_properties.hpp:
+
+/usr/local/include/boost/test/detail/config.hpp:
+
+/usr/local/include/boost/preprocessor/seq/for_each.hpp:
+
+/usr/local/include/boost/call_traits.hpp:
+
+/usr/local/include/boost/detail/call_traits.hpp:
+
+/usr/local/include/boost/test/detail/suppress_warnings.hpp:
+
+/usr/local/include/boost/test/detail/enable_warnings.hpp:
+
+/usr/local/include/boost/test/utils/wrap_stringstream.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/basic_cstring.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/basic_cstring_fwd.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/bcs_char_traits.hpp:
+
+/usr/local/include/boost/test/unit_test_log.hpp:
+
+/usr/local/include/boost/test/test_observer.hpp:
+
+/usr/local/include/boost/test/detail/fwd_decl.hpp:
+
+/usr/local/include/boost/test/detail/global_typedef.hpp:
+
+/usr/local/include/boost/test/detail/log_level.hpp:
+
+/usr/local/include/boost/test/utils/trivial_singleton.hpp:
+
+/usr/local/include/boost/noncopyable.hpp:
+
+/usr/local/include/boost/test/utils/lazy_ostream.hpp:
+
+/usr/local/include/boost/utility.hpp:
+
+/usr/local/include/boost/utility/base_from_member.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp:
+
+/usr/local/include/boost/utility/binary.hpp:
+
+/usr/local/include/boost/preprocessor/control/deduce_d.hpp:
+
+/usr/local/include/boost/preprocessor/seq/cat.hpp:
+
+/usr/local/include/boost/preprocessor/seq/fold_left.hpp:
+
+/usr/local/include/boost/preprocessor/seq/transform.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/mod.hpp:
+
+/usr/local/include/boost/preprocessor/arithmetic/detail/div_base.hpp:
+
+/usr/local/include/boost/preprocessor/comparison/less_equal.hpp:
+
+/usr/local/include/boost/preprocessor/logical/not.hpp:
+
+/usr/local/include/boost/utility/identity_type.hpp:
+
+/usr/local/include/boost/test/floating_point_comparison.hpp:
+
+/usr/local/include/boost/test/detail/workaround.hpp:
+
+/usr/local/include/boost/test/utils/basic_cstring/io.hpp:
+
+/usr/local/include/boost/test/unit_test_suite.hpp:
+
+/usr/local/include/boost/test/unit_test_suite_impl.hpp:
+
+/usr/local/include/boost/test/utils/callback.hpp:
+
+/usr/local/include/boost/mpl/for_each.hpp:
+
+/usr/local/include/boost/mpl/is_sequence.hpp:
+
+/usr/local/include/boost/mpl/aux_/unwrap.hpp:
+
+/usr/local/include/boost/ref.hpp:
+
+/usr/local/include/boost/utility/value_init.hpp:
+
+/usr/local/include/boost/aligned_storage.hpp:
+
+/usr/local/include/boost/type_traits/alignment_of.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_def.hpp:
+
+/usr/local/include/boost/mpl/size_t.hpp:
+
+/usr/local/include/boost/mpl/size_t_fwd.hpp:
+
+/usr/local/include/boost/type_traits/detail/size_t_trait_undef.hpp:
+
+/usr/local/include/boost/type_traits/type_with_alignment.hpp:
+
+/usr/local/include/boost/preprocessor/list/for_each_i.hpp:
+
+/usr/local/include/boost/preprocessor/tuple/to_list.hpp:
+
+/usr/local/include/boost/preprocessor/list/transform.hpp:
+
+/usr/local/include/boost/preprocessor/list/append.hpp:
+
+/usr/local/include/boost/type_traits/cv_traits.hpp:
+
+/usr/local/include/boost/type_traits/add_cv.hpp:
+
+/usr/local/include/boost/type_traits/remove_volatile.hpp:
+
+/usr/local/include/boost/test/framework.hpp:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h:
