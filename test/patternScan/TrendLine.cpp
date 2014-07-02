@@ -38,9 +38,8 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 	TrendLineScanner scanner(0.5,100.0,15.0);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
-	BOOST_TEST_MESSAGE("Number of pattern matches (without constraint): " << patternMatches->size());
-	BOOST_REQUIRE(patternMatches->size() == 12);
 	TestHelper::genPatternMatchListInfo("Matches without threshold",*patternMatches);
+	BOOST_REQUIRE(patternMatches->size() == 12);
 
 	double thresholdVal = 67.5;
 	BOOST_TEST_MESSAGE("Re-running trend-line scan but with a constraint on the last value (close)  >" << thresholdVal);
@@ -50,8 +49,6 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 	TrendLineScanner scannerWithContraint(0.5,10.0,lastValContraint);
 	patternMatches = scannerWithContraint.scanPatternMatches(rhsSegData);
 
-	BOOST_TEST_MESSAGE("Number of pattern matches (with last value threshold): " << patternMatches->size());
-
 	TestHelper::genPatternMatchListInfo("Matches above threshold",*patternMatches);
 	BOOST_REQUIRE(patternMatches->size() == 6);
 	for(PatternMatchList::iterator matchIter = patternMatches->begin();
@@ -60,22 +57,8 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 		BOOST_CHECK((*matchIter)->lastValue().close() >= thresholdVal);
 	}
 
-
-	PatternMatchPtr thePatternMatch = patternMatches->front();
-
-	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
-	BOOST_CHECK(thePatternMatch->numSegments() == 3);
-
-	PeriodVal firstVal = thePatternMatch->firstValue();
-	PeriodVal lastVal = thePatternMatch->lastValue();
-
-	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
-	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
-	BOOST_TEST_MESSAGE("Uptrend pattern: " << (*thePatternMatch));
-
-	BOOST_CHECK(ptime(date(2014,1,6)) == firstVal.periodTime());
-	BOOST_CHECK(ptime(date(2014,2,18)) == lastVal.periodTime());
-
+	TestHelper::verifyPatternMatch("V Match on RHS",
+			ptime(date(2014,1,6)),ptime(date(2014,2,18)),3,patternMatches->front());
 
 }
 

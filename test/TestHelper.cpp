@@ -18,18 +18,24 @@
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
+void TestHelper::genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch)
+{
+	BOOST_TEST_MESSAGE(prefix << ": pattern match: "
+			<< "start = " << TimeHelper::formatDate(patternMatch->firstValue().periodTime())
+			<< ", end = " << TimeHelper::formatDate(patternMatch->lastValue().periodTime())
+			<< ", num segments = " << patternMatch->numSegments()
+		<< ", last close = " << patternMatch->lastValue().close());
+
+}
 
 void TestHelper::genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList)
 {
+	BOOST_TEST_MESSAGE(prefix << ": number of pattern matches = " << matchList.size());
+
 	for(PatternMatchList::const_iterator matchIter = matchList.begin();
 			matchIter != matchList.end(); matchIter++)
 	{
-		BOOST_TEST_MESSAGE(prefix << ": pattern match: "
-				<< "start = " << TimeHelper::formatDate((*matchIter)->firstValue().periodTime())
-				<< ", end = " << TimeHelper::formatDate((*matchIter)->lastValue().periodTime())
-				<< ", num segments = " << (*matchIter)->numSegments()
-			<< ", last close = " << (*matchIter)->lastValue().close()
-		);
+		TestHelper::genPatternMatchInfo(prefix,*matchIter);
 	}
 
 }
@@ -43,6 +49,27 @@ void TestHelper::genPeriodValSegmentInfo(const std::string prefix, const PeriodV
 				<< ",c=" << (*segIter).close()
 		);
 	}
+}
+
+void TestHelper::verifyPatternMatch(const std::string &prefix,
+		const boost::posix_time::ptime &expectedStart,
+		const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
+		const PatternMatchPtr &patternMatch)
+{
+
+	BOOST_TEST_MESSAGE(prefix << ": number of segments= " << patternMatch->numSegments());
+	BOOST_CHECK(patternMatch->numSegments() == expectedSegments);
+
+	PeriodVal firstVal = patternMatch->firstValue();
+	PeriodVal lastVal = patternMatch->lastValue();
+
+	BOOST_TEST_MESSAGE(prefix << ": first period value: " << firstVal);
+	BOOST_TEST_MESSAGE(prefix << ": last period value: " << lastVal);
+	TestHelper::genPatternMatchInfo(prefix,patternMatch);
+
+	BOOST_CHECK(expectedStart == firstVal.periodTime());
+	BOOST_CHECK(expectedEnd == lastVal.periodTime());
+
 }
 
 

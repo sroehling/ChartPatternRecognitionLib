@@ -31,27 +31,14 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 	VScanner scanner(minRHSBelowLHSofVPerc);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(vData);
 
-	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
-
 	TestHelper::genPatternMatchListInfo("V Match on LHS",*patternMatches);
 
 
 	BOOST_REQUIRE(patternMatches->size() == 5);
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
-	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
-	BOOST_CHECK(thePatternMatch->numSegments() == 4);
-
-	PeriodVal firstVal = thePatternMatch->firstValue();
-	PeriodVal lastVal = thePatternMatch->lastValue();
-
-	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
-	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
-
-	BOOST_TEST_MESSAGE("V pattern: " << (*thePatternMatch));
-
-	BOOST_CHECK(ptime(date(2013,8,26)) == firstVal.periodTime());
-	BOOST_CHECK(ptime(date(2013,10,21)) == lastVal.periodTime());
+	TestHelper::verifyPatternMatch("V Match on LHS",
+			ptime(date(2013,8,26)),ptime(date(2013,10,21)),4,thePatternMatch);
 
 }
 
@@ -64,6 +51,7 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 	BOOST_TEST_MESSAGE("Testing V sub-patterns for RHS of double bottom of QCOR");
 	PeriodValSegmentPair splitQCORdata = chartData->split(8);
 	PeriodValSegmentPtr rhsSegData = splitQCORdata.second;
+
 	TestHelper::genPeriodValSegmentInfo("V RHS segment data",*rhsSegData);
 
 	double minPercentRHSBelowLHSofV = 0.0; // RHS must recover entire LHS/downtrend movement
@@ -71,24 +59,13 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 	VScanner scanner(minPercentRHSBelowLHSofV);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
-	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
 	TestHelper::genPatternMatchListInfo("V Match on RHS",*patternMatches);
+
 	BOOST_REQUIRE(patternMatches->size() == 96);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
-	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
-	BOOST_CHECK(thePatternMatch->numSegments() == 8);
-
-	PeriodVal firstVal = thePatternMatch->firstValue();
-	PeriodVal lastVal = thePatternMatch->lastValue();
-
-	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
-	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
-
-	BOOST_TEST_MESSAGE("V pattern: " << (*thePatternMatch));
-
-	BOOST_CHECK(ptime(date(2013,10,21)) == firstVal.periodTime());
-	BOOST_CHECK(ptime(date(2014,2,18)) == lastVal.periodTime());
+	TestHelper::verifyPatternMatch("V Match on RHS",
+			ptime(date(2013,10,21)),ptime(date(2014,2,18)),8,thePatternMatch);
 
 }

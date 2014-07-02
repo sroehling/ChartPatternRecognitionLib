@@ -37,20 +37,7 @@ BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 	BOOST_REQUIRE(patternMatches->size() == 480);
 	TestHelper::genPatternMatchListInfo("Double bottom match",*patternMatches);
 
-	PatternMatchPtr thePatternMatch = patternMatches->front();
-
-	BOOST_TEST_MESSAGE("Number of segments: " << thePatternMatch->numSegments());
-	BOOST_CHECK(thePatternMatch->numSegments() == 12);
-
-	PeriodVal firstVal = thePatternMatch->firstValue();
-	PeriodVal lastVal = thePatternMatch->lastValue();
-
-	BOOST_TEST_MESSAGE("First Period Value: " << firstVal);
-	BOOST_TEST_MESSAGE("Last Period Value: " << lastVal);
-
-	BOOST_TEST_MESSAGE("Double bottom pattern: " << (*thePatternMatch));
-
-	BOOST_CHECK(ptime(date(2013,8,26)) == firstVal.periodTime());
-	BOOST_CHECK(ptime(date(2014,2,18)) == lastVal.periodTime());
+	TestHelper::verifyPatternMatch("V Match on RHS",
+			ptime(date(2013,8,26)),ptime(date(2014,2,18)),12,patternMatches->front());
 
 }
