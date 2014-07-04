@@ -72,6 +72,13 @@ void TestHelper::verifyPatternMatch(const std::string &prefix,
 
 }
 
+boost::posix_time::ptime TestHelper::dateToTime(unsigned int year, unsigned int month, unsigned int day)
+{
+	using namespace boost::posix_time;
+	using namespace boost::gregorian;
+
+	return ptime(date(year,month,day));
+}
 
 
 PeriodVal TestHelper::testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol)

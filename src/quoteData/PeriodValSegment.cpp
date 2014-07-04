@@ -63,6 +63,14 @@ PeriodValSegmentPair PeriodValSegment::split(unsigned int splitPos) const
 	return PeriodValSegmentPair(beforeSplit,afterSplit);
 }
 
+PeriodValSegmentPtr PeriodValSegment::spliceRange(unsigned int startPos, unsigned int endPos) const
+{
+	assert(endPos >= startPos);
+	PeriodValSegmentPair beforeAfterSplice = split(startPos);
+	PeriodValSegmentPair spliceAndSuffice = beforeAfterSplice.second->split(endPos-startPos);
+	return spliceAndSuffice.first;
+}
+
 PeriodValSegmentPtr PeriodValSegment::trailingVals() const
 {
 	PeriodValSegmentPtr trailing(new PeriodValSegment(perValCltn_,segEnd_,perValCltn_->end()));

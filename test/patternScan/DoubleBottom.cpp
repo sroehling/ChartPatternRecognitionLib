@@ -34,10 +34,10 @@ BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
-	BOOST_REQUIRE(patternMatches->size() == 480);
+	BOOST_REQUIRE(patternMatches->size() == 1);
 	TestHelper::genPatternMatchListInfo("Double bottom match",*patternMatches);
 
-	TestHelper::verifyPatternMatch("V Match on RHS",
-			ptime(date(2013,8,26)),ptime(date(2014,2,18)),12,patternMatches->front());
+	TestHelper::verifyPatternMatch("Double bottom match",
+			ptime(date(2013,8,26)),ptime(date(2014,2,18)),5,patternMatches->front());
 
 }

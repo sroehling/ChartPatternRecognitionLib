@@ -1,4 +1,6 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 #include "PeriodValSegment.h"
 #include "PeriodVal.h"
@@ -87,5 +89,50 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 
     BOOST_CHECK_CLOSE( cupSeg->pointsAtPercentOfDepthBelowHigh(25.0),41.297,0.01);
 
+
+}
+
+BOOST_AUTO_TEST_CASE( PeriodValSegment_Splice )
+{
+	PeriodValCltnPtr testData(new PeriodValCltn());
+																	// <<-- split position 0
+	testData->push_back(TestHelper::testPeriodVal(2013,1,1,1.0,1));
+																	// <<-- split position 1
+	testData->push_back(TestHelper::testPeriodVal(2013,2,1,2.0,2));
+	testData->push_back(TestHelper::testPeriodVal(2013,3,1,3.0,3));
+	testData->push_back(TestHelper::testPeriodVal(2013,4,1,4.0,4));
+	testData->push_back(TestHelper::testPeriodVal(2013,5,1,5.0,5));
+																	// <<-- split position 5
+
+	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
+
+	PeriodValSegmentPtr splice0 = testSeg->spliceRange(0,0);
+    BOOST_CHECK( splice0->numVals() == 0 );
+
+
+	PeriodValSegmentPtr splice1 = testSeg->spliceRange(0,2);
+    BOOST_CHECK( splice1->numVals() == 2 );
+    BOOST_CHECK( splice1->firstVal().periodTime() == TestHelper::dateToTime(2013,1,1));
+    BOOST_CHECK( splice1->lastVal().periodTime() == TestHelper::dateToTime(2013,2,1));
+
+	PeriodValSegmentPtr splice2 = testSeg->spliceRange(1,2);
+    BOOST_CHECK( splice2->numVals() == 1 );
+    BOOST_CHECK( splice2->firstVal().periodTime() == TestHelper::dateToTime(2013,2,1));
+    BOOST_CHECK( splice2->lastVal().periodTime() == TestHelper::dateToTime(2013,2,1));
+
+	PeriodValSegmentPtr splice3 = testSeg->spliceRange(1,3);
+    BOOST_CHECK( splice3->numVals() == 2 );
+    BOOST_CHECK( splice3->firstVal().periodTime() == TestHelper::dateToTime(2013,2,1));
+    BOOST_CHECK( splice3->lastVal().periodTime() == TestHelper::dateToTime(2013,3,1));
+
+	PeriodValSegmentPtr splice4 = testSeg->spliceRange(3,5);
+    BOOST_CHECK( splice4->numVals() == 2 );
+    BOOST_CHECK( splice4->firstVal().periodTime() == TestHelper::dateToTime(2013,4,1));
+    BOOST_CHECK( splice4->lastVal().periodTime() == TestHelper::dateToTime(2013,5,1));
+
+	PeriodValSegmentPtr splice5 = testSeg->spliceRange(0,5);
+    BOOST_CHECK( splice5->numVals() == 5 );
+    BOOST_CHECK( splice5->firstVal().periodTime() == TestHelper::dateToTime(2013,1,1));
+    BOOST_CHECK( splice5->lastVal().periodTime() == TestHelper::dateToTime(2013,5,1));
 
 }

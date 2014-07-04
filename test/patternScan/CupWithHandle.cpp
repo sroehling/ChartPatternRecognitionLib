@@ -37,7 +37,6 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 	PeriodValSegmentPtr chartData(new PeriodValSegment(cupData));
 	TestHelper::genPeriodValSegmentInfo("Cup data",*chartData);
 
-
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 	TestHelper::genPatternMatchListInfo("Cup with handle",*patternMatches);
 

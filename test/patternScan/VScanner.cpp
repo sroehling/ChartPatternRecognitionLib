@@ -34,11 +34,11 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 	TestHelper::genPatternMatchListInfo("V Match on LHS",*patternMatches);
 
 
-	BOOST_REQUIRE(patternMatches->size() == 5);
+	BOOST_REQUIRE(patternMatches->size() == 1);
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
 	TestHelper::verifyPatternMatch("V Match on LHS",
-			ptime(date(2013,8,26)),ptime(date(2013,10,21)),4,thePatternMatch);
+			ptime(date(2013,8,26)),ptime(date(2013,10,21)),2,thePatternMatch);
 
 }
 
@@ -61,11 +61,11 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 
 	TestHelper::genPatternMatchListInfo("V Match on RHS",*patternMatches);
 
-	BOOST_REQUIRE(patternMatches->size() == 96);
+	BOOST_REQUIRE(patternMatches->size() == 1);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
 	TestHelper::verifyPatternMatch("V Match on RHS",
-			ptime(date(2013,10,21)),ptime(date(2014,2,18)),8,thePatternMatch);
+			ptime(date(2013,10,21)),ptime(date(2014,2,18)),3,thePatternMatch);
 
 }

@@ -1,4 +1,5 @@
-quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
+patternMatchFilter/UniqueStartEndDateFilter.d: \
+  ../patternMatchFilter/UniqueStartEndDateFilter.cpp \
   /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
   /usr/local/include/boost/test/predicate_result.hpp \
@@ -336,16 +337,28 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/type.hpp \
   /usr/local/include/boost/test/framework.hpp \
   /usr/local/include/boost/config/auto_link.hpp \
-  /usr/local/include/boost/date_time/gregorian/gregorian.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
+  /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
   /usr/local/include/boost/date_time/compiler_config.hpp \
   /usr/local/include/boost/date_time/locale_config.hpp \
   /usr/local/include/boost/cstdint.hpp \
-  /usr/local/include/boost/date_time/gregorian/gregorian_types.hpp \
-  /usr/local/include/boost/date_time/date.hpp \
+  /usr/local/include/boost/date_time/posix_time/ptime.hpp \
+  /usr/local/include/boost/date_time/posix_time/posix_time_system.hpp \
+  /usr/local/include/boost/date_time/posix_time/posix_time_config.hpp \
+  /usr/local/include/boost/config/no_tr1/cmath.hpp \
+  /usr/local/include/boost/date_time/time_duration.hpp \
   /usr/local/include/boost/operators.hpp \
   /usr/local/include/boost/iterator.hpp \
-  /usr/local/include/boost/date_time/year_month_day.hpp \
+  /usr/local/include/boost/date_time/time_defs.hpp \
   /usr/local/include/boost/date_time/special_defs.hpp \
+  /usr/local/include/boost/date_time/time_resolution_traits.hpp \
+  /usr/local/include/boost/date_time/int_adapter.hpp \
+  /usr/local/include/boost/date_time/gregorian/gregorian_types.hpp \
+  /usr/local/include/boost/date_time/date.hpp \
+  /usr/local/include/boost/date_time/year_month_day.hpp \
   /usr/local/include/boost/date_time/period.hpp \
   /usr/local/include/boost/date_time/gregorian/greg_calendar.hpp \
   /usr/local/include/boost/date_time/gregorian/greg_weekday.hpp \
@@ -361,7 +374,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/date_time/gregorian/greg_day.hpp \
   /usr/local/include/boost/date_time/gregorian/greg_year.hpp \
   /usr/local/include/boost/date_time/gregorian/greg_month.hpp \
-  /usr/local/include/boost/date_time/int_adapter.hpp \
   /usr/local/include/boost/date_time/gregorian/greg_duration.hpp \
   /usr/local/include/boost/date_time/date_duration.hpp \
   /usr/local/include/boost/date_time/date_duration_types.hpp \
@@ -373,6 +385,12 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/date_time/date_clock_device.hpp \
   /usr/local/include/boost/date_time/c_time.hpp \
   /usr/local/include/boost/date_time/date_iterator.hpp \
+  /usr/local/include/boost/date_time/time_system_split.hpp \
+  /usr/local/include/boost/date_time/time_system_counted.hpp \
+  /usr/local/include/boost/date_time/time.hpp \
+  /usr/local/include/boost/date_time/posix_time/date_duration_operators.hpp \
+  /usr/local/include/boost/date_time/posix_time/time_formatters.hpp \
+  /usr/local/include/boost/date_time/gregorian/gregorian.hpp \
   /usr/local/include/boost/date_time/gregorian/conversion.hpp \
   /usr/local/include/boost/date_time/gregorian/formatters.hpp \
   /usr/local/include/boost/date_time/date_formatting.hpp \
@@ -474,7 +492,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/numeric/conversion/cast.hpp \
   /usr/local/include/boost/numeric/conversion/converter.hpp \
   /usr/local/include/boost/numeric/conversion/converter_policies.hpp \
-  /usr/local/include/boost/config/no_tr1/cmath.hpp \
   /usr/local/include/boost/numeric/conversion/detail/converter.hpp \
   /usr/local/include/boost/numeric/conversion/bounds.hpp \
   /usr/local/include/boost/numeric/conversion/detail/bounds.hpp \
@@ -655,18 +672,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/token_iterator.hpp \
   /usr/local/include/boost/iterator/detail/minimum_category.hpp \
   /usr/local/include/boost/token_functions.hpp \
-  /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
-  /usr/local/include/boost/date_time/posix_time/ptime.hpp \
-  /usr/local/include/boost/date_time/posix_time/posix_time_system.hpp \
-  /usr/local/include/boost/date_time/posix_time/posix_time_config.hpp \
-  /usr/local/include/boost/date_time/time_duration.hpp \
-  /usr/local/include/boost/date_time/time_defs.hpp \
-  /usr/local/include/boost/date_time/time_resolution_traits.hpp \
-  /usr/local/include/boost/date_time/time_system_split.hpp \
-  /usr/local/include/boost/date_time/time_system_counted.hpp \
-  /usr/local/include/boost/date_time/time.hpp \
-  /usr/local/include/boost/date_time/posix_time/date_duration_operators.hpp \
-  /usr/local/include/boost/date_time/posix_time/time_formatters.hpp \
   /usr/local/include/boost/date_time/posix_time/posix_time_types.hpp \
   /usr/local/include/boost/date_time/time_clock.hpp \
   /usr/local/include/boost/date_time/microsec_time_clock.hpp \
@@ -684,13 +689,11 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -1366,7 +1369,15 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /usr/local/include/boost/config/auto_link.hpp:
 
-/usr/local/include/boost/date_time/gregorian/gregorian.hpp:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
+
+/usr/local/include/boost/date_time/posix_time/posix_time.hpp:
 
 /usr/local/include/boost/date_time/compiler_config.hpp:
 
@@ -1374,17 +1385,33 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /usr/local/include/boost/cstdint.hpp:
 
-/usr/local/include/boost/date_time/gregorian/gregorian_types.hpp:
+/usr/local/include/boost/date_time/posix_time/ptime.hpp:
 
-/usr/local/include/boost/date_time/date.hpp:
+/usr/local/include/boost/date_time/posix_time/posix_time_system.hpp:
+
+/usr/local/include/boost/date_time/posix_time/posix_time_config.hpp:
+
+/usr/local/include/boost/config/no_tr1/cmath.hpp:
+
+/usr/local/include/boost/date_time/time_duration.hpp:
 
 /usr/local/include/boost/operators.hpp:
 
 /usr/local/include/boost/iterator.hpp:
 
-/usr/local/include/boost/date_time/year_month_day.hpp:
+/usr/local/include/boost/date_time/time_defs.hpp:
 
 /usr/local/include/boost/date_time/special_defs.hpp:
+
+/usr/local/include/boost/date_time/time_resolution_traits.hpp:
+
+/usr/local/include/boost/date_time/int_adapter.hpp:
+
+/usr/local/include/boost/date_time/gregorian/gregorian_types.hpp:
+
+/usr/local/include/boost/date_time/date.hpp:
+
+/usr/local/include/boost/date_time/year_month_day.hpp:
 
 /usr/local/include/boost/date_time/period.hpp:
 
@@ -1416,8 +1443,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /usr/local/include/boost/date_time/gregorian/greg_month.hpp:
 
-/usr/local/include/boost/date_time/int_adapter.hpp:
-
 /usr/local/include/boost/date_time/gregorian/greg_duration.hpp:
 
 /usr/local/include/boost/date_time/date_duration.hpp:
@@ -1439,6 +1464,18 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 /usr/local/include/boost/date_time/c_time.hpp:
 
 /usr/local/include/boost/date_time/date_iterator.hpp:
+
+/usr/local/include/boost/date_time/time_system_split.hpp:
+
+/usr/local/include/boost/date_time/time_system_counted.hpp:
+
+/usr/local/include/boost/date_time/time.hpp:
+
+/usr/local/include/boost/date_time/posix_time/date_duration_operators.hpp:
+
+/usr/local/include/boost/date_time/posix_time/time_formatters.hpp:
+
+/usr/local/include/boost/date_time/gregorian/gregorian.hpp:
 
 /usr/local/include/boost/date_time/gregorian/conversion.hpp:
 
@@ -1641,8 +1678,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 /usr/local/include/boost/numeric/conversion/converter.hpp:
 
 /usr/local/include/boost/numeric/conversion/converter_policies.hpp:
-
-/usr/local/include/boost/config/no_tr1/cmath.hpp:
 
 /usr/local/include/boost/numeric/conversion/detail/converter.hpp:
 
@@ -2004,30 +2039,6 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /usr/local/include/boost/token_functions.hpp:
 
-/usr/local/include/boost/date_time/posix_time/posix_time.hpp:
-
-/usr/local/include/boost/date_time/posix_time/ptime.hpp:
-
-/usr/local/include/boost/date_time/posix_time/posix_time_system.hpp:
-
-/usr/local/include/boost/date_time/posix_time/posix_time_config.hpp:
-
-/usr/local/include/boost/date_time/time_duration.hpp:
-
-/usr/local/include/boost/date_time/time_defs.hpp:
-
-/usr/local/include/boost/date_time/time_resolution_traits.hpp:
-
-/usr/local/include/boost/date_time/time_system_split.hpp:
-
-/usr/local/include/boost/date_time/time_system_counted.hpp:
-
-/usr/local/include/boost/date_time/time.hpp:
-
-/usr/local/include/boost/date_time/posix_time/date_duration_operators.hpp:
-
-/usr/local/include/boost/date_time/posix_time/time_formatters.hpp:
-
 /usr/local/include/boost/date_time/posix_time/posix_time_types.hpp:
 
 /usr/local/include/boost/date_time/time_clock.hpp:
@@ -2062,16 +2073,12 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:

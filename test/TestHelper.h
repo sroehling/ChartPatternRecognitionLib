@@ -29,6 +29,8 @@ public:
 			const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
 			const PatternMatchPtr &patternMatch);
 
+	static boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day);
+
 
 };
 

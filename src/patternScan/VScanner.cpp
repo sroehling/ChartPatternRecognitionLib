@@ -14,6 +14,7 @@
 #include "AnyPatternMatchValidator.h"
 #include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
+#include "FilterUniqueStartEndDate.h"
 
 VScanner::VScanner(double minRHSBelowLHSofVPerc)
 : minRHSBelowLHSofVPerc_(minRHSBelowLHSofVPerc)
@@ -57,6 +58,8 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,10.0,uptrendPercOfDownTrend));
 
 		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
+
+
 		BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << uptrendMatches->size();
 		PatternMatchListPtr downUpMatches = (*dtMatchIter)->appendMatchList(*uptrendMatches);
 
@@ -79,7 +82,14 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
 	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of overall matches: " <<  vMatches->size();
 
-	return vMatches;
+
+	// For purposes of pattern matching, there's no need to return duplicate patterns with
+	// the same start and end date.
+	FilterUniqueStartEndDate uniqueStartEndDateFilter;
+	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(vMatches);
+	return uniqueMatches;
+
+//	return vMatches;
 }
 
 

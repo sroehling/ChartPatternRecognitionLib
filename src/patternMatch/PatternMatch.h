@@ -13,7 +13,7 @@
 
 class PatternMatch;
 typedef boost::shared_ptr<PatternMatch> PatternMatchPtr;
-typedef std::vector<PatternMatchPtr> PatternMatchList;
+typedef std::list<PatternMatchPtr> PatternMatchList;
 typedef boost::shared_ptr<PatternMatchList> PatternMatchListPtr;
 
 

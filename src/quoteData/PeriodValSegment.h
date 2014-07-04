@@ -56,6 +56,7 @@ public:
 	const PeriodValCltnPtr perValCltn() const { return perValCltn_; }
 
 	PeriodValSegmentPair split(unsigned int splitPos) const;
+	PeriodValSegmentPtr spliceRange(unsigned int startPos, unsigned int endPos) const;
 
 	unsigned int numVals() const;
 	const PeriodVal &firstVal() const;

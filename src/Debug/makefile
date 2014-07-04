@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include quoteData/subdir.mk
 -include patternScan/subdir.mk
+-include patternMatchFilter/subdir.mk
 -include patternMatch/subdir.mk
 -include math/subdir.mk
 -include date/subdir.mk
