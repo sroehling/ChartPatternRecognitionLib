@@ -167,6 +167,11 @@ double PeriodValSegment::pointsAtPercentOfDepthBelowHigh(double percentBelowHigh
 	return depthAtPerc;
 }
 
+PeriodValSegmentPtr PeriodValSegment::readFromFile(const std::string &fileName)
+{
+	PeriodValCltnPtr segData = PeriodVal::readFromFile(fileName);
+	return PeriodValSegmentPtr(new PeriodValSegment(segData));
+}
 
 
 PeriodValSegment::~PeriodValSegment() {

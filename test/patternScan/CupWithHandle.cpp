@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 	// "typical price" data for SAVE, starting on 2013-07-22,
 	// where typical price is (high + low + close)/3.0
 
-	PeriodValCltnPtr cupData = PeriodVal::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
+	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
 	BOOST_TEST_MESSAGE("CupWithHandle_SAVE_20130722");
 
@@ -34,14 +34,11 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 	PatternScannerEngine scanner(segConstraint,segListConstraint,patternMatchValidator);
 
-	PeriodValSegmentPtr chartData(new PeriodValSegment(cupData));
 	TestHelper::genPeriodValSegmentInfo("Cup data",*chartData);
 
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
-	TestHelper::genPatternMatchListInfo("Cup with handle",*patternMatches);
 
-	BOOST_TEST_MESSAGE("CupWithHandle_SAVE_20130722: Number of pattern matches: " << patternMatches->size());
-	BOOST_REQUIRE(patternMatches->size() == 2);
+	TestHelper::verifyMatchList("CupWithHandle_SAVE_20130722",patternMatches,2);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 	BOOST_CHECK(segListConstraint->validSegments(thePatternMatch->segments()) == true);
@@ -54,17 +51,12 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 {
-
-	PeriodValCltnPtr cupData = PeriodVal::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
+	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
 	CupScanner scanner;
-
-	PeriodValSegmentPtr chartData(new PeriodValSegment(cupData));
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
-	TestHelper::genPatternMatchListInfo("Cup with handle",*patternMatches);
 
-	BOOST_CHECK(patternMatches->size() == 3);
-	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
+	TestHelper::verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,3);
 
 	TestHelper::verifyPatternMatch("Cup Match",
 			ptime(date(2013,7,22)),ptime(date(2013,10,7)),3,patternMatches->front());

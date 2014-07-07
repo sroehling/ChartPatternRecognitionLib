@@ -26,16 +26,13 @@ BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 	// should therefore be the number of matches from VScanner_QCOR_20130819_LHSofDoubleBottom
 	// multiplied times the number of matches from VScanner_QCOR_20130819_RHSofDoubleBottom.
 
-	PeriodValCltnPtr vData = PeriodVal::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
-	PeriodValSegmentPtr chartData(new PeriodValSegment(vData));
+	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
 	TestHelper::genPeriodValSegmentInfo("Double bottom segment data",*chartData);
 
 	DoubleBottomScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	BOOST_TEST_MESSAGE("Number of pattern matches: " << patternMatches->size());
-	BOOST_REQUIRE(patternMatches->size() == 1);
-	TestHelper::genPatternMatchListInfo("Double bottom match",*patternMatches);
+	TestHelper::verifyMatchList("Double bottom match",patternMatches,1);
 
 	TestHelper::verifyPatternMatch("Double bottom match",
 			ptime(date(2013,8,26)),ptime(date(2014,2,18)),5,patternMatches->front());

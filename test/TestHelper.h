@@ -23,6 +23,9 @@ public:
 	static void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch);
 	static void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList);
 
+	static void verifyMatchList(const std::string prefix,
+			const PatternMatchListPtr &matchList, unsigned int expectedNumMatches);
+
 	static void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment);
 
 	static void verifyPatternMatch(const std::string &prefix,const boost::posix_time::ptime &expectedStart,

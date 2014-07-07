@@ -73,6 +73,9 @@ public:
 	// constraints.
 	double pointsAtPercentOfDepthBelowHigh(double percentBelowHigh) const;
 
+	static PeriodValSegmentPtr readFromFile(const std::string &fileName);
+
+
 	virtual ~PeriodValSegment();
 };
 

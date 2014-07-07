@@ -40,6 +40,13 @@ void TestHelper::genPatternMatchListInfo(const std::string prefix, const Pattern
 
 }
 
+void TestHelper::verifyMatchList(const std::string prefix,
+		const PatternMatchListPtr &matchList, unsigned int expectedNumMatches)
+{
+	TestHelper::genPatternMatchListInfo(prefix,*matchList);
+	BOOST_REQUIRE(matchList->size() == expectedNumMatches);
+}
+
 void TestHelper::genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment)
 {
 	for(PeriodValCltn::iterator segIter = perSegment.segBegin(); segIter != perSegment.segEnd(); segIter++)

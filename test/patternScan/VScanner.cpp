@@ -20,8 +20,8 @@ using namespace boost::gregorian;
 
 BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 {
-	PeriodValCltnPtr allPeriodData = PeriodVal::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
-	PeriodValSegmentPtr allPerSegment(new PeriodValSegment(allPeriodData));
+	PeriodValSegmentPtr allPerSegment = PeriodValSegment::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
+
 	PeriodValSegmentPair splitSeg = allPerSegment->split(11);
 	PeriodValSegmentPtr vData = splitSeg.first;
 	TestHelper::genPeriodValSegmentInfo("V segment data",*vData);
@@ -31,10 +31,8 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 	VScanner scanner(minRHSBelowLHSofVPerc);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(vData);
 
-	TestHelper::genPatternMatchListInfo("V Match on LHS",*patternMatches);
+	TestHelper::verifyMatchList("VScanner_QCOR_20130819_LHSofDoubleBottom",patternMatches,1);
 
-
-	BOOST_REQUIRE(patternMatches->size() == 1);
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
 	TestHelper::verifyPatternMatch("V Match on LHS",
@@ -45,8 +43,7 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 
 BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 {
-	PeriodValCltnPtr vData = PeriodVal::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
-	PeriodValSegmentPtr chartData(new PeriodValSegment(vData));
+	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
 
 	BOOST_TEST_MESSAGE("Testing V sub-patterns for RHS of double bottom of QCOR");
 	PeriodValSegmentPair splitQCORdata = chartData->split(8);
@@ -59,9 +56,7 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 	VScanner scanner(minPercentRHSBelowLHSofV);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
-	TestHelper::genPatternMatchListInfo("V Match on RHS",*patternMatches);
-
-	BOOST_REQUIRE(patternMatches->size() == 1);
+	TestHelper::verifyMatchList("VScanner_QCOR_20130819_RHSofDoubleBottom",patternMatches,1);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
