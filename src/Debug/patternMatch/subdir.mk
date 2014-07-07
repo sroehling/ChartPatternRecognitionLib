@@ -11,7 +11,9 @@ CPP_SRCS += \
 ../patternMatch/PatternLengthAtLeast.cpp \
 ../patternMatch/PatternLengthLessThanEqual.cpp \
 ../patternMatch/PatternMatch.cpp \
-../patternMatch/PatternMatchValidator.cpp 
+../patternMatch/PatternMatchValidator.cpp \
+../patternMatch/PatternMatchValueRef.cpp \
+../patternMatch/ValueComparisonMatchValidator.cpp 
 
 OBJS += \
 ./patternMatch/AnyPatternMatchValidator.o \
@@ -21,7 +23,9 @@ OBJS += \
 ./patternMatch/PatternLengthAtLeast.o \
 ./patternMatch/PatternLengthLessThanEqual.o \
 ./patternMatch/PatternMatch.o \
-./patternMatch/PatternMatchValidator.o 
+./patternMatch/PatternMatchValidator.o \
+./patternMatch/PatternMatchValueRef.o \
+./patternMatch/ValueComparisonMatchValidator.o 
 
 CPP_DEPS += \
 ./patternMatch/AnyPatternMatchValidator.d \
@@ -31,7 +35,9 @@ CPP_DEPS += \
 ./patternMatch/PatternLengthAtLeast.d \
 ./patternMatch/PatternLengthLessThanEqual.d \
 ./patternMatch/PatternMatch.d \
-./patternMatch/PatternMatchValidator.d 
+./patternMatch/PatternMatchValidator.d \
+./patternMatch/PatternMatchValueRef.d \
+./patternMatch/ValueComparisonMatchValidator.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

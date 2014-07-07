@@ -8,11 +8,23 @@
 #include "PatternMatchValidator.h"
 
 PatternMatchValidator::PatternMatchValidator() {
-	// TODO Auto-generated constructor stub
-
 }
 
 PatternMatchValidator::~PatternMatchValidator() {
-	// TODO Auto-generated destructor stub
+}
+
+PatternMatchListPtr PatternMatchValidator::filterMatches(const PatternMatchValidatorPtr &validator,
+		const PatternMatchListPtr &unfilteredMatches)
+{
+	PatternMatchListPtr filteredMatches(new PatternMatchList());
+	for(PatternMatchList::const_iterator matchIter = unfilteredMatches->begin();
+			matchIter != unfilteredMatches->end(); matchIter++)
+	{
+		if(validator->validPattern(**matchIter))
+		{
+			filteredMatches->push_back(*matchIter);
+		}
+	}
+	return filteredMatches;
 }
 

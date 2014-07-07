@@ -6,16 +6,19 @@
 CPP_SRCS += \
 ../math/LinearEquation.cpp \
 ../math/MathHelper.cpp \
+../math/ValueComparator.cpp \
 ../math/XYCoord.cpp 
 
 OBJS += \
 ./math/LinearEquation.o \
 ./math/MathHelper.o \
+./math/ValueComparator.o \
 ./math/XYCoord.o 
 
 CPP_DEPS += \
 ./math/LinearEquation.d \
 ./math/MathHelper.d \
+./math/ValueComparator.d \
 ./math/XYCoord.d 
 
 

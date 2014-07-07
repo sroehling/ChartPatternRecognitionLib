@@ -20,6 +20,9 @@ public:
 
 	virtual bool validPattern(const PatternMatch &candidateMatch) = 0;
 
+	static PatternMatchListPtr filterMatches(const PatternMatchValidatorPtr &validator,
+			const PatternMatchListPtr &unfilteredMatches);
+
 	virtual ~PatternMatchValidator();
 };
 

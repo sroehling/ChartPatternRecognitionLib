@@ -8,8 +8,21 @@
 #include <DoubleBottomScanner.h>
 #include "VScanner.h"
 #include "PatternMatch.h"
+#include "PatternMatchValueRef.h"
+#include "ValueComparisonMatchValidator.h"
 
 DoubleBottomScanner::DoubleBottomScanner() {
+}
+
+
+PatternMatchValidatorPtr DoubleBottomScanner::rhsLowerLowValidator(const PatternMatchPtr &lhsMatch) const
+{
+	ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
+	PatternMatchValueRefPtr lhsLow(new FixedPatternMatchValueRef(lhsMatch->lowestLow()));
+	PatternMatchValueRefPtr rhsLowRef(new LowestLowPatternMatchValueRef());
+	PatternMatchValidatorPtr lowerLowValidator(
+			new ValueComparisonMatchValidator(rhsLowRef,lhsLow,lessEqualCompare));
+	return lowerLowValidator;
 }
 
 PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
@@ -34,7 +47,12 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		double rhsVMinRecoverLHSDepth = 0.0; // RHS of RHS V must recover 100% of the depth of the LHS of V
 		VScanner rightVScanner(rhsVMinRecoverLHSDepth);
 
-		PatternMatchListPtr rightVMatches = rightVScanner.scanPatternMatches(valsForRightVScan);
+		PatternMatchValidatorPtr rhsLowerLowValid = rhsLowerLowValidator(*leftMatchIter);
+
+		// Filter down the scanned results for the RHS to those RHS V's which have a lower low
+		// than the LHS.
+		PatternMatchListPtr rightVMatches = PatternMatchValidator::filterMatches(rhsLowerLowValid,
+				rightVScanner.scanPatternMatches(valsForRightVScan));
 
 		// TODO - The left and right V should be in proportion to one another (e.g., the left V
 		// shouldn't be 5% down while the right V is 25% down).
