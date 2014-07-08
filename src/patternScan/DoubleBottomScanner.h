@@ -10,12 +10,15 @@
 
 #include <PatternScanner.h>
 #include "PatternMatchValidator.h"
+#include "DoubleRange.h"
 
 class DoubleBottomScanner: public PatternScanner {
 private:
-	PatternMatchValidatorPtr rhsLowerLowValidator(const PatternMatchPtr &lhsMatch) const;
+	DoubleRange minMaxDepthPerc_;
 public:
+	DoubleBottomScanner(const DoubleRange &minMaxDepthPerc);
 	DoubleBottomScanner();
+
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 	virtual ~DoubleBottomScanner();
 };

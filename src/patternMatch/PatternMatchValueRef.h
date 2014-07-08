@@ -25,6 +25,12 @@ public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class DepthPercentPatternMatchValueRef : public PatternMatchValueRef {
+public:
+	virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 class FixedPatternMatchValueRef : public PatternMatchValueRef {
 private:
 	double val_;

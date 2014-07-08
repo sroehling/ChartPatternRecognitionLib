@@ -4,18 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../math/DoubleRange.cpp \
 ../math/LinearEquation.cpp \
 ../math/MathHelper.cpp \
 ../math/ValueComparator.cpp \
 ../math/XYCoord.cpp 
 
 OBJS += \
+./math/DoubleRange.o \
 ./math/LinearEquation.o \
 ./math/MathHelper.o \
 ./math/ValueComparator.o \
 ./math/XYCoord.o 
 
 CPP_DEPS += \
+./math/DoubleRange.d \
 ./math/LinearEquation.d \
 ./math/MathHelper.d \
 ./math/ValueComparator.d \

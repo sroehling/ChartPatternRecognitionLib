@@ -24,6 +24,7 @@ void TestHelper::genPatternMatchInfo(const std::string &prefix, const PatternMat
 			<< "start = " << TimeHelper::formatDate(patternMatch->firstValue().periodTime())
 			<< ", end = " << TimeHelper::formatDate(patternMatch->lastValue().periodTime())
 			<< ", num segments = " << patternMatch->numSegments()
+			<< ", depth % = " << patternMatch->depthPercent()
 		<< ", last close = " << patternMatch->lastValue().close());
 
 }

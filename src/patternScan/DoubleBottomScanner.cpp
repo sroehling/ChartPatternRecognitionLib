@@ -11,23 +11,22 @@
 #include "PatternMatchValueRef.h"
 #include "ValueComparisonMatchValidator.h"
 #include "FilterUniqueStartEndDate.h"
+#include "PatternMatchValidatorCreationHelper.h"
 
-DoubleBottomScanner::DoubleBottomScanner() {
+DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
+: minMaxDepthPerc_(minMaxDepthPerc)
+{
+	assert(minMaxDepthPerc.positiveVals());
 }
 
-
-PatternMatchValidatorPtr DoubleBottomScanner::rhsLowerLowValidator(const PatternMatchPtr &lhsMatch) const
+DoubleBottomScanner::DoubleBottomScanner()
+: minMaxDepthPerc_(DoubleRange(7.0,30.0))
 {
-	ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
-	PatternMatchValueRefPtr lhsLow(new FixedPatternMatchValueRef(lhsMatch->lowestLow()));
-	PatternMatchValueRefPtr rhsLowRef(new LowestLowPatternMatchValueRef());
-	PatternMatchValidatorPtr lowerLowValidator(
-			new ValueComparisonMatchValidator(rhsLowRef,lhsLow,lessEqualCompare));
-	return lowerLowValidator;
 }
 
 PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
+	using namespace PatternMatchValidatorCreationHelper;
 
 	// The 1st up-trend of the double-bottom must no more than 40% below the depth of the
 	// 1st down-trend.
@@ -48,10 +47,10 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		double rhsVMinRecoverLHSDepth = 0.0; // RHS of RHS V must recover 100% of the depth of the LHS of V
 		VScanner rightVScanner(rhsVMinRecoverLHSDepth);
 
-		PatternMatchValidatorPtr rhsLowerLowValid = rhsLowerLowValidator(*leftMatchIter);
 
 		// Filter down the scanned results for the RHS to those RHS V's which have a lower low
 		// than the LHS.
+		PatternMatchValidatorPtr rhsLowerLowValid = lowerLowValidator(*leftMatchIter);
 		PatternMatchListPtr rightVMatches = PatternMatchValidator::filterMatches(rhsLowerLowValid,
 				rightVScanner.scanPatternMatches(valsForRightVScan));
 
@@ -62,7 +61,10 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 
 		// TODO - Probably some overall validation is needed here; e.g., the overall
 		// depth of the double bottom should not exceed 30%.
-		dblBottomMatches->insert(dblBottomMatches->end(),overallMatches->begin(),overallMatches->end());
+		PatternMatchListPtr filteredOverallMatches = PatternMatchValidator::filterMatches(
+				depthWithinRangeValidator(minMaxDepthPerc_),overallMatches);
+		dblBottomMatches->insert(dblBottomMatches->end(),filteredOverallMatches->begin(),filteredOverallMatches->end());
+
 	} // for each "left V" match.
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with

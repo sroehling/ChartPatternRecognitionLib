@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../patternMatch/ANDPatternMatchValidator.cpp \
 ../patternMatch/AnyPatternMatchValidator.cpp \
 ../patternMatch/EndWithinPercentOfStart.cpp \
 ../patternMatch/LastValueAbovePointValue.cpp \
@@ -12,10 +13,12 @@ CPP_SRCS += \
 ../patternMatch/PatternLengthLessThanEqual.cpp \
 ../patternMatch/PatternMatch.cpp \
 ../patternMatch/PatternMatchValidator.cpp \
+../patternMatch/PatternMatchValidatorCreationHelper.cpp \
 ../patternMatch/PatternMatchValueRef.cpp \
 ../patternMatch/ValueComparisonMatchValidator.cpp 
 
 OBJS += \
+./patternMatch/ANDPatternMatchValidator.o \
 ./patternMatch/AnyPatternMatchValidator.o \
 ./patternMatch/EndWithinPercentOfStart.o \
 ./patternMatch/LastValueAbovePointValue.o \
@@ -24,10 +27,12 @@ OBJS += \
 ./patternMatch/PatternLengthLessThanEqual.o \
 ./patternMatch/PatternMatch.o \
 ./patternMatch/PatternMatchValidator.o \
+./patternMatch/PatternMatchValidatorCreationHelper.o \
 ./patternMatch/PatternMatchValueRef.o \
 ./patternMatch/ValueComparisonMatchValidator.o 
 
 CPP_DEPS += \
+./patternMatch/ANDPatternMatchValidator.d \
 ./patternMatch/AnyPatternMatchValidator.d \
 ./patternMatch/EndWithinPercentOfStart.d \
 ./patternMatch/LastValueAbovePointValue.d \
@@ -36,6 +41,7 @@ CPP_DEPS += \
 ./patternMatch/PatternLengthLessThanEqual.d \
 ./patternMatch/PatternMatch.d \
 ./patternMatch/PatternMatchValidator.d \
+./patternMatch/PatternMatchValidatorCreationHelper.d \
 ./patternMatch/PatternMatchValueRef.d \
 ./patternMatch/ValueComparisonMatchValidator.d 
 

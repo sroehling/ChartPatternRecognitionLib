@@ -699,6 +699,7 @@ patternScan/DoubleBottom.d: ../patternScan/DoubleBottom.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/DoubleBottomScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h
 
@@ -2101,6 +2102,8 @@ patternScan/DoubleBottom.d: ../patternScan/DoubleBottom.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/DoubleBottomScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
 
