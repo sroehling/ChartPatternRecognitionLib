@@ -629,17 +629,17 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/AnyPatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/AnyPatternMatchValidator.h \
   /usr/local/include/boost/log/trivial.hpp \
   /usr/local/include/boost/log/detail/config.hpp \
   /usr/local/include/boost/thread/detail/config.hpp \
@@ -1989,7 +1989,7 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 
@@ -1999,17 +1999,17 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/AnyPatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/AnyPatternMatchValidator.h:
 
 /usr/local/include/boost/log/trivial.hpp:
 

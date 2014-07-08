@@ -693,13 +693,13 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
@@ -2093,7 +2093,7 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
@@ -2101,11 +2101,11 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 

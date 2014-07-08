@@ -52,7 +52,7 @@ PatternMatchValidatorPtr depthWithinRangeValidator(const DoubleRange &minMaxDept
 	return depthInRange;
 }
 
-PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith) const
+PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith)
 {
 	ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
 	PatternMatchValueRefPtr compareWithLow(new FixedPatternMatchValueRef(compareWith->lowestLow()));

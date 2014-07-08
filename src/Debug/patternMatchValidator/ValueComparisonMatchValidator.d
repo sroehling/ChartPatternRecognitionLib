@@ -1,7 +1,7 @@
-patternMatch/PatternLengthAtLeast.d: \
-  ../patternMatch/PatternLengthAtLeast.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternLengthAtLeast.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+patternMatchValidator/ValueComparisonMatchValidator.d: \
+  ../patternMatchValidator/ValueComparisonMatchValidator.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -629,11 +629,13 @@ patternMatch/PatternLengthAtLeast.d: \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternLengthAtLeast.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 
@@ -1892,3 +1894,7 @@ patternMatch/PatternLengthAtLeast.d: \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h:

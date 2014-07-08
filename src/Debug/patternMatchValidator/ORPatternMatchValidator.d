@@ -1,7 +1,7 @@
-patternMatch/PatternLengthLessThanEqual.d: \
-  ../patternMatch/PatternLengthLessThanEqual.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternLengthLessThanEqual.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+patternMatchValidator/ORPatternMatchValidator.d: \
+  ../patternMatchValidator/ORPatternMatchValidator.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -631,9 +631,9 @@ patternMatch/PatternLengthLessThanEqual.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternLengthLessThanEqual.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 

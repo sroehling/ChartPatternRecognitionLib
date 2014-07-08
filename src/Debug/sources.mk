@@ -25,6 +25,7 @@ C_UPPER_DEPS :=
 SUBDIRS := \
 quoteData \
 patternScan \
+patternMatchValidator \
 patternMatchFilter \
 patternMatch \
 math \

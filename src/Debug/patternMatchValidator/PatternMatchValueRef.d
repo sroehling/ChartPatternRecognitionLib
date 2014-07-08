@@ -1,7 +1,6 @@
-patternMatch/ANDPatternMatchValidator.d: \
-  ../patternMatch/ANDPatternMatchValidator.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ANDPatternMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+patternMatchValidator/PatternMatchValueRef.d: \
+  ../patternMatchValidator/PatternMatchValueRef.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -631,9 +630,7 @@ patternMatch/ANDPatternMatchValidator.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ANDPatternMatchValidator.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 

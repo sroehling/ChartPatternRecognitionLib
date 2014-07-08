@@ -1,6 +1,6 @@
 patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -629,7 +629,7 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
@@ -637,9 +637,9 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 
@@ -1899,7 +1899,7 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h:
 

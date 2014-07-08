@@ -631,15 +631,15 @@ patternScan/TrendLineScanner.d: ../patternScan/TrendLineScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SlopeWithinRangeConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ANDSegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/AnySegmentListValidConstraint.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/AnyPatternMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/AnyPatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 
@@ -1907,7 +1907,7 @@ patternScan/TrendLineScanner.d: ../patternScan/TrendLineScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
@@ -1919,8 +1919,8 @@ patternScan/TrendLineScanner.d: ../patternScan/TrendLineScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/AnySegmentListValidConstraint.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/AnyPatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/AnyPatternMatchValidator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/EndWithinPercentOfStart.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ORPatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:

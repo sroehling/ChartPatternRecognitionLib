@@ -629,14 +629,14 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ValueComparisonMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidatorCreationHelper.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/DoubleBottomScanner.h:
 
@@ -1900,18 +1900,18 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValueRef.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/ValueComparisonMatchValidator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchValidatorCreationHelper.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h:
