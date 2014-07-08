@@ -88,8 +88,6 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 	FilterUniqueStartEndDate uniqueStartEndDateFilter;
 	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(vMatches);
 	return uniqueMatches;
-
-//	return vMatches;
 }
 
 

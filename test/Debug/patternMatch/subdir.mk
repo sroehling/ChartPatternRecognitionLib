@@ -4,13 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../patternMatch/PatternMatch.cpp 
+../patternMatch/PatternMatch.cpp \
+../patternMatch/PatternMatchValidator.cpp 
 
 OBJS += \
-./patternMatch/PatternMatch.o 
+./patternMatch/PatternMatch.o \
+./patternMatch/PatternMatchValidator.o 
 
 CPP_DEPS += \
-./patternMatch/PatternMatch.d 
+./patternMatch/PatternMatch.d \
+./patternMatch/PatternMatchValidator.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

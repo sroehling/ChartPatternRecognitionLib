@@ -95,3 +95,38 @@ PeriodVal TestHelper::testPeriodVal(unsigned int year, unsigned int month, unsig
 	return perVal;
 }
 
+PeriodValSegmentPtr TestHelper::synthesizePeriodValSegment(const boost::gregorian::date &startDate,
+		const TestPerValRangeList &ranges)
+{
+	using namespace boost::gregorian;
+	using namespace boost::posix_time;
+
+	PeriodValCltnPtr perVals(new PeriodValCltn());
+
+	assert(ranges.size() > 0);
+
+	day_iterator dayIncr(startDate, 1);
+
+	for(TestPerValRangeList::const_iterator rangeIter = ranges.begin();
+			rangeIter != ranges.end(); rangeIter++)
+	{
+		double valIncr = (*rangeIter).valIncr();
+		double currVal = (*rangeIter).startVal();
+
+		for(unsigned int dayCount = 0; dayCount < (*rangeIter).numVals(); dayCount++)
+		{
+			ptime currTime(*dayIncr);
+
+			BOOST_TEST_MESSAGE("Synthesized PeriodValSegment date: " << currTime << " val: " << currVal);
+			perVals->push_back(PeriodVal(currTime,currVal,currVal,currVal,currVal,currVal));
+
+			currVal += valIncr;
+			++dayIncr;
+		}
+
+	}
+
+	return PeriodValSegmentPtr(new PeriodValSegment(perVals));
+
+}
+

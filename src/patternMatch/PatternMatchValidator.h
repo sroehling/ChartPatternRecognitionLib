@@ -11,6 +11,11 @@
 #include <boost/shared_ptr.hpp>
 #include "PatternMatch.h"
 
+class PatternMatchValidator;
+typedef boost::shared_ptr<PatternMatchValidator> PatternMatchValidatorPtr;
+typedef std::list<PatternMatchValidatorPtr> PatternMatchValidatorList;
+
+
 // The PatternMatchValidator class is a base class for classes
 // which validate a pattern as a whole, given a candidate match
 // (e.g., based upon length, % change since start, etc).
@@ -26,7 +31,5 @@ public:
 	virtual ~PatternMatchValidator();
 };
 
-typedef boost::shared_ptr<PatternMatchValidator> PatternMatchValidatorPtr;
-typedef std::list<PatternMatchValidatorPtr> PatternMatchValidatorList;
 
 #endif /* PATTERNMATCHVALIDATOR_H_ */

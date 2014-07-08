@@ -690,7 +690,8 @@ patternMatch/PatternMatch.d: ../patternMatch/PatternMatch.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2075,3 +2076,5 @@ patternMatch/PatternMatch.d: ../patternMatch/PatternMatch.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h:

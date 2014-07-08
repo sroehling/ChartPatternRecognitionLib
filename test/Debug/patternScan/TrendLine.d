@@ -702,7 +702,8 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/LastValueAbovePointValue.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2111,3 +2112,5 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h:

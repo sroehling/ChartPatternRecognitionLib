@@ -11,6 +11,8 @@
 #include "PeriodVal.h"
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
+#include "TestPerValRange.h"
+
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
@@ -19,6 +21,9 @@ class TestHelper {
 public:
 	static PeriodVal testPeriodVal(unsigned int year, unsigned int month,
 					unsigned int day, double val, unsigned int vol);
+
+	static PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &startDate,
+			const TestPerValRangeList &ranges);
 
 	static void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch);
 	static void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList);

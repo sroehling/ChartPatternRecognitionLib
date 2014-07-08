@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../RunTests.cpp \
-../TestHelper.cpp 
+../TestHelper.cpp \
+../TestPerValRange.cpp 
 
 OBJS += \
 ./RunTests.o \
-./TestHelper.o 
+./TestHelper.o \
+./TestPerValRange.o 
 
 CPP_DEPS += \
 ./RunTests.d \
-./TestHelper.d 
+./TestHelper.d \
+./TestPerValRange.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

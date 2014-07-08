@@ -10,6 +10,7 @@
 #include "PatternMatch.h"
 #include "PatternMatchValueRef.h"
 #include "ValueComparisonMatchValidator.h"
+#include "FilterUniqueStartEndDate.h"
 
 DoubleBottomScanner::DoubleBottomScanner() {
 }
@@ -64,7 +65,11 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		dblBottomMatches->insert(dblBottomMatches->end(),overallMatches->begin(),overallMatches->end());
 	} // for each "left V" match.
 
-	return dblBottomMatches;
+	// For purposes of pattern matching, there's no need to return duplicate patterns with
+	// the same start and end date.
+	FilterUniqueStartEndDate uniqueStartEndDateFilter;
+	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(dblBottomMatches);
+	return uniqueMatches;
 }
 
 DoubleBottomScanner::~DoubleBottomScanner() {
