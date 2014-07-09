@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../patternScan/AscendingBaseScanner.cpp \
 ../patternScan/CupScanner.cpp \
 ../patternScan/DoubleBottomScanner.cpp \
 ../patternScan/PatternScannerEngine.cpp \
@@ -12,6 +13,7 @@ CPP_SRCS += \
 ../patternScan/VScanner.cpp 
 
 OBJS += \
+./patternScan/AscendingBaseScanner.o \
 ./patternScan/CupScanner.o \
 ./patternScan/DoubleBottomScanner.o \
 ./patternScan/PatternScannerEngine.o \
@@ -20,6 +22,7 @@ OBJS += \
 ./patternScan/VScanner.o 
 
 CPP_DEPS += \
+./patternScan/AscendingBaseScanner.d \
 ./patternScan/CupScanner.d \
 ./patternScan/DoubleBottomScanner.d \
 ./patternScan/PatternScannerEngine.d \

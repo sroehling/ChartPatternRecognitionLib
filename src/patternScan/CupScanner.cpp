@@ -9,7 +9,9 @@
 #include "ORPatternMatchValidator.h"
 #include "CupScanner.h"
 #include "TrendLineScanner.h"
-#include "FilterUniqueStartEndDate.h"
+#include "ScannerHelper.h"
+
+using namespace scannerHelper;
 
 CupScanner::CupScanner() {
 
@@ -30,7 +32,10 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	{
 		PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal();
 		PatternMatchListPtr flatMatches = flatScanner->scanPatternMatches(valsForFlatScan);
+
+		// Append the flat matches to the current downtrend
 		PatternMatchListPtr downFlatMatches = (*dtMatchIter)->appendMatchList(*flatMatches);
+
 		for(PatternMatchList::const_iterator downFlatMatchIter = downFlatMatches->begin();
 				downFlatMatchIter!=downFlatMatches->end();downFlatMatchIter++)
 		{
@@ -43,28 +48,13 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 			PatternMatchValidatorList finalValidators;
 			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(8.0)));
 			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(-3.0)));
-			ORPatternMatchValidator plusMinusWithinStart(finalValidators);
-			for(PatternMatchList::const_iterator overallIter = overallMatches->begin();
-						overallIter != overallMatches->end(); overallIter++)
-			{
-				if(plusMinusWithinStart.validPattern(**overallIter))
-				{
-					cupMatches->push_back(*overallIter);
-				}
+			PatternMatchValidatorPtr overallValidator(new ORPatternMatchValidator(finalValidators));
 
-			}
+			appendValidatedMatches(cupMatches,overallMatches,overallValidator);
 
 		} // For each combined down trend and flat area match
 	} // For each down trend match
 
-	FilterUniqueStartEndDate uniqueStartEndDateFilter;
-	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(cupMatches);
-	return uniqueMatches;
-
-
-	return cupMatches;
-}
-
-CupScanner::~CupScanner() {
+	return filterUniqueMatches(cupMatches);
 }
 

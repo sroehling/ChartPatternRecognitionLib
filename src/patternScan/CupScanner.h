@@ -19,7 +19,7 @@ public:
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
-	virtual ~CupScanner();
+	virtual ~CupScanner() {}
 };
 
 #endif /* CUPSCANNER_H_ */
