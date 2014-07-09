@@ -17,11 +17,15 @@
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 
-void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope,
+const DoubleRange TrendLineScanner::UPTREND_SLOPE_RANGE(0.5,15.0);
+const DoubleRange TrendLineScanner::DOWNTREND_SLOPE_RANGE(-15.0,-0.5);
+const DoubleRange TrendLineScanner::FLAT_SLOPE_RANGE(-0.5,0.5);
+
+void TrendLineScanner::initTrendScanner(const DoubleRange &slopeRange,
 		const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation)
 {
 	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(maxPercDistanceToLineEquation));
-	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(minSlope,maxSlope));
+	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(slopeRange));
 
 	SegmentConstraintList trendConstraints;
 	trendConstraints.push_back(valsCloseToEquation);
@@ -36,22 +40,22 @@ void TrendLineScanner::initTrendScanner(double minSlope, double maxSlope,
 
 }
 
-TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope, double maxPercDistToLineEquation)
+TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange, double maxPercDistToLineEquation)
 {
-	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),maxPercDistToLineEquation);
+	initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),maxPercDistToLineEquation);
 
 }
 
 
-TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope, const PatternMatchValidatorPtr &matchConstraint) {
+TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange, const PatternMatchValidatorPtr &matchConstraint) {
 
-	initTrendScanner(minSlope,maxSlope,matchConstraint,7.0);
+	initTrendScanner(slopeRange,matchConstraint,7.0);
 
 }
 
-TrendLineScanner::TrendLineScanner(double minSlope, double maxSlope) {
+TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange) {
 
-	initTrendScanner(minSlope,maxSlope,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),7.0);
+	initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),7.0);
 }
 
 

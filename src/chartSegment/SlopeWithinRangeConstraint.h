@@ -9,13 +9,13 @@
 #define SLOPEWITHINRANGECONSTRAINT_H_
 
 #include <SegmentConstraint.h>
+#include "DoubleRange.h"
 
 class SlopeWithinRangeConstraint: public SegmentConstraint {
 private:
-	double minSlope_;
-	double maxSlope_;
+	DoubleRange slopeRange_;
 public:
-	SlopeWithinRangeConstraint(double minSlope, double maxSlope);
+	SlopeWithinRangeConstraint(const DoubleRange &slopeRange);
 
 	bool validSegment(const ChartSegment &segment);
 

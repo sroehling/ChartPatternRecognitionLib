@@ -633,6 +633,7 @@ patternScan/TrendLineScanner.d: ../patternScan/TrendLineScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SlopeWithinRangeConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentValsCloseToLinearEq.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ANDSegmentConstraint.h \
@@ -1910,6 +1911,8 @@ patternScan/TrendLineScanner.d: ../patternScan/TrendLineScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SlopeWithinRangeConstraint.h:
 

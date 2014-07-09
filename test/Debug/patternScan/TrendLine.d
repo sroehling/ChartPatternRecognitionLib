@@ -699,6 +699,7 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
@@ -2104,6 +2105,8 @@ patternScan/TrendLine.d: ../patternScan/TrendLine.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h:
 

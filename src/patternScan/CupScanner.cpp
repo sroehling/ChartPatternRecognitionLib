@@ -9,6 +9,7 @@
 #include "ORPatternMatchValidator.h"
 #include "CupScanner.h"
 #include "TrendLineScanner.h"
+#include "FilterUniqueStartEndDate.h"
 
 CupScanner::CupScanner() {
 
@@ -17,9 +18,9 @@ CupScanner::CupScanner() {
 
 PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(-1.2,-0.5));
-	PatternScannerPtr flatScanner(new TrendLineScanner(-0.5,0.5));
-	PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,1.2));
+	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
+	PatternScannerPtr flatScanner(new TrendLineScanner(TrendLineScanner::FLAT_SLOPE_RANGE));
+	PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE));
 
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
@@ -55,6 +56,11 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 
 		} // For each combined down trend and flat area match
 	} // For each down trend match
+
+	FilterUniqueStartEndDate uniqueStartEndDateFilter;
+	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(cupMatches);
+	return uniqueMatches;
+
 
 	return cupMatches;
 }

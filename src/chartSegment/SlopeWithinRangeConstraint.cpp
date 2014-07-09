@@ -8,17 +8,14 @@
 #include <boost/log/trivial.hpp>
 #include <SlopeWithinRangeConstraint.h>
 
-SlopeWithinRangeConstraint::SlopeWithinRangeConstraint(double minSlope, double maxSlope)
-: minSlope_(minSlope),
-  maxSlope_(maxSlope)
+SlopeWithinRangeConstraint::SlopeWithinRangeConstraint(const DoubleRange &slopeRange)
+: slopeRange_(slopeRange)
 {
-	assert(maxSlope >= minSlope);
-
 }
 
 bool SlopeWithinRangeConstraint::validSegment(const ChartSegment &segment)
 {
-	if((segment.slope() >= minSlope_) && (segment.slope() <= maxSlope_))
+	if((segment.slope() >= slopeRange_.minVal()) && (segment.slope() <= slopeRange_.maxVal()))
 	{
 		return true;
 	}

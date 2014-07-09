@@ -634,6 +634,7 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h \
@@ -1998,6 +1999,8 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 

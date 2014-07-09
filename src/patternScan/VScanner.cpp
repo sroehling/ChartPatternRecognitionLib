@@ -39,7 +39,7 @@ PatternMatchValidatorPtr VScanner::uptrendPercOfDowntrendValidator(const Pattern
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(-10.0,-0.5));
+	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
 
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
 
@@ -55,7 +55,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
 		PatternMatchValidatorPtr uptrendPercOfDownTrend = uptrendPercOfDowntrendValidator(*dtMatchIter);
 
-		PatternScannerPtr uptrendScanner(new TrendLineScanner(0.5,10.0,uptrendPercOfDownTrend));
+		PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,uptrendPercOfDownTrend));
 
 		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 

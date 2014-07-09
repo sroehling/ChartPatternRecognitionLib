@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 
 	TestHelper::genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
 
-	TrendLineScanner scanner(0.5,100.0,15.0);
+	TrendLineScanner scanner(TrendLineScanner::UPTREND_SLOPE_RANGE,15.0);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
 	TestHelper::verifyMatchList("Matches without threshold",patternMatches,12);
@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 
 	PeriodValueRefPtr closeRef(new ClosePeriodValueRef());
 	PatternMatchValidatorPtr lastValContraint(new LastValueAbovePointValue(closeRef,thresholdVal));
-	TrendLineScanner scannerWithContraint(0.5,10.0,lastValContraint);
+	TrendLineScanner scannerWithContraint(TrendLineScanner::UPTREND_SLOPE_RANGE,lastValContraint);
 	patternMatches = scannerWithContraint.scanPatternMatches(rhsSegData);
 
 	TestHelper::verifyMatchList("Matches above threshold",patternMatches,6);
@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_EndOfUptrend )
 
 	TestHelper::genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
 
-	TrendLineScanner scanner(-100.0,100.0,100.0); // leave constraints wide open
+	TrendLineScanner scanner(DoubleRange(-100.0,100.0),100.0); // leave constraints wide open
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
 	TestHelper::verifyMatchList("Number of pattern matches (without constraint)",patternMatches,1);
