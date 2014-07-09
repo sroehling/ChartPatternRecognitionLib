@@ -9,15 +9,20 @@
 #define SCANNERHELPER_H_
 
 #include "PatternMatch.h"
+#include "PatternMatchValidator.h"
 
-class ScannerHelper {
-public:
-	ScannerHelper() {}
+namespace scannerHelper {
 
-	static void logMatchInfo(const std::string &prefix, const PatternMatch &match);
+	void logMatchInfo(const std::string &prefix, const PatternMatch &match);
 
+	// Filter unfilteredMatches to only those pattern matches passing validation,
+	// then append the results to the end of appendTo.
+	void appendValidatedMatches(const PatternMatchListPtr &appendTo,
+			const PatternMatchListPtr &unfilteredMatches,
+			const PatternMatchValidatorPtr &matchValidator);
 
-	virtual ~ScannerHelper() {}
-};
+	PatternMatchListPtr filterUniqueMatches(const PatternMatchListPtr &unfilteredMatches);
+}
+
 
 #endif /* SCANNERHELPER_H_ */

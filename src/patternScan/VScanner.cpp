@@ -14,7 +14,8 @@
 #include "AnyPatternMatchValidator.h"
 #include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
-#include "FilterUniqueStartEndDate.h"
+
+using namespace scannerHelper;
 
 VScanner::VScanner(double minRHSBelowLHSofVPerc)
 : minRHSBelowLHSofVPerc_(minRHSBelowLHSofVPerc)
@@ -40,9 +41,7 @@ PatternMatchValidatorPtr VScanner::uptrendPercOfDowntrendValidator(const Pattern
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
-
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
-
 	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of downtrend matches: " << downtrendMatches->size();
 
 	PatternMatchListPtr vMatches(new PatternMatchList());
@@ -51,14 +50,11 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
 		PeriodValSegmentPtr valsForUptrendScan = (*dtMatchIter)->trailingValsWithLastVal();
-		ScannerHelper::logMatchInfo("VScanner: downtrend match",**dtMatchIter);
+		logMatchInfo("VScanner: downtrend match",**dtMatchIter);
 
 		PatternMatchValidatorPtr uptrendPercOfDownTrend = uptrendPercOfDowntrendValidator(*dtMatchIter);
-
 		PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,uptrendPercOfDownTrend));
-
 		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
-
 
 		BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << uptrendMatches->size();
 		PatternMatchListPtr downUpMatches = (*dtMatchIter)->appendMatchList(*uptrendMatches);
@@ -66,17 +62,8 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		// Perform a final validation on the pattern as a whole.
 		PatternMatchValidatorList finalValidators;
 		finalValidators.push_back(PatternMatchValidatorPtr(new AnyPatternMatchValidator()));
-		ORPatternMatchValidator overallMatchValidator(finalValidators);
-		for(PatternMatchList::const_iterator overallIter = downUpMatches->begin();
-					overallIter != downUpMatches->end(); overallIter++)
-		{
-			if(overallMatchValidator.validPattern(**overallIter))
-			{
-				ScannerHelper::logMatchInfo("VScanner: down and up trend match",**overallIter);
-				vMatches->push_back(*overallIter);
-			}
-
-		}
+		PatternMatchValidatorPtr overallMatchValidator (new ORPatternMatchValidator (finalValidators));
+		appendValidatedMatches(vMatches,downUpMatches,overallMatchValidator);
 
 	} // for each downtrend match
 
@@ -85,9 +72,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with
 	// the same start and end date.
-	FilterUniqueStartEndDate uniqueStartEndDateFilter;
-	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(vMatches);
-	return uniqueMatches;
+	return filterUniqueMatches(vMatches);
 }
 
 

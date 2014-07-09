@@ -628,6 +628,7 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h \
   /usr/local/include/boost/log/trivial.hpp \
   /usr/local/include/boost/log/detail/config.hpp \
@@ -712,7 +713,8 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
   /usr/local/include/boost/log/detail/attachable_sstream_buf.hpp \
   /usr/local/include/boost/log/detail/code_conversion.hpp \
   /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
-  /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp
+  /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
 
@@ -1974,6 +1976,8 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h:
 
 /usr/local/include/boost/log/trivial.hpp:
@@ -2143,3 +2147,5 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
 /usr/local/include/boost/log/utility/string_literal_fwd.hpp:
 
 /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:

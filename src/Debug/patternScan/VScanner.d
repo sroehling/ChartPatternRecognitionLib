@@ -725,8 +725,7 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /usr/local/include/boost/log/detail/code_conversion.hpp \
   /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
   /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
@@ -2183,5 +2182,3 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:

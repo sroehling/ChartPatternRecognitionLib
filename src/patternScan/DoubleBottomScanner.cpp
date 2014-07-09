@@ -12,6 +12,7 @@
 #include "ValueComparisonMatchValidator.h"
 #include "FilterUniqueStartEndDate.h"
 #include "PatternMatchValidatorCreationHelper.h"
+#include "ScannerHelper.h"
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
@@ -27,6 +28,7 @@ DoubleBottomScanner::DoubleBottomScanner()
 PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 	using namespace PatternMatchValidatorCreationHelper;
+	using namespace scannerHelper;
 
 	// The 1st up-trend of the double-bottom must no more than 40% below the depth of the
 	// 1st down-trend.
@@ -47,7 +49,6 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		double rhsVMinRecoverLHSDepth = 0.0; // RHS of RHS V must recover 100% of the depth of the LHS of V
 		VScanner rightVScanner(rhsVMinRecoverLHSDepth);
 
-
 		// Filter down the scanned results for the RHS to those RHS V's which have a lower low
 		// than the LHS.
 		PatternMatchValidatorPtr rhsLowerLowValid = lowerLowValidator(*leftMatchIter);
@@ -59,19 +60,13 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		// Put the left V and Right V pattern matches together, forming the overall double-bottom pattern.
 		PatternMatchListPtr overallMatches = (*leftMatchIter)->appendMatchList(*rightVMatches);
 
-		// TODO - Probably some overall validation is needed here; e.g., the overall
-		// depth of the double bottom should not exceed 30%.
-		PatternMatchListPtr filteredOverallMatches = PatternMatchValidator::filterMatches(
-				depthWithinRangeValidator(minMaxDepthPerc_),overallMatches);
-		dblBottomMatches->insert(dblBottomMatches->end(),filteredOverallMatches->begin(),filteredOverallMatches->end());
+		appendValidatedMatches(dblBottomMatches,overallMatches,depthWithinRangeValidator(minMaxDepthPerc_));
 
 	} // for each "left V" match.
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with
 	// the same start and end date.
-	FilterUniqueStartEndDate uniqueStartEndDateFilter;
-	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(dblBottomMatches);
-	return uniqueMatches;
+	return filterUniqueMatches(dblBottomMatches);
 }
 
 DoubleBottomScanner::~DoubleBottomScanner() {
