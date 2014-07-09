@@ -13,6 +13,7 @@
 #include "EndWithinPercentOfStart.h"
 #include "PeriodValSegment.h"
 #include "CupScanner.h"
+#include "CupScannerConfigurator.h"
 #include "TestHelper.h"
 
 using namespace boost::posix_time;
@@ -54,7 +55,8 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 {
 	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
-	CupScanner scanner;
+	CupScannerConfiguratorPtr scannerConfig(new CupScannerConfigurator());
+	CupScanner scanner(scannerConfig);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);

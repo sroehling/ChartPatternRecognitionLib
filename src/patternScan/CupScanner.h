@@ -11,11 +11,14 @@
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
 #include "PatternScannerEngine.h"
+#include "CupScannerConfigurator.h"
 
 
 class CupScanner {
+private:
+	CupScannerConfiguratorPtr configurator_;
 public:
-	CupScanner();
+	CupScanner(const CupScannerConfiguratorPtr &configurator);
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 

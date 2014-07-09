@@ -13,8 +13,9 @@
 
 using namespace scannerHelper;
 
-CupScanner::CupScanner() {
-
+CupScanner::CupScanner(const CupScannerConfiguratorPtr &configurator)
+: configurator_(configurator)
+{
 }
 
 
@@ -27,33 +28,38 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
+
 	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
 		PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal();
 		PatternMatchListPtr flatMatches = flatScanner->scanPatternMatches(valsForFlatScan);
 
-		// Append the flat matches to the current downtrend
-		PatternMatchListPtr downFlatMatches = (*dtMatchIter)->appendMatchList(*flatMatches);
-
-		for(PatternMatchList::const_iterator downFlatMatchIter = downFlatMatches->begin();
-				downFlatMatchIter!=downFlatMatches->end();downFlatMatchIter++)
+		for(PatternMatchList::const_iterator ftMatchIter = flatMatches->begin();
+				ftMatchIter!=flatMatches->end();ftMatchIter++)
 		{
-			PeriodValSegmentPtr valsForUptrendScan = (*downFlatMatchIter)->trailingValsWithLastVal();
-			PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
+			PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal();
+			PatternMatchListPtr upTrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 
-			PatternMatchListPtr overallMatches = (*downFlatMatchIter)->appendMatchList(*uptrendMatches);
+			PatternMatchValidatorPtr uptrendValidator =configurator_->upTrendValidator(*dtMatchIter,*ftMatchIter);
 
-			// Perform a final validation on the pattern as a whole.
-			PatternMatchValidatorList finalValidators;
-			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(8.0)));
-			finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(-3.0)));
-			PatternMatchValidatorPtr overallValidator(new ORPatternMatchValidator(finalValidators));
-
-			appendValidatedMatches(cupMatches,overallMatches,overallValidator);
-
-		} // For each combined down trend and flat area match
-	} // For each down trend match
+			for(PatternMatchList::const_iterator utMatchIter = upTrendMatches->begin();
+					utMatchIter != upTrendMatches->end(); utMatchIter++)
+			{
+					if(uptrendValidator->validPattern(**utMatchIter))
+					{
+						PatternMatchValidatorPtr overallValidator = configurator_->overallValidator(
+								*dtMatchIter,*ftMatchIter,*utMatchIter);
+						PatternMatchPtr overallMatch =
+									((*dtMatchIter)->appendMatch(**ftMatchIter))->appendMatch(**utMatchIter);
+						if(overallValidator->validPattern(*overallMatch))
+						{
+							cupMatches->push_back(overallMatch);
+						}
+					}
+			} // for each up trend
+		} // for each flat trend
+	} // for each down trend
 
 	return filterUniqueMatches(cupMatches);
 }
