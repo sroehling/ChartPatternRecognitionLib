@@ -8,8 +8,6 @@
 #include <AscendingBaseScanner.h>
 
 AscendingBaseScanner::AscendingBaseScanner() {
-	// TODO Auto-generated constructor stub
-
 }
 
 
