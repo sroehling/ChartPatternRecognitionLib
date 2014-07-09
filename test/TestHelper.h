@@ -16,28 +16,27 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
-class TestHelper {
+namespace testHelper {
 
-public:
-	static PeriodVal testPeriodVal(unsigned int year, unsigned int month,
+	PeriodVal testPeriodVal(unsigned int year, unsigned int month,
 					unsigned int day, double val, unsigned int vol);
 
-	static PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &startDate,
+	PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &startDate,
 			const TestPerValRangeList &ranges);
 
-	static void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch);
-	static void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList);
+	void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch);
+	void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList);
 
-	static void verifyMatchList(const std::string prefix,
+	void verifyMatchList(const std::string prefix,
 			const PatternMatchListPtr &matchList, unsigned int expectedNumMatches);
 
-	static void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment);
+	void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment);
 
-	static void verifyPatternMatch(const std::string &prefix,const boost::posix_time::ptime &expectedStart,
+	void verifyPatternMatch(const std::string &prefix,const boost::posix_time::ptime &expectedStart,
 			const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
 			const PatternMatchPtr &patternMatch);
 
-	static boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day);
+	boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day);
 
 
 };

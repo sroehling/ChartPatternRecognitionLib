@@ -17,6 +17,7 @@
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
+using namespace testHelper;
 
 BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 {
@@ -27,14 +28,14 @@ BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 	// multiplied times the number of matches from VScanner_QCOR_20130819_RHSofDoubleBottom.
 
 	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/QCOR_DoubleBottom_Weekly.csv");
-	TestHelper::genPeriodValSegmentInfo("Double bottom segment data",*chartData);
+	genPeriodValSegmentInfo("Double bottom segment data",*chartData);
 
 	DoubleBottomScanner scanner(DoubleRange(7.0,40.0)); // allow for a deeper depth than the default
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	TestHelper::verifyMatchList("Double bottom match",patternMatches,1);
+	verifyMatchList("Double bottom match",patternMatches,1);
 
-	TestHelper::verifyPatternMatch("Double bottom match",
+	verifyPatternMatch("Double bottom match",
 			ptime(date(2013,8,26)),ptime(date(2014,2,18)),5,patternMatches->front());
 
 }
@@ -48,13 +49,13 @@ BOOST_AUTO_TEST_CASE( DoubleBottom_Synthesized )
 	ranges.push_back(TestPerValRange(3,92.5,98.0)); // up-trend falling short of down-trend
 	ranges.push_back(TestPerValRange(3,97.5,91.5)); // next down-trend, going below the initial down-trend
 	ranges.push_back(TestPerValRange(4,92.0,100.5)); // final uptrend, goes above start
-	PeriodValSegmentPtr chartData = TestHelper::synthesizePeriodValSegment(date(2014,1,1),ranges);
+	PeriodValSegmentPtr chartData = synthesizePeriodValSegment(date(2014,1,1),ranges);
 
 	DoubleBottomScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	TestHelper::verifyMatchList("DoubleBottom_Synthesized",patternMatches,2);
-	TestHelper::verifyPatternMatch("DoubleBottom_Synthesized match",
+	verifyMatchList("DoubleBottom_Synthesized",patternMatches,2);
+	verifyPatternMatch("DoubleBottom_Synthesized match",
 			ptime(date(2014,1,1)),ptime(date(2014,1,13)),4,patternMatches->front());
 
 }
@@ -68,13 +69,13 @@ BOOST_AUTO_TEST_CASE( DoubleBottom_Synthesized_RHSHigherLow )
 	ranges.push_back(TestPerValRange(3,92.5,98.0)); // up-trend falling short of down-trend
 	ranges.push_back(TestPerValRange(3,97.5,92.5)); // next down-trend, *not* going below the initial down-trend
 	ranges.push_back(TestPerValRange(4,93.0,100.5)); // final uptrend, goes above start
-	PeriodValSegmentPtr chartData = TestHelper::synthesizePeriodValSegment(date(2014,1,1),ranges);
+	PeriodValSegmentPtr chartData = synthesizePeriodValSegment(date(2014,1,1),ranges);
 
 	DoubleBottomScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_TEST_MESSAGE("Should return 0 matches, since the lowest low on the RHS is not lower than the LHS");
-	TestHelper::verifyMatchList("DoubleBottom_Synthesized_RHSHigherLow",patternMatches,0);
+	verifyMatchList("DoubleBottom_Synthesized_RHSHigherLow",patternMatches,0);
 
 }
 
@@ -87,19 +88,19 @@ BOOST_AUTO_TEST_CASE( DoubleBottom_Synthesized_MinMaxDepth )
 	ranges.push_back(TestPerValRange(3,92.5,98.0)); // up-trend falling short of down-trend
 	ranges.push_back(TestPerValRange(3,97.5,91.5)); // next down-trend, going below the initial down-trend
 	ranges.push_back(TestPerValRange(4,92.0,100.5)); // final uptrend, goes above start
-	PeriodValSegmentPtr chartData = TestHelper::synthesizePeriodValSegment(date(2014,1,1),ranges);
+	PeriodValSegmentPtr chartData = synthesizePeriodValSegment(date(2014,1,1),ranges);
 
 	DoubleBottomScanner scanner(DoubleRange(9.0,30.0)); // Require at least a 10% depth to trigger depth constraints
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_TEST_MESSAGE("Should return 0 matches, since the depth is not greater than 9%");
-	TestHelper::verifyMatchList("DoubleBottom_Synthesized_ShallowDepth",patternMatches,0);
+	verifyMatchList("DoubleBottom_Synthesized_ShallowDepth",patternMatches,0);
 
 	DoubleBottomScanner scannerMaxDepth(DoubleRange(4.0,7.0)); // Require at least a 10% depth to trigger depth constraints
 	patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_TEST_MESSAGE("Should return 0 matches, since the depth is greater than 7%");
-	TestHelper::verifyMatchList("DoubleBottom_Synthesized_ShallowDepth",patternMatches,0);
+	verifyMatchList("DoubleBottom_Synthesized_ShallowDepth",patternMatches,0);
 
 
 

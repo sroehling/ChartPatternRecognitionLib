@@ -8,6 +8,8 @@
 #include "TimeHelper.h"
 #include "TestPerValRange.h"
 
+using namespace testHelper;
+
 BOOST_AUTO_TEST_CASE( PatternMatchValidator )
 {
 	using namespace boost::gregorian;
@@ -17,5 +19,5 @@ BOOST_AUTO_TEST_CASE( PatternMatchValidator )
 	ranges.push_back(TestPerValRange(3,101.0,104.5)); // up-trend falling short of down-trend
 	ranges.push_back(TestPerValRange(3,104.0,99.0)); // next down-trend, going below the initial down-trend
 	ranges.push_back(TestPerValRange(4,99.5,106.0)); // final uptrend, goes above start
-	TestHelper::synthesizePeriodValSegment(date(2014,1,1),ranges);
+	synthesizePeriodValSegment(date(2014,1,1),ranges);
 }

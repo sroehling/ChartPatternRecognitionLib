@@ -8,16 +8,18 @@
 #include "SortPatternMatchByStartAndEndDate.h"
 #include "FilterUniqueStartEndDate.h"
 
+using namespace testHelper;
+
 BOOST_AUTO_TEST_CASE( UniqueStartEndDatePatternMatchFilter )
 {
 
 	PeriodValCltnPtr testData(new PeriodValCltn());
 
-	testData->push_back(TestHelper::testPeriodVal(2013,1,1,1.0,1));
-	testData->push_back(TestHelper::testPeriodVal(2013,2,1,2.0,2));
-	testData->push_back(TestHelper::testPeriodVal(2013,3,1,3.0,3));
-	testData->push_back(TestHelper::testPeriodVal(2013,4,1,4.0,4));
-	testData->push_back(TestHelper::testPeriodVal(2013,5,1,5.0,5));
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
 
@@ -48,34 +50,34 @@ BOOST_AUTO_TEST_CASE( UniqueStartEndDatePatternMatchFilter )
 	unfilteredMatches->push_back(patternMatch1);
 	unfilteredMatches->push_back(patternMatch2);
 
-	TestHelper::genPatternMatchListInfo("Unfiltered matches",*unfilteredMatches);
+	genPatternMatchListInfo("Unfiltered matches",*unfilteredMatches);
 
 	PatternMatchListPtr testSortFunc(new PatternMatchList);
 	testSortFunc->insert(testSortFunc->end(),unfilteredMatches->begin(),unfilteredMatches->end());
 	testSortFunc->sort(SortPatternMatchByStartAndEndDate());
-	TestHelper::genPatternMatchListInfo("Sorted matches",*testSortFunc);
+	genPatternMatchListInfo("Sorted matches",*testSortFunc);
 	PatternMatchList::iterator sortedMatchesIter = testSortFunc->begin();
-	TestHelper::verifyPatternMatch("Sorted matches [0]",TestHelper::dateToTime(2013,1,1),TestHelper::dateToTime(2013,3,1),1,*sortedMatchesIter);
+	verifyPatternMatch("Sorted matches [0]",dateToTime(2013,1,1),dateToTime(2013,3,1),1,*sortedMatchesIter);
 	sortedMatchesIter++;
 	BOOST_TEST_MESSAGE("Second item of the list should be the same as the first but with one more segment");
-	TestHelper::verifyPatternMatch("Sorted matches [1]",TestHelper::dateToTime(2013,1,1),TestHelper::dateToTime(2013,3,1),2,*sortedMatchesIter);
+	verifyPatternMatch("Sorted matches [1]",dateToTime(2013,1,1),dateToTime(2013,3,1),2,*sortedMatchesIter);
 	sortedMatchesIter++;
 	BOOST_TEST_MESSAGE("Third item of the list should have an end date further into the future");
-	TestHelper::verifyPatternMatch("Sorted matches [2]",TestHelper::dateToTime(2013,1,1),TestHelper::dateToTime(2013,4,1),2,*sortedMatchesIter);
+	verifyPatternMatch("Sorted matches [2]",dateToTime(2013,1,1),dateToTime(2013,4,1),2,*sortedMatchesIter);
 	sortedMatchesIter++;
 	BOOST_TEST_MESSAGE("Third item of the list should have both a a start and end date further into the future");
-	TestHelper::verifyPatternMatch("Sorted matches [3]",TestHelper::dateToTime(2013,2,1),TestHelper::dateToTime(2013,5,1),1,*sortedMatchesIter);
+	verifyPatternMatch("Sorted matches [3]",dateToTime(2013,2,1),dateToTime(2013,5,1),1,*sortedMatchesIter);
 
 	FilterUniqueStartEndDate uniqueFilter;
 	PatternMatchListPtr uniqueSorted = uniqueFilter.filterPatternMatches(unfilteredMatches);
 	BOOST_REQUIRE(uniqueSorted->size() == 3);
-	TestHelper::genPatternMatchListInfo("Unique matches",*uniqueSorted);
+	genPatternMatchListInfo("Unique matches",*uniqueSorted);
 	PatternMatchList::iterator uniqueMatchesIter = uniqueSorted->begin();
 	BOOST_TEST_MESSAGE("The sorted & unique matches exclude the duplicate match with 2 segments, starting on 2013-1-1, and ending on 2013-3-1");
-	TestHelper::verifyPatternMatch("Sorted matches [0]",TestHelper::dateToTime(2013,1,1),TestHelper::dateToTime(2013,3,1),1,*uniqueMatchesIter);
+	verifyPatternMatch("Sorted matches [0]",dateToTime(2013,1,1),dateToTime(2013,3,1),1,*uniqueMatchesIter);
 	uniqueMatchesIter++;
-	TestHelper::verifyPatternMatch("Sorted matches [1]",TestHelper::dateToTime(2013,1,1),TestHelper::dateToTime(2013,4,1),2,*uniqueMatchesIter);
+	verifyPatternMatch("Sorted matches [1]",dateToTime(2013,1,1),dateToTime(2013,4,1),2,*uniqueMatchesIter);
 	uniqueMatchesIter++;
-	TestHelper::verifyPatternMatch("Sorted matches [2]",TestHelper::dateToTime(2013,2,1),TestHelper::dateToTime(2013,5,1),1,*uniqueMatchesIter);
+	verifyPatternMatch("Sorted matches [2]",dateToTime(2013,2,1),dateToTime(2013,5,1),1,*uniqueMatchesIter);
 	uniqueMatchesIter++;
 }

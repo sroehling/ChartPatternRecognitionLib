@@ -17,6 +17,7 @@
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
+using namespace testHelper;
 
 BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 {
@@ -34,16 +35,16 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 	PatternScannerEngine scanner(segConstraint,segListConstraint,patternMatchValidator);
 
-	TestHelper::genPeriodValSegmentInfo("Cup data",*chartData);
+	genPeriodValSegmentInfo("Cup data",*chartData);
 
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	TestHelper::verifyMatchList("CupWithHandle_SAVE_20130722",patternMatches,2);
+	verifyMatchList("CupWithHandle_SAVE_20130722",patternMatches,2);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 	BOOST_CHECK(segListConstraint->validSegments(thePatternMatch->segments()) == true);
 
-	TestHelper::verifyPatternMatch("Cup Match",
+	verifyPatternMatch("Cup Match",
 			ptime(date(2013,7,22)),ptime(date(2013,10,7)),4,thePatternMatch);
 
 }
@@ -56,9 +57,9 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 	CupScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	TestHelper::verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);
+	verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);
 
-	TestHelper::verifyPatternMatch("Cup Match",
+	verifyPatternMatch("Cup Match",
 			ptime(date(2013,7,22)),ptime(date(2013,10,7)),3,patternMatches->front());
 
 }

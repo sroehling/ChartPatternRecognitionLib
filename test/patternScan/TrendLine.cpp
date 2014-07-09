@@ -19,6 +19,7 @@
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
+using namespace testHelper;
 
 BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 {
@@ -29,12 +30,12 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 	PeriodValSegmentPtr rhsSegData = splitQCORdata.second;
 
 
-	TestHelper::genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
+	genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
 
 	TrendLineScanner scanner(TrendLineScanner::UPTREND_SLOPE_RANGE,15.0);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
-	TestHelper::verifyMatchList("Matches without threshold",patternMatches,12);
+	verifyMatchList("Matches without threshold",patternMatches,12);
 
 	double thresholdVal = 67.5;
 	BOOST_TEST_MESSAGE("Re-running trend-line scan but with a constraint on the last value (close)  >" << thresholdVal);
@@ -44,7 +45,7 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 	TrendLineScanner scannerWithContraint(TrendLineScanner::UPTREND_SLOPE_RANGE,lastValContraint);
 	patternMatches = scannerWithContraint.scanPatternMatches(rhsSegData);
 
-	TestHelper::verifyMatchList("Matches above threshold",patternMatches,6);
+	verifyMatchList("Matches above threshold",patternMatches,6);
 
 
 	for(PatternMatchList::iterator matchIter = patternMatches->begin();
@@ -53,7 +54,7 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_Uptrend )
 		BOOST_CHECK((*matchIter)->lastValue().close() >= thresholdVal);
 	}
 
-	TestHelper::verifyPatternMatch("V Match on RHS",
+	verifyPatternMatch("V Match on RHS",
 			ptime(date(2014,1,6)),ptime(date(2014,2,18)),3,patternMatches->front());
 
 }
@@ -72,12 +73,12 @@ BOOST_AUTO_TEST_CASE( TrendLineScanner_QCOR_20130819_RHS_EndOfUptrend )
 	PeriodValSegmentPair splitQCORdata = chartData->split(23);
 	PeriodValSegmentPtr rhsSegData = splitQCORdata.second;
 
-	TestHelper::genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
+	genPeriodValSegmentInfo("RHS uptrend data: period data",*rhsSegData);
 
 	TrendLineScanner scanner(DoubleRange(-100.0,100.0),100.0); // leave constraints wide open
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
-	TestHelper::verifyMatchList("Number of pattern matches (without constraint)",patternMatches,1);
+	verifyMatchList("Number of pattern matches (without constraint)",patternMatches,1);
 
 }
 

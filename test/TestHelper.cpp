@@ -18,7 +18,10 @@
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
-void TestHelper::genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch)
+namespace testHelper
+{
+
+void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch)
 {
 	BOOST_TEST_MESSAGE(prefix << ": pattern match: "
 			<< "start = " << TimeHelper::formatDate(patternMatch->firstValue().periodTime())
@@ -29,26 +32,26 @@ void TestHelper::genPatternMatchInfo(const std::string &prefix, const PatternMat
 
 }
 
-void TestHelper::genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList)
+void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList)
 {
 	BOOST_TEST_MESSAGE(prefix << ": number of pattern matches = " << matchList.size());
 
 	for(PatternMatchList::const_iterator matchIter = matchList.begin();
 			matchIter != matchList.end(); matchIter++)
 	{
-		TestHelper::genPatternMatchInfo(prefix,*matchIter);
+		genPatternMatchInfo(prefix,*matchIter);
 	}
 
 }
 
-void TestHelper::verifyMatchList(const std::string prefix,
+void verifyMatchList(const std::string prefix,
 		const PatternMatchListPtr &matchList, unsigned int expectedNumMatches)
 {
-	TestHelper::genPatternMatchListInfo(prefix,*matchList);
+	genPatternMatchListInfo(prefix,*matchList);
 	BOOST_REQUIRE(matchList->size() == expectedNumMatches);
 }
 
-void TestHelper::genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment)
+void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment)
 {
 	for(PeriodValCltn::iterator segIter = perSegment.segBegin(); segIter != perSegment.segEnd(); segIter++)
 	{
@@ -59,7 +62,7 @@ void TestHelper::genPeriodValSegmentInfo(const std::string prefix, const PeriodV
 	}
 }
 
-void TestHelper::verifyPatternMatch(const std::string &prefix,
+void verifyPatternMatch(const std::string &prefix,
 		const boost::posix_time::ptime &expectedStart,
 		const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
 		const PatternMatchPtr &patternMatch)
@@ -73,14 +76,14 @@ void TestHelper::verifyPatternMatch(const std::string &prefix,
 
 	BOOST_TEST_MESSAGE(prefix << ": first period value: " << firstVal);
 	BOOST_TEST_MESSAGE(prefix << ": last period value: " << lastVal);
-	TestHelper::genPatternMatchInfo(prefix,patternMatch);
+	genPatternMatchInfo(prefix,patternMatch);
 
 	BOOST_CHECK(expectedStart == firstVal.periodTime());
 	BOOST_CHECK(expectedEnd == lastVal.periodTime());
 
 }
 
-boost::posix_time::ptime TestHelper::dateToTime(unsigned int year, unsigned int month, unsigned int day)
+boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day)
 {
 	using namespace boost::posix_time;
 	using namespace boost::gregorian;
@@ -89,14 +92,14 @@ boost::posix_time::ptime TestHelper::dateToTime(unsigned int year, unsigned int 
 }
 
 
-PeriodVal TestHelper::testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol)
+PeriodVal testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol)
 {
 	ptime perTime(date(year,month,day));
 	PeriodVal perVal(perTime,val,val,val,val,vol);
 	return perVal;
 }
 
-PeriodValSegmentPtr TestHelper::synthesizePeriodValSegment(const boost::gregorian::date &startDate,
+PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &startDate,
 		const TestPerValRangeList &ranges)
 {
 	using namespace boost::gregorian;
@@ -131,3 +134,4 @@ PeriodValSegmentPtr TestHelper::synthesizePeriodValSegment(const boost::gregoria
 
 }
 
+} // namespace TestHelper
