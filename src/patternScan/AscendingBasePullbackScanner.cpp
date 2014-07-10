@@ -8,6 +8,7 @@
 #include <AscendingBasePullbackScanner.h>
 #include "CupScanner.h"
 #include "CupScannerConfigurator.h"
+#include "VScanner.h"
 #include "TrendLineScanner.h"
 #include "ScannerHelper.h"
 #include "PatternMatchValidatorCreationHelper.h"
@@ -26,6 +27,9 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 
 	PatternMatchListPtr pullbackMatches(new PatternMatchList());
 
+	// TODO - Need to measure depth from the start of the pattern, rather than the overall depth.
+	// This is because the last uptrend in the pattern is expected to extend beyond the starting
+	// high.
 	PatternMatchValidatorPtr overallDepthValidator = depthWithinRangeValidator(minMaxDepthPerc_);
 
 	// An optional short flat area leading into the pull-back; i.e., the price will
@@ -56,10 +60,23 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 			{
 				pullbackMatches->push_back(overallMatch);
 			}
-		}
+		} // for each cup match
+	} // for each roll-over match
 
+	// If price doesn't first roll-over, it can do a straight pull-back into a cup-shaped pull-back.
+	CupScannerConfiguratorPtr cupScannerConfig(new CupScannerConfigurator());
+	cupScannerConfig->addOverallValidator(lastHighAboveFirstHigh());
+	cupScannerConfig->addOverallValidator(overallDepthValidator);
+	CupScanner cupShapedPullbackScanner(cupScannerConfig);
+	PatternMatchListPtr cupMatches = cupShapedPullbackScanner.scanPatternMatches(chartVals);
+	pullbackMatches->insert(pullbackMatches->end(),cupMatches->begin(),cupMatches->end());
 
-	}
+	double minBelowRHSDepth = 0.0;
+	VScanner vShapedPullbackScanner(minBelowRHSDepth);
+	vShapedPullbackScanner.addOverallValidator(lastHighAboveFirstHigh());
+	vShapedPullbackScanner.addOverallValidator(overallDepthValidator);
+	PatternMatchListPtr vMatches = vShapedPullbackScanner.scanPatternMatches(chartVals);
+	pullbackMatches->insert(pullbackMatches->end(),vMatches->begin(),vMatches->end());
 
 	return filterUniqueMatches(pullbackMatches);
 

@@ -25,6 +25,7 @@ namespace patternMatchValidatorCreationHelper
 	PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith);
 
 	PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue);
+	PatternMatchValidatorPtr lastHighAboveFirstHigh();
 
 }
 

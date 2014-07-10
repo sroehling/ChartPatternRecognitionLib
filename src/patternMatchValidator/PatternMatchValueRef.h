@@ -48,5 +48,14 @@ public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class FirstPeriodValPatternMatchValueRef : public PatternMatchValueRef {
+private:
+	PeriodValueRefPtr valRefWithinPeriodVal_;
+public:
+	FirstPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinPeriodVal);
+	virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 
 #endif /* PATTERNMATCHVALUEREF_H_ */

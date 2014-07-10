@@ -18,6 +18,7 @@
 class VScanner {
 private:
 	PatternMatchValidatorList customUpTrendValidators_;
+	PatternMatchValidatorList customOverallValidators_;
 protected:
 	virtual PatternMatchValidatorPtr upTrendValidator(const PatternMatchPtr &downTrend) const;
 	virtual PatternMatchValidatorPtr overallValidator(const PatternMatchPtr &downTrend,
@@ -26,16 +27,18 @@ private:
 	// Minimum amount the RHS of the V (uptrend) can be below the LHS (downtrend).
 	double minRHSBelowLHSofVPerc_;
 
-	// Add a custom/user-defined "static" up-trend validators; i.e., one which doesn't
-	// depend on the downTrend or flatTrend, but is appended to the list of
-	// validators AND'ed to any other up-trend validators.
-	void addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValidator);
-
-
 	PatternMatchValidatorPtr uptrendPercOfDowntrendValidator(const PatternMatchPtr &downtrendMatch) const;
 
 public:
 	VScanner(double minRHSBelowLHSofVPerc);
+
+	// Add a custom/user-defined "static" up-trend validators; i.e., one which doesn't
+	// depend on the downTrend or flatTrend, but is appended to the list of
+	// validators AND'ed to any other up-trend validators.
+	void addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValidator);
+	void addOverallValidator(const PatternMatchValidatorPtr &overallValidator);
+
+
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 	virtual ~VScanner();
 };

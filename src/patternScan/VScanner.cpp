@@ -30,6 +30,12 @@ void VScanner::addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValida
 	customUpTrendValidators_.push_back(upTrendValidator);
 }
 
+void VScanner::addOverallValidator(const PatternMatchValidatorPtr &overallValidator)
+{
+	customOverallValidators_.push_back(overallValidator);
+}
+
+
 PatternMatchValidatorPtr VScanner::uptrendPercOfDowntrendValidator(const PatternMatchPtr &downtrendMatch) const
 {
 	// Create a pattern match constraint for the up-trend's close to exceed a
@@ -58,13 +64,7 @@ PatternMatchValidatorPtr VScanner::upTrendValidator(const PatternMatchPtr &downT
 PatternMatchValidatorPtr VScanner::overallValidator(const PatternMatchPtr &downTrend,
 			const PatternMatchPtr &upTrend) const
 {
-
-
-
-	PatternMatchValidatorList finalValidators;
-	finalValidators.push_back(PatternMatchValidatorPtr(new AnyPatternMatchValidator()));
-	PatternMatchValidatorPtr overallMatchValidator (new ORPatternMatchValidator (finalValidators));
-	return overallMatchValidator;
+	return PatternMatchValidatorPtr(new ANDPatternMatchValidator(customOverallValidators_));
 }
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const

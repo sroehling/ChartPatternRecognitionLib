@@ -65,19 +65,42 @@ PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith)
 	return lowerLowValidator;
 }
 
+static PatternMatchValueRefPtr lastHighValueRef()
+{
+	// Reference the high value for the last value in the pattern match.
+	PeriodValueRefPtr highValueRef(new HighPeriodValueRef());
+	PatternMatchValueRefPtr lastHighRef(new LastPeriodValPatternMatchValueRef(highValueRef));
+	return lastHighRef;
+}
+
+
+static PatternMatchValueRefPtr firstHighValueRef()
+{
+	// Reference the high value for the last value in the pattern match.
+	PeriodValueRefPtr highValueRef(new HighPeriodValueRef());
+	PatternMatchValueRefPtr firstHighRef(new FirstPeriodValPatternMatchValueRef(highValueRef));
+	return firstHighRef;
+}
+
+
 PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue)
 {
 	assert(thresholdValue >= 0.0);
 	ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
+
 	PatternMatchValueRefPtr thresholdValRef(new FixedPatternMatchValueRef(thresholdValue));
 
-	// Reference the high value for the last value in the pattern match.
-	PeriodValueRefPtr highValueRef(new HighPeriodValueRef());
-	PatternMatchValueRefPtr lastHighRef(new LastPeriodValPatternMatchValueRef(highValueRef));
-
 	PatternMatchValidatorPtr aboveThresholdValidator(
-			new ValueComparisonMatchValidator(lastHighRef,thresholdValRef,greaterEqualCompare));
+			new ValueComparisonMatchValidator(lastHighValueRef(),thresholdValRef,greaterEqualCompare));
 	return aboveThresholdValidator;
+}
+
+PatternMatchValidatorPtr lastHighAboveFirstHigh()
+{
+	ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
+	PatternMatchValidatorPtr aboveFirstHigh(
+			new ValueComparisonMatchValidator(lastHighValueRef(),firstHighValueRef(),greaterEqualCompare));
+	return aboveFirstHigh;
 }
 
 
