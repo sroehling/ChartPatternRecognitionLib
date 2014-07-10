@@ -27,7 +27,7 @@ DoubleBottomScanner::DoubleBottomScanner()
 
 PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	using namespace PatternMatchValidatorCreationHelper;
+	using namespace patternMatchValidatorCreationHelper;
 	using namespace scannerHelper;
 
 	// The 1st up-trend of the double-bottom must no more than 40% below the depth of the

@@ -10,12 +10,15 @@
 
 #include "PeriodValSegment.h"
 #include "PatternMatch.h"
+#include "DoubleRange.h"
 
 // An ascending base consists of 3 pull-backs of 10-20%, followed by a break-out
 // above the highest one.
 class AscendingBasePullbackScanner {
+private:
+	DoubleRange minMaxDepthPerc_;
 public:
-	AscendingBasePullbackScanner();
+	AscendingBasePullbackScanner(const DoubleRange &minMaxDepthPerc);
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 

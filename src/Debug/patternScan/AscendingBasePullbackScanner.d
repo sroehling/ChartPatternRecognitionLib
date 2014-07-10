@@ -629,6 +629,7 @@ patternScan/AscendingBasePullbackScanner.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
@@ -636,9 +637,13 @@ patternScan/AscendingBasePullbackScanner.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/AscendingBasePullbackScanner.h:
 
@@ -1900,6 +1905,8 @@ patternScan/AscendingBasePullbackScanner.d: \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h:
@@ -1914,8 +1921,16 @@ patternScan/AscendingBasePullbackScanner.d: \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h:

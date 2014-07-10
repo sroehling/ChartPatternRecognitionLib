@@ -14,7 +14,7 @@
 #include "DoubleRange.h"
 
 
-namespace PatternMatchValidatorCreationHelper
+namespace patternMatchValidatorCreationHelper
 {
 	PatternMatchValidatorPtr minDepthPercentValidator(double minDepthPerc);
 	PatternMatchValidatorPtr maxDepthPercentValidator(double maxDepthPerc);
@@ -23,6 +23,8 @@ namespace PatternMatchValidatorCreationHelper
 	// In comparison with another pattern 'compareWith', validate that the given
 	// pattern has a lower low than compareWith.
 	PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith);
+
+	PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue);
 
 }
 

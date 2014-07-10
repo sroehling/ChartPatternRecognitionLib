@@ -7,14 +7,17 @@
 
 #include <PatternMatchValidatorCreationHelper.h>
 #include "ANDPatternMatchValidator.h"
+#include "PatternMatchValueRef.h"
+#include "PeriodValueRef.h"
+#include "DoubleRange.h"
 
-namespace PatternMatchValidatorCreationHelper
+namespace patternMatchValidatorCreationHelper
 {
 
 
 PatternMatchValidatorPtr minDepthPercentValidator(double minDepthPerc)
 {
-	assert(minDepthPerc >= 0.0);
+	assert(DoubleRange(0.0,100.0).valueWithinRange(minDepthPerc));
 
 	ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
 	PatternMatchValueRefPtr depthVal(new DepthPercentPatternMatchValueRef());
@@ -26,7 +29,7 @@ PatternMatchValidatorPtr minDepthPercentValidator(double minDepthPerc)
 
 PatternMatchValidatorPtr maxDepthPercentValidator(double maxDepthPerc)
 {
-	assert(maxDepthPerc >= 0.0);
+	assert(DoubleRange(0.0,100.0).valueWithinRange(maxDepthPerc));
 
 	ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
 	PatternMatchValueRefPtr maxDepthVal(new FixedPatternMatchValueRef(maxDepthPerc));
@@ -61,6 +64,22 @@ PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith)
 			new ValueComparisonMatchValidator(validationLowRef,compareWithLow,lessEqualCompare));
 	return lowerLowValidator;
 }
+
+PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue)
+{
+	assert(thresholdValue >= 0.0);
+	ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
+	PatternMatchValueRefPtr thresholdValRef(new FixedPatternMatchValueRef(thresholdValue));
+
+	// Reference the high value for the last value in the pattern match.
+	PeriodValueRefPtr highValueRef(new HighPeriodValueRef());
+	PatternMatchValueRefPtr lastHighRef(new LastPeriodValPatternMatchValueRef(highValueRef));
+
+	PatternMatchValidatorPtr aboveThresholdValidator(
+			new ValueComparisonMatchValidator(lastHighRef,thresholdValRef,greaterEqualCompare));
+	return aboveThresholdValidator;
+}
+
 
 
 }

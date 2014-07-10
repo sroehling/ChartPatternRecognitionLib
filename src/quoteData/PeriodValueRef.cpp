@@ -8,11 +8,8 @@
 #include <PeriodValueRef.h>
 
 PeriodValueRef::PeriodValueRef() {
-	// TODO Auto-generated constructor stub
-
 }
 
 PeriodValueRef::~PeriodValueRef() {
-	// TODO Auto-generated destructor stub
 }
 

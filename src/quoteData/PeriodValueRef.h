@@ -24,5 +24,11 @@ public:
 
 typedef boost::shared_ptr<PeriodValueRef> PeriodValueRefPtr;
 
+class HighPeriodValueRef: public PeriodValueRef {
+public:
+	virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.high(); }
+};
+
+
 
 #endif /* PERIODVALUEREF_H_ */

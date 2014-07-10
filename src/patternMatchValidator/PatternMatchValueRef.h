@@ -10,6 +10,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include "PatternMatch.h"
+#include "PeriodValueRef.h"
 
 class PatternMatchValueRef {
 public:
@@ -36,6 +37,14 @@ private:
 	double val_;
 public:
 	FixedPatternMatchValueRef(double val) : val_(val) {}
+	virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+class LastPeriodValPatternMatchValueRef : public PatternMatchValueRef {
+private:
+	PeriodValueRefPtr valRefWithinLastPeriodVal_;
+public:
+	LastPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinLastPeriodVal);
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 

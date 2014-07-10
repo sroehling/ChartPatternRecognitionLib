@@ -22,3 +22,15 @@ double FixedPatternMatchValueRef::patternMatchVal(const PatternMatch &match) con
 {
 	return val_;
 }
+
+
+LastPeriodValPatternMatchValueRef::LastPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinLastPeriodVal)
+: valRefWithinLastPeriodVal_(valRefWithinLastPeriodVal)
+{
+
+}
+
+double LastPeriodValPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+	return valRefWithinLastPeriodVal_->referencedVal(match.lastValue());
+}

@@ -630,6 +630,7 @@ patternMatchValidator/PatternMatchValidatorCreationHelper.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h \
@@ -1897,6 +1898,8 @@ patternMatchValidator/PatternMatchValidatorCreationHelper.d: \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
 

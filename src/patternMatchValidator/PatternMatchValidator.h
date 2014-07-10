@@ -23,6 +23,8 @@ class PatternMatchValidator {
 public:
 	PatternMatchValidator();
 
+	// TODO - Change argument to PatternMatchPtr. In the context of scanning
+	// PatternMatchPtr is always passed around.
 	virtual bool validPattern(const PatternMatch &candidateMatch) = 0;
 
 	static PatternMatchListPtr filterMatches(const PatternMatchValidatorPtr &validator,

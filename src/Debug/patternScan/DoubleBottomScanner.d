@@ -633,6 +633,7 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h \
@@ -1908,6 +1909,8 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
 

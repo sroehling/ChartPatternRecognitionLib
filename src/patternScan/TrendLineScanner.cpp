@@ -61,6 +61,8 @@ TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange) {
 
 PatternMatchListPtr TrendLineScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
+	// TODO - Depending on the slope range, need to validate no value goes below or above the first value.
+
 	return trendScanner_->scanPatternMatches(chartVals);
 }
 

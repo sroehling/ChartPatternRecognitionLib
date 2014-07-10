@@ -19,6 +19,7 @@ public:
 	double maxVal() const { return maxVal_; }
 
 	bool positiveVals() const { return (minVal() >= 0.0) && (maxVal() >=0.0); }
+	bool valueWithinRange(double val) const { return (val >= minVal()) && (val <= maxVal()); }
 
 	virtual ~DoubleRange() {}
 };
