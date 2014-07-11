@@ -18,48 +18,16 @@
 
 using namespace scannerHelper;
 
-VScanner::VScanner(double minRHSBelowLHSofVPerc)
-: minRHSBelowLHSofVPerc_(minRHSBelowLHSofVPerc)
+VScanner::VScanner()
 {
-	assert(minRHSBelowLHSofVPerc_ >= 0.0);
-	assert(minRHSBelowLHSofVPerc_ <= 100);
 }
 
-void VScanner::addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValidator)
-{
-	customUpTrendValidators_.push_back(upTrendValidator);
-}
 
 void VScanner::addOverallValidator(const PatternMatchValidatorPtr &overallValidator)
 {
 	customOverallValidators_.push_back(overallValidator);
 }
 
-
-PatternMatchValidatorPtr VScanner::uptrendPercOfDowntrendValidator(const PatternMatchPtr &downtrendMatch) const
-{
-	// Create a pattern match constraint for the up-trend's close to exceed a
-	// percentage threshold of the immediately preceding downtrend.
-	PeriodValueRefPtr closeRef(new ClosePeriodValueRef());
-	double thresholdValBelowHigh = downtrendMatch->pointsAtPercentOfDepthBelowHigh(minRHSBelowLHSofVPerc_);
-	BOOST_LOG_TRIVIAL(debug) << "VScanner: Threshold for last value (close) of uptrend (last value must exceed): "
-			<< thresholdValBelowHigh;
-	PatternMatchValidatorPtr uptrendPercOfDownTrend(new
-				LastValueAbovePointValue(closeRef,thresholdValBelowHigh));
-
-	return uptrendPercOfDownTrend;
-}
-
-PatternMatchValidatorPtr VScanner::upTrendValidator(const PatternMatchPtr &downTrend) const
-{
-	PatternMatchValidatorPtr uptrendPercOfDownTrend = this->uptrendPercOfDowntrendValidator(downTrend);
-
-	PatternMatchValidatorList upTrendValidators;
-	upTrendValidators.push_back(uptrendPercOfDowntrendValidator(downTrend));
-	upTrendValidators.insert(upTrendValidators.end(),customUpTrendValidators_.begin(),customUpTrendValidators_.end());
-
-	return PatternMatchValidatorPtr(new ANDPatternMatchValidator(upTrendValidators));
-}
 
 PatternMatchValidatorPtr VScanner::overallValidator(const PatternMatchPtr &downTrend,
 			const PatternMatchPtr &upTrend) const
@@ -87,7 +55,8 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		for(PatternMatchList::iterator utMatchIter = uptrendMatches->begin();
 				utMatchIter!=uptrendMatches->end();utMatchIter++)
 		{
-			PatternMatchValidatorPtr upTrendValidator = this->upTrendValidator(*dtMatchIter);
+			PatternMatchValidatorPtr upTrendValidator =
+						upTrendValidatorFactory_.createValidator(*dtMatchIter);
 			if(upTrendValidator->validPattern(**utMatchIter))
 			{
 				PatternMatchPtr overallPattern = (*dtMatchIter)->appendMatch(**utMatchIter);

@@ -14,6 +14,7 @@
 #include "PeriodValSegment.h"
 #include "VScanner.h"
 #include "TestHelper.h"
+#include "RecoverPercentOfDepth.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -27,9 +28,10 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_LHSofDoubleBottom )
 	PeriodValSegmentPtr vData = splitSeg.first;
 	genPeriodValSegmentInfo("V segment data",*vData);
 
-	double minRHSBelowLHSofVPerc = 40.0;
+	VScanner scanner;
+	scanner.upTrendValidatorFactory().addFactory(
+			PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(60.0)));
 
-	VScanner scanner(minRHSBelowLHSofVPerc);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(vData);
 
 	verifyMatchList("VScanner_QCOR_20130819_LHSofDoubleBottom",patternMatches,1);
@@ -52,9 +54,9 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 
 	genPeriodValSegmentInfo("V RHS segment data",*rhsSegData);
 
-	double minPercentRHSBelowLHSofV = 0.0; // RHS must recover entire LHS/downtrend movement
-
-	VScanner scanner(minPercentRHSBelowLHSofV);
+	VScanner scanner;
+	scanner.upTrendValidatorFactory().addFactory(
+			PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(100.0)));
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(rhsSegData);
 
 	verifyMatchList("VScanner_QCOR_20130819_RHSofDoubleBottom",patternMatches,1);

@@ -12,31 +12,30 @@
 #include "PeriodValSegment.h"
 #include "PatternScanner.h"
 #include "PatternMatchValidator.h"
+#include "CompositePatternMatchValidatorFactory.h"
 
 // Scan for V shaped patterns. This class is a building block
 // for double bottoms or other patterns with a V shape.
 class VScanner {
 private:
-	PatternMatchValidatorList customUpTrendValidators_;
 	PatternMatchValidatorList customOverallValidators_;
+
+	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
+
 protected:
-	virtual PatternMatchValidatorPtr upTrendValidator(const PatternMatchPtr &downTrend) const;
 	virtual PatternMatchValidatorPtr overallValidator(const PatternMatchPtr &downTrend,
 			const PatternMatchPtr &upTrend) const;
-private:
-	// Minimum amount the RHS of the V (uptrend) can be below the LHS (downtrend).
-	double minRHSBelowLHSofVPerc_;
-
-	PatternMatchValidatorPtr uptrendPercOfDowntrendValidator(const PatternMatchPtr &downtrendMatch) const;
 
 public:
-	VScanner(double minRHSBelowLHSofVPerc);
+	VScanner();
 
 	// Add a custom/user-defined "static" up-trend validators; i.e., one which doesn't
 	// depend on the downTrend or flatTrend, but is appended to the list of
 	// validators AND'ed to any other up-trend validators.
 	void addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValidator);
 	void addOverallValidator(const PatternMatchValidatorPtr &overallValidator);
+
+	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
 
 
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;

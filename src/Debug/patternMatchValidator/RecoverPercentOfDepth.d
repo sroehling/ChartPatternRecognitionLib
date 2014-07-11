@@ -1,6 +1,8 @@
-patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/DoubleBottomScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
+patternMatchValidator/RecoverPercentOfDepth.d: \
+  ../patternMatchValidator/RecoverPercentOfDepth.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
   /usr/local/include/boost/config.hpp \
@@ -35,6 +37,7 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
   /usr/local/include/boost/smart_ptr/detail/yield_k.hpp \
   /usr/local/include/boost/memory_order.hpp \
   /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
   /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
@@ -625,27 +628,103 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h
+  /usr/local/include/boost/log/trivial.hpp \
+  /usr/local/include/boost/log/detail/config.hpp \
+  /usr/local/include/boost/thread/detail/config.hpp \
+  /usr/local/include/boost/thread/detail/platform.hpp \
+  /usr/local/include/boost/config/requires_threads.hpp \
+  /usr/local/include/boost/log/keywords/severity.hpp \
+  /usr/local/include/boost/parameter/keyword.hpp \
+  /usr/local/include/boost/parameter/aux_/unwrap_cv_reference.hpp \
+  /usr/local/include/boost/parameter/aux_/yesno.hpp \
+  /usr/local/include/boost/parameter/aux_/tag.hpp \
+  /usr/local/include/boost/parameter/aux_/tagged_argument.hpp \
+  /usr/local/include/boost/parameter/aux_/void.hpp \
+  /usr/local/include/boost/parameter/aux_/arg_list.hpp \
+  /usr/local/include/boost/parameter/aux_/result_of0.hpp \
+  /usr/local/include/boost/parameter/aux_/default.hpp \
+  /usr/local/include/boost/parameter/aux_/parameter_requirements.hpp \
+  /usr/local/include/boost/parameter/aux_/is_maybe.hpp \
+  /usr/local/include/boost/parameter/config.hpp \
+  /usr/local/include/boost/mpl/begin.hpp \
+  /usr/local/include/boost/mpl/end.hpp \
+  /usr/local/include/boost/log/sources/severity_logger.hpp \
+  /usr/local/include/boost/log/detail/light_rw_mutex.hpp \
+  /usr/local/include/boost/log/detail/header.hpp \
+  /usr/local/include/boost/config/abi_prefix.hpp \
+  /usr/local/include/boost/log/detail/footer.hpp \
+  /usr/local/include/boost/config/abi_suffix.hpp \
+  /usr/local/include/boost/log/sources/features.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_shifted_binary_params.hpp \
+  /usr/local/include/boost/log/sources/basic_logger.hpp \
+  /usr/local/include/boost/move/core.hpp \
+  /usr/local/include/boost/move/detail/config_begin.hpp \
+  /usr/local/include/boost/move/detail/meta_utils.hpp \
+  /usr/local/include/boost/move/detail/config_end.hpp \
+  /usr/local/include/boost/move/utility.hpp \
+  /usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/local/include/boost/log/detail/parameter_tools.hpp \
+  /usr/local/include/boost/log/attributes/attribute_set.hpp \
+  /usr/local/include/boost/log/attributes/attribute_name.hpp \
+  /usr/local/include/boost/log/utility/explicit_operator_bool.hpp \
+  /usr/local/include/boost/log/attributes/attribute.hpp \
+  /usr/local/include/boost/intrusive_ptr.hpp \
+  /usr/local/include/boost/smart_ptr/intrusive_ptr.hpp \
+  /usr/local/include/boost/config/no_tr1/functional.hpp \
+  /usr/local/include/boost/log/utility/intrusive_ref_counter.hpp \
+  /usr/local/include/boost/detail/atomic_count.hpp \
+  /usr/local/include/boost/smart_ptr/detail/atomic_count.hpp \
+  /usr/local/include/boost/smart_ptr/detail/atomic_count_gcc_x86.hpp \
+  /usr/local/include/boost/log/core/core.hpp \
+  /usr/local/include/boost/log/detail/light_function.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_trailing_binary_params.hpp \
+  /usr/local/include/boost/log/detail/light_function_pp.hpp \
+  /usr/local/include/boost/log/core/record.hpp \
+  /usr/local/include/boost/log/attributes/attribute_value_set.hpp \
+  /usr/local/include/boost/log/attributes/attribute_value.hpp \
+  /usr/local/include/boost/log/utility/type_info_wrapper.hpp \
+  /usr/local/include/boost/log/utility/type_dispatch/type_dispatcher.hpp \
+  /usr/local/include/boost/log/detail/visible_type.hpp \
+  /usr/local/include/boost/log/attributes/value_extraction_fwd.hpp \
+  /usr/local/include/boost/log/attributes/fallback_policy_fwd.hpp \
+  /usr/local/include/boost/log/attributes/value_visitation_fwd.hpp \
+  /usr/local/include/boost/log/detail/attribute_get_value_impl.hpp \
+  /usr/local/include/boost/log/expressions/keyword_fwd.hpp \
+  /usr/local/include/boost/log/core/record_view.hpp \
+  /usr/local/include/boost/log/expressions/filter.hpp \
+  /usr/local/include/boost/log/sources/threading_models.hpp \
+  /usr/local/include/boost/log/detail/locks.hpp \
+  /usr/local/include/boost/log/sources/severity_feature.hpp \
+  /usr/local/include/boost/log/detail/default_attribute_names.hpp \
+  /usr/local/include/boost/log/attributes/attribute_cast.hpp \
+  /usr/local/include/boost/log/attributes/attribute_value_impl.hpp \
+  /usr/local/include/boost/log/utility/strictest_lock.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_trailing.hpp \
+  /usr/local/include/boost/preprocessor/repetition/enum_params_with_a_default.hpp \
+  /usr/local/include/boost/log/detail/pp_identity.hpp \
+  /usr/local/include/boost/log/sources/record_ostream.hpp \
+  /usr/local/include/boost/log/detail/native_typeof.hpp \
+  /usr/local/include/boost/log/detail/unhandled_exception_count.hpp \
+  /usr/local/include/boost/log/utility/unique_identifier_name.hpp \
+  /usr/local/include/boost/log/utility/formatting_ostream.hpp \
+  /usr/local/include/boost/utility/string_ref_fwd.hpp \
+  /usr/local/include/boost/log/detail/attachable_sstream_buf.hpp \
+  /usr/local/include/boost/log/detail/code_conversion.hpp \
+  /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
+  /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/DoubleBottomScanner.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
 /usr/local/include/boost/shared_ptr.hpp:
 
@@ -714,6 +793,8 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
 /usr/local/include/boost/memory_order.hpp:
 
 /usr/local/include/boost/smart_ptr/detail/operator_bool.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
 
@@ -1897,36 +1978,184 @@ patternScan/DoubleBottomScanner.d: ../patternScan/DoubleBottomScanner.cpp \
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
+/usr/local/include/boost/log/trivial.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h:
+/usr/local/include/boost/log/detail/config.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:
+/usr/local/include/boost/thread/detail/config.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h:
+/usr/local/include/boost/thread/detail/platform.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
+/usr/local/include/boost/config/requires_threads.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h:
+/usr/local/include/boost/log/keywords/severity.hpp:
+
+/usr/local/include/boost/parameter/keyword.hpp:
+
+/usr/local/include/boost/parameter/aux_/unwrap_cv_reference.hpp:
+
+/usr/local/include/boost/parameter/aux_/yesno.hpp:
+
+/usr/local/include/boost/parameter/aux_/tag.hpp:
+
+/usr/local/include/boost/parameter/aux_/tagged_argument.hpp:
+
+/usr/local/include/boost/parameter/aux_/void.hpp:
+
+/usr/local/include/boost/parameter/aux_/arg_list.hpp:
+
+/usr/local/include/boost/parameter/aux_/result_of0.hpp:
+
+/usr/local/include/boost/parameter/aux_/default.hpp:
+
+/usr/local/include/boost/parameter/aux_/parameter_requirements.hpp:
+
+/usr/local/include/boost/parameter/aux_/is_maybe.hpp:
+
+/usr/local/include/boost/parameter/config.hpp:
+
+/usr/local/include/boost/mpl/begin.hpp:
+
+/usr/local/include/boost/mpl/end.hpp:
+
+/usr/local/include/boost/log/sources/severity_logger.hpp:
+
+/usr/local/include/boost/log/detail/light_rw_mutex.hpp:
+
+/usr/local/include/boost/log/detail/header.hpp:
+
+/usr/local/include/boost/config/abi_prefix.hpp:
+
+/usr/local/include/boost/log/detail/footer.hpp:
+
+/usr/local/include/boost/config/abi_suffix.hpp:
+
+/usr/local/include/boost/log/sources/features.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_shifted_binary_params.hpp:
+
+/usr/local/include/boost/log/sources/basic_logger.hpp:
+
+/usr/local/include/boost/move/core.hpp:
+
+/usr/local/include/boost/move/detail/config_begin.hpp:
+
+/usr/local/include/boost/move/detail/meta_utils.hpp:
+
+/usr/local/include/boost/move/detail/config_end.hpp:
+
+/usr/local/include/boost/move/utility.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/repeat_from_to.hpp:
+
+/usr/local/include/boost/log/detail/parameter_tools.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_set.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_name.hpp:
+
+/usr/local/include/boost/log/utility/explicit_operator_bool.hpp:
+
+/usr/local/include/boost/log/attributes/attribute.hpp:
+
+/usr/local/include/boost/intrusive_ptr.hpp:
+
+/usr/local/include/boost/smart_ptr/intrusive_ptr.hpp:
+
+/usr/local/include/boost/config/no_tr1/functional.hpp:
+
+/usr/local/include/boost/log/utility/intrusive_ref_counter.hpp:
+
+/usr/local/include/boost/detail/atomic_count.hpp:
+
+/usr/local/include/boost/smart_ptr/detail/atomic_count.hpp:
+
+/usr/local/include/boost/smart_ptr/detail/atomic_count_gcc_x86.hpp:
+
+/usr/local/include/boost/log/core/core.hpp:
+
+/usr/local/include/boost/log/detail/light_function.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_trailing_binary_params.hpp:
+
+/usr/local/include/boost/log/detail/light_function_pp.hpp:
+
+/usr/local/include/boost/log/core/record.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_value_set.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_value.hpp:
+
+/usr/local/include/boost/log/utility/type_info_wrapper.hpp:
+
+/usr/local/include/boost/log/utility/type_dispatch/type_dispatcher.hpp:
+
+/usr/local/include/boost/log/detail/visible_type.hpp:
+
+/usr/local/include/boost/log/attributes/value_extraction_fwd.hpp:
+
+/usr/local/include/boost/log/attributes/fallback_policy_fwd.hpp:
+
+/usr/local/include/boost/log/attributes/value_visitation_fwd.hpp:
+
+/usr/local/include/boost/log/detail/attribute_get_value_impl.hpp:
+
+/usr/local/include/boost/log/expressions/keyword_fwd.hpp:
+
+/usr/local/include/boost/log/core/record_view.hpp:
+
+/usr/local/include/boost/log/expressions/filter.hpp:
+
+/usr/local/include/boost/log/sources/threading_models.hpp:
+
+/usr/local/include/boost/log/detail/locks.hpp:
+
+/usr/local/include/boost/log/sources/severity_feature.hpp:
+
+/usr/local/include/boost/log/detail/default_attribute_names.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_cast.hpp:
+
+/usr/local/include/boost/log/attributes/attribute_value_impl.hpp:
+
+/usr/local/include/boost/log/utility/strictest_lock.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_trailing.hpp:
+
+/usr/local/include/boost/preprocessor/repetition/enum_params_with_a_default.hpp:
+
+/usr/local/include/boost/log/detail/pp_identity.hpp:
+
+/usr/local/include/boost/log/sources/record_ostream.hpp:
+
+/usr/local/include/boost/log/detail/native_typeof.hpp:
+
+/usr/local/include/boost/log/detail/unhandled_exception_count.hpp:
+
+/usr/local/include/boost/log/utility/unique_identifier_name.hpp:
+
+/usr/local/include/boost/log/utility/formatting_ostream.hpp:
+
+/usr/local/include/boost/utility/string_ref_fwd.hpp:
+
+/usr/local/include/boost/log/detail/attachable_sstream_buf.hpp:
+
+/usr/local/include/boost/log/detail/code_conversion.hpp:
+
+/usr/local/include/boost/log/utility/string_literal_fwd.hpp:
+
+/usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/LastValueAbovePointValue.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h:

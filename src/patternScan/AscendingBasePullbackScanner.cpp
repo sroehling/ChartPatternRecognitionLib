@@ -71,8 +71,7 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 	PatternMatchListPtr cupMatches = cupShapedPullbackScanner.scanPatternMatches(chartVals);
 	pullbackMatches->insert(pullbackMatches->end(),cupMatches->begin(),cupMatches->end());
 
-	double minBelowRHSDepth = 0.0;
-	VScanner vShapedPullbackScanner(minBelowRHSDepth);
+	VScanner vShapedPullbackScanner;
 	vShapedPullbackScanner.addOverallValidator(lastHighAboveFirstHigh());
 	vShapedPullbackScanner.addOverallValidator(overallDepthValidator);
 	PatternMatchListPtr vMatches = vShapedPullbackScanner.scanPatternMatches(chartVals);

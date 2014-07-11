@@ -13,6 +13,7 @@
 #include "FilterUniqueStartEndDate.h"
 #include "PatternMatchValidatorCreationHelper.h"
 #include "ScannerHelper.h"
+#include "RecoverPercentOfDepth.h"
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
@@ -32,8 +33,9 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 
 	// The 1st up-trend of the double-bottom must no more than 40% below the depth of the
 	// 1st down-trend.
-	double minPercentOfDowntrend = 40.0;
-	VScanner leftVScanner(minPercentOfDowntrend);
+	VScanner leftVScanner;
+	leftVScanner.upTrendValidatorFactory().addFactory(
+			PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(60.0)));
 	PatternMatchListPtr leftVMatches = leftVScanner.scanPatternMatches(chartVals);
 
 	PatternMatchListPtr dblBottomMatches(new PatternMatchList());
@@ -46,8 +48,9 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		// The RHS of the RHS V must recover 100% of of the LHS of this V. In other words,
 		// for the pattern match to be complete (confirmed), the right-most up-trend of the
 		// double-bottom must exceed the start of the 2nd down-trend of the double-bottom.
-		double rhsVMinRecoverLHSDepth = 0.0; // RHS of RHS V must recover 100% of the depth of the LHS of V
-		VScanner rightVScanner(rhsVMinRecoverLHSDepth);
+		VScanner rightVScanner;
+		rightVScanner.upTrendValidatorFactory().addFactory(
+				PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(100.0)));
 
 		// Filter down the scanned results for the RHS to those RHS V's which have a lower low
 		// than the LHS.

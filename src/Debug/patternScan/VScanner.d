@@ -630,6 +630,8 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/SegmentConstraint.h \
@@ -1991,6 +1993,10 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 

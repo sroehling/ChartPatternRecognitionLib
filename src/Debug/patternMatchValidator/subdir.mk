@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../patternMatchValidator/ANDPatternMatchValidator.cpp \
 ../patternMatchValidator/AnyPatternMatchValidator.cpp \
+../patternMatchValidator/CompositePatternMatchValidatorFactory.cpp \
 ../patternMatchValidator/EndWithinPercentOfStart.cpp \
 ../patternMatchValidator/LastValueAbovePointValue.cpp \
 ../patternMatchValidator/ORPatternMatchValidator.cpp \
@@ -13,12 +14,16 @@ CPP_SRCS += \
 ../patternMatchValidator/PatternLengthLessThanEqual.cpp \
 ../patternMatchValidator/PatternMatchValidator.cpp \
 ../patternMatchValidator/PatternMatchValidatorCreationHelper.cpp \
+../patternMatchValidator/PatternMatchValidatorFactory.cpp \
 ../patternMatchValidator/PatternMatchValueRef.cpp \
+../patternMatchValidator/RecoverPercentOfDepth.cpp \
+../patternMatchValidator/StaticPatternMatchValidatorFactory.cpp \
 ../patternMatchValidator/ValueComparisonMatchValidator.cpp 
 
 OBJS += \
 ./patternMatchValidator/ANDPatternMatchValidator.o \
 ./patternMatchValidator/AnyPatternMatchValidator.o \
+./patternMatchValidator/CompositePatternMatchValidatorFactory.o \
 ./patternMatchValidator/EndWithinPercentOfStart.o \
 ./patternMatchValidator/LastValueAbovePointValue.o \
 ./patternMatchValidator/ORPatternMatchValidator.o \
@@ -26,12 +31,16 @@ OBJS += \
 ./patternMatchValidator/PatternLengthLessThanEqual.o \
 ./patternMatchValidator/PatternMatchValidator.o \
 ./patternMatchValidator/PatternMatchValidatorCreationHelper.o \
+./patternMatchValidator/PatternMatchValidatorFactory.o \
 ./patternMatchValidator/PatternMatchValueRef.o \
+./patternMatchValidator/RecoverPercentOfDepth.o \
+./patternMatchValidator/StaticPatternMatchValidatorFactory.o \
 ./patternMatchValidator/ValueComparisonMatchValidator.o 
 
 CPP_DEPS += \
 ./patternMatchValidator/ANDPatternMatchValidator.d \
 ./patternMatchValidator/AnyPatternMatchValidator.d \
+./patternMatchValidator/CompositePatternMatchValidatorFactory.d \
 ./patternMatchValidator/EndWithinPercentOfStart.d \
 ./patternMatchValidator/LastValueAbovePointValue.d \
 ./patternMatchValidator/ORPatternMatchValidator.d \
@@ -39,7 +48,10 @@ CPP_DEPS += \
 ./patternMatchValidator/PatternLengthLessThanEqual.d \
 ./patternMatchValidator/PatternMatchValidator.d \
 ./patternMatchValidator/PatternMatchValidatorCreationHelper.d \
+./patternMatchValidator/PatternMatchValidatorFactory.d \
 ./patternMatchValidator/PatternMatchValueRef.d \
+./patternMatchValidator/RecoverPercentOfDepth.d \
+./patternMatchValidator/StaticPatternMatchValidatorFactory.d \
 ./patternMatchValidator/ValueComparisonMatchValidator.d 
 
 

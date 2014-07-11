@@ -699,8 +699,11 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2102,6 +2105,12 @@ patternScan/VScanner.d: ../patternScan/VScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/RecoverPercentOfDepth.h:
