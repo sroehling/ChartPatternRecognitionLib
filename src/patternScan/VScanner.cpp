@@ -22,19 +22,6 @@ VScanner::VScanner()
 {
 }
 
-
-void VScanner::addOverallValidator(const PatternMatchValidatorPtr &overallValidator)
-{
-	customOverallValidators_.push_back(overallValidator);
-}
-
-
-PatternMatchValidatorPtr VScanner::overallValidator(const PatternMatchPtr &downTrend,
-			const PatternMatchPtr &upTrend) const
-{
-	return PatternMatchValidatorPtr(new ANDPatternMatchValidator(customOverallValidators_));
-}
-
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
@@ -56,12 +43,13 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 				utMatchIter!=uptrendMatches->end();utMatchIter++)
 		{
 			PatternMatchValidatorPtr upTrendValidator =
-						upTrendValidatorFactory_.createValidator(*dtMatchIter);
+						upTrendValidatorFactory_.createValidator1(*dtMatchIter);
 			if(upTrendValidator->validPattern(**utMatchIter))
 			{
 				PatternMatchPtr overallPattern = (*dtMatchIter)->appendMatch(**utMatchIter);
 
-				PatternMatchValidatorPtr overallValidate = this->overallValidator(*dtMatchIter,*utMatchIter);
+				PatternMatchValidatorPtr overallValidate =
+						overallValidatorFactory_.createValidator2(*dtMatchIter,*utMatchIter);
 				if(overallValidate->validPattern(*overallPattern))
 				{
 					vMatches->push_back(overallPattern);

@@ -7,7 +7,6 @@ CPP_SRCS += \
 ../patternScan/AscendingBasePullbackScanner.cpp \
 ../patternScan/AscendingBaseScanner.cpp \
 ../patternScan/CupScanner.cpp \
-../patternScan/CupScannerConfigurator.cpp \
 ../patternScan/DoubleBottomScanner.cpp \
 ../patternScan/PatternScannerEngine.cpp \
 ../patternScan/ScannerHelper.cpp \
@@ -18,7 +17,6 @@ OBJS += \
 ./patternScan/AscendingBasePullbackScanner.o \
 ./patternScan/AscendingBaseScanner.o \
 ./patternScan/CupScanner.o \
-./patternScan/CupScannerConfigurator.o \
 ./patternScan/DoubleBottomScanner.o \
 ./patternScan/PatternScannerEngine.o \
 ./patternScan/ScannerHelper.o \
@@ -29,7 +27,6 @@ CPP_DEPS += \
 ./patternScan/AscendingBasePullbackScanner.d \
 ./patternScan/AscendingBaseScanner.d \
 ./patternScan/CupScanner.d \
-./patternScan/CupScannerConfigurator.d \
 ./patternScan/DoubleBottomScanner.d \
 ./patternScan/PatternScannerEngine.d \
 ./patternScan/ScannerHelper.d \

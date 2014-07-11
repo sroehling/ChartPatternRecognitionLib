@@ -24,7 +24,18 @@ class PatternMatchValidatorFactory {
 public:
 	PatternMatchValidatorFactory();
 
-	virtual PatternMatchValidatorPtr createValidator(const PatternMatchPtr &otherMatch) const = 0;
+	virtual PatternMatchValidatorPtr createValidator(const PatternMatchVector &previousMatches) const = 0;
+
+	// Convenience/helper methods for creating validators with a certain number of previous
+	// matches.
+	PatternMatchValidatorPtr createValidator1(const PatternMatchPtr &otherMatch) const;
+	PatternMatchValidatorPtr createValidator2(const PatternMatchPtr &firstMatch,
+			const PatternMatchPtr &secondMatch) const;
+	PatternMatchValidatorPtr createValidator3(const PatternMatchPtr &firstMatch,
+			const PatternMatchPtr &secondMatch,const PatternMatchPtr &thirdMatch) const;
+
+	PatternMatchValidatorPtr createValidator(const PatternMatchPtr &firstMatch,
+			const PatternMatchPtr &secondMatch,const PatternMatchPtr &thirdMatch) const;
 
 	virtual ~PatternMatchValidatorFactory();
 };

@@ -16,7 +16,7 @@ private:
 public:
 	RecoverPercentOfDepth(double depthPercRecover);
 
-	virtual PatternMatchValidatorPtr createValidator(const PatternMatchPtr &otherMatch) const;
+	virtual PatternMatchValidatorPtr createValidator(const PatternMatchVector &previousMatches) const;
 
 	virtual ~RecoverPercentOfDepth();
 };

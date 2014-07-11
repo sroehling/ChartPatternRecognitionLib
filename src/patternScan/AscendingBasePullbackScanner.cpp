@@ -7,7 +7,6 @@
 
 #include <AscendingBasePullbackScanner.h>
 #include "CupScanner.h"
-#include "CupScannerConfigurator.h"
 #include "VScanner.h"
 #include "TrendLineScanner.h"
 #include "ScannerHelper.h"
@@ -41,13 +40,12 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 	for(PatternMatchList::const_iterator rolloverMatchIter = rolloverMatches->begin();
 			rolloverMatchIter!=rolloverMatches->end();rolloverMatchIter++)
 	{
-		CupScannerConfiguratorPtr cupScannerConfig(new CupScannerConfigurator());
 
 		// The up-trend on the cup pattern must go beyond the highest high of
 		// the rollover pattern.
 		double rolloverHighestHigh = (*rolloverMatchIter)->highestHigh();
-		cupScannerConfig->addUpTrendValidator(lastHighAboveFixedValue(rolloverHighestHigh));
-		CupScanner cupScanner(cupScannerConfig);
+		CupScanner cupScanner;
+		cupScanner.overallValidatorFactory().addStaticValidator(lastHighAboveFixedValue(rolloverHighestHigh));
 
 		PeriodValSegmentPtr valsForCupScan = (*rolloverMatchIter)->trailingValsWithLastVal();
 		PatternMatchListPtr cupMatches = cupScanner.scanPatternMatches(valsForCupScan);
@@ -64,16 +62,15 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 	} // for each roll-over match
 
 	// If price doesn't first roll-over, it can do a straight pull-back into a cup-shaped pull-back.
-	CupScannerConfiguratorPtr cupScannerConfig(new CupScannerConfigurator());
-	cupScannerConfig->addOverallValidator(lastHighAboveFirstHigh());
-	cupScannerConfig->addOverallValidator(overallDepthValidator);
-	CupScanner cupShapedPullbackScanner(cupScannerConfig);
+	CupScanner cupShapedPullbackScanner;
+	cupShapedPullbackScanner.overallValidatorFactory().addStaticValidator(lastHighAboveFirstHigh());
+	cupShapedPullbackScanner.overallValidatorFactory().addStaticValidator(overallDepthValidator);
 	PatternMatchListPtr cupMatches = cupShapedPullbackScanner.scanPatternMatches(chartVals);
 	pullbackMatches->insert(pullbackMatches->end(),cupMatches->begin(),cupMatches->end());
 
 	VScanner vShapedPullbackScanner;
-	vShapedPullbackScanner.addOverallValidator(lastHighAboveFirstHigh());
-	vShapedPullbackScanner.addOverallValidator(overallDepthValidator);
+	vShapedPullbackScanner.overallValidatorFactory().addStaticValidator(lastHighAboveFirstHigh());
+	vShapedPullbackScanner.overallValidatorFactory().addStaticValidator(overallDepthValidator);
 	PatternMatchListPtr vMatches = vShapedPullbackScanner.scanPatternMatches(chartVals);
 	pullbackMatches->insert(pullbackMatches->end(),vMatches->begin(),vMatches->end());
 

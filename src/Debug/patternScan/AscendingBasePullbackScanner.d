@@ -636,10 +636,9 @@ patternScan/AscendingBasePullbackScanner.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SegmentListConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorCreationHelper.h \
@@ -1922,13 +1921,11 @@ patternScan/AscendingBasePullbackScanner.d: \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/VScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/TrendLineScanner.h:
 

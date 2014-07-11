@@ -699,8 +699,8 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegmentList/SlopeIncreasesConstraint.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h
@@ -2105,9 +2105,9 @@ patternScan/CupWithHandle.d: ../patternScan/CupWithHandle.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScannerConfigurator.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:
 

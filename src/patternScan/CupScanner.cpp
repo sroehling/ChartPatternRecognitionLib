@@ -13,11 +13,9 @@
 
 using namespace scannerHelper;
 
-CupScanner::CupScanner(const CupScannerConfiguratorPtr &configurator)
-: configurator_(configurator)
+CupScanner::CupScanner()
 {
 }
-
 
 PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
@@ -41,14 +39,15 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 			PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal();
 			PatternMatchListPtr upTrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 
-			PatternMatchValidatorPtr uptrendValidator =configurator_->upTrendValidator(*dtMatchIter,*ftMatchIter);
+			PatternMatchValidatorPtr uptrendValidator =
+					upTrendValidatorFactory_.createValidator2(*dtMatchIter,*ftMatchIter);
 
 			for(PatternMatchList::const_iterator utMatchIter = upTrendMatches->begin();
 					utMatchIter != upTrendMatches->end(); utMatchIter++)
 			{
 					if(uptrendValidator->validPattern(**utMatchIter))
 					{
-						PatternMatchValidatorPtr overallValidator = configurator_->overallValidator(
+						PatternMatchValidatorPtr overallValidator = overallValidatorFactory_.createValidator3(
 								*dtMatchIter,*ftMatchIter,*utMatchIter);
 						PatternMatchPtr overallMatch =
 									((*dtMatchIter)->appendMatch(**ftMatchIter))->appendMatch(**utMatchIter);

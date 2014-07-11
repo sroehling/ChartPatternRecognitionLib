@@ -23,16 +23,20 @@ void CompositePatternMatchValidatorFactory::addStaticValidator(const PatternMatc
 	factories_.push_back(staticFactory);
 }
 
-PatternMatchValidatorPtr CompositePatternMatchValidatorFactory::createValidator(const PatternMatchPtr &otherMatch) const
+PatternMatchValidatorPtr CompositePatternMatchValidatorFactory::createValidator(
+		const PatternMatchVector &previousMatches) const
 {
 	PatternMatchValidatorList validators;
 	for(PatternMatchValidatorFactoryList::const_iterator factoryIter = factories_.begin();
 			factoryIter != factories_.end(); factoryIter++)
 	{
-		validators.push_back((*factoryIter)->createValidator(otherMatch));
+		validators.push_back((*factoryIter)->createValidator(previousMatches));
 	}
 	return PatternMatchValidatorPtr(new ANDPatternMatchValidator(validators));
+
 }
+
+
 
 CompositePatternMatchValidatorFactory::~CompositePatternMatchValidatorFactory() {
 

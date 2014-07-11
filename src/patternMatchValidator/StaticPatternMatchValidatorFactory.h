@@ -16,7 +16,7 @@ private:
 public:
 	StaticPatternMatchValidatorFactory(const PatternMatchValidatorPtr &staticValidator);
 
-	virtual PatternMatchValidatorPtr createValidator(const PatternMatchPtr &otherMatch) const;
+	virtual PatternMatchValidatorPtr createValidator(const PatternMatchVector &previousMatches) const;
 
 	virtual ~StaticPatternMatchValidatorFactory();
 };

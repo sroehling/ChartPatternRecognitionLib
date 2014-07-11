@@ -11,14 +11,17 @@
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
 #include "PatternScannerEngine.h"
-#include "CupScannerConfigurator.h"
-
+#include "CompositePatternMatchValidatorFactory.h"
 
 class CupScanner {
 private:
-	CupScannerConfiguratorPtr configurator_;
+	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
+	CompositePatternMatchValidatorFactory overallValidatorFactory_;
 public:
-	CupScanner(const CupScannerConfiguratorPtr &configurator);
+	CupScanner();
+
+	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
+	CompositePatternMatchValidatorFactory &overallValidatorFactory() { return overallValidatorFactory_; }
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 

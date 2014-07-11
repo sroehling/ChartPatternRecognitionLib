@@ -18,25 +18,14 @@
 // for double bottoms or other patterns with a V shape.
 class VScanner {
 private:
-	PatternMatchValidatorList customOverallValidators_;
-
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
-
-protected:
-	virtual PatternMatchValidatorPtr overallValidator(const PatternMatchPtr &downTrend,
-			const PatternMatchPtr &upTrend) const;
+	CompositePatternMatchValidatorFactory overallValidatorFactory_;
 
 public:
 	VScanner();
 
-	// Add a custom/user-defined "static" up-trend validators; i.e., one which doesn't
-	// depend on the downTrend or flatTrend, but is appended to the list of
-	// validators AND'ed to any other up-trend validators.
-	void addUpTrendValidator(const PatternMatchValidatorPtr &upTrendValidator);
-	void addOverallValidator(const PatternMatchValidatorPtr &overallValidator);
-
 	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
-
+	CompositePatternMatchValidatorFactory &overallValidatorFactory() { return overallValidatorFactory_; }
 
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 	virtual ~VScanner();

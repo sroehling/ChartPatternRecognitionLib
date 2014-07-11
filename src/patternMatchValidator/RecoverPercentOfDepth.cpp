@@ -18,8 +18,13 @@ RecoverPercentOfDepth::RecoverPercentOfDepth(double depthPercRecover)
 	assert(DoubleRange(0.0,100.0).valueWithinRange(depthPercRecover));
 }
 
-PatternMatchValidatorPtr RecoverPercentOfDepth::createValidator(const PatternMatchPtr &otherMatch) const
+
+PatternMatchValidatorPtr RecoverPercentOfDepth::createValidator(
+		const PatternMatchVector &previousMatches) const
 {
+	assert(previousMatches.size() ==1); // limited to working with 1 previous match
+	PatternMatchPtr otherMatch = previousMatches[0];
+
 	// Create a pattern match constraint for the up-trend's close to exceed a
 	// percentage threshold of the immediately preceding downtrend.
 	PeriodValueRefPtr closeRef(new ClosePeriodValueRef());
@@ -31,6 +36,7 @@ PatternMatchValidatorPtr RecoverPercentOfDepth::createValidator(const PatternMat
 				LastValueAbovePointValue(closeRef,thresholdValBelowHigh));
 
 	return recoverPerc;
+
 }
 
 RecoverPercentOfDepth::~RecoverPercentOfDepth() {
