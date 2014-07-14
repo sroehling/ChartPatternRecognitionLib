@@ -8,11 +8,12 @@
 #include <HigherLowPatternMatchValidatorFactory.h>
 #include "ValueComparator.h"
 #include "PatternMatchValueRef.h"
+#include "ValueComparisonMatchValidator.h"
 
 HigherLowPatternMatchValidatorFactory::HigherLowPatternMatchValidatorFactory() {
 }
 
-PatternMatchValidatorPtr createValidator(const PatternMatchVector &previousMatches) const
+PatternMatchValidatorPtr HigherLowPatternMatchValidatorFactory::createValidator(const PatternMatchVector &previousMatches) const
 {
 	assert(previousMatches.size()==1); // only works when provided with 1 previous match.
 

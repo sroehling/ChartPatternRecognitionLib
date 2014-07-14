@@ -4,18 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../patternScan/AscendingBase.cpp \
 ../patternScan/CupWithHandle.cpp \
 ../patternScan/DoubleBottom.cpp \
 ../patternScan/TrendLine.cpp \
 ../patternScan/VScanner.cpp 
 
 OBJS += \
+./patternScan/AscendingBase.o \
 ./patternScan/CupWithHandle.o \
 ./patternScan/DoubleBottom.o \
 ./patternScan/TrendLine.o \
 ./patternScan/VScanner.o 
 
 CPP_DEPS += \
+./patternScan/AscendingBase.d \
 ./patternScan/CupWithHandle.d \
 ./patternScan/DoubleBottom.d \
 ./patternScan/TrendLine.d \
