@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../patternMatchValidator/AnyPatternMatchValidator.cpp \
 ../patternMatchValidator/CompositePatternMatchValidatorFactory.cpp \
 ../patternMatchValidator/EndWithinPercentOfStart.cpp \
+../patternMatchValidator/HigherLowPatternMatchValidatorFactory.cpp \
 ../patternMatchValidator/LastValueAbovePointValue.cpp \
 ../patternMatchValidator/ORPatternMatchValidator.cpp \
 ../patternMatchValidator/PatternLengthAtLeast.cpp \
@@ -25,6 +26,7 @@ OBJS += \
 ./patternMatchValidator/AnyPatternMatchValidator.o \
 ./patternMatchValidator/CompositePatternMatchValidatorFactory.o \
 ./patternMatchValidator/EndWithinPercentOfStart.o \
+./patternMatchValidator/HigherLowPatternMatchValidatorFactory.o \
 ./patternMatchValidator/LastValueAbovePointValue.o \
 ./patternMatchValidator/ORPatternMatchValidator.o \
 ./patternMatchValidator/PatternLengthAtLeast.o \
@@ -42,6 +44,7 @@ CPP_DEPS += \
 ./patternMatchValidator/AnyPatternMatchValidator.d \
 ./patternMatchValidator/CompositePatternMatchValidatorFactory.d \
 ./patternMatchValidator/EndWithinPercentOfStart.d \
+./patternMatchValidator/HigherLowPatternMatchValidatorFactory.d \
 ./patternMatchValidator/LastValueAbovePointValue.d \
 ./patternMatchValidator/ORPatternMatchValidator.d \
 ./patternMatchValidator/PatternLengthAtLeast.d \
