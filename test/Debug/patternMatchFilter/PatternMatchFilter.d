@@ -1,5 +1,5 @@
-patternMatchFilter/UniqueStartEndDateFilter.d: \
-  ../patternMatchFilter/UniqueStartEndDateFilter.cpp \
+patternMatchFilter/PatternMatchFilter.d: \
+  ../patternMatchFilter/PatternMatchFilter.cpp \
   /usr/local/include/boost/test/unit_test.hpp \
   /usr/local/include/boost/test/test_tools.hpp \
   /usr/local/include/boost/test/predicate_result.hpp \

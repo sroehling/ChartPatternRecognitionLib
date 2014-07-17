@@ -12,6 +12,7 @@
 #include "ScannerHelper.h"
 #include "PatternMatchValidatorCreationHelper.h"
 #include "DoubleRange.h"
+#include "PatternMatchFilter.h"
 
 using namespace patternMatchValidatorCreationHelper;
 using namespace scannerHelper;
@@ -74,7 +75,7 @@ PatternMatchListPtr AscendingBasePullbackScanner::scanPatternMatches(const Perio
 	PatternMatchListPtr vMatches = vShapedPullbackScanner.scanPatternMatches(chartVals);
 	pullbackMatches->insert(pullbackMatches->end(),vMatches->begin(),vMatches->end());
 
-	return filterUniqueMatches(pullbackMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(pullbackMatches);
 
 }
 

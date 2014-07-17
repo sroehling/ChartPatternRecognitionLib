@@ -10,10 +10,10 @@
 #include "PatternMatch.h"
 #include "PatternMatchValueRef.h"
 #include "ValueComparisonMatchValidator.h"
-#include "FilterUniqueStartEndDate.h"
 #include "PatternMatchValidatorCreationHelper.h"
 #include "ScannerHelper.h"
 #include "RecoverPercentOfDepth.h"
+#include "PatternMatchFilter.h"
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
@@ -69,7 +69,7 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with
 	// the same start and end date.
-	return filterUniqueMatches(dblBottomMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(dblBottomMatches);
 }
 
 DoubleBottomScanner::~DoubleBottomScanner() {

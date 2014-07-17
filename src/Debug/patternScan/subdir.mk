@@ -9,10 +9,12 @@ CPP_SRCS += \
 ../patternScan/CupScanner.cpp \
 ../patternScan/DoubleBottomScanner.cpp \
 ../patternScan/InvertedVScanner.cpp \
+../patternScan/MultiPatternScanner.cpp \
 ../patternScan/PatternScannerEngine.cpp \
 ../patternScan/ScannerHelper.cpp \
 ../patternScan/TrendLineScanner.cpp \
-../patternScan/VScanner.cpp 
+../patternScan/VScanner.cpp \
+../patternScan/WedgeScannerEngine.cpp 
 
 OBJS += \
 ./patternScan/AscendingBasePullbackScanner.o \
@@ -20,10 +22,12 @@ OBJS += \
 ./patternScan/CupScanner.o \
 ./patternScan/DoubleBottomScanner.o \
 ./patternScan/InvertedVScanner.o \
+./patternScan/MultiPatternScanner.o \
 ./patternScan/PatternScannerEngine.o \
 ./patternScan/ScannerHelper.o \
 ./patternScan/TrendLineScanner.o \
-./patternScan/VScanner.o 
+./patternScan/VScanner.o \
+./patternScan/WedgeScannerEngine.o 
 
 CPP_DEPS += \
 ./patternScan/AscendingBasePullbackScanner.d \
@@ -31,10 +35,12 @@ CPP_DEPS += \
 ./patternScan/CupScanner.d \
 ./patternScan/DoubleBottomScanner.d \
 ./patternScan/InvertedVScanner.d \
+./patternScan/MultiPatternScanner.d \
 ./patternScan/PatternScannerEngine.d \
 ./patternScan/ScannerHelper.d \
 ./patternScan/TrendLineScanner.d \
-./patternScan/VScanner.d 
+./patternScan/VScanner.d \
+./patternScan/WedgeScannerEngine.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

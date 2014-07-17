@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../patternMatchFilter/FilterUniqueStartEndDate.cpp \
-../patternMatchFilter/SortPatternMatchByStartAndEndDate.cpp 
+../patternMatchFilter/PatternMatchFilter.cpp \
+../patternMatchFilter/PatternMatchSortFunctor.cpp \
+../patternMatchFilter/PatternMatchUniqueFunctor.cpp 
 
 OBJS += \
-./patternMatchFilter/FilterUniqueStartEndDate.o \
-./patternMatchFilter/SortPatternMatchByStartAndEndDate.o 
+./patternMatchFilter/PatternMatchFilter.o \
+./patternMatchFilter/PatternMatchSortFunctor.o \
+./patternMatchFilter/PatternMatchUniqueFunctor.o 
 
 CPP_DEPS += \
-./patternMatchFilter/FilterUniqueStartEndDate.d \
-./patternMatchFilter/SortPatternMatchByStartAndEndDate.d 
+./patternMatchFilter/PatternMatchFilter.d \
+./patternMatchFilter/PatternMatchSortFunctor.d \
+./patternMatchFilter/PatternMatchUniqueFunctor.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

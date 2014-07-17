@@ -14,6 +14,7 @@
 #include "AnyPatternMatchValidator.h"
 #include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
+#include "PatternMatchFilter.h"
 #include "ANDPatternMatchValidator.h"
 
 using namespace scannerHelper;
@@ -64,7 +65,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with
 	// the same start and end date.
-	return filterUniqueMatches(vMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(vMatches);
 }
 
 

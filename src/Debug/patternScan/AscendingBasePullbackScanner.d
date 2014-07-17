@@ -645,7 +645,10 @@ patternScan/AscendingBasePullbackScanner.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/AscendingBasePullbackScanner.h:
 
@@ -1940,3 +1943,9 @@ patternScan/AscendingBasePullbackScanner.d: \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ValueComparisonMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/ValueComparator.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:

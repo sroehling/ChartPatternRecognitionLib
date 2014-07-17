@@ -1,6 +1,6 @@
-patternMatchFilter/SortPatternMatchByStartAndEndDate.d: \
-  ../patternMatchFilter/SortPatternMatchByStartAndEndDate.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h \
+patternMatchFilter/PatternMatchFilter.d: \
+  ../patternMatchFilter/PatternMatchFilter.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
@@ -628,9 +628,11 @@ patternMatchFilter/SortPatternMatchByStartAndEndDate.d: \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
@@ -1889,3 +1891,7 @@ patternMatchFilter/SortPatternMatchByStartAndEndDate.d: \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:

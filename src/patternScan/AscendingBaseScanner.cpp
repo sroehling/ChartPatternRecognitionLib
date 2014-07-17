@@ -10,6 +10,7 @@
 #include "ScannerHelper.h"
 #include "CompositePatternMatchValidatorFactory.h"
 #include "HigherLowPatternMatchValidatorFactory.h"
+#include "PatternMatchFilter.h"
 
 using namespace scannerHelper;
 
@@ -60,6 +61,6 @@ PatternMatchListPtr AscendingBaseScanner::scanPatternMatches(const PeriodValSegm
 		} // for each match of the 2nd pull back
 	} // for each match in the first pull back
 
-	return filterUniqueMatches(ascendingBaseMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(ascendingBaseMatches);
 }
 

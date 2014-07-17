@@ -32,6 +32,10 @@ public:
 
 	const PeriodVal &firstValue() const;
 	const PeriodVal &lastValue() const;
+
+	const boost::posix_time::ptime &startTime() const;
+	const boost::posix_time::ptime &endTime() const;
+
 	unsigned int numSegments() const;
 	unsigned int numPeriods() const;
 	const ChartSegmentList &segments() const;

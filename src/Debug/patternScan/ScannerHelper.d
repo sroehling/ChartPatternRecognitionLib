@@ -714,7 +714,9 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
   /usr/local/include/boost/log/detail/code_conversion.hpp \
   /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
   /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
 
@@ -2148,4 +2150,8 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
 
 /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:

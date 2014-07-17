@@ -21,7 +21,6 @@ namespace scannerHelper {
 			const PatternMatchListPtr &unfilteredMatches,
 			const PatternMatchValidatorPtr &matchValidator);
 
-	PatternMatchListPtr filterUniqueMatches(const PatternMatchListPtr &unfilteredMatches);
 }
 
 

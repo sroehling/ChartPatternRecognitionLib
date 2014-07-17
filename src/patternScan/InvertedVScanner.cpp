@@ -10,6 +10,7 @@
 #include "TrendLineScanner.h"
 #include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
+#include "PatternMatchFilter.h"
 
 using namespace scannerHelper;
 
@@ -59,7 +60,7 @@ PatternMatchListPtr InvertedVScanner::scanPatternMatches(const PeriodValSegmentP
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with
 	// the same start and end date.
-	return filterUniqueMatches(invertedVMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(invertedVMatches);
 }
 
 

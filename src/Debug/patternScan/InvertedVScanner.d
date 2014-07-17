@@ -721,7 +721,10 @@ patternScan/InvertedVScanner.d: ../patternScan/InvertedVScanner.cpp \
   /usr/local/include/boost/log/detail/code_conversion.hpp \
   /usr/local/include/boost/log/utility/string_literal_fwd.hpp \
   /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/InvertedVScanner.h:
 
@@ -2170,3 +2173,9 @@ patternScan/InvertedVScanner.d: ../patternScan/InvertedVScanner.cpp \
 /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:

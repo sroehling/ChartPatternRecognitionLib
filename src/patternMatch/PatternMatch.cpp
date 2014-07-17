@@ -15,7 +15,6 @@ PatternMatch::PatternMatch(const ChartSegmentList &segments)
 	assert(segmentsConnected(segments_));
 }
 
-
 const PeriodVal &PatternMatch::firstValue() const
 {
 	return segments_.front()->firstPeriodVal();
@@ -25,6 +24,17 @@ const PeriodVal &PatternMatch::lastValue() const
 {
 	return segments_.back()->lastPeriodVal();
 }
+
+const boost::posix_time::ptime &PatternMatch::startTime() const
+{
+	return this->firstValue().periodTime();
+}
+
+const boost::posix_time::ptime &PatternMatch::endTime() const
+{
+	return this->lastValue().periodTime();
+}
+
 
 unsigned int PatternMatch::numSegments() const
 {

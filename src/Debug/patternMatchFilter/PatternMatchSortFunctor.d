@@ -1,6 +1,6 @@
-patternMatchFilter/FilterUniqueStartEndDate.d: \
-  ../patternMatchFilter/FilterUniqueStartEndDate.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h \
+patternMatchFilter/PatternMatchSortFunctor.d: \
+  ../patternMatchFilter/PatternMatchSortFunctor.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
@@ -628,14 +628,9 @@ patternMatchFilter/FilterUniqueStartEndDate.d: \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h \
-  /usr/local/include/boost/iterator/indirect_iterator.hpp \
-  /usr/local/include/boost/pointee.hpp \
-  /usr/local/include/boost/detail/is_incrementable.hpp \
-  /usr/local/include/boost/indirect_reference.hpp
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/FilterUniqueStartEndDate.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
@@ -1894,13 +1889,3 @@ patternMatchFilter/FilterUniqueStartEndDate.d: \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/SortPatternMatchByStartAndEndDate.h:
-
-/usr/local/include/boost/iterator/indirect_iterator.hpp:
-
-/usr/local/include/boost/pointee.hpp:
-
-/usr/local/include/boost/detail/is_incrementable.hpp:
-
-/usr/local/include/boost/indirect_reference.hpp:

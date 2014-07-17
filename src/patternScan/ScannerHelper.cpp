@@ -9,7 +9,7 @@
 #include "PatternMatch.h"
 #include "TimeHelper.h"
 #include <boost/log/trivial.hpp>
-#include "FilterUniqueStartEndDate.h"
+#include "PatternMatchFilter.h"
 
 
 namespace scannerHelper {
@@ -33,15 +33,6 @@ void appendValidatedMatches(const PatternMatchListPtr &appendTo,
 	appendTo->insert(appendTo->end(),filteredMatches->begin(),filteredMatches->end());
 
 }
-
-PatternMatchListPtr filterUniqueMatches(const PatternMatchListPtr &unfilteredMatches)
-{
-	FilterUniqueStartEndDate uniqueStartEndDateFilter;
-	PatternMatchListPtr uniqueMatches = uniqueStartEndDateFilter.filterPatternMatches(unfilteredMatches);
-	return uniqueMatches;
-
-}
-
 
 } // namespace
 

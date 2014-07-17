@@ -10,6 +10,7 @@
 #include "CupScanner.h"
 #include "TrendLineScanner.h"
 #include "ScannerHelper.h"
+#include "PatternMatchFilter.h"
 
 using namespace scannerHelper;
 
@@ -60,6 +61,6 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 		} // for each flat trend
 	} // for each down trend
 
-	return filterUniqueMatches(cupMatches);
+	return patternMatchFilter::filterUniqueStartEndTime(cupMatches);
 }
 
