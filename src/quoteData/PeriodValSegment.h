@@ -24,12 +24,16 @@ private:
 	PeriodValCltnPtr perValCltn_;
 	PeriodValCltn::iterator segBegin_;
 	PeriodValCltn::iterator segEnd_;
+	PeriodValCltn::iterator highestHighValIter_;
+	PeriodValCltn::iterator lowestLowValIter_;
 
 	unsigned int startPos_;
 	unsigned int endPos_;
 
 	void initSegments(const PeriodValCltn::iterator &segBegin,
 			const PeriodValCltn::iterator &segEnd);
+	void initHighestHighValIter();
+	void initLowestLowValIter();
 public:
 	PeriodValSegment(const PeriodValCltnPtr &perValCltn,
 			const PeriodValCltn::iterator &segBegin,
@@ -63,7 +67,10 @@ public:
 	const PeriodVal &lastVal() const;
 
 	double highestHigh() const; // Highest high within the segment
+	const PeriodVal highestHighVal() const; // PeriodVal with the highest high
 	double lowestLow() const; // Lowest low value within the segment
+	const PeriodVal lowestLowVal() const;
+
 	double depthPoints() const; // depth in number of points ($, etc.)
 	double depthPercent() const; // depth from high to low, percent
 

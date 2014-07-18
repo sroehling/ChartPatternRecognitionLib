@@ -26,7 +26,8 @@ private:
 	// Construct a combined segment from the start to the end of the
 	// pattern match. This is useful for performing internal calculations
 	// on pattern depth, lowest lows, etc.
-	PeriodValSegmentPtr matchSegment() const;
+	void initMatchSegment();
+	PeriodValSegmentPtr matchSegment_;
 public:
 	PatternMatch(const ChartSegmentList &segments);
 
@@ -41,7 +42,9 @@ public:
 	const ChartSegmentList &segments() const;
 
 	double highestHigh() const; // Highest high across all segments
+	PeriodVal highestHighVal() const; // Full PeriodVal with the highest high
 	double lowestLow() const; // Lowest low across all segments
+	PeriodVal lowestLowVal() const; // Full PeriodVal with the lowest low
 	double depthPoints() const; // depth from highest high to lowest low
 	double depthPercent() const; // depth from highest high to lowest low
 

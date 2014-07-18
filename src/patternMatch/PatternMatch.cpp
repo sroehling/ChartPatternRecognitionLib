@@ -8,11 +8,22 @@
 #include "PatternMatch.h"
 #include "MathHelper.h"
 
+void PatternMatch::initMatchSegment()
+{
+	PeriodValCltn::iterator matchSegBegin = segments().front()->perValSegment()->segBegin();
+	PeriodValCltn::iterator matchSegEnd = segments().back()->perValSegment()->segEnd();
+	PeriodValCltnPtr matchPerValCltn = segments().front()->perValSegment()->perValCltn();
+	PeriodValSegmentPtr combinedMatchSegment(new PeriodValSegment(matchPerValCltn,matchSegBegin,matchSegEnd));
+	matchSegment_ = combinedMatchSegment;
+}
+
+
 PatternMatch::PatternMatch(const ChartSegmentList &segments)
 : segments_(segments)
 {
 	assert(segments.size() > 0);
 	assert(segmentsConnected(segments_));
+	initMatchSegment();
 }
 
 const PeriodVal &PatternMatch::firstValue() const
@@ -107,44 +118,46 @@ const ChartSegmentList &PatternMatch::segments() const
 	return segments_;
 }
 
-PeriodValSegmentPtr PatternMatch::matchSegment() const
-{
-	PeriodValCltn::iterator matchSegBegin = segments().front()->perValSegment()->segBegin();
-	PeriodValCltn::iterator matchSegEnd = segments().back()->perValSegment()->segEnd();
-	PeriodValCltnPtr matchPerValCltn = segments().front()->perValSegment()->perValCltn();
-	PeriodValSegmentPtr combinedMatchSegment(new PeriodValSegment(matchPerValCltn,matchSegBegin,matchSegEnd));
-	return combinedMatchSegment;
-}
 
 unsigned int PatternMatch::numPeriods() const
 {
-	return matchSegment()->numVals();
+	return matchSegment_->numVals();
 }
 
 double PatternMatch::lowestLow() const
 {
-	return matchSegment()->lowestLow();
+	return matchSegment_->lowestLow();
+}
+
+PeriodVal PatternMatch::lowestLowVal() const
+{
+	return matchSegment_->lowestLowVal();
 }
 
 double PatternMatch::highestHigh() const
 {
-	return matchSegment()->highestHigh();
+	return matchSegment_->highestHigh();
+}
+
+PeriodVal PatternMatch::highestHighVal() const
+{
+	return matchSegment_->highestHighVal();
 }
 
 
 double PatternMatch::depthPoints() const
 {
-	return matchSegment()->depthPoints();
+	return matchSegment_->depthPoints();
 }
 
 double PatternMatch::depthPercent() const
 {
-	return matchSegment()->depthPercent();
+	return matchSegment_->depthPercent();
 }
 
 double PatternMatch::pointsAtPercentOfDepthBelowHigh(double percentFromHigh) const
 {
-	return matchSegment()->pointsAtPercentOfDepthBelowHigh(percentFromHigh);
+	return matchSegment_->pointsAtPercentOfDepthBelowHigh(percentFromHigh);
 }
 
 
@@ -172,6 +185,5 @@ std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 
 
 PatternMatch::~PatternMatch() {
-	// TODO Auto-generated destructor stub
 }
 

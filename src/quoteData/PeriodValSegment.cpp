@@ -10,6 +10,36 @@
 #include "MathHelper.h"
 
 
+void PeriodValSegment::initHighestHighValIter()
+{
+	double maxVal = MathHelper::minDouble();
+	highestHighValIter_ = segBegin();
+	for(PeriodValCltn::iterator perValIter = segBegin();
+			perValIter != segEnd(); perValIter++)
+	{
+		if((*perValIter).high() > maxVal)
+		{
+			maxVal = (*perValIter).high();
+			highestHighValIter_ = perValIter;
+		}
+	}
+}
+
+void PeriodValSegment::initLowestLowValIter()
+{
+	double minVal = MathHelper::maxDouble();
+	lowestLowValIter_ = segBegin();
+	for(PeriodValCltn::iterator perValIter = segBegin();
+			perValIter != segEnd(); perValIter++)
+	{
+		if((*perValIter).low() < minVal)
+		{
+			minVal = (*perValIter).low();
+			lowestLowValIter_ = perValIter;
+		}
+	}
+}
+
 void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
 		const PeriodValCltn::iterator &segEnd)
 {
@@ -23,6 +53,9 @@ void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
 
 	assert((endPos_-startPos_) >= 0);
 	assert(numVals() <= perValCltn_->size());
+
+	initHighestHighValIter();
+	initLowestLowValIter();
 
 }
 
@@ -108,34 +141,27 @@ const PeriodVal &PeriodValSegment::lastVal() const
 	return (*lastValIter);
 }
 
+const PeriodVal PeriodValSegment::highestHighVal() const
+{
+	assert(numVals()>0); // there's only a highest high if there is at least 1 value
+	return (*highestHighValIter_);
+}
+
 double PeriodValSegment::highestHigh() const
 {
-	double maxVal = MathHelper::minDouble();
-	for(PeriodValCltn::const_iterator perValIter = segBegin();
-			perValIter != segEnd(); perValIter++)
-	{
-		if((*perValIter).high() > maxVal)
-		{
-			maxVal = (*perValIter).high();
-		}
-	}
-	assert(maxVal >= 0.0);
-	return maxVal;
+	return this->highestHighVal().high();
 }
+
+const PeriodVal PeriodValSegment::lowestLowVal() const
+{
+	assert(numVals()>0); // there's only a lowest low if there is at least 1 value
+	return (*lowestLowValIter_);
+}
+
 
 double PeriodValSegment::lowestLow() const
 {
-	double minVal = MathHelper::maxDouble();
-	for(PeriodValCltn::const_iterator perValIter = segBegin();
-			perValIter != segEnd(); perValIter++)
-	{
-		if((*perValIter).low() < minVal)
-		{
-			minVal = (*perValIter).low();
-		}
-	}
-	assert(minVal >= 0.0);
-	return minVal;
+	return this->lowestLowVal().low();
 }
 
 double PeriodValSegment::depthPoints() const
