@@ -16,6 +16,10 @@ namespace patternMatchFilter {
 
 PatternMatchListPtr filterUniqueStartEndTime(const PatternMatchListPtr &unfilteredMatches);
 
+PatternMatchListPtr filterUniqueAndLongestHighestHigh(const PatternMatchListPtr &unfilteredMatches);
+PatternMatchListPtr filterUniqueAndLongestLowestLow(const PatternMatchListPtr &unfilteredMatches);
+
+
 PatternMatchListPtr sortPatternMatches(const PatternMatchListPtr &unsortedMatches,
 		const PatternMatchSortFunctor &sortFunc);
 PatternMatchListPtr uniquePatternMatches(const PatternMatchListPtr &unfilteredMatches,

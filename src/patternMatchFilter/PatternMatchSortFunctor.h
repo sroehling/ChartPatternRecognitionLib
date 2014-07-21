@@ -39,5 +39,20 @@ public:
 	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
 };
 
+// The PatternMatch class has a highestHighTime member function. This method
+// returns the period time when the highest high took place. This is useful
+// to first sort by the highest high, then the length of the pattern to identify
+// unique pivot points with the same highest high.
+class SortPatternMatchByHighestHighTimeThenLength : public PatternMatchSortFunctor {
+public:
+	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
+};
+
+class SortPatternMatchByLowestLowTimeThenLength : public PatternMatchSortFunctor {
+public:
+	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
+};
+
+
 
 #endif /* PATTERNMATCHSORTFUNCTOR_H_ */

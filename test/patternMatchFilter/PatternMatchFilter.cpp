@@ -142,3 +142,78 @@ BOOST_AUTO_TEST_CASE( PatternMatchFilter_SortByEndDateThenLength )
 	verifyPatternMatch("Unique matches [1]",dateToTime(2013,1,1),dateToTime(2013,4,1),1,*uniqueMatchesIter);
 
 }
+
+BOOST_AUTO_TEST_CASE( PatternMatchFilter_SortAndUniqueHighestHighPivot )
+{
+
+	PeriodValCltnPtr testData(new PeriodValCltn());
+
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3)); // highest high
+	testData->push_back(testPeriodVal(2013,4,1,2.0,2));
+	testData->push_back(testPeriodVal(2013,5,1,1.0,1));
+
+	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
+
+	BOOST_TEST_MESSAGE("testSeg: highestHighVal()" << testSeg->highestHighVal());
+	BOOST_TEST_MESSAGE("testSeg: highestHighVal().periodTime()" << testSeg->highestHighVal().periodTime());
+
+	ChartSegmentList matchSegments1;
+	matchSegments1.push_back(ChartSegmentPtr(new ChartSegment(testSeg->spliceRange(1,4))));
+	PatternMatchPtr patternMatch1(new PatternMatch(matchSegments1));
+	BOOST_TEST_MESSAGE("patternMatch1: highest high: " << patternMatch1->highestHigh());
+	BOOST_TEST_MESSAGE("patternMatch1: highest high val: " << patternMatch1->highestHighVal());
+	BOOST_TEST_MESSAGE("patternMatch1: highest high time: " << patternMatch1->highestHighTime());
+
+	ChartSegmentList matchSegments2;
+	matchSegments2.push_back(ChartSegmentPtr(new ChartSegment(testSeg->spliceRange(0,4))));
+	PatternMatchPtr patternMatch2(new PatternMatch(matchSegments2));
+	BOOST_TEST_MESSAGE("patternMatch2: highest high: " << patternMatch2->highestHighVal());
+	BOOST_TEST_MESSAGE("patternMatch2: highest high time: " << patternMatch2->highestHighTime());
+
+	ChartSegmentList matchSegments3;
+	matchSegments3.push_back(ChartSegmentPtr(new ChartSegment(testSeg->spliceRange(0,2))));
+	PatternMatchPtr patternMatch3(new PatternMatch(matchSegments3));
+	BOOST_TEST_MESSAGE("patternMatch3: highest high time: " << patternMatch3->highestHighTime());
+
+	ChartSegmentList matchSegments4;
+	matchSegments4.push_back(ChartSegmentPtr(new ChartSegment(testSeg->spliceRange(3,5))));
+	PatternMatchPtr patternMatch4(new PatternMatch(matchSegments4));
+	BOOST_TEST_MESSAGE("patternMatch4: highest high time: " << patternMatch4->highestHighTime());
+
+	PatternMatchListPtr unfilteredMatches(new PatternMatchList);
+	unfilteredMatches->push_back(patternMatch1);
+	unfilteredMatches->push_back(patternMatch2);
+	unfilteredMatches->push_back(patternMatch3);
+	unfilteredMatches->push_back(patternMatch4);
+
+	PatternMatchListPtr  sortedMatches = patternMatchFilter::sortPatternMatches(
+				unfilteredMatches,SortPatternMatchByHighestHighTimeThenLength());
+
+	BOOST_TEST_MESSAGE("Sorted highest high pattern matches");
+	genPatternMatchListInfo("Sorted matches",*sortedMatches);
+	PatternMatchList::iterator sortedMatchesIter = sortedMatches->begin();
+	verifyPatternMatch("Sorted matches [0]",dateToTime(2013,1,1),dateToTime(2013,2,1),1,*sortedMatchesIter); // unique highest high
+	sortedMatchesIter++;
+	verifyPatternMatch("Sorted matches [1]",dateToTime(2013,1,1),dateToTime(2013,4,1),1,*sortedMatchesIter);
+	sortedMatchesIter++;
+	verifyPatternMatch("Sorted matches [2]",dateToTime(2013,2,1),dateToTime(2013,4,1),1,*sortedMatchesIter); // same highest high as [1], but shorter
+	sortedMatchesIter++;
+	verifyPatternMatch("Sorted matches [3]",dateToTime(2013,4,1),dateToTime(2013,5,1),1,*sortedMatchesIter); // unique highest high
+	sortedMatchesIter++;
+
+
+	PatternMatchListPtr  uniqueMatches = patternMatchFilter::filterUniqueAndLongestHighestHigh(unfilteredMatches);
+	genPatternMatchListInfo("Unique highest high pattern matches",*uniqueMatches);
+	PatternMatchList::iterator uniqueMatchesIter = uniqueMatches->begin();
+
+	verifyPatternMatch("Unique matches [0]",dateToTime(2013,1,1),dateToTime(2013,2,1),1,*uniqueMatchesIter);
+	uniqueMatchesIter++;
+	verifyPatternMatch("Unique matches [1]",dateToTime(2013,1,1),dateToTime(2013,4,1),1,*uniqueMatchesIter);
+	uniqueMatchesIter++;
+	verifyPatternMatch("Unique matches [2]",dateToTime(2013,4,1),dateToTime(2013,5,1),1,*uniqueMatchesIter);
+	uniqueMatchesIter++;
+
+
+}

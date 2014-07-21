@@ -72,4 +72,17 @@ PatternMatchListPtr filterUniqueStartEndTime(const PatternMatchListPtr &unfilter
 			SortPatternMatchByStartAndEndDate(),SameStartAndEndDate());
 }
 
+PatternMatchListPtr filterUniqueAndLongestHighestHigh(const PatternMatchListPtr &unfilteredMatches)
+{
+	return sortThenFilterUniqueMatches(unfilteredMatches,
+			SortPatternMatchByHighestHighTimeThenLength(),SameHighestHighTime());
+}
+
+PatternMatchListPtr filterUniqueAndLongestLowestLow(const PatternMatchListPtr &unfilteredMatches)
+{
+	return sortThenFilterUniqueMatches(unfilteredMatches,
+			SortPatternMatchByLowestLowTimeThenLength(),SameLowestLowTime());
+}
+
+
 } // namespace

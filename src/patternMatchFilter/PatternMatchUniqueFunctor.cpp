@@ -17,3 +17,14 @@ bool SameEndTime::operator() (const PatternMatchPtr &first, const PatternMatchPt
 {
 	  return(first->endTime() == second->endTime() );
 }
+
+
+bool SameHighestHighTime::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
+{
+	  return(first->highestHighTime() == second->highestHighTime() );
+}
+
+bool SameLowestLowTime::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
+{
+	  return(first->lowestLowTime() == second->lowestLowTime() );
+}

@@ -31,4 +31,15 @@ public:
 };
 
 
+class SameHighestHighTime: public PatternMatchUniqueFunctor {
+public:
+	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
+};
+
+class SameLowestLowTime: public PatternMatchUniqueFunctor {
+public:
+	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
+};
+
+
 #endif /* PATTERNMATCHUNIQUEFUNCTOR_H_ */

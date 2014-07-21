@@ -71,3 +71,59 @@ bool SortPatternMatchByStartAndEndDate::operator() (const PatternMatchPtr &first
 	}
 }
 
+bool SortPatternMatchByHighestHighTimeThenLength::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
+{
+	// First sort by highestHighTime()
+	if(first->highestHighTime() < second->highestHighTime())
+	{
+		return true;
+	}
+	else if(first->highestHighTime() == second->highestHighTime())
+	{
+		// Then sort by number of periods, with the highest number coming first.
+		// A PatternMatch with the same highest high, but a longer period will be a
+		// "larger pivot". When combined with the unique functors for the same highest high,
+		// sorting then getting the unique values in a list will yield the largest unique
+		// pivots.
+		if(first->numPeriods() > second->numPeriods())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+
+bool SortPatternMatchByLowestLowTimeThenLength::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
+{
+	// First sort by lowestLowTime()
+	if(first->lowestLowTime() < second->lowestLowTime())
+	{
+		return true;
+	}
+	else if(first->lowestLowTime() == second->lowestLowTime())
+	{
+		if(first->numPeriods() > second->numPeriods())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+}
+

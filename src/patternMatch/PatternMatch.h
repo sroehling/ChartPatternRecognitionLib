@@ -43,8 +43,12 @@ public:
 
 	double highestHigh() const; // Highest high across all segments
 	PeriodVal highestHighVal() const; // Full PeriodVal with the highest high
+	const boost::posix_time::ptime highestHighTime() const; // Time when the highest high took place - good for sorting/unique
+
 	double lowestLow() const; // Lowest low across all segments
 	PeriodVal lowestLowVal() const; // Full PeriodVal with the lowest low
+	const boost::posix_time::ptime lowestLowTime() const; // Time when the lowest low took place - good for sorting/unique
+
 	double depthPoints() const; // depth from highest high to lowest low
 	double depthPercent() const; // depth from highest high to lowest low
 
