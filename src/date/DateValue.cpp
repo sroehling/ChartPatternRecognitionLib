@@ -10,8 +10,6 @@
 DateValue::DateValue(const boost::gregorian::date &date, double value)
 : date_(date), value_(value)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 double DateValue::value()
@@ -26,6 +24,5 @@ double DateValue::value()
 
 
 DateValue::~DateValue() {
-	// TODO Auto-generated destructor stub
 }
 

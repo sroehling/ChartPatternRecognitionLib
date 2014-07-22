@@ -124,6 +124,5 @@ PatternMatchListPtr PatternScannerEngine::scanPatternMatches(const PeriodValSegm
 
 
 PatternScannerEngine::~PatternScannerEngine() {
-	// TODO Auto-generated destructor stub
 }
 

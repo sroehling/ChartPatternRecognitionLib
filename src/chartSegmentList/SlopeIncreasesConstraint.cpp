@@ -30,6 +30,5 @@ bool SlopeIncreasesConstraint::validSegments(const ChartSegmentList &segments)
 
 
 SlopeIncreasesConstraint::~SlopeIncreasesConstraint() {
-	// TODO Auto-generated destructor stub
 }
 

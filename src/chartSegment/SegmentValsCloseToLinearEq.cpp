@@ -26,6 +26,5 @@ bool SegmentValsCloseToLinearEq::validSegment(const ChartSegment &segment)
 }
 
 SegmentValsCloseToLinearEq::~SegmentValsCloseToLinearEq() {
-	// TODO Auto-generated destructor stub
-}
+\}
 

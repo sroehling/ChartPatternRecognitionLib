@@ -8,11 +8,8 @@
 #include "SegmentListConstraint.h"
 
 SegmentListConstraint::SegmentListConstraint() {
-	// TODO Auto-generated constructor stub
-
 }
 
 SegmentListConstraint::~SegmentListConstraint() {
-	// TODO Auto-generated destructor stub
 }
 

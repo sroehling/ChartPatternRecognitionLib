@@ -35,6 +35,5 @@ bool ORPatternMatchValidator::validPattern(const PatternMatch &candidateMatch)
 
 
 ORPatternMatchValidator::~ORPatternMatchValidator() {
-	// TODO Auto-generated destructor stub
 }
 

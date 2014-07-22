@@ -69,7 +69,6 @@ double ChartSegment::maxRelPercentVsLinearEq() const
 }
 
 ChartSegment::~ChartSegment() {
-	// TODO Auto-generated destructor stub
 }
 
 

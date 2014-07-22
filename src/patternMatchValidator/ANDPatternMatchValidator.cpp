@@ -35,6 +35,5 @@ bool ANDPatternMatchValidator::validPattern(const PatternMatch &candidateMatch)
 
 
 ANDPatternMatchValidator::~ANDPatternMatchValidator() {
-	// TODO Auto-generated destructor stub
 }
 
