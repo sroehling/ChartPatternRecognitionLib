@@ -20,7 +20,9 @@ InvertedVScanner::InvertedVScanner() {
 
 PatternMatchListPtr InvertedVScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE));
+	double maxDistanceToTrendLinePerc = 3.0;
+
+	PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,maxDistanceToTrendLinePerc));
 	PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(chartVals);
 	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of up-trend matches: " << uptrendMatches->size();
 
@@ -31,7 +33,7 @@ PatternMatchListPtr InvertedVScanner::scanPatternMatches(const PeriodValSegmentP
 	{
 		logMatchInfo("InvertedVScanner: up-trend match",**utMatchIter);
 
-		PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
+		PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE,maxDistanceToTrendLinePerc));
 		PeriodValSegmentPtr valsForDowntrendScan = (*utMatchIter)->trailingValsWithLastVal();
 		PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(valsForDowntrendScan);
 

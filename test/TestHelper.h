@@ -35,6 +35,10 @@ namespace testHelper {
 	void verifyPatternMatch(const std::string &prefix,const boost::posix_time::ptime &expectedStart,
 			const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
 			const PatternMatchPtr &patternMatch);
+	void verifyPatternMatch(const std::string &prefix,
+			const boost::posix_time::ptime &expectedStart,
+			const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
+			const PatternMatchListPtr &patternMatchList, unsigned int matchIndex);
 
 	boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day);
 

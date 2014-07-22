@@ -8,6 +8,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/test/unit_test.hpp>
+#include <boost/lexical_cast.hpp>
 
 
 #include "TestHelper.h"
@@ -81,6 +82,27 @@ void verifyPatternMatch(const std::string &prefix,
 	BOOST_CHECK(expectedStart == firstVal.periodTime());
 	BOOST_CHECK(expectedEnd == lastVal.periodTime());
 
+}
+
+void verifyPatternMatch(const std::string &prefix,
+		const boost::posix_time::ptime &expectedStart,
+		const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
+		const PatternMatchListPtr &patternMatchList, unsigned int matchIndex)
+{
+	BOOST_REQUIRE(matchIndex < patternMatchList->size());
+	PatternMatchList::iterator matchIter = patternMatchList->begin();
+	unsigned int currIndex = 0;
+	while(currIndex < matchIndex)
+	{
+		currIndex++;
+		matchIter++;
+	}
+	assert(matchIter != patternMatchList->end());
+	std::string extendedPrefix = prefix;
+	extendedPrefix.append(" [");
+	extendedPrefix.append(boost::lexical_cast<std::string>(matchIndex));
+	extendedPrefix.append("]");
+	verifyPatternMatch(extendedPrefix,expectedStart,expectedEnd,expectedSegments,*matchIter);
 }
 
 boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day)

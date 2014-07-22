@@ -15,7 +15,7 @@
 #include "CompositePatternMatchValidatorFactory.h"
 
 
-class InvertedVScanner {
+class InvertedVScanner : public PatternScanner {
 private:
 	CompositePatternMatchValidatorFactory downTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
