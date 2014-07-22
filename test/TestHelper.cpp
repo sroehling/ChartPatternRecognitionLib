@@ -114,10 +114,10 @@ boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsig
 }
 
 
-PeriodVal testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol)
+PeriodVal testPeriodVal(unsigned int year, unsigned int month, unsigned int day, double val, unsigned int vol, unsigned int perValIndex)
 {
 	ptime perTime(date(year,month,day));
-	PeriodVal perVal(perTime,val,val,val,val,vol);
+	PeriodVal perVal(perTime,val,val,val,val,vol,perValIndex);
 	return perVal;
 }
 
@@ -144,13 +144,16 @@ PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &sta
 			ptime currTime(*dayIncr);
 
 			BOOST_TEST_MESSAGE("Synthesized PeriodValSegment date: " << currTime << " val: " << currVal);
-			perVals->push_back(PeriodVal(currTime,currVal,currVal,currVal,currVal,currVal));
+			unsigned int dummyPerValIndexForIndexForReAssignment = 0;
+			perVals->push_back(PeriodVal(currTime,currVal,currVal,currVal,currVal,currVal,dummyPerValIndexForIndexForReAssignment));
 
 			currVal += valIncr;
 			++dayIncr;
 		}
 
 	}
+
+	PeriodVal::reAssignIndices(*perVals);
 
 	return PeriodValSegmentPtr(new PeriodValSegment(perVals));
 

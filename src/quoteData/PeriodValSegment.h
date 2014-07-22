@@ -68,8 +68,11 @@ public:
 
 	double highestHigh() const; // Highest high within the segment
 	const PeriodVal highestHighVal() const; // PeriodVal with the highest high
+	const PeriodValCltn::iterator &highestHighIter() const { return highestHighValIter_; }
+
 	double lowestLow() const; // Lowest low value within the segment
 	const PeriodVal lowestLowVal() const;
+	const PeriodValCltn::iterator &lowestLowIter() const { return lowestLowValIter_; }
 
 	double depthPoints() const; // depth in number of points ($, etc.)
 	double depthPercent() const; // depth from high to low, percent

@@ -17,6 +17,8 @@
 
 class InvertedVScanner : public PatternScanner {
 private:
+
+	double trendLineMaxDistancePerc_;
 	CompositePatternMatchValidatorFactory downTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
 
@@ -28,6 +30,7 @@ public:
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
 	InvertedVScanner();
+	InvertedVScanner(double trendLineMaxDistancePerc);
 	virtual ~InvertedVScanner();
 };
 

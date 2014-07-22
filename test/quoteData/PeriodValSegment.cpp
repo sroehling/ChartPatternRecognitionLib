@@ -12,11 +12,12 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
 {
 	PeriodValCltnPtr testData(new PeriodValCltn());
 
-	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
-	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
-	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
-	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
-	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
+	unsigned int periodValIndex=0;
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5,periodValIndex++));
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
 
@@ -66,11 +67,12 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 {
 	PeriodValCltnPtr testData(new PeriodValCltn());
 
-	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
-	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
-	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
-	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
-	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
+	unsigned int periodValIndex = 0;
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5,periodValIndex++));
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
 
@@ -97,13 +99,14 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 BOOST_AUTO_TEST_CASE( PeriodValSegment_Splice )
 {
 	PeriodValCltnPtr testData(new PeriodValCltn());
-																	// <<-- split position 0
-	testData->push_back(testPeriodVal(2013,1,1,1.0,1));
+	unsigned int periodValIndex = 0;
+										// <<-- split position 0
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1,periodValIndex++));
 																	// <<-- split position 1
-	testData->push_back(testPeriodVal(2013,2,1,2.0,2));
-	testData->push_back(testPeriodVal(2013,3,1,3.0,3));
-	testData->push_back(testPeriodVal(2013,4,1,4.0,4));
-	testData->push_back(testPeriodVal(2013,5,1,5.0,5));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,4,1,4.0,4,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,5,1,5.0,5,periodValIndex++));
 																	// <<-- split position 5
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));

@@ -21,11 +21,18 @@ using namespace scannerHelper;
 
 VScanner::VScanner()
 {
+	trendLineMaxDistancePerc_ = 7.0;
+}
+
+VScanner::VScanner(double trendLineMaxDistancePerc)
+: trendLineMaxDistancePerc_(trendLineMaxDistancePerc)
+{
+	assert(trendLineMaxDistancePerc > 0.0);
 }
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
+	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE,trendLineMaxDistancePerc_));
 	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
 	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of downtrend matches: " << downtrendMatches->size();
 
@@ -37,7 +44,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		logMatchInfo("VScanner: downtrend match",**dtMatchIter);
 
 		PeriodValSegmentPtr valsForUptrendScan = (*dtMatchIter)->trailingValsWithLastVal();
-		PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE));
+		PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,trendLineMaxDistancePerc_));
 		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
 
 		for(PatternMatchList::iterator utMatchIter = uptrendMatches->begin();

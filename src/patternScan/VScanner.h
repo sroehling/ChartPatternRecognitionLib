@@ -16,13 +16,15 @@
 
 // Scan for V shaped patterns. This class is a building block
 // for double bottoms or other patterns with a V shape.
-class VScanner {
+class VScanner : public PatternScanner {
 private:
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
+	double trendLineMaxDistancePerc_;
 
 public:
 	VScanner();
+	VScanner(double trendLineMaxDistancePerc);
 
 	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
 	CompositePatternMatchValidatorFactory &overallValidatorFactory() { return overallValidatorFactory_; }

@@ -19,7 +19,7 @@
 namespace testHelper {
 
 	PeriodVal testPeriodVal(unsigned int year, unsigned int month,
-					unsigned int day, double val, unsigned int vol);
+					unsigned int day, double val, unsigned int vol, unsigned int periodValIndex);
 
 	PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &startDate,
 			const TestPerValRangeList &ranges);

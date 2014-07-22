@@ -22,9 +22,10 @@
 
 PeriodVal::PeriodVal(boost::posix_time::ptime &periodTime,
 		double open, double high, double low,
-			double close, unsigned int volume)
+			double close, unsigned int volume,unsigned int perValIndex)
 : periodTime_(periodTime),
-  	  open_(open), high_(high), low_(low), close_(close), volume_(volume)
+  	  open_(open), high_(high), low_(low), close_(close), volume_(volume),
+	perValIndex_(perValIndex)
 {
 }
 
@@ -34,7 +35,6 @@ double PeriodVal::typicalPrice() const
 }
 
 PeriodVal::~PeriodVal() {
-	// TODO Auto-generated destructor stub
 }
 
 PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
@@ -104,7 +104,8 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 			// The data is read in reverse chronological order (most recent dates first),
 			// but needs to be be in chronological order for processing
 			// in memory.
-			perValCltn->push_front(PeriodVal(perTime,open,high,low,close,vol));
+			unsigned int dummyIndexPlaceholderForReassignment = 0;
+			perValCltn->push_front(PeriodVal(perTime,open,high,low,close,vol,dummyIndexPlaceholderForReassignment));
 
 		}
 		catch(const std::exception &e)
@@ -117,8 +118,21 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 		}
 
 	}
+	PeriodVal::reAssignIndices(*perValCltn);
+
 	return perValCltn;
 }
+
+void PeriodVal::reAssignIndices(PeriodValCltn &perValCltn)
+{
+	unsigned int currIndex = 0;
+	for(PeriodValCltn::iterator perValIter = perValCltn.begin(); perValIter != perValCltn.end(); perValIter++)
+	{
+		(*perValIter).setIndex(currIndex);
+		currIndex++;
+	}
+}
+
 
 
 std::ostream& operator<<(std::ostream& os, const PeriodVal& perVal)

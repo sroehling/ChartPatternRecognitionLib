@@ -16,6 +16,10 @@
 // ascending triangle (flat upper trend line, upward sloping lower trend line), or
 // triangle (downward sloping upper trend line, upward sloping lower trend line).
 class WedgeScannerEngine {
+private:
+	double pivotLowMaxTrendLineDistancePerc_;
+	PatternMatchListPtr scanPivotHighs(const PeriodValSegmentPtr &chartVals) const;
+	PatternMatchListPtr scanPivotLows(const PeriodValSegmentPtr &chartVals) const;
 public:
 	WedgeScannerEngine();
 

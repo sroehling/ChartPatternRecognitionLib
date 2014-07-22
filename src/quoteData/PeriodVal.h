@@ -27,9 +27,21 @@ private:
 	double close_;
 	unsigned int volume_;
 
+	// Each PeriodVal needs to be assigned a unique index value w.r.t the
+	// other PeriodVal's in the same collection. A "flyweight" iterator is
+	// used to access all the PeriodVal's, and this index is used for
+	// calculations with LinearEquations, since a date cannot be used
+	// as an X value in a LinearEquation.
+	unsigned int perValIndex_;
+
+	// setIndex is for internal use by code for reading PeriodVal's
+	void setIndex(unsigned int index) { perValIndex_ = index; }
+
+
 public:
 	PeriodVal(boost::posix_time::ptime &periodTime,
-			double open, double high, double low, double close, unsigned int volume);
+			double open, double high, double low, double close, unsigned int volume,
+			unsigned int perValIndex);
 
 	const boost::posix_time::ptime &periodTime() const { return periodTime_; }
 	double open() const { return open_; }
@@ -37,6 +49,10 @@ public:
 	double low() const { return low_; }
 	double close() const { return close_; }
 	unsigned int volume() const { return volume_; }
+
+	unsigned int index() const { return perValIndex_; }
+
+	static void reAssignIndices(PeriodValCltn &perValCltn);
 
 	static PeriodValCltnPtr readFromFile(const std::string &fileName);
 

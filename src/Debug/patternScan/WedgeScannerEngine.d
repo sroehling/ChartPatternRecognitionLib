@@ -634,6 +634,9 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/InvertedVScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/MultiPatternScanner.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/WedgeScannerEngine.h:
@@ -1907,5 +1910,11 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidatorFactory.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/InvertedVScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/MultiPatternScanner.h:

@@ -139,6 +139,12 @@ const boost::posix_time::ptime PatternMatch::lowestLowTime() const
 	return lowestLowVal().periodTime();
 }
 
+const PeriodValCltn::iterator &PatternMatch::lowestLowIter() const
+{
+	return matchSegment_->lowestLowIter();
+}
+
+
 
 double PatternMatch::highestHigh() const
 {
@@ -155,6 +161,11 @@ const boost::posix_time::ptime PatternMatch::highestHighTime() const
 	return highestHighVal().periodTime();
 }
 
+
+const PeriodValCltn::iterator &PatternMatch::highestHighIter() const
+{
+	return matchSegment_->highestHighIter();
+}
 
 double PatternMatch::depthPoints() const
 {
