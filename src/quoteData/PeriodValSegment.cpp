@@ -40,6 +40,31 @@ void PeriodValSegment::initLowestLowValIter()
 	}
 }
 
+bool PeriodValSegment::validPeriodValIndices() const
+{
+
+	if(segBegin() == segEnd())
+	{
+		return true;
+	}
+	PeriodValCltn::const_iterator checkBeginIter = segBegin();
+	unsigned int lastIndex = (*segBegin()).perValIndex();
+	checkBeginIter++;
+	unsigned int segPos = 1;
+	for(PeriodValCltn::const_iterator perValIter = checkBeginIter;
+			perValIter != segEnd(); perValIter++)
+	{
+		unsigned int currIndex = (*perValIter).perValIndex();
+		if((currIndex-1) != lastIndex)
+		{
+			return false;
+		}
+		lastIndex = currIndex;
+		segPos++;
+	}
+	return true;
+}
+
 void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
 		const PeriodValCltn::iterator &segEnd)
 {
@@ -56,6 +81,7 @@ void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
 
 	initHighestHighValIter();
 	initLowestLowValIter();
+	assert(validPeriodValIndices());
 
 }
 

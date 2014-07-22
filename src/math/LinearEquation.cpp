@@ -8,13 +8,15 @@ LinearEquation::LinearEquation(double m, double b)
 
 LinearEquation::LinearEquation(const XYCoord &startPt, const XYCoord &endPt)
 {
-	assert(endPt.x() != 0.0); // would cause a divide by zero error.
+	double changeX = endPt.x()-startPt.x();
+	double changeY = endPt.y()-startPt.y();
+	assert(changeX != 0.0);
 
-	b_ = startPt.y();
+	m_ = changeY/changeX;
 
 	// y = mx + b
-	// m = (y-b)/x
-	m_ = (endPt.y() - b_)/endPt.x();
+	// b = y - mx
+	b_ = endPt.y()-(m_*endPt.x());
 }
 
 double LinearEquation::slope() const

@@ -14,10 +14,13 @@ ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 {
 	assert(segmentVals->numVals() >= 2);
 
+
+
 	// For purposes of creating a LinearEquation based upon the
 	// dates and value we need to map the dates onto numerical values.
-	double startPtXVal = 0.0;
-	double endPtXVal = double(segmentVals->numVals()-1);
+	double startPtXVal = segmentVals->firstVal().pseudoXVal();
+	double endPtXVal = segmentVals->lastVal().pseudoXVal();
+	assert(endPtXVal > startPtXVal);
 
 	XYCoord startPt(startPtXVal,segmentVals->firstVal().typicalPrice());
 	XYCoord endPt(endPtXVal,segmentVals->lastVal().typicalPrice());
@@ -51,18 +54,16 @@ double ChartSegment::slope() const
 double ChartSegment::maxRelPercentVsLinearEq() const
 {
 	double maxPerc = -1.0 * std::numeric_limits<double>::max();
-	double currXVal = 0.0;
 	for(PeriodValCltn::const_iterator valIter = segmentVals_->segBegin();
 			valIter != segmentVals_->segEnd(); valIter++)
 	{
 		double segYVal = (*valIter).typicalPrice();
-		double eqYVal = segmentEq_->yVal(currXVal);
+		double eqYVal = segmentEq_->yVal((*valIter).pseudoXVal());
 		double relPerc = MathHelper::absRelPercentVal(eqYVal,segYVal);
 		if(relPerc > maxPerc)
 		{
 			maxPerc = relPerc;
 		}
-		currXVal += 1.0;
 	}
 	return maxPerc;
 }

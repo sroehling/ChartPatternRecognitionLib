@@ -50,7 +50,8 @@ public:
 	double close() const { return close_; }
 	unsigned int volume() const { return volume_; }
 
-	unsigned int index() const { return perValIndex_; }
+	unsigned int perValIndex() const { return perValIndex_; }
+	double pseudoXVal() const { return (double)perValIndex_; }
 
 	static void reAssignIndices(PeriodValCltn &perValCltn);
 

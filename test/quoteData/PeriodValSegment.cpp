@@ -8,6 +8,7 @@
 
 using namespace testHelper;
 
+
 BOOST_AUTO_TEST_CASE( PeriodValSegmentTest )
 {
 	PeriodValCltnPtr testData(new PeriodValCltn());

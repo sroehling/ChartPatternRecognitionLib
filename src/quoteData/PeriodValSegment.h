@@ -30,6 +30,8 @@ private:
 	unsigned int startPos_;
 	unsigned int endPos_;
 
+	bool validPeriodValIndices() const;
+
 	void initSegments(const PeriodValCltn::iterator &segBegin,
 			const PeriodValCltn::iterator &segEnd);
 	void initHighestHighValIter();
