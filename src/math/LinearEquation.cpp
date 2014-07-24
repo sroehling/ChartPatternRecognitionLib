@@ -28,3 +28,27 @@ double LinearEquation::yVal(double x) const
 {
     return m_ * x + b_;
 }
+
+XYCoord LinearEquation::intercept(const LinearEquation &otherEquation) const
+{
+	assert(slope() != otherEquation.slope()); // equations never intersect
+
+	// Start with 2 equations
+	// y1 = m1 * x1 + b1
+	// y2 = m2 * x2 + b2
+	//
+	// At the point of intersection, we know that y1 = y2
+	// and x1 = x2
+	//
+	// Therefore (at the point of intersection)
+	//
+	// m1 * x + b1 = m2 * x * b2
+	//    or:
+	// x = (b2-b1)/(m1-m2)
+
+	double intersectX = (otherEquation.b() - this->b())/(this->slope()-otherEquation.slope());
+	double intersectY = this->yVal(intersectX);
+
+	return XYCoord(intersectX, intersectY);
+
+}

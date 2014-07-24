@@ -95,7 +95,11 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 						LinearEquationPtr lowerTrendLineEq = pivotLowSeg->segmentEquation(LowPeriodValueRef());
 
 						// TODO - Validate the slopes of the trend-lines
+
+
 						// TODO - Calculate the apex between upper and lower trend-lines.
+
+
 						// TODO - Validate the distance to the apex is within the range for a pattern match
 						// TODO - For reporting a pattern match, validate the matching done thus far is far
 						// 	enough along towards the apex (e.g., 60-70%).

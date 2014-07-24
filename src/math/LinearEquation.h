@@ -20,8 +20,13 @@ public:
     LinearEquation(double m, double b);
     LinearEquation(const XYCoord &startPt, const XYCoord &endPt);
 
+    // Point at which this equation intercepts another. Don't use
+    // this method if both equations have the same slope (and thus never intersect).
+    XYCoord intercept(const LinearEquation &otherEquation) const;
+
     double slope() const;
     double yVal(double x) const;
+    double b() const { return b_; }
 };
 
 typedef boost::shared_ptr<LinearEquation> LinearEquationPtr;
