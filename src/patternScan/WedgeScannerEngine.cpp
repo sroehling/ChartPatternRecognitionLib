@@ -94,18 +94,42 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 								(*trendLineEndPointPivotLowIter)->lowestLowIter()));
 						LinearEquationPtr lowerTrendLineEq = pivotLowSeg->segmentEquation(LowPeriodValueRef());
 
-						// TODO - Validate the slopes of the trend-lines
 
 
-						// TODO - Calculate the apex between upper and lower trend-lines.
+						// Calculate the intersection between upper and lower trend-lines.
+						// This is where the pattern ends.
+						if(lowerTrendLineEq->slope() != upperTrendLineEq->slope())
+						{
+							// Only continue if the lower and upper trend-line have different slopes.
+							// Otherwise they'll never intersect. This being said, a similar scanning
+							// algorithm may be appropriate for channels.
+							XYCoord trendlineIntercept = lowerTrendLineEq->intercept(*upperTrendLineEq);
+
+							// Only continue if the intercept occurs after the first pivot high's "pseudo X" value
+							// (i.e., the unique numerical value assigned for each PeriodVal's date). If the intercept
+							// is before the first pivot high, then the lines are angled away from each other, and
+							// we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
+							// at some point, but not here).
+							if(trendlineIntercept.x() > (*startMatchPivotHighIter)->highestHighVal().pseudoXVal())
+							{
+								// TODO - Besides validating the trendlines intersect after the first pivot high,
+								// validate the slopes of the individual trendlines are within the tolerances for
+								// an acceptable pattern match (e.g., we don't want both to have a steep negative slope,
+								// even if they do intercept).
+
+								// TODO - Validate the distance to the apex is within the range for a pattern match
+
+								// TODO - Iterate through each point between the starting pivot high and the apex
+								// (or end, whichever comes first), and check that each value and a % of overall values
+								// is between the two equations.
+
+								// TODO - For reporting a pattern match, validate the matching done thus far is far
+								// 	enough along towards the apex (e.g., 60-70%).
 
 
-						// TODO - Validate the distance to the apex is within the range for a pattern match
-						// TODO - For reporting a pattern match, validate the matching done thus far is far
-						// 	enough along towards the apex (e.g., 60-70%).
-						// TODO - Iterate through each point between the starting pivot high and the apex
-						// (or end, whichever comes first), and check that each value and a % of overall values
-						// is between the two equations.
+						} // if trendline intercept occurs after the pivot high
+
+						} // If lower and upper trend line have different slopes (i.e., they intersect)
 
 					} // for each candidate pivot low to serve as the end-point for drawing the lower trend-line
 
