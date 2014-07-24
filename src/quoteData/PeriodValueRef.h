@@ -29,6 +29,16 @@ public:
 	virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.high(); }
 };
 
+class LowPeriodValueRef: public PeriodValueRef {
+public:
+	virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.low(); }
+};
+
+
+class TypicalPricePeriodValueRef: public PeriodValueRef {
+public:
+	virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.typicalPrice(); }
+};
 
 
 #endif /* PERIODVALUEREF_H_ */

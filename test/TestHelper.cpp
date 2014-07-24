@@ -15,6 +15,8 @@
 #include "PatternMatch.h"
 #include "TimeHelper.h"
 #include "PeriodVal.h"
+#include "PeriodValSegment.h"
+#include "ChartSegment.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -158,5 +160,15 @@ PeriodValSegmentPtr synthesizePeriodValSegment(const boost::gregorian::date &sta
 	return PeriodValSegmentPtr(new PeriodValSegment(perVals));
 
 }
+
+PatternMatchPtr segmentSpiceToPatternMatch(const PeriodValSegmentPtr &seg, unsigned int beginRange, unsigned int endRange)
+{
+	assert(endRange >= beginRange);
+	ChartSegmentList matchSegments;
+	matchSegments.push_back(ChartSegmentPtr(new ChartSegment(seg->spliceRange(beginRange,endRange))));
+	PatternMatchPtr patternMatch(new PatternMatch(matchSegments));
+	return patternMatch;
+}
+
 
 } // namespace TestHelper

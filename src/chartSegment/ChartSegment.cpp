@@ -8,24 +8,13 @@
 #include "ChartSegment.h"
 #include "XYCoord.h"
 #include "MathHelper.h"
+#include "PeriodValueRef.h"
 
 ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 : segmentVals_(segmentVals)
 {
 	assert(segmentVals->numVals() >= 2);
-
-
-
-	// For purposes of creating a LinearEquation based upon the
-	// dates and value we need to map the dates onto numerical values.
-	double startPtXVal = segmentVals->firstVal().pseudoXVal();
-	double endPtXVal = segmentVals->lastVal().pseudoXVal();
-	assert(endPtXVal > startPtXVal);
-
-	XYCoord startPt(startPtXVal,segmentVals->firstVal().typicalPrice());
-	XYCoord endPt(endPtXVal,segmentVals->lastVal().typicalPrice());
-
-	segmentEq_ = LinearEquationPtr(new LinearEquation(startPt,endPt));
+	segmentEq_ = segmentVals->segmentEquation(TypicalPricePeriodValueRef());
 }
 
 const PeriodVal &ChartSegment::lastPeriodVal() const

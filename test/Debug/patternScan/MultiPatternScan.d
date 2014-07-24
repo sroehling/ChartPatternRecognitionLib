@@ -691,12 +691,14 @@ patternScan/MultiPatternScan.d: ../patternScan/MultiPatternScan.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/MultiPatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/InvertedVScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/CompositePatternMatchValidatorFactory.h \
@@ -2086,6 +2088,8 @@ patternScan/MultiPatternScan.d: ../patternScan/MultiPatternScan.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/MultiPatternScanner.h:
@@ -2097,6 +2101,8 @@ patternScan/MultiPatternScan.d: ../patternScan/MultiPatternScan.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/InvertedVScanner.h:
 

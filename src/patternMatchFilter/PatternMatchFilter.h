@@ -11,6 +11,7 @@
 #include "PatternMatch.h"
 #include "PatternMatchSortFunctor.h"
 #include "PatternMatchUniqueFunctor.h"
+#include "PatternMatchFindPredicate.h"
 
 namespace patternMatchFilter {
 
@@ -27,6 +28,10 @@ PatternMatchListPtr uniquePatternMatches(const PatternMatchListPtr &unfilteredMa
 
 PatternMatchListPtr sortThenFilterUniqueMatches(const PatternMatchListPtr &unfilteredMatches,
 		const PatternMatchSortFunctor &sortFunc, const PatternMatchUniqueFunctor &uniqueFunc);
+
+// Starting at the beginning of patternMatches, find the first PatternMatch satisfying findPred
+PatternMatchList::iterator findFirstPatternMatch(const PatternMatchListPtr &patternMatches,
+		const PatternMatchFindPredicate &findPred);
 
 }
 

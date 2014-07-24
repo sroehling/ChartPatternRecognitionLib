@@ -628,6 +628,7 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h \
   /usr/local/include/boost/log/trivial.hpp \
@@ -716,7 +717,8 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
   /usr/local/include/boost/log/utility/formatting_ostream_fwd.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h:
 
@@ -1978,6 +1980,8 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h:
@@ -2155,3 +2159,5 @@ patternScan/ScannerHelper.d: ../patternScan/ScannerHelper.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h:

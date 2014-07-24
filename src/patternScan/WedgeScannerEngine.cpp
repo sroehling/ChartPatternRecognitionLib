@@ -11,6 +11,8 @@
 #include "PeriodValSegment.h"
 #include "PatternMatchFilter.h"
 #include "MultiPatternScanner.h"
+#include "PatternMatchFindPredicate.h"
+#include "PeriodValueRef.h"
 
 WedgeScannerEngine::WedgeScannerEngine() {
 	pivotLowMaxTrendLineDistancePerc_ = 3.0;
@@ -64,9 +66,48 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 			// This trend line is only valid for purposes of continued matching the wedge pattern if it has
 			// a negative slope.
 
-			// Get the first pivot low which starts after the starting pivot high. This
+			// Find the first pivot low which starts after the starting pivot high. This
 			// first pivot low serves as the candidate starting point to draw the corresponding
 			// lower trend line.
+			PatternMatchList::iterator pivotLowBeginAfterPivotHighStart =
+					patternMatchFilter::findFirstPatternMatch(pivotLows,
+							LowestLowAfterTime((*startMatchPivotHighIter)->highestHighTime()));
+			if(pivotLowBeginAfterPivotHighStart != pivotLows->end())
+			{
+				for(PatternMatchList::iterator startPivotLowIter = pivotLowBeginAfterPivotHighStart;
+						startPivotLowIter != pivotLows->end(); startPivotLowIter++)
+				{
+					// TODO - Test if depth from the pivot high to pivot low satisfies the depth criterion.
+					PatternMatchList::iterator remainingPivotLowsBegin = startPivotLowIter;
+					remainingPivotLowsBegin++;
+					for(PatternMatchList::iterator trendLineEndPointPivotLowIter = remainingPivotLowsBegin;
+							trendLineEndPointPivotLowIter != pivotLows->end(); trendLineEndPointPivotLowIter++)
+					{
+						// Create Linear equations defining the upper and lower trend-lines
+						PeriodValSegmentPtr pivotHighSeg(new PeriodValSegment(chartVals->perValCltn(),
+								(*startMatchPivotHighIter)->highestHighIter(),
+								(*trendLineEndPointPivotHighIter)->highestHighIter()));
+						LinearEquationPtr upperTrendLineEq = pivotHighSeg->segmentEquation(HighPeriodValueRef());
+
+						PeriodValSegmentPtr pivotLowSeg(new PeriodValSegment(chartVals->perValCltn(),
+								(*startPivotLowIter)->lowestLowIter(),
+								(*trendLineEndPointPivotLowIter)->lowestLowIter()));
+						LinearEquationPtr lowerTrendLineEq = pivotLowSeg->segmentEquation(LowPeriodValueRef());
+
+						// TODO - Validate the slopes of the trend-lines
+						// TODO - Calculate the apex between upper and lower trend-lines.
+						// TODO - Validate the distance to the apex is within the range for a pattern match
+						// TODO - For reporting a pattern match, validate the matching done thus far is far
+						// 	enough along towards the apex (e.g., 60-70%).
+						// TODO - Iterate through each point between the starting pivot high and the apex
+						// (or end, whichever comes first), and check that each value and a % of overall values
+						// is between the two equations.
+
+					} // for each candidate pivot low to serve as the end-point for drawing the lower trend-line
+
+				} // for each pivot low after the starting pivot high to serve as the start point for lower trend-line.
+
+			} // If a pivot low is found after the starting pivot high's time
 		}
 	}
 

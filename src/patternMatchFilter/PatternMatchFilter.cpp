@@ -6,6 +6,7 @@
  */
 
 #include <PatternMatchFilter.h>
+#include <algorithm>
 
 namespace patternMatchFilter
 {
@@ -31,6 +32,17 @@ public:
 	UniquePatternMatchProxy(const PatternMatchUniqueFunctor &func) : func_(func) {}
     bool operator()(const PatternMatchPtr &match1, const PatternMatchPtr &match2) const { return func_(match1, match2); }
 };
+
+
+class FindPatternMatchProxy
+{
+private:
+	const PatternMatchFindPredicate &pred_;
+public:
+	FindPatternMatchProxy(const PatternMatchFindPredicate &pred) : pred_(pred) {}
+    bool operator()(const PatternMatchPtr &match) const { return pred_(match); }
+};
+
 
 PatternMatchListPtr sortPatternMatches(const PatternMatchListPtr &unsortedMatches,
 		const PatternMatchSortFunctor &sortFunc)
@@ -84,5 +96,11 @@ PatternMatchListPtr filterUniqueAndLongestLowestLow(const PatternMatchListPtr &u
 			SortPatternMatchByLowestLowTimeThenLength(),SameLowestLowTime());
 }
 
+
+PatternMatchList::iterator findFirstPatternMatch(const PatternMatchListPtr &patternMatches,
+		const PatternMatchFindPredicate &findPred)
+{
+	return std::find_if(patternMatches->begin(),patternMatches->end(),FindPatternMatchProxy(findPred));
+}
 
 } // namespace

@@ -219,6 +219,19 @@ double PeriodValSegment::pointsAtPercentOfDepthBelowHigh(double percentBelowHigh
 	return depthAtPerc;
 }
 
+LinearEquationPtr PeriodValSegment::segmentEquation(const PeriodValueRef &endPointValRef) const
+{
+	double startPtXVal = this->firstVal().pseudoXVal();
+	double endPtXVal = this->lastVal().pseudoXVal();
+	assert(endPtXVal > startPtXVal);
+
+	XYCoord startPt(startPtXVal,endPointValRef.referencedVal(this->firstVal()));
+	XYCoord endPt(endPtXVal,endPointValRef.referencedVal(this->lastVal()));
+
+	return LinearEquationPtr(new LinearEquation(startPt,endPt));
+
+}
+
 PeriodValSegmentPtr PeriodValSegment::readFromFile(const std::string &fileName)
 {
 	PeriodValCltnPtr segData = PeriodVal::readFromFile(fileName);

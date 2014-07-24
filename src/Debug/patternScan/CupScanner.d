@@ -629,6 +629,7 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PatternScannerEngine.h \
@@ -642,7 +643,8 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/ScannerHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFilter.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/EndWithinPercentOfStart.h:
 
@@ -1906,6 +1908,8 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/ORPatternMatchValidator.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/CupScanner.h:
@@ -1933,3 +1937,5 @@ patternScan/CupScanner.d: ../patternScan/CupScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchSortFunctor.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h:

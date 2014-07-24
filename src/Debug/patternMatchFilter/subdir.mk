@@ -5,16 +5,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../patternMatchFilter/PatternMatchFilter.cpp \
+../patternMatchFilter/PatternMatchFindPredicate.cpp \
 ../patternMatchFilter/PatternMatchSortFunctor.cpp \
 ../patternMatchFilter/PatternMatchUniqueFunctor.cpp 
 
 OBJS += \
 ./patternMatchFilter/PatternMatchFilter.o \
+./patternMatchFilter/PatternMatchFindPredicate.o \
 ./patternMatchFilter/PatternMatchSortFunctor.o \
 ./patternMatchFilter/PatternMatchUniqueFunctor.o 
 
 CPP_DEPS += \
 ./patternMatchFilter/PatternMatchFilter.d \
+./patternMatchFilter/PatternMatchFindPredicate.d \
 ./patternMatchFilter/PatternMatchSortFunctor.d \
 ./patternMatchFilter/PatternMatchUniqueFunctor.d 
 

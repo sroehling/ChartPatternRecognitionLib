@@ -10,6 +10,8 @@
 
 #include <boost/shared_ptr.hpp>
 #include "PeriodVal.h"
+#include "LinearEquation.h"
+#include "PeriodValueRef.h"
 
 class PeriodValSegment;
 typedef boost::shared_ptr<PeriodValSegment> PeriodValSegmentPtr;
@@ -84,6 +86,11 @@ public:
 	// will return 75. This is useful when constructing pattern recognition
 	// constraints.
 	double pointsAtPercentOfDepthBelowHigh(double percentBelowHigh) const;
+
+	// Construct a LinearEquation from the start to finish of this segment.
+	// The given PeriodValueRef determines which values on the end-points are
+	// used to draw the equation.
+	LinearEquationPtr segmentEquation(const PeriodValueRef &endPointValRef) const;
 
 	static PeriodValSegmentPtr readFromFile(const std::string &fileName);
 

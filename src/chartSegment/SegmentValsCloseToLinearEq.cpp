@@ -26,5 +26,5 @@ bool SegmentValsCloseToLinearEq::validSegment(const ChartSegment &segment)
 }
 
 SegmentValsCloseToLinearEq::~SegmentValsCloseToLinearEq() {
-\}
+}
 

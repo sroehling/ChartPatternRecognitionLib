@@ -42,6 +42,7 @@ namespace testHelper {
 
 	boost::posix_time::ptime dateToTime(unsigned int year, unsigned int month, unsigned int day);
 
+	PatternMatchPtr segmentSpiceToPatternMatch(const PeriodValSegmentPtr &seg, unsigned int beginRange, unsigned int endRange);
 
 };
 

@@ -8,6 +8,7 @@
 #include "PatternMatchSortFunctor.h"
 #include "PatternMatchUniqueFunctor.h"
 #include "PatternMatchFilter.h"
+#include "PatternMatchFindPredicate.h"
 
 using namespace testHelper;
 using namespace patternMatchFilter;
@@ -218,5 +219,47 @@ BOOST_AUTO_TEST_CASE( PatternMatchFilter_SortAndUniqueHighestHighPivot )
 	verifyPatternMatch("Unique matches [2]",dateToTime(2013,4,1),dateToTime(2013,5,1),1,*uniqueMatchesIter);
 	uniqueMatchesIter++;
 
+
+}
+
+
+BOOST_AUTO_TEST_CASE( PatternMatchFilter_FindFirstLowestLow )
+{
+
+	PeriodValCltnPtr testData(new PeriodValCltn());
+
+	unsigned int periodValIndex = 0;
+	testData->push_back(testPeriodVal(2013,1,1,1.0,1,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,2,1,2.0,2,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,3,1,3.0,3,periodValIndex++)); // highest high
+	testData->push_back(testPeriodVal(2013,4,1,2.0,2,periodValIndex++));
+	testData->push_back(testPeriodVal(2013,5,1,1.0,1,periodValIndex++));
+
+	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
+
+	PatternMatchPtr patternMatch1 = segmentSpiceToPatternMatch(testSeg,1,3);
+	BOOST_TEST_MESSAGE("patternMatch1: lowest low: " << patternMatch1->lowestLow());
+	BOOST_TEST_MESSAGE("patternMatch1: lowest low time: " << patternMatch1->lowestLowTime());
+	BOOST_CHECK(patternMatch1->lowestLowTime() == dateToTime(2013,2,1));
+
+	PatternMatchPtr patternMatch2 = segmentSpiceToPatternMatch(testSeg,2,5);
+	BOOST_TEST_MESSAGE("patternMatch2: lowest low: " << patternMatch2->lowestLow());
+	BOOST_TEST_MESSAGE("patternMatch2: lowest low time: " << patternMatch2->lowestLowTime());
+	BOOST_CHECK(patternMatch2->lowestLowTime() == dateToTime(2013,5,1));
+
+	PatternMatchListPtr patternMatchList(new PatternMatchList());
+	patternMatchList->push_back(patternMatch1);
+	patternMatchList->push_back(patternMatch2);
+
+	PatternMatchList::iterator lowAfterIter = findFirstPatternMatch(patternMatchList,LowestLowAfterTime(dateToTime(2012,12,1)));
+	BOOST_REQUIRE(lowAfterIter != patternMatchList->end());
+	BOOST_CHECK((*lowAfterIter)->lowestLowTime() == dateToTime(2013,2,1));
+
+	lowAfterIter = findFirstPatternMatch(patternMatchList,LowestLowAfterTime(dateToTime(2013,3,1)));
+	BOOST_REQUIRE(lowAfterIter != patternMatchList->end());
+	BOOST_CHECK((*lowAfterIter)->lowestLowTime() == dateToTime(2013,5,1));
+
+	lowAfterIter = findFirstPatternMatch(patternMatchList,LowestLowAfterTime(dateToTime(2013,5,1)));
+	BOOST_REQUIRE(lowAfterIter == patternMatchList->end());
 
 }

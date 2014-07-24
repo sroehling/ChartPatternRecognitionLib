@@ -1,6 +1,6 @@
-patternMatchFilter/PatternMatchUniqueFunctor.d: \
-  ../patternMatchFilter/PatternMatchUniqueFunctor.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h \
+patternMatchFilter/PatternMatchFindPredicate.d: \
+  ../patternMatchFilter/PatternMatchFindPredicate.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
@@ -631,7 +631,7 @@ patternMatchFilter/PatternMatchUniqueFunctor.d: \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchUniqueFunctor.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
