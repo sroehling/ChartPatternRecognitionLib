@@ -5,6 +5,7 @@
  *      Author: sroehling
  */
 
+#include <boost/log/trivial.hpp>
 #include <WedgeScannerEngine.h>
 #include "VScanner.h"
 #include "InvertedVScanner.h"
@@ -24,6 +25,13 @@ PatternMatchListPtr WedgeScannerEngine::scanPivotHighs(const PeriodValSegmentPtr
 	MultiPatternScanner pivotHighMultiPatternScanner(pivotHighScanner);
 	PatternMatchListPtr pivotHighs = pivotHighMultiPatternScanner.scanPatternMatches(chartVals);
 	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(pivotHighs);
+
+	BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num pivot highs: " << sortedUniquePivots->size() << std::endl;
+	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
+	{
+		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: pivot high: " << (*matchIter)->highestHigh() << std::endl;
+	}
+
 	return sortedUniquePivots;
 }
 
@@ -33,6 +41,13 @@ PatternMatchListPtr WedgeScannerEngine::scanPivotLows(const PeriodValSegmentPtr 
 	MultiPatternScanner pivotLowMultiPatternScanner(pivotLowScanner);
 	PatternMatchListPtr pivotLows = pivotLowMultiPatternScanner.scanPatternMatches(chartVals);
 	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestLowestLow(pivotLows);
+
+	BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num pivot lows: " << sortedUniquePivots->size() << std::endl;
+	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
+	{
+		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: pivot low: " << (*matchIter)->lowestLow() << std::endl;
+	}
+
 	return sortedUniquePivots;
 
 }
@@ -110,12 +125,16 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 							// is before the first pivot high, then the lines are angled away from each other, and
 							// we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
 							// at some point, but not here).
+							double firstPivotHighXVal = (*startMatchPivotHighIter)->highestHighVal().pseudoXVal();
 							if(trendlineIntercept.x() > (*startMatchPivotHighIter)->highestHighVal().pseudoXVal())
 							{
 								// TODO - Besides validating the trendlines intersect after the first pivot high,
 								// validate the slopes of the individual trendlines are within the tolerances for
 								// an acceptable pattern match (e.g., we don't want both to have a steep negative slope,
 								// even if they do intercept).
+
+								double numPeriodsToIntercept = trendlineIntercept.x() - firstPivotHighXVal;
+								BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num periods to intercept: " << numPeriodsToIntercept << std::endl;
 
 								// TODO - Validate the distance to the apex is within the range for a pattern match
 

@@ -9,7 +9,8 @@ CPP_SRCS += \
 ../patternScan/DoubleBottom.cpp \
 ../patternScan/MultiPatternScan.cpp \
 ../patternScan/TrendLine.cpp \
-../patternScan/VScanner.cpp 
+../patternScan/VScanner.cpp \
+../patternScan/WedgeScannerEngine.cpp 
 
 OBJS += \
 ./patternScan/AscendingBase.o \
@@ -17,7 +18,8 @@ OBJS += \
 ./patternScan/DoubleBottom.o \
 ./patternScan/MultiPatternScan.o \
 ./patternScan/TrendLine.o \
-./patternScan/VScanner.o 
+./patternScan/VScanner.o \
+./patternScan/WedgeScannerEngine.o 
 
 CPP_DEPS += \
 ./patternScan/AscendingBase.d \
@@ -25,7 +27,8 @@ CPP_DEPS += \
 ./patternScan/DoubleBottom.d \
 ./patternScan/MultiPatternScan.d \
 ./patternScan/TrendLine.d \
-./patternScan/VScanner.d 
+./patternScan/VScanner.d \
+./patternScan/WedgeScannerEngine.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
