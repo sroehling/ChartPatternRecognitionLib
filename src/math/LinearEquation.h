@@ -24,6 +24,10 @@ public:
     // this method if both equations have the same slope (and thus never intersect).
     XYCoord intercept(const LinearEquation &otherEquation) const;
 
+    // Tests if the given XYCoord is above or below the line drawn by this equation.
+    bool aboveLine(const XYCoord &coord) const;
+    bool belowLine(const XYCoord &coord) const;
+
     double slope() const;
     double yVal(double x) const;
     double b() const { return b_; }

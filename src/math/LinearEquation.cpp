@@ -52,3 +52,16 @@ XYCoord LinearEquation::intercept(const LinearEquation &otherEquation) const
 	return XYCoord(intersectX, intersectY);
 
 }
+
+bool LinearEquation::aboveLine(const XYCoord &coord) const
+{
+	double lineYVal = this->yVal(coord.x());
+	return (coord.y() >= lineYVal)?true:false;
+}
+
+bool LinearEquation::belowLine(const XYCoord &coord) const
+{
+	double lineYVal = this->yVal(coord.x());
+	return (coord.y() <= lineYVal)?true:false;
+}
+

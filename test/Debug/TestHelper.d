@@ -684,11 +684,11 @@ TestHelper.d: ../TestHelper.cpp \
   /usr/local/include/boost/test/framework.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/date/TimeHelper.h
@@ -2065,6 +2065,8 @@ TestHelper.d: ../TestHelper.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
 
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/chartSegment/ChartSegment.h:
@@ -2072,8 +2074,6 @@ TestHelper.d: ../TestHelper.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 

@@ -628,8 +628,8 @@ patternMatchValidator/RecoverPercentOfDepth.d: \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchValidator/PatternMatchValidator.h \
   /usr/local/include/boost/log/trivial.hpp \
@@ -1978,9 +1978,9 @@ patternMatchValidator/RecoverPercentOfDepth.d: \
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 

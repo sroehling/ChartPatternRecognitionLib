@@ -8,6 +8,8 @@
 #ifndef DOUBLERANGE_H_
 #define DOUBLERANGE_H_
 
+#include <ostream>
+
 class DoubleRange {
 private:
 	double minVal_;
@@ -20,6 +22,10 @@ public:
 
 	bool positiveVals() const { return (minVal() >= 0.0) && (maxVal() >=0.0); }
 	bool valueWithinRange(double val) const { return (val >= minVal()) && (val <= maxVal()); }
+
+	double percentWithinRange(double val) const;
+
+	friend std::ostream& operator<<(std::ostream& os, const DoubleRange& range);
 
 	virtual ~DoubleRange() {}
 };

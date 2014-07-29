@@ -12,6 +12,7 @@
 #include <boost/shared_ptr.hpp>
 #include <list>
 #include <ostream>
+#include "XYCoord.h"
 
 class PeriodVal;
 typedef std::list<PeriodVal> PeriodValCltn;
@@ -52,6 +53,11 @@ public:
 
 	unsigned int perValIndex() const { return perValIndex_; }
 	double pseudoXVal() const { return (double)perValIndex_; }
+
+	// Coordinate based upon psuedoXVal and the closing price. This
+	// is used to test the closing price for cross-overs of a LinearEquation's line.
+	// (e.g. for wedge pattern matching).
+	XYCoord closeCoord() const { return XYCoord(pseudoXVal(),close()); }
 
 	static void reAssignIndices(PeriodValCltn &perValCltn);
 

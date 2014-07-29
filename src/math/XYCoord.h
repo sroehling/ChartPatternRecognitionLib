@@ -8,6 +8,8 @@
 #ifndef XYCOORD_H_
 #define XYCOORD_H_
 
+#include <ostream>
+
 
 class XYCoord {
 private:
@@ -19,6 +21,8 @@ public:
 
     double x() const;
     double y() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const XYCoord& coord);
 
 };
 

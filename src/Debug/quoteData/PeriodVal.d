@@ -622,6 +622,7 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /usr/local/include/boost/format.hpp \
   /usr/local/include/boost/format/detail/compat_workarounds.hpp \
   /usr/local/include/boost/format/detail/config_macros.hpp \
@@ -1916,6 +1917,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /usr/local/include/boost/date_time/posix_time/conversion.hpp:
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
 
 /usr/local/include/boost/format.hpp:
 

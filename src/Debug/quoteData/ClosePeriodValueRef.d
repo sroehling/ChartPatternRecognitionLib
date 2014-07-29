@@ -623,7 +623,8 @@ quoteData/ClosePeriodValueRef.d: ../quoteData/ClosePeriodValueRef.cpp \
   /usr/local/include/boost/date_time/time_facet.hpp \
   /usr/local/include/boost/algorithm/string/erase.hpp \
   /usr/local/include/boost/date_time/posix_time/conversion.hpp \
-  /usr/local/include/boost/date_time/posix_time/time_parsers.hpp
+  /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h:
 
@@ -1876,3 +1877,5 @@ quoteData/ClosePeriodValueRef.d: ../quoteData/ClosePeriodValueRef.cpp \
 /usr/local/include/boost/date_time/posix_time/conversion.hpp:
 
 /usr/local/include/boost/date_time/posix_time/time_parsers.hpp:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:

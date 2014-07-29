@@ -23,3 +23,21 @@ BOOST_AUTO_TEST_CASE( LinearEquation_Intersection )
     BOOST_CHECK( intercept.x() == -3.0);
     BOOST_CHECK( intercept.y() == -7.0);
 }
+
+
+BOOST_AUTO_TEST_CASE( LinearEquation_InterceptEndpoints )
+{
+
+    BOOST_TEST_MESSAGE("LinearEquation_InterceptEndpoints: checking intercept used in WedgeScannerEngine_SynthesizedPattern test case");
+
+   LinearEquation upperTrendline(XYCoord(3,100),XYCoord(11,98));
+    LinearEquation lowerTrendline(XYCoord(7,92),XYCoord(15,94));
+
+    XYCoord intercept = upperTrendline.intercept(lowerTrendline);
+
+    BOOST_TEST_MESSAGE("LinearEquation_InterceptEndpoints: intercept: " << intercept);
+
+    BOOST_CHECK_CLOSE( intercept.x(),21,0.001);
+    BOOST_CHECK_CLOSE( intercept.y(),95.5,0.001);
+}
+

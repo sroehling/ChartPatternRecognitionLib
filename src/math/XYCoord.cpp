@@ -25,3 +25,12 @@ double XYCoord::y() const
 }
 
 
+std::ostream& operator<<(std::ostream& os, const XYCoord& coord)
+{
+	os << "XYCoord("
+			<< "x="<<coord.x()
+			<< ",y="<<coord.y()
+			<< ")";
+	return os;
+}
+

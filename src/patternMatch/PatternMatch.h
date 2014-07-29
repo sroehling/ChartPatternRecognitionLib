@@ -30,6 +30,7 @@ private:
 	PeriodValSegmentPtr matchSegment_;
 public:
 	PatternMatch(const ChartSegmentList &segments);
+	PatternMatch(const ChartSegmentPtr &singleSegment);
 
 	const PeriodVal &firstValue() const;
 	const PeriodVal &lastValue() const;

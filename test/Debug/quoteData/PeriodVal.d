@@ -686,7 +686,8 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/ClosePeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h
 
 /usr/local/include/boost/test/unit_test.hpp:
 
@@ -2063,3 +2064,5 @@ quoteData/PeriodVal.d: ../quoteData/PeriodVal.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:

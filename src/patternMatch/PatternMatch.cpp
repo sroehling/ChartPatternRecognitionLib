@@ -26,6 +26,12 @@ PatternMatch::PatternMatch(const ChartSegmentList &segments)
 	initMatchSegment();
 }
 
+PatternMatch::PatternMatch(const ChartSegmentPtr &singleSegment)
+{
+	segments_.push_back(singleSegment);
+	initMatchSegment();
+}
+
 const PeriodVal &PatternMatch::firstValue() const
 {
 	return segments_.front()->firstPeriodVal();

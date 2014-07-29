@@ -686,8 +686,8 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValSegment.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestHelper.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
@@ -2068,9 +2068,9 @@ quoteData/PeriodValSegment.d: ../quoteData/PeriodValSegment.cpp \
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodVal.h:
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
-
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
