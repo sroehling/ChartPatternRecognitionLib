@@ -12,6 +12,7 @@
 #include "PeriodValSegment.h"
 #include "ChartSegment.h"
 #include "DoubleRange.h"
+#include "PeriodValueRef.h"
 #include "PivotLowScanner.h"
 #include "PivotHighScanner.h"
 
@@ -22,23 +23,21 @@ WedgeScannerEngine::WedgeScannerEngine() {
 
 
 PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
-		const LinearEquationPtr &upperTrendLineEq, const LinearEquationPtr &lowerTrendLineEq,
-		const PeriodValCltn::iterator &firstPivotHighIter, const PeriodValCltn::iterator &secondPivotHighIter,
-		const PeriodValCltn::iterator &firstPivotLowIter, const PeriodValCltn::iterator &secondPivotLowIter) const
+		const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
 	PatternMatchListPtr wedgeMatches(new PatternMatchList());
 
 	// Calculate the intersection between upper and lower trend-lines.
 	// This is where the pattern ends.
-	if(lowerTrendLineEq->slope() != upperTrendLineEq->slope())
+	if(lowerTrendLine->segmentEq()->slope() != upperTrendLine->segmentEq()->slope())
 	{
 		// Only continue if the lower and upper trend-line have different slopes.
 		// Otherwise they'll never intersect. This being said, a similar scanning
 		// algorithm may be appropriate for channels.
-		XYCoord trendlineIntercept = lowerTrendLineEq->intercept(*upperTrendLineEq);
+		XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
 		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: "
-				<< " upper trend line: start="<< (*firstPivotHighIter) << " end=" << (*secondPivotHighIter)
-				<< " lower trend line: start="<< (*firstPivotLowIter) << " end=" << (*secondPivotLowIter)
+				<< " upper trend line: " << upperTrendLine
+				<< " lower trend line: " << lowerTrendLine
 				<< " intercept " << trendlineIntercept << std::endl;
 
 		// Only continue if the intercept occurs after the first pivot high's "pseudo X" value
@@ -46,7 +45,7 @@ PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodVal
 		// is before the first pivot high, then the lines are angled away from each other, and
 		// we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
 		// at some point, but not here).
-		double firstPivotHighXVal = (*firstPivotHighIter).pseudoXVal();
+		double firstPivotHighXVal = upperTrendLine->firstPeriodVal().pseudoXVal();
 		if(trendlineIntercept.x() > firstPivotHighXVal)
 		{
 			// TODO - Besides validating the trendlines intersect after the first pivot high,
@@ -62,8 +61,8 @@ PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodVal
 			// The starting point to test for the end of the pattern match occurs after
 			// the 2nd pivot high or the 2nd pivot low, whichever has a date farthest in the future.
 			PeriodValCltn::iterator endPatternMatchBeginIter =
-					(*secondPivotHighIter).periodTime() > (*secondPivotLowIter).periodTime()?
-							secondPivotHighIter:secondPivotLowIter;
+					upperTrendLine->lastPeriodVal().periodTime() > lowerTrendLine->lastPeriodVal().periodTime()?
+							upperTrendLine->perValSegment()->segEnd():lowerTrendLine->perValSegment()->segEnd();
 
 			// Starting at endPatternMatchBeginIter then ending at the x value of the trend line intercept or
 			// the last value in chartVals (whichever comes first), test each potential end point for a
@@ -86,8 +85,8 @@ PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodVal
 				if(percentOfPatternLengthCovered >= minPercDistanceToUpperLowerTrendlineIntercept_)
 				{
 
-					if(upperTrendLineEq->belowLine((*prevValIter).closeCoord()) &&
-							upperTrendLineEq->aboveLine((*endPatternMatchIter).closeCoord()))
+					if(upperTrendLine->segmentEq()->belowLine((*prevValIter).closeCoord()) &&
+							upperTrendLine->segmentEq()->aboveLine((*endPatternMatchIter).closeCoord()))
 					{
 
 						BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: upper trend line crossover: "
@@ -95,16 +94,11 @@ PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodVal
 									<< ", curr val=" << (*endPatternMatchIter).closeCoord()
 									<< ", curr period val=" << (*endPatternMatchIter) << std::endl;
 
-						// PeriodValSegment works like regular STL iterator, in that iteration over
-						// the segment includes everything except segEnd. So, to include the value
-						// pointed to by endPatternMatchIter, we need iterate one beyond endPatternMatchIter.
-						PeriodValCltn::iterator segEnd = endPatternMatchIter;
-						segEnd++;
-
-						PeriodValSegmentPtr patternSeg(new PeriodValSegment(chartVals->perValCltn(),
-								firstPivotHighIter,segEnd));
-						ChartSegmentPtr chartSeg(new ChartSegment(patternSeg));
+						ChartSegmentPtr chartSeg(new ChartSegment(chartVals->perValCltn(),
+								upperTrendLine->firstValIter(),endPatternMatchIter,
+								PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
 						PatternMatchPtr patternMatch(new PatternMatch(chartSeg));
+
 						wedgeMatches->push_back(patternMatch);
 						// TODO Based upon minPercValsBetweenTrendlines_, Check that each value and a % of overall values
 						// is between the two equations.
@@ -177,18 +171,15 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 						// Create Linear equations defining the upper and lower trend-lines
 						PeriodValCltn::iterator secondPivotLowIter = (*trendLineEndPointPivotLowIter)->lowestLowIter();
 
-						XYCoord startUpperTrendline((*firstPivotHighIter).pseudoXVal(),(*firstPivotHighIter).high());
-						XYCoord endUpperTrendline((*secondPivotHighIter).pseudoXVal(),(*secondPivotHighIter).high());
-						LinearEquationPtr upperTrendLineEq(new LinearEquation(startUpperTrendline,endUpperTrendline));
-
-						XYCoord startLowerTrendline((*firstPivotLowIter).pseudoXVal(),(*firstPivotLowIter).low());
-						XYCoord endLowerTrendline((*secondPivotLowIter).pseudoXVal(),(*secondPivotLowIter).low());
-						LinearEquationPtr lowerTrendLineEq(new LinearEquation(startLowerTrendline,endLowerTrendline));
+						ChartSegmentPtr upperTrendLine(new ChartSegment(chartVals->perValCltn(),
+								firstPivotHighIter,secondPivotHighIter,
+								PeriodValueRefPtr(new HighPeriodValueRef())));
+						ChartSegmentPtr lowerTrendLine(new ChartSegment(chartVals->perValCltn(),
+								firstPivotLowIter,secondPivotLowIter,
+								PeriodValueRefPtr(new LowPeriodValueRef)));
 
 						PatternMatchListPtr wedgePatternMatches = scanWedgePatternMatches(chartVals,
-								upperTrendLineEq,lowerTrendLineEq,
-								firstPivotHighIter, secondPivotHighIter,
-								firstPivotLowIter, secondPivotLowIter);
+								upperTrendLine,lowerTrendLine);
 						wedgeMatches->insert(wedgeMatches->end(),wedgePatternMatches->begin(),wedgePatternMatches->end());
 
 					} // for each candidate pivot low to serve as the end-point for drawing the lower trend-line

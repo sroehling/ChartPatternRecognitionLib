@@ -159,12 +159,17 @@ const PeriodVal &PeriodValSegment::firstVal() const
 
 }
 
-const PeriodVal &PeriodValSegment::lastVal() const
+const PeriodValCltn::iterator &PeriodValSegment::lastValIter() const
 {
 	assert(numVals() > 0);
 	PeriodValCltn::iterator lastValIter = segEnd_;
 	lastValIter--;
-	return (*lastValIter);
+	return lastValIter;
+}
+
+const PeriodVal &PeriodValSegment::lastVal() const
+{
+	return (*lastValIter());
 }
 
 const PeriodVal PeriodValSegment::highestHighVal() const

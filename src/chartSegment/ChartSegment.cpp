@@ -23,7 +23,15 @@ ChartSegment::ChartSegment(const PeriodValCltnPtr &perValCltn,
 			const PeriodValueRefPtr &endPtValueRef)
 {
 	perValRef_ = endPtValueRef;
-	segmentVals_ = PeriodValSegmentPtr(new PeriodValSegment(perValCltn,startPt,endPt));
+
+	// PeriodValSegment works like a regular STL iterator, in that iteration over
+	// the segment includes everything *except* segEnd. So, to include the value
+	// pointed to by endPatternMatchIter, we need iterate one beyond endPatternMatchIter.
+	PeriodValCltn::iterator segEnd = endPt;
+	assert(endPt != perValCltn->end());
+	segEnd++;
+
+	segmentVals_ = PeriodValSegmentPtr(new PeriodValSegment(perValCltn,startPt,segEnd));
 	segmentEq_ = segmentVals_->segmentEquation(*perValRef_);
 	assert(segmentVals_->numVals() >= 2);
 }
@@ -38,6 +46,17 @@ const PeriodVal &ChartSegment::firstPeriodVal() const
 {
 	return segmentVals_->firstVal();
 }
+
+const PeriodValCltn::iterator &ChartSegment::lastValIter() const
+{
+	return segmentVals_->lastValIter();
+}
+
+const PeriodValCltn::iterator &ChartSegment::firstValIter() const
+{
+	return segmentVals_->firstValIter();
+}
+
 
 unsigned int ChartSegment::numPeriods() const
 {

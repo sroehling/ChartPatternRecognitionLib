@@ -10,6 +10,7 @@
 
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
+#include "ChartSegment.h"
 
 // WedgeScannerEngine is a scanner for a category of patterns where 2 trend lines come together in an
 // apex. This can include descending triangle (downward upper trend line, flat lower trend line),
@@ -32,9 +33,7 @@ private:
 	// scans for the pivot highs and lows, constructs the upper and lower trend-lines, then calls this
 	// method with the upper and lower trend-lines.
 	PatternMatchListPtr  scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
-			const LinearEquationPtr &upperTrendLineEq, const LinearEquationPtr &lowerTrendLineEq,
-			const PeriodValCltn::iterator &firstPivotHighIter, const PeriodValCltn::iterator &secondPivotHighIter,
-			const PeriodValCltn::iterator &firstPivotLowIter, const PeriodValCltn::iterator &secondPivotLowIter) const;
+			const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const;
 
 public:
 	WedgeScannerEngine();

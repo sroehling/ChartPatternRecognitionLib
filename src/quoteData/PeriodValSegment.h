@@ -68,7 +68,9 @@ public:
 
 	unsigned int numVals() const;
 	const PeriodVal &firstVal() const;
+	const PeriodValCltn::iterator &firstValIter() const { return segBegin(); }
 	const PeriodVal &lastVal() const;
+	const PeriodValCltn::iterator &lastValIter() const;
 
 	double highestHigh() const; // Highest high within the segment
 	const PeriodVal highestHighVal() const; // PeriodVal with the highest high
