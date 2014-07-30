@@ -9,6 +9,7 @@
 #include "VScanner.h"
 #include "MultiPatternScanner.h"
 #include <boost/log/trivial.hpp>
+#include "PatternMatchFilter.h"
 
 PivotLowScanner::PivotLowScanner() {
 	pivotLowMaxTrendLineDistancePerc_ = 3.0;

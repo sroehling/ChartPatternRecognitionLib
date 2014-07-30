@@ -8,6 +8,9 @@
 #ifndef PIVOTLOWSCANNER_H_
 #define PIVOTLOWSCANNER_H_
 
+#include "PeriodValSegment.h"
+#include "PatternMatch.h"
+
 class PivotLowScanner {
 private:
 	double pivotLowMaxTrendLineDistancePerc_;

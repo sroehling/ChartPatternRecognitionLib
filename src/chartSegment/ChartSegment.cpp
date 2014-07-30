@@ -14,7 +14,18 @@ ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 : segmentVals_(segmentVals)
 {
 	assert(segmentVals->numVals() >= 2);
-	segmentEq_ = segmentVals->segmentEquation(TypicalPricePeriodValueRef());
+	perValRef_ = PeriodValueRefPtr(new TypicalPricePeriodValueRef());
+	segmentEq_ = segmentVals->segmentEquation(*perValRef_);
+}
+
+ChartSegment::ChartSegment(const PeriodValCltnPtr &perValCltn,
+		const PeriodValCltn::iterator &startPt, const PeriodValCltn::iterator &endPt,
+			const PeriodValueRefPtr &endPtValueRef)
+{
+	perValRef_ = endPtValueRef;
+	segmentVals_ = PeriodValSegmentPtr(new PeriodValSegment(perValCltn,startPt,endPt));
+	segmentEq_ = segmentVals_->segmentEquation(*perValRef_);
+	assert(segmentVals_->numVals() >= 2);
 }
 
 const PeriodVal &ChartSegment::lastPeriodVal() const
@@ -43,6 +54,7 @@ double ChartSegment::slope() const
 double ChartSegment::maxRelPercentVsLinearEq() const
 {
 	double maxPerc = -1.0 * std::numeric_limits<double>::max();
+	// TODO - Should this iteration include segEnd()? This appears to be an off-by-one bug.
 	for(PeriodValCltn::const_iterator valIter = segmentVals_->segBegin();
 			valIter != segmentVals_->segEnd(); valIter++)
 	{

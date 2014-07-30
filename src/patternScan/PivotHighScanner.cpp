@@ -8,6 +8,8 @@
 #include <PivotHighScanner.h>
 #include "InvertedVScanner.h"
 #include <boost/log/trivial.hpp>
+#include "MultiPatternScanner.h"
+#include "PatternMatchFilter.h"
 
 
 PivotHighScanner::PivotHighScanner() {

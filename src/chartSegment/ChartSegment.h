@@ -17,10 +17,14 @@ class ChartSegment {
 private:
 	PeriodValSegmentPtr segmentVals_;
 	LinearEquationPtr segmentEq_;
+	PeriodValueRefPtr perValRef_;
 
 	double absRelPercentVal(double comparisonVal, double baseVal) const;
 public:
 	ChartSegment(const PeriodValSegmentPtr &segmentVals);
+	ChartSegment(const PeriodValCltnPtr &perValCltn,
+			const PeriodValCltn::iterator &startPt, const PeriodValCltn::iterator &endPt,
+				const PeriodValueRefPtr &endPtValueRef);
 
 	const PeriodVal &lastPeriodVal() const;
 	const PeriodVal &firstPeriodVal() const;

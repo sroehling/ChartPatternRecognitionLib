@@ -31,7 +31,7 @@ private:
 	// scanWedgePatternMatches functionally sub-divides pattern scanning. The main scanPatternMatches
 	// scans for the pivot highs and lows, constructs the upper and lower trend-lines, then calls this
 	// method with the upper and lower trend-lines.
-	PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
+	PatternMatchListPtr  scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
 			const LinearEquationPtr &upperTrendLineEq, const LinearEquationPtr &lowerTrendLineEq,
 			const PeriodValCltn::iterator &firstPivotHighIter, const PeriodValCltn::iterator &secondPivotHighIter,
 			const PeriodValCltn::iterator &firstPivotLowIter, const PeriodValCltn::iterator &secondPivotLowIter) const;
