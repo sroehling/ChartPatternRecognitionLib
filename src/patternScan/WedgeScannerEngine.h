@@ -17,8 +17,6 @@
 // triangle (downward sloping upper trend line, upward sloping lower trend line).
 class WedgeScannerEngine {
 private:
-	double pivotLowMaxTrendLineDistancePerc_;
-
 	// Threshold for how far a PeriodVal must be to the intercept between
 	// the lower and upper trend line for a break-out to be valid.
 	double minPercDistanceToUpperLowerTrendlineIntercept_;

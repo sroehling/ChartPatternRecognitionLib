@@ -7,61 +7,19 @@
 
 #include <boost/log/trivial.hpp>
 #include <WedgeScannerEngine.h>
-#include "VScanner.h"
-#include "InvertedVScanner.h"
 #include "PeriodValSegment.h"
 #include "PatternMatchFilter.h"
-#include "MultiPatternScanner.h"
-#include "PatternMatchFindPredicate.h"
-#include "PeriodValueRef.h"
 #include "PeriodValSegment.h"
 #include "ChartSegment.h"
 #include "DoubleRange.h"
+#include "PivotLowScanner.h"
+#include "PivotHighScanner.h"
 
 WedgeScannerEngine::WedgeScannerEngine() {
-	pivotLowMaxTrendLineDistancePerc_ = 3.0;
 	minPercDistanceToUpperLowerTrendlineIntercept_ = 0.6;
 	minPercValsBetweenTrendlines_ = 0.85;
 }
 
-PatternMatchListPtr WedgeScannerEngine::scanPivotHighs(const PeriodValSegmentPtr &chartVals) const
-{
-	PatternScannerPtr pivotHighScanner(new InvertedVScanner(pivotLowMaxTrendLineDistancePerc_));
-	MultiPatternScanner pivotHighMultiPatternScanner(pivotHighScanner);
-	PatternMatchListPtr pivotHighs = pivotHighMultiPatternScanner.scanPatternMatches(chartVals);
-	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(pivotHighs);
-
-	BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num pivot highs: " << sortedUniquePivots->size() << std::endl;
-	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
-	{
-		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: pivot high:"
-				<< " time=" << (*matchIter)->highestHighVal().periodTime()
-				<< " (psuedo) x val=" << (*matchIter)->highestHighVal().pseudoXVal()
-				<< ", highest high=" << (*matchIter)->highestHigh() << std::endl;
-	}
-
-	return sortedUniquePivots;
-}
-
-PatternMatchListPtr WedgeScannerEngine::scanPivotLows(const PeriodValSegmentPtr &chartVals) const
-{
-	PatternScannerPtr pivotLowScanner(new VScanner(pivotLowMaxTrendLineDistancePerc_));
-	MultiPatternScanner pivotLowMultiPatternScanner(pivotLowScanner);
-	PatternMatchListPtr pivotLows = pivotLowMultiPatternScanner.scanPatternMatches(chartVals);
-	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestLowestLow(pivotLows);
-
-	BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num pivot lows: " << sortedUniquePivots->size() << std::endl;
-	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
-	{
-		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: pivot low: "
-				<< "time=" << (*matchIter)->lowestLowVal().periodTime()
-				<< "(psuedo) x val=" << (*matchIter)->lowestLowVal().pseudoXVal()
-				<< ", lowest low=" << (*matchIter)->lowestLow() << std::endl;
-	}
-
-	return sortedUniquePivots;
-
-}
 
 PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
@@ -74,8 +32,8 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 	// The scanning starts by getting a list of pivot highs and lows within chartVals.
 	// These pivots serve as anchor points for drawing candidate trend lines for the
 	// pattern matches.
-	PatternMatchListPtr pivotHighs = scanPivotHighs(chartVals);
-	PatternMatchListPtr pivotLows = scanPivotLows(chartVals);
+	PatternMatchListPtr pivotHighs = PivotHighScanner().scanPatternMatches(chartVals);
+	PatternMatchListPtr pivotLows = PivotLowScanner().scanPatternMatches(chartVals);
 
 	// Each of the pivot highs serves as a potential starting point for the pattern match.
 	for(PatternMatchList::iterator startMatchPivotHighIter = pivotHighs->begin();

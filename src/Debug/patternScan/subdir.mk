@@ -11,6 +11,8 @@ CPP_SRCS += \
 ../patternScan/InvertedVScanner.cpp \
 ../patternScan/MultiPatternScanner.cpp \
 ../patternScan/PatternScannerEngine.cpp \
+../patternScan/PivotHighScanner.cpp \
+../patternScan/PivotLowScanner.cpp \
 ../patternScan/ScannerHelper.cpp \
 ../patternScan/TrendLineScanner.cpp \
 ../patternScan/VScanner.cpp \
@@ -24,6 +26,8 @@ OBJS += \
 ./patternScan/InvertedVScanner.o \
 ./patternScan/MultiPatternScanner.o \
 ./patternScan/PatternScannerEngine.o \
+./patternScan/PivotHighScanner.o \
+./patternScan/PivotLowScanner.o \
 ./patternScan/ScannerHelper.o \
 ./patternScan/TrendLineScanner.o \
 ./patternScan/VScanner.o \
@@ -37,6 +41,8 @@ CPP_DEPS += \
 ./patternScan/InvertedVScanner.d \
 ./patternScan/MultiPatternScanner.d \
 ./patternScan/PatternScannerEngine.d \
+./patternScan/PivotHighScanner.d \
+./patternScan/PivotLowScanner.d \
 ./patternScan/ScannerHelper.d \
 ./patternScan/TrendLineScanner.d \
 ./patternScan/VScanner.d \
