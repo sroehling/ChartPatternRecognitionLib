@@ -28,8 +28,14 @@ private:
 	// is still considered valid.
 	double minPercValsBetweenTrendlines_;
 
-	PatternMatchListPtr scanPivotHighs(const PeriodValSegmentPtr &chartVals) const;
-	PatternMatchListPtr scanPivotLows(const PeriodValSegmentPtr &chartVals) const;
+	// scanWedgePatternMatches functionally sub-divides pattern scanning. The main scanPatternMatches
+	// scans for the pivot highs and lows, constructs the upper and lower trend-lines, then calls this
+	// method with the upper and lower trend-lines.
+	PatternMatchListPtr  WedgeScannerEngine::scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
+			const LinearEquationPtr &upperTrendLineEq, const LinearEquationPtr &lowerTrendLineEq,
+			const PeriodValCltn::iterator &firstPivotHighIter, const PeriodValCltn::iterator &secondPivotHighIter,
+			const PeriodValCltn::iterator &firstPivotLowIter, const PeriodValCltn::iterator &secondPivotLowIter) const;
+
 public:
 	WedgeScannerEngine();
 
