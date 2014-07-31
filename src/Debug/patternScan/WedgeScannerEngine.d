@@ -720,7 +720,8 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatchFilter/PatternMatchFindPredicate.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/DoubleRange.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PivotLowScanner.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PivotHighScanner.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PivotHighScanner.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/UnsignedIntRange.h
 
 /usr/local/include/boost/log/trivial.hpp:
 
@@ -2167,3 +2168,5 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PivotLowScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/PivotHighScanner.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/UnsignedIntRange.h:

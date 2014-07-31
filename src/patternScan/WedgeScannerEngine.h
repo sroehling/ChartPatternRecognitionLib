@@ -29,11 +29,34 @@ private:
 	// is still considered valid.
 	double minPercValsBetweenTrendlines_;
 
-	// scanWedgePatternMatches functionally sub-divides pattern scanning. The main scanPatternMatches
-	// scans for the pivot highs and lows, constructs the upper and lower trend-lines, then calls this
-	// method with the upper and lower trend-lines.
-	PatternMatchListPtr  scanWedgePatternMatches(const PeriodValSegmentPtr &chartVals,
-			const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const;
+
+	// The number of periods from the first pivot high to the intercept
+	// of the upper and lower trend line. Only works when the upper and
+	// lower trend line in fact have an intercept.
+	double numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,
+			const ChartSegmentPtr &lowerTrendLine) const;
+
+	// Test if the given upper and lower trend lines are valid with
+	// respect to a possible pattern match. For example, this could
+	// return true only if the trend lines have an intercept
+	// after the first pivot high.
+	bool validTrendLines(const ChartSegmentPtr &upperTrendLine,
+			const ChartSegmentPtr &lowerTrendLine) const;
+
+	// Calculate the minimum and maximum number of periods for a valid
+	// pattern match.
+	unsigned int maxPatternPeriods(const ChartSegmentPtr &upperTrendLine,
+			const ChartSegmentPtr &lowerTrendLine) const;
+	unsigned int minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
+			const ChartSegmentPtr &lowerTrendLine) const;
+
+	// Test if a completed pattern match is found at the location pointed to by
+	// currPerValIter.
+	PatternMatchPtr findPatternMatch(const PeriodValSegmentPtr &chartVals,
+			const ChartSegmentPtr &upperTrendLine,
+			const ChartSegmentPtr &lowerTrendLine,
+			const PeriodValCltn::iterator &currPerValIter) const;
+
 
 public:
 	WedgeScannerEngine();

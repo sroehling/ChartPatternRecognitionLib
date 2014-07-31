@@ -7,6 +7,7 @@ CPP_SRCS += \
 ../math/DoubleRange.cpp \
 ../math/LinearEquation.cpp \
 ../math/MathHelper.cpp \
+../math/UnsignedIntRange.cpp \
 ../math/ValueComparator.cpp \
 ../math/XYCoord.cpp 
 
@@ -14,6 +15,7 @@ OBJS += \
 ./math/DoubleRange.o \
 ./math/LinearEquation.o \
 ./math/MathHelper.o \
+./math/UnsignedIntRange.o \
 ./math/ValueComparator.o \
 ./math/XYCoord.o 
 
@@ -21,6 +23,7 @@ CPP_DEPS += \
 ./math/DoubleRange.d \
 ./math/LinearEquation.d \
 ./math/MathHelper.d \
+./math/UnsignedIntRange.d \
 ./math/ValueComparator.d \
 ./math/XYCoord.d 
 
