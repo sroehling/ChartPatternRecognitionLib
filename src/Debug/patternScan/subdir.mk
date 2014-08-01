@@ -16,6 +16,7 @@ CPP_SRCS += \
 ../patternScan/ScannerHelper.cpp \
 ../patternScan/TrendLineScanner.cpp \
 ../patternScan/VScanner.cpp \
+../patternScan/WedgeScanner.cpp \
 ../patternScan/WedgeScannerEngine.cpp 
 
 OBJS += \
@@ -31,6 +32,7 @@ OBJS += \
 ./patternScan/ScannerHelper.o \
 ./patternScan/TrendLineScanner.o \
 ./patternScan/VScanner.o \
+./patternScan/WedgeScanner.o \
 ./patternScan/WedgeScannerEngine.o 
 
 CPP_DEPS += \
@@ -46,6 +48,7 @@ CPP_DEPS += \
 ./patternScan/ScannerHelper.d \
 ./patternScan/TrendLineScanner.d \
 ./patternScan/VScanner.d \
+./patternScan/WedgeScanner.d \
 ./patternScan/WedgeScannerEngine.d 
 
 

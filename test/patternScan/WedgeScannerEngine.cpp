@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include "TestHelper.h"
-#include "WedgeScannerEngine.h"
+#include "WedgeScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_SynthesizedPattern )
 	ranges.push_back(TestPerValRange(4,94.5,104.0)); // up-trend after 2nd pivot low, including up-side break-out
 	PeriodValSegmentPtr chartData = synthesizePeriodValSegment(date(2014,1,1),ranges);
 
-	WedgeScannerEngine scanner;
+	WedgeScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	BOOST_TEST_MESSAGE("Should return 1 match, the break-out after the 2nd pivot low");

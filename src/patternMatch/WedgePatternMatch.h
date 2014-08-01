@@ -16,9 +16,9 @@ private:
 	ChartSegmentPtr upperTrendLine_;
 	ChartSegmentPtr lowerTrendLine_;
 public:
-	WedgePatternMatch(const ChartSegmentList &segments,
+	WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 			const ChartSegmentPtr &upperTrendLine,
-			ChartSegmentPtr &lowerTrendLine);
+			const ChartSegmentPtr &lowerTrendLine);
 	virtual void acceptVisitor(PatternMatchVisitor &visitor);
 	virtual ~WedgePatternMatch() {}
 };

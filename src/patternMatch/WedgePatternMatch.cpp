@@ -9,10 +9,11 @@
 #include "PatternMatch.h"
 #include "PatternMatchVisitor.h"
 
-WedgePatternMatch::WedgePatternMatch(const ChartSegmentList &segments,
+
+WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 		const ChartSegmentPtr &upperTrendLine,
-		ChartSegmentPtr &lowerTrendLine)
-: PatternMatch(segments),
+		const ChartSegmentPtr &lowerTrendLine)
+: PatternMatch(wedgeSegment),
   upperTrendLine_(upperTrendLine),
   lowerTrendLine_(lowerTrendLine)
 {
