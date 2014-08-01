@@ -11,6 +11,8 @@
 #include <boost/shared_ptr.hpp>
 #include "ChartSegment.h"
 
+class PatternMatchVisitor;
+
 class PatternMatch;
 typedef boost::shared_ptr<PatternMatch> PatternMatchPtr;
 typedef std::list<PatternMatchPtr> PatternMatchList;
@@ -67,6 +69,8 @@ public:
 	PatternMatchListPtr appendMatchList(const PatternMatchList &appendList) const;
 
 	friend std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch);
+
+	virtual void acceptVisitor(PatternMatchVisitor &visitor) {}
 
 
 	virtual ~PatternMatch();

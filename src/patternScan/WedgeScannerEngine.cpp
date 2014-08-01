@@ -17,6 +17,7 @@
 #include "PivotHighScanner.h"
 #include "Math.h"
 #include "UnsignedIntRange.h"
+#include "WedgePatternMatch.h"
 
 WedgeScannerEngine::WedgeScannerEngine() {
 	minPercDistanceToUpperLowerTrendlineIntercept_ = 0.6;
@@ -109,7 +110,7 @@ PatternMatchPtr WedgeScannerEngine::findPatternMatch(const PeriodValSegmentPtr &
 		ChartSegmentPtr chartSeg(new ChartSegment(chartVals->perValCltn(),
 				upperTrendLine->firstValIter(),currPerValIter,
 				PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
-		return PatternMatchPtr(new PatternMatch(chartSeg));
+		return PatternMatchPtr(new WedgePatternMatch(chartSeg,upperTrendLine,lowerTrendLine));
 	}
 
 	return PatternMatchPtr(); // NULL (smart) pointer
