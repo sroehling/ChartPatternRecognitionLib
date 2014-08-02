@@ -41,13 +41,7 @@ protected:
 	virtual unsigned int minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine) const;
 
-	// Test if a completed pattern match is found at the location pointed to by
-	// currPerValIter.
-	virtual PatternMatchPtr findPatternMatch(const PeriodValSegmentPtr &chartVals,
-			const ChartSegmentPtr &upperTrendLine,
-			const ChartSegmentPtr &lowerTrendLine,
-			const PeriodValCltn::iterator &currPerValIter) const;
-
+	// The findPatternMatch method is still virtual
 public:
 	WedgeScanner();
 

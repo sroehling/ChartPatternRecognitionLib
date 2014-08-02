@@ -12,6 +12,8 @@
 #include "PeriodValSegment.h"
 #include "ChartSegment.h"
 
+// TODO Refactor to change the name of this class to UpperLowerTrendlinePatternScanner (or similar),
+// since derived classes can scan anything from a flat base to a rising/falling/symetric wedge.
 // WedgeScannerEngine is a scanner for a category of patterns where 2 trend lines come together in an
 // apex. This can include descending triangle (downward upper trend line, flat lower trend line),
 // ascending triangle (flat upper trend line, upward sloping lower trend line), or
@@ -39,6 +41,14 @@ protected:
 			const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine,
 			const PeriodValCltn::iterator &currPerValIter) const = 0;
+
+	// Helper methods
+	ChartSegmentPtr createWedgeSegment(const PeriodValSegmentPtr &chartVals,
+			const ChartSegmentPtr &upperTrendLine,const PeriodValCltn::iterator &currPerValIter) const;
+	bool upperTrendLineBreakout(const PeriodValSegmentPtr &chartVals,
+			const ChartSegmentPtr &upperTrendLine,
+			const PeriodValCltn::iterator &currPerValIter) const;
+
 
 public:
 	WedgeScannerEngine();

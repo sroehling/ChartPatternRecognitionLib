@@ -6,17 +6,17 @@
 CPP_SRCS += \
 ../patternMatch/PatternMatch.cpp \
 ../patternMatch/PatternMatchVisitor.cpp \
-../patternMatch/WedgePatternMatch.cpp 
+../patternMatch/SymetricWedgePatternMatch.cpp 
 
 OBJS += \
 ./patternMatch/PatternMatch.o \
 ./patternMatch/PatternMatchVisitor.o \
-./patternMatch/WedgePatternMatch.o 
+./patternMatch/SymetricWedgePatternMatch.o 
 
 CPP_DEPS += \
 ./patternMatch/PatternMatch.d \
 ./patternMatch/PatternMatchVisitor.d \
-./patternMatch/WedgePatternMatch.d 
+./patternMatch/SymetricWedgePatternMatch.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

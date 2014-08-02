@@ -17,9 +17,42 @@
 #include "PivotHighScanner.h"
 #include "Math.h"
 #include "UnsignedIntRange.h"
-#include "WedgePatternMatch.h"
 
 WedgeScannerEngine::WedgeScannerEngine() {
+}
+
+ChartSegmentPtr WedgeScannerEngine::createWedgeSegment(const PeriodValSegmentPtr &chartVals,
+		const ChartSegmentPtr &upperTrendLine,const PeriodValCltn::iterator &currPerValIter) const
+{
+	ChartSegmentPtr wedgeSeg(new ChartSegment(chartVals->perValCltn(),
+			upperTrendLine->firstValIter(),currPerValIter,
+			PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
+	return wedgeSeg;
+}
+
+
+bool WedgeScannerEngine::upperTrendLineBreakout(const PeriodValSegmentPtr &chartVals,
+		const ChartSegmentPtr &upperTrendLine,
+		const PeriodValCltn::iterator &currPerValIter) const
+{
+	PeriodValCltn::iterator prevPerValIter = currPerValIter;
+	prevPerValIter--;
+	assert(prevPerValIter != chartVals->segBegin());
+
+	if (upperTrendLine->segmentEq()->belowLine((*prevPerValIter).closeCoord()) &&
+			upperTrendLine->segmentEq()->aboveLine((*currPerValIter).closeCoord()))
+	{
+		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: upper trend line breakout: "
+					<< "prev val=" << (*prevPerValIter).closeCoord()
+					<< ", curr val=" << (*currPerValIter).closeCoord()
+					<< ", curr period val=" << (*currPerValIter) << std::endl;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 

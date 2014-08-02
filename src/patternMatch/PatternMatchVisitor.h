@@ -8,13 +8,13 @@
 #ifndef PATTERNMATCHVISITOR_H_
 #define PATTERNMATCHVISITOR_H_
 
-class WedgePatternMatch;
+class SymetricWedgePatternMatch;
 
 class PatternMatchVisitor {
 public:
 	PatternMatchVisitor();
 
-	virtual void visitWedgePatternMatch(WedgePatternMatch &wedgePatternMatch) {}
+	virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &wedgePatternMatch) {}
 
 	virtual ~PatternMatchVisitor();
 };

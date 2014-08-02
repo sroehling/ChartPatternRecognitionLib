@@ -9,7 +9,6 @@
 
 #include <WedgeScanner.h>
 #include "ChartSegment.h"
-#include "WedgePatternMatch.h"
 
 WedgeScanner::WedgeScanner() {
 	minPercDistanceToUpperLowerTrendlineIntercept_ = 0.6;
@@ -83,30 +82,7 @@ unsigned int WedgeScanner::maxPatternPeriods(const ChartSegmentPtr &upperTrendLi
 	return maxPeriods;
 }
 
-PatternMatchPtr WedgeScanner::findPatternMatch(const PeriodValSegmentPtr &chartVals,
-		const ChartSegmentPtr &upperTrendLine,
-		const ChartSegmentPtr &lowerTrendLine,
-		const PeriodValCltn::iterator &currPerValIter) const
-{
-	PeriodValCltn::iterator prevPerValIter = currPerValIter;
-	prevPerValIter--;
 
-	if (upperTrendLine->segmentEq()->belowLine((*prevPerValIter).closeCoord()) &&
-			upperTrendLine->segmentEq()->aboveLine((*currPerValIter).closeCoord()))
-	{
-		BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: upper trend line crossover: "
-					<< "prev val=" << (*prevPerValIter).closeCoord()
-					<< ", curr val=" << (*currPerValIter).closeCoord()
-					<< ", curr period val=" << (*currPerValIter) << std::endl;
-		ChartSegmentPtr wedgeSeg(new ChartSegment(chartVals->perValCltn(),
-				upperTrendLine->firstValIter(),currPerValIter,
-				PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
-		return PatternMatchPtr(new WedgePatternMatch(wedgeSeg,upperTrendLine,lowerTrendLine));
-	}
-
-	return PatternMatchPtr(); // NULL (smart) pointer
-
-}
 
 WedgeScanner::~WedgeScanner() {
 }

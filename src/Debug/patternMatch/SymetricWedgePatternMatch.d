@@ -1,5 +1,6 @@
-patternMatch/WedgePatternMatch.d: ../patternMatch/WedgePatternMatch.cpp \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/WedgePatternMatch.h \
+patternMatch/SymetricWedgePatternMatch.d: \
+  ../patternMatch/SymetricWedgePatternMatch.cpp \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/SymetricWedgePatternMatch.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h \
   /usr/local/include/boost/shared_ptr.hpp \
   /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
@@ -631,7 +632,7 @@ patternMatch/WedgePatternMatch.d: ../patternMatch/WedgePatternMatch.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatchVisitor.h
 
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/WedgePatternMatch.h:
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/SymetricWedgePatternMatch.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/PatternMatch.h:
 

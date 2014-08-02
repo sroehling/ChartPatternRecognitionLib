@@ -14,6 +14,7 @@ CPP_SRCS += \
 ../patternScan/PivotHighScanner.cpp \
 ../patternScan/PivotLowScanner.cpp \
 ../patternScan/ScannerHelper.cpp \
+../patternScan/SymetricWedgeScanner.cpp \
 ../patternScan/TrendLineScanner.cpp \
 ../patternScan/VScanner.cpp \
 ../patternScan/WedgeScanner.cpp \
@@ -30,6 +31,7 @@ OBJS += \
 ./patternScan/PivotHighScanner.o \
 ./patternScan/PivotLowScanner.o \
 ./patternScan/ScannerHelper.o \
+./patternScan/SymetricWedgeScanner.o \
 ./patternScan/TrendLineScanner.o \
 ./patternScan/VScanner.o \
 ./patternScan/WedgeScanner.o \
@@ -46,6 +48,7 @@ CPP_DEPS += \
 ./patternScan/PivotHighScanner.d \
 ./patternScan/PivotLowScanner.d \
 ./patternScan/ScannerHelper.d \
+./patternScan/SymetricWedgeScanner.d \
 ./patternScan/TrendLineScanner.d \
 ./patternScan/VScanner.d \
 ./patternScan/WedgeScanner.d \

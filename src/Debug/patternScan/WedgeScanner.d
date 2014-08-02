@@ -714,8 +714,7 @@ patternScan/WedgeScanner.d: ../patternScan/WedgeScanner.cpp \
   /usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/XYCoord.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
-  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/WedgePatternMatch.h
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h
 
 /usr/local/include/boost/log/trivial.hpp:
 
@@ -2150,5 +2149,3 @@ patternScan/WedgeScanner.d: ../patternScan/WedgeScanner.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
-
-/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternMatch/WedgePatternMatch.h:

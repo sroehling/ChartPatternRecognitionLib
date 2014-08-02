@@ -5,12 +5,12 @@
  *      Author: sroehling
  */
 
-#include <WedgePatternMatch.h>
+#include <SymetricWedgePatternMatch.h>
 #include "PatternMatch.h"
 #include "PatternMatchVisitor.h"
 
 
-WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+SymetricWedgePatternMatch::SymetricWedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 		const ChartSegmentPtr &upperTrendLine,
 		const ChartSegmentPtr &lowerTrendLine)
 : PatternMatch(wedgeSegment),
@@ -20,7 +20,7 @@ WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 
 }
 
-void WedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
+void SymetricWedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
-	visitor.visitWedgePatternMatch(*this);
+	visitor.visitSymetricWedgePatternMatch(*this);
 }

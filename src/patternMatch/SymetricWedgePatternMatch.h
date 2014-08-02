@@ -5,22 +5,22 @@
  *      Author: sroehling
  */
 
-#ifndef WEDGEPATTERNMATCH_H_
-#define WEDGEPATTERNMATCH_H_
+#ifndef SYMETRICWEDGEPATTERNMATCH_H_
+#define SYMETRICWEDGEPATTERNMATCH_H_
 
 #include <PatternMatch.h>
 #include "ChartSegment.h"
 
-class WedgePatternMatch: public PatternMatch {
+class SymetricWedgePatternMatch: public PatternMatch {
 private:
 	ChartSegmentPtr upperTrendLine_;
 	ChartSegmentPtr lowerTrendLine_;
 public:
-	WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+	SymetricWedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 			const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine);
 	virtual void acceptVisitor(PatternMatchVisitor &visitor);
-	virtual ~WedgePatternMatch() {}
+	virtual ~SymetricWedgePatternMatch() {}
 };
 
-#endif /* WEDGEPATTERNMATCH_H_ */
+#endif /* SYMETRICWEDGEPATTERNMATCH_H_ */

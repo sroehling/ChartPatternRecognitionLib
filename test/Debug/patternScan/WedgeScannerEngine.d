@@ -693,6 +693,7 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/math/LinearEquation.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h \
+  /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/SymetricWedgeScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/WedgeScanner.h \
   /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/WedgeScannerEngine.h
 
@@ -2083,6 +2084,8 @@ patternScan/WedgeScannerEngine.d: ../patternScan/WedgeScannerEngine.cpp \
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/quoteData/PeriodValueRef.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/test/TestPerValRange.h:
+
+/Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/SymetricWedgeScanner.h:
 
 /Users/sroehling/Development/workspace/PatternRecognitionLib/src/patternScan/WedgeScanner.h:
 
