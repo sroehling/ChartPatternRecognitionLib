@@ -1,0 +1,156 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2014-08-05T09:28:59
+#
+#-------------------------------------------------
+
+QT       -= core gui
+
+TARGET = PatternRecognitionLib
+TEMPLATE = lib
+CONFIG += staticlib
+
+# Configure compiling and linking against libc++ instead of libstdc++
+# This is needed to ensure consistency for all components, including
+# the boost library.
+QMAKE_CXXFLAGS += -mmacosx-version-min=10.7 -std=c++11 -stdlib=libc++
+LIBS += -mmacosx-version-min=10.7 -stdlib=libc++
+CONFIG += c++11
+
+SOURCES += \
+    chartSegment/ANDSegmentConstraint.cpp \
+    chartSegment/ChartSegment.cpp \
+    chartSegment/SegmentValsCloseToLinearEq.cpp \
+    chartSegment/SlopeWithinRangeConstraint.cpp \
+    chartSegmentList/AnySegmentListValidConstraint.cpp \
+    chartSegmentList/SegmentListConstraint.cpp \
+    chartSegmentList/SlopeIncreasesConstraint.cpp \
+    date/DateValue.cpp \
+    date/TimeHelper.cpp \
+    math/DoubleRange.cpp \
+    math/LinearEquation.cpp \
+    math/MathHelper.cpp \
+    math/UnsignedIntRange.cpp \
+    math/XYCoord.cpp \
+    patternMatch/PatternMatch.cpp \
+    patternMatch/PatternMatchVisitor.cpp \
+    patternMatch/SymetricWedgePatternMatch.cpp \
+    patternMatchFilter/PatternMatchFilter.cpp \
+    patternMatchFilter/PatternMatchFindPredicate.cpp \
+    patternMatchFilter/PatternMatchSortFunctor.cpp \
+    patternMatchFilter/PatternMatchUniqueFunctor.cpp \
+    patternMatchValidator/ANDPatternMatchValidator.cpp \
+    patternMatchValidator/AnyPatternMatchValidator.cpp \
+    patternMatchValidator/CompositePatternMatchValidatorFactory.cpp \
+    patternMatchValidator/EndWithinPercentOfStart.cpp \
+    patternMatchValidator/HigherLowPatternMatchValidatorFactory.cpp \
+    patternMatchValidator/LastValueAbovePointValue.cpp \
+    patternMatchValidator/ORPatternMatchValidator.cpp \
+    patternMatchValidator/PatternLengthAtLeast.cpp \
+    patternMatchValidator/PatternLengthLessThanEqual.cpp \
+    patternMatchValidator/PatternMatchValidator.cpp \
+    patternMatchValidator/PatternMatchValidatorCreationHelper.cpp \
+    patternMatchValidator/PatternMatchValidatorFactory.cpp \
+    patternMatchValidator/PatternMatchValueRef.cpp \
+    patternMatchValidator/RecoverPercentOfDepth.cpp \
+    patternMatchValidator/StaticPatternMatchValidatorFactory.cpp \
+    patternMatchValidator/ValueComparisonMatchValidator.cpp \
+    patternScan/AscendingBasePullbackScanner.cpp \
+    patternScan/AscendingBaseScanner.cpp \
+    patternScan/CupScanner.cpp \
+    patternScan/DoubleBottomScanner.cpp \
+    patternScan/InvertedVScanner.cpp \
+    patternScan/MultiPatternScanner.cpp \
+    patternScan/PatternScannerEngine.cpp \
+    patternScan/PivotHighScanner.cpp \
+    patternScan/PivotLowScanner.cpp \
+    patternScan/ScannerHelper.cpp \
+    patternScan/SymetricWedgeScanner.cpp \
+    patternScan/TrendLineScanner.cpp \
+    patternScan/VScanner.cpp \
+    patternScan/WedgeScanner.cpp \
+    patternScan/WedgeScannerEngine.cpp \
+    quoteData/ClosePeriodValueRef.cpp \
+    quoteData/PeriodVal.cpp \
+    quoteData/PeriodValSegment.cpp \
+    quoteData/PeriodValueRef.cpp
+
+INCLUDEPATH += segmentContraint\
+    chartSegment\
+    chartSegmentList\
+    date\
+    math\
+    patternMatch\
+    patternMatchFilter\
+    patternMatchValidator\
+    patternScan\
+    quoteData
+
+INCLUDEPATH += /usr/local/boost156/include
+DEFINES += BOOST_ALL_DYN_LINK
+DEFINES += BOOST_LOG_DYN_LINK
+
+HEADERS += patternrecognitionlib.h \
+    chartSegment/ANDSegmentConstraint.h \
+    chartSegment/ChartSegment.h \
+    chartSegment/SegmentConstraint.h \
+    chartSegment/SegmentValsCloseToLinearEq.h \
+    chartSegment/SlopeWithinRangeConstraint.h \
+    chartSegmentList/AnySegmentListValidConstraint.h \
+    chartSegmentList/SegmentListConstraint.h \
+    chartSegmentList/SlopeIncreasesConstraint.h \
+    date/DateValue.h \
+    date/TimeHelper.h \
+    math/DoubleRange.h \
+    math/LinearEquation.h \
+    math/MathHelper.h \
+    math/UnsignedIntRange.h \
+    math/ValueComparator.h \
+    math/XYCoord.h \
+    patternMatch/PatternMatch.h \
+    patternMatch/PatternMatchVisitor.h \
+    patternMatch/SymetricWedgePatternMatch.h \
+    patternMatchFilter/PatternMatchFilter.h \
+    patternMatchFilter/PatternMatchFindPredicate.h \
+    patternMatchFilter/PatternMatchSortFunctor.h \
+    patternMatchFilter/PatternMatchUniqueFunctor.h \
+    patternMatchValidator/ANDPatternMatchValidator.h \
+    patternMatchValidator/AnyPatternMatchValidator.h \
+    patternMatchValidator/CompositePatternMatchValidatorFactory.h \
+    patternMatchValidator/EndWithinPercentOfStart.h \
+    patternMatchValidator/HigherLowPatternMatchValidatorFactory.h \
+    patternMatchValidator/LastValueAbovePointValue.h \
+    patternMatchValidator/ORPatternMatchValidator.h \
+    patternMatchValidator/PatternLengthAtLeast.h \
+    patternMatchValidator/PatternLengthLessThanEqual.h \
+    patternMatchValidator/PatternMatchValidator.h \
+    patternMatchValidator/PatternMatchValidatorCreationHelper.h \
+    patternMatchValidator/PatternMatchValidatorFactory.h \
+    patternMatchValidator/PatternMatchValueRef.h \
+    patternMatchValidator/RecoverPercentOfDepth.h \
+    patternMatchValidator/StaticPatternMatchValidatorFactory.h \
+    patternMatchValidator/ValueComparisonMatchValidator.h \
+    patternScan/AscendingBasePullbackScanner.h \
+    patternScan/AscendingBaseScanner.h \
+    patternScan/CupScanner.h \
+    patternScan/DoubleBottomScanner.h \
+    patternScan/InvertedVScanner.h \
+    patternScan/MultiPatternScanner.h \
+    patternScan/PatternScanner.h \
+    patternScan/PatternScannerEngine.h \
+    patternScan/PivotHighScanner.h \
+    patternScan/PivotLowScanner.h \
+    patternScan/ScannerHelper.h \
+    patternScan/SymetricWedgeScanner.h \
+    patternScan/TrendLineScanner.h \
+    patternScan/VScanner.h \
+    patternScan/WedgeScanner.h \
+    patternScan/WedgeScannerEngine.h \
+    quoteData/ClosePeriodValueRef.h \
+    quoteData/PeriodVal.h \
+    quoteData/PeriodValSegment.h \
+    quoteData/PeriodValueRef.h
+unix {
+    target.path = /usr/local/lib
+    INSTALLS += target
+}

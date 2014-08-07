@@ -13,3 +13,8 @@ PatternRecognitionLibTest
 
 # PDT-specific
 .buildpath
+
+# Qt Creator project and build files
+*.pro.user
+src/build-*
+test/build-*
