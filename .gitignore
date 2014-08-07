@@ -18,3 +18,4 @@ PatternRecognitionLibTest
 *.pro.user
 src/build-*
 test/build-*
+build-*
