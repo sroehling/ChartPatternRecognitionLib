@@ -35,10 +35,11 @@ LIBS += -mmacosx-version-min=10.7 -stdlib=libc++
 CONFIG += c++11
 
 
-## Link with pre-built version of Boost.
+## Link with pre-built version of Boost. Using -isystem to include the boost headers supresses
+## Warnings from these headers.
 DEFINES += BOOST_ALL_DYN_LINK
 DEFINES += BOOST_LOG_DYN_LINK
-macx: INCLUDEPATH += /usr/local/boost156/include
+macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
 macx: LIBS += -L/usr/local/boost156/lib -lboost_date_time-mt -lboost_log-mt -lboost_log_setup-mt -lboost_unit_test_framework-mt
 
 macx: LIBS += -L$$PWD/../build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug/ -lPatternRecognitionLib

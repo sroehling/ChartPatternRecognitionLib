@@ -96,6 +96,26 @@ PatternMatchListPtr filterUniqueAndLongestLowestLow(const PatternMatchListPtr &u
 			SortPatternMatchByLowestLowTimeThenLength(),SameLowestLowTime());
 }
 
+PatternMatchListPtr filterUniqueLongestPatternSameEndDate(const PatternMatchListPtr &unfilteredMatches)
+{
+    PatternMatchListPtr  sortedMatches = patternMatchFilter::sortPatternMatches(
+                unfilteredMatches,SortPatternMatchByEndTimeThenLength());
+
+    // Eliminate duplicate patterns with the same end date (confirmation date), but differenting start dates.
+    // We only want to return the pattern starting earliest, essentially the one with same end date, but starting
+    // the earliest.
+    PatternMatchListPtr  uniqueMatches = patternMatchFilter::uniquePatternMatches(sortedMatches,SameEndTime());
+
+    // Sort the final results by start date, then end date.
+    PatternMatchListPtr  sortedUniqueMatches = patternMatchFilter::sortPatternMatches(
+                uniqueMatches,SortPatternMatchByStartAndEndDate());
+
+
+    return uniqueMatches;
+}
+
+
+
 
 PatternMatchList::iterator findFirstPatternMatch(const PatternMatchListPtr &patternMatches,
 		const PatternMatchFindPredicate &findPred)

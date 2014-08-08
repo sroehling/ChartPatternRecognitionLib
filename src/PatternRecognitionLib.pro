@@ -92,7 +92,9 @@ INCLUDEPATH += segmentContraint\
     patternShape\
     quoteData
 
-INCLUDEPATH += /usr/local/boost156/include
+# Include the boost headers using the -system flag, suppressing warnigns
+# from these files.
+macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
 DEFINES += BOOST_ALL_DYN_LINK
 DEFINES += BOOST_LOG_DYN_LINK
 

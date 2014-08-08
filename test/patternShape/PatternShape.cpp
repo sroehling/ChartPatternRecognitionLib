@@ -5,6 +5,8 @@
 #include "DoubleBottomScanner.h"
 #include "TestHelper.h"
 #include "PatternShapeGenerator.h"
+#include "MultiPatternScanner.h"
+#include "PatternMatchFilter.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -36,6 +38,33 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_QCOR_20130819 )
     PatternShapePointVectorPtr shapeCurve = shapeGen.generateShape(*doubleBottomMatch);
     BOOST_TEST_MESSAGE("PatternShape_DoubleBottom_QCOR_20130819: num points in shape: " << shapeCurve->size());
     BOOST_CHECK_EQUAL(shapeCurve->size(),5);
+
+}
+
+BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly )
+{
+
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternShape/QCOR_2013_2014_Weekly.csv");
+
+    PatternScannerPtr doubleBottomScanner(new DoubleBottomScanner(DoubleRange(7.0,40.0)));
+    MultiPatternScanner multiScanner(doubleBottomScanner);
+
+    PatternMatchListPtr doubleBottoms = multiScanner.scanPatternMatches(chartData);
+
+    // TODO - The scanning seems to be working fine, but the actual pattern matches for a double-bottom don't appear to
+    // be correct. In particular, the start dates for some of the matches occur below the RHS of the first dip in the
+    // double bottom.
+    verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: unfiltered matches",doubleBottoms,5);
+
+    PatternMatchListPtr  uniqueMatches = patternMatchFilter::filterUniqueLongestPatternSameEndDate(doubleBottoms);
+
+    genPatternMatchListInfo("Unique matches",*uniqueMatches);
+
+    verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: filtered matches",uniqueMatches,1);
+    verifyPatternMatch("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly match",
+            ptime(date(2013,8,12)),ptime(date(2014,2,18)),5,uniqueMatches,0);
+
+
 
 }
 
