@@ -16,6 +16,7 @@
 #include "ScannerHelper.h"
 #include "PatternMatchFilter.h"
 #include "ANDPatternMatchValidator.h"
+#include "VPatternMatch.h"
 
 using namespace scannerHelper;
 
@@ -54,7 +55,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 						upTrendValidatorFactory_.createValidator1(*dtMatchIter);
 			if(upTrendValidator->validPattern(**utMatchIter))
 			{
-				PatternMatchPtr overallPattern = (*dtMatchIter)->appendMatch(**utMatchIter);
+                PatternMatchPtr overallPattern(new VPatternMatch(*dtMatchIter,*utMatchIter));
 
 				PatternMatchValidatorPtr overallValidate =
 						overallValidatorFactory_.createValidator2(*dtMatchIter,*utMatchIter);

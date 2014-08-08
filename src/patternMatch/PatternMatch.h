@@ -70,7 +70,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch);
 
-	virtual void acceptVisitor(PatternMatchVisitor &visitor) {}
+    virtual void acceptVisitor(PatternMatchVisitor &) {}
 
 
 	virtual ~PatternMatch();

@@ -73,7 +73,12 @@ SOURCES += \
     quoteData/ClosePeriodValueRef.cpp \
     quoteData/PeriodVal.cpp \
     quoteData/PeriodValSegment.cpp \
-    quoteData/PeriodValueRef.cpp
+    quoteData/PeriodValueRef.cpp \
+    patternMatch/VPatternMatch.cpp \
+    patternShape/PatternShape.cpp \
+    patternShape/PatternShapeGenerator.cpp \
+    patternMatch/DoubleBottomPatternMatch.cpp \
+    patternShape/PatternShapePoint.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -84,6 +89,7 @@ INCLUDEPATH += segmentContraint\
     patternMatchFilter\
     patternMatchValidator\
     patternScan\
+    patternShape\
     quoteData
 
 INCLUDEPATH += /usr/local/boost156/include
@@ -149,7 +155,12 @@ HEADERS += patternrecognitionlib.h \
     quoteData/ClosePeriodValueRef.h \
     quoteData/PeriodVal.h \
     quoteData/PeriodValSegment.h \
-    quoteData/PeriodValueRef.h
+    quoteData/PeriodValueRef.h \
+    patternMatch/VPatternMatch.h \
+    patternShape/PatternShape.h \
+    patternShape/PatternShapeGenerator.h \
+    patternMatch/DoubleBottomPatternMatch.h \
+    patternShape/PatternShapePoint.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

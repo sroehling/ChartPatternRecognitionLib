@@ -14,6 +14,7 @@
 #include "ScannerHelper.h"
 #include "RecoverPercentOfDepth.h"
 #include "PatternMatchFilter.h"
+#include "DoubleBottomPatternMatch.h"
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
@@ -61,7 +62,12 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 		// TODO - The left and right V should be in proportion to one another (e.g., the left V
 		// shouldn't be 5% down while the right V is 25% down).
 		// Put the left V and Right V pattern matches together, forming the overall double-bottom pattern.
-		PatternMatchListPtr overallMatches = (*leftMatchIter)->appendMatchList(*rightVMatches);
+        PatternMatchListPtr overallMatches(new PatternMatchList());
+        for(PatternMatchList::const_iterator rightMatchIter = rightVMatches->begin();
+            rightMatchIter != rightVMatches->end(); rightMatchIter++)
+        {
+            overallMatches->push_back(PatternMatchPtr(new DoubleBottomPatternMatch(*leftMatchIter,*rightMatchIter)));
+        } // for each "right V" match
 
 		appendValidatedMatches(dblBottomMatches,overallMatches,depthWithinRangeValidator(minMaxDepthPerc_));
 

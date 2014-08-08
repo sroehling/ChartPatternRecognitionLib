@@ -9,12 +9,16 @@
 #define PATTERNMATCHVISITOR_H_
 
 class SymetricWedgePatternMatch;
+class VPatternMatch;
+class DoubleBottomPatternMatch;
 
 class PatternMatchVisitor {
 public:
 	PatternMatchVisitor();
 
-	virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &wedgePatternMatch) {}
+    virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &) {}
+    virtual void visitVPatternMatch(VPatternMatch &) {}
+    virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &) {}
 
 	virtual ~PatternMatchVisitor();
 };

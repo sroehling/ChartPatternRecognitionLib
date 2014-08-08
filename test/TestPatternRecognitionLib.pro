@@ -19,7 +19,8 @@ SOURCES += RunTests.cpp \
     quoteData/PeriodVal.cpp \
     quoteData/PeriodValSegment.cpp \
     TestHelper.cpp \
-    TestPerValRange.cpp
+    TestPerValRange.cpp \
+    patternShape/PatternShape.cpp
 
 HEADERS += \
     TestHelper.h \
@@ -51,4 +52,5 @@ macx: INCLUDEPATH += $$PWD/../src/chartSegment\
     $$PWD/../src/patternMatchFilter\
     $$PWD/../src/patternMatchValidator\
     $$PWD/../src/patternScan\
+    $$PWD/../src/patternShape\
     $$PWD/../src/quoteData

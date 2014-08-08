@@ -11,7 +11,7 @@ AnyPatternMatchValidator::AnyPatternMatchValidator() {
 }
 
 
-bool AnyPatternMatchValidator::validPattern(const PatternMatch &candidateMatch)
+bool AnyPatternMatchValidator::validPattern(const PatternMatch &)
 {
 	return true;
 }

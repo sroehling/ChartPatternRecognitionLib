@@ -10,7 +10,7 @@
 AnySegmentListValidConstraint::AnySegmentListValidConstraint() {
 }
 
-bool AnySegmentListValidConstraint::validSegments(const ChartSegmentList &segments)
+bool AnySegmentListValidConstraint::validSegments(const ChartSegmentList &)
 {
 	return true;
 }

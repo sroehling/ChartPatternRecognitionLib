@@ -98,7 +98,7 @@ bool PatternMatch::segmentsConnected(const ChartSegmentList &segments) const
 	{
 		PeriodValCltn::iterator firstSegBeginIter =
 					segments.front()->perValSegment()->perValCltn()->begin();
-		for(int segIndex = 1; segIndex < segments.size()-1; segIndex++)
+        for(unsigned int segIndex = 1; segIndex < segments.size()-1; segIndex++)
 		{
 			// Segments must be point to the same underlying PeriodValCltn. This is
 			// necessary, since segments are implemented as flyweights for PeriodValCltn,
