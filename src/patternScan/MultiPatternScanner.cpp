@@ -6,6 +6,7 @@
  */
 
 #include <MultiPatternScanner.h>
+#include "PatternMatchFilter.h"
 
 MultiPatternScanner::MultiPatternScanner(const PatternScannerPtr &singlePatternScanner)
 : singlePatternScanner_(singlePatternScanner)
@@ -32,6 +33,14 @@ PatternMatchListPtr MultiPatternScanner::scanPatternMatches(const PeriodValSegme
 	}
 
 	return allSubSegmentMatches;
+}
+
+PatternMatchListPtr MultiPatternScanner::scanUniquePatternMatches(const PeriodValSegmentPtr &chartVals) const
+{
+    PatternMatchListPtr unfilteredMatches = scanPatternMatches(chartVals);
+    PatternMatchListPtr uniqueFilteredMatches =
+            patternMatchFilter::filterUniqueLongestPatternSameEndDate(unfilteredMatches);
+    return uniqueFilteredMatches;
 }
 
 

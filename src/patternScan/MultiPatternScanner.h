@@ -19,6 +19,10 @@ public:
 
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
+    // Scan for all the matches starting anywhere in chartVals, but filter the matched
+    // patterns to those not ending on the same date and the earliest start time.
+    PatternMatchListPtr scanUniquePatternMatches(const PeriodValSegmentPtr &chartVals) const;
+
 	virtual ~MultiPatternScanner();
 };
 
