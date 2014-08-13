@@ -20,7 +20,8 @@ SOURCES += RunTests.cpp \
     quoteData/PeriodValSegment.cpp \
     TestHelper.cpp \
     TestPerValRange.cpp \
-    patternShape/PatternShape.cpp
+    patternShape/PatternShape.cpp \
+    patternScan/PivotScanner.cpp
 
 HEADERS += \
     TestHelper.h \
@@ -42,8 +43,9 @@ DEFINES += BOOST_LOG_DYN_LINK
 macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
 macx: LIBS += -L/usr/local/boost156/lib -lboost_date_time-mt -lboost_log-mt -lboost_log_setup-mt -lboost_unit_test_framework-mt
 
+# Link with the PatternRecognitionLib and establish a build dependency to re-link if the library changes.
 macx: LIBS += -L$$PWD/../build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug/ -lPatternRecognitionLib
-
+macx: PRE_TARGETDEPS += $$PWD/../build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug/libPatternRecognitionLib.a
 
 macx: INCLUDEPATH += $$PWD/../src/chartSegment\
     $$PWD/../src/chartSegmentList\

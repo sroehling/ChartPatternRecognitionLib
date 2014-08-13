@@ -14,8 +14,8 @@ bool SymetricWedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine
 		const ChartSegmentPtr &lowerTrendLine) const
 {
 
-	DoubleRange upperTrendLineSlopeRange(-100.0,-0.20);
-	DoubleRange lowerTrendLineSlopeRange(0.20,100.0);
+    DoubleRange upperTrendLineSlopeRange(-100.0,-0.10);
+    DoubleRange lowerTrendLineSlopeRange(0.10,100.0);
 
 	if(upperTrendLineSlopeRange.valueWithinRange(upperTrendLine->slope()) &&
 			lowerTrendLineSlopeRange.valueWithinRange(lowerTrendLine->slope()))

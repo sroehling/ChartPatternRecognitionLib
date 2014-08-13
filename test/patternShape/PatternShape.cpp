@@ -7,6 +7,7 @@
 #include "PatternShapeGenerator.h"
 #include "MultiPatternScanner.h"
 #include "PatternMatchFilter.h"
+#include "PatternShape.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -35,9 +36,14 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_QCOR_20130819 )
     PatternMatchPtr doubleBottomMatch = patternMatches->front();
 
     PatternShapeGenerator shapeGen;
-    PatternShapePointVectorPtr shapeCurve = shapeGen.generateShape(*doubleBottomMatch);
-    BOOST_TEST_MESSAGE("PatternShape_DoubleBottom_QCOR_20130819: num points in shape: " << shapeCurve->size());
-    BOOST_CHECK_EQUAL(shapeCurve->size(),5);
+    PatternShapePtr patternShape = shapeGen.generateShape(*doubleBottomMatch);
+    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),1);
+
+    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+    PatternShapePointVectorPtr firstShape = (*curveShapes)[0];
+
+    BOOST_TEST_MESSAGE("PatternShape_DoubleBottom_QCOR_20130819: num points in shape: " << firstShape->size());
+    BOOST_CHECK_EQUAL(firstShape->size(),5);
 
 }
 

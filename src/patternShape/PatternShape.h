@@ -3,15 +3,25 @@
 
 #include "PeriodVal.h"
 #include "PatternShapePoint.h"
+#include <boost/shared_ptr.hpp>
+
 
 class PatternShape {
 private:
-    PatternShapePointVector shapePoints_; // points in the shape, from start to finish
+    PatternShapePointVectorVectorPtr curveShapes_;
 public:
-    PatternShape(const PatternShapePointVector &shapePoints);
-    void addShapePoint(const PeriodVal &shapePt);
+    PatternShape();
+
+    // Add a vector of PatternShapePoint's comprising a curve or line
+    // for the pattern shape.
+    void addCurveShape(const PatternShapePointVectorPtr &curveShape);
+
+    unsigned int numCurveShapes() const { return curveShapes_->size(); }
+    PatternShapePointVectorVectorPtr curveShapes() const { return curveShapes_; }
+
+    virtual ~PatternShape() {}
 };
 
-
+typedef boost::shared_ptr<PatternShape> PatternShapePtr;
 
 #endif

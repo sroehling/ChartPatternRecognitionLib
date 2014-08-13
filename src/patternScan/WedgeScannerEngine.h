@@ -11,6 +11,7 @@
 #include "PatternMatch.h"
 #include "PeriodValSegment.h"
 #include "ChartSegment.h"
+#include "PatternScanner.h"
 
 // TODO Refactor to change the name of this class to UpperLowerTrendlinePatternScanner (or similar),
 // since derived classes can scan anything from a flat base to a rising/falling/symetric wedge.
@@ -18,7 +19,7 @@
 // apex. This can include descending triangle (downward upper trend line, flat lower trend line),
 // ascending triangle (flat upper trend line, upward sloping lower trend line), or
 // triangle (downward sloping upper trend line, upward sloping lower trend line).
-class WedgeScannerEngine {
+class WedgeScannerEngine: public PatternScanner {
 
 protected:
 	// Test if the given upper and lower trend lines are valid with

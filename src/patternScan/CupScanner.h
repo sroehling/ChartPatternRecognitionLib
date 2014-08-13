@@ -12,8 +12,9 @@
 #include "PeriodValSegment.h"
 #include "PatternScannerEngine.h"
 #include "CompositePatternMatchValidatorFactory.h"
+#include "PatternScanner.h"
 
-class CupScanner {
+class CupScanner: public PatternScanner {
 private:
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;

@@ -16,6 +16,7 @@ private:
 	double pivotHighMaxTrendLineDistancePerc_;
 public:
 	PivotHighScanner();
+    PivotHighScanner(double maxTrendLineDistancePerc);
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
