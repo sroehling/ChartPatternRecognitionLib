@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
     genPatternMatchListInfo("Unique matches",*symetricTriangles);
 
-    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,1);
+    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,17);
 
 
     PatternMatchPtr wedgeMatch = symetricTriangles->back();

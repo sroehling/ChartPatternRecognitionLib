@@ -10,6 +10,7 @@
 #include <boost/log/trivial.hpp>
 #include "MultiPatternScanner.h"
 #include "PatternMatchFilter.h"
+#include "PerValCltnSlidingWindow.h"
 
 
 PivotHighScanner::PivotHighScanner() {
@@ -24,46 +25,48 @@ PivotHighScanner::PivotHighScanner(double maxTrendLineDistancePerc)
 
 PatternMatchListPtr PivotHighScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
+    /*
 	PatternScannerPtr pivotHighScanner(new InvertedVScanner(pivotHighMaxTrendLineDistancePerc_));
 	MultiPatternScanner pivotHighMultiPatternScanner(pivotHighScanner);
 	PatternMatchListPtr pivotHighs = pivotHighMultiPatternScanner.scanPatternMatches(chartVals);
 	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(pivotHighs);
-
+*/
 
     /* The code below is experimental code for matching pivots. Rather than progressively scanning for
      * using the InvertedVScanner, use a sliding window to determine where pivots have taken place.
-
+    */
     PatternMatchListPtr allPivots(new PatternMatchList());
 
-    unsigned int pivotLen = 3;
-    PeriodValCltn::iterator pivotLHSIter = chartVals->segBegin();
-    PeriodValCltn::iterator pivotMiddleIter = pivotLHSIter;
-    std::advance(pivotMiddleIter,pivotLen);
-    PeriodValCltn::iterator pivotRHSIter = pivotMiddleIter;
-    std::advance(pivotRHSIter,pivotLen);
-
-    for(pivotRHSIter = pivotRHSIter; pivotRHSIter != chartVals->segEnd();
-        pivotLHSIter++,pivotMiddleIter++,pivotRHSIter++)
+    unsigned int pivotWindowLen = 6;
+    if(PerValCltnSlidingWindow::windowFitsWithinRange(pivotWindowLen,chartVals->segBegin(),chartVals->segEnd()))
     {
-        if(((*pivotMiddleIter).high() > (*pivotLHSIter).high()) &&
-               ((*pivotMiddleIter).high() > (*pivotRHSIter).high()))
+        PerValCltnSlidingWindow slidingPivotTestWindow(pivotWindowLen,chartVals->segBegin(),chartVals->segEnd());
+
+        while(!slidingPivotTestWindow.windowAtEnd())
         {
-            BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: pivot high: "
-                    << "LHS=" << (*pivotLHSIter)
-                    << "Middle (pivot)=" << (*pivotMiddleIter)
-                    << "RHS=" << (*pivotRHSIter) << std::endl;
-            PeriodValCltn::iterator pivotEndIter = pivotRHSIter;
-            pivotEndIter++;
-            ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
-                    pivotLHSIter,pivotEndIter,
-                    PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
-            PatternMatchPtr pivotMatch(new PatternMatch(pivotSeg));
-            allPivots->push_back(pivotMatch);
+            if((slidingPivotTestWindow.middleVal().high() >
+                  slidingPivotTestWindow.firstVal().high()) &&
+                    (slidingPivotTestWindow.middleVal().high() >
+                     slidingPivotTestWindow.lastVal().high())
+                   )
+             {
+
+                BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: pivot high: "
+                        << "LHS=" << slidingPivotTestWindow.firstVal()
+                        << "Middle (pivot)=" << slidingPivotTestWindow.middleVal()
+                        << "RHS=" << slidingPivotTestWindow.lastVal() << std::endl;
+                ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
+                        slidingPivotTestWindow.windowFirst(),slidingPivotTestWindow.windowLast(),
+                        PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
+                PatternMatchPtr pivotMatch(new PatternMatch(pivotSeg));
+                allPivots->push_back(pivotMatch);
+               }
+                slidingPivotTestWindow.advanceWindow();
+
         }
     }
 
     PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(allPivots);
-*/
 
 
 	BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: num pivot highs: " << sortedUniquePivots->size() << std::endl;

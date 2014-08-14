@@ -16,6 +16,7 @@
 #include "PatternLengthLessThanEqual.h"
 #include "PeriodValueRef.h"
 #include "ChartSegment.h"
+#include "PerValCltnSlidingWindow.h"
 
 PivotLowScanner::PivotLowScanner() {
 	pivotLowMaxTrendLineDistancePerc_ = 3.0;
@@ -32,12 +33,17 @@ PatternMatchListPtr PivotLowScanner::scanPatternMatches(const PeriodValSegmentPt
 {
     PatternMatchListPtr allPivots(new PatternMatchList());
 
+    /*
     PatternScannerPtr vPivotLowScanner(new VScanner(pivotLowMaxTrendLineDistancePerc_));
     MultiPatternScanner vPivotLowMultiPatternScanner(vPivotLowScanner);
     PatternMatchListPtr vShapedPivotLows = vPivotLowMultiPatternScanner.scanPatternMatches(chartVals);
     allPivots->insert(allPivots->end(),vShapedPivotLows->begin(),vShapedPivotLows->end());
+*/
+
 /* The code below is experimental/WIP code for different algorithms for pivot scanning,
  * using either the cup shaped scanner or a sliding window when pivots occur.
+ */
+/*
      PatternMatchValidatorList finalValidators;
     finalValidators.push_back(PatternMatchValidatorPtr(new PatternLengthLessThanEqual(20)));
     PatternMatchValidatorPtr overallValidator(new ORPatternMatchValidator(finalValidators));
@@ -50,34 +56,35 @@ PatternMatchListPtr PivotLowScanner::scanPatternMatches(const PeriodValSegmentPt
      allPivots->insert(allPivots->end(),uShapedPivotLows->begin(),uShapedPivotLows->end());
 */
 
-    /*
-    unsigned int pivotLen = 3;
-    PeriodValCltn::iterator pivotLHSIter = chartVals->segBegin();
-    PeriodValCltn::iterator pivotMiddleIter = pivotLHSIter;
-    std::advance(pivotMiddleIter,pivotLen);
-    PeriodValCltn::iterator pivotRHSIter = pivotMiddleIter;
-    std::advance(pivotRHSIter,pivotLen);
-
-    for(pivotRHSIter = pivotRHSIter; pivotRHSIter != chartVals->segEnd();
-        pivotLHSIter++,pivotMiddleIter++,pivotRHSIter++)
+    unsigned int pivotWindowLen = 6;
+    if(PerValCltnSlidingWindow::windowFitsWithinRange(pivotWindowLen,chartVals->segBegin(),chartVals->segEnd()))
     {
-        if(((*pivotMiddleIter).low() < (*pivotLHSIter).low()) &&
-               ((*pivotMiddleIter).low() < (*pivotRHSIter).low()))
+        PerValCltnSlidingWindow slidingPivotTestWindow(pivotWindowLen,chartVals->segBegin(),chartVals->segEnd());
+
+        while(!slidingPivotTestWindow.windowAtEnd())
         {
-            BOOST_LOG_TRIVIAL(debug) << "PivotLowScanner: pivot low: "
-                    << "LHS=" << (*pivotLHSIter)
-                    << "Middle (pivot)=" << (*pivotMiddleIter)
-                    << "RHS=" << (*pivotRHSIter) << std::endl;
-            PeriodValCltn::iterator pivotEndIter = pivotRHSIter;
-            pivotEndIter++;
-            ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
-                    pivotLHSIter,pivotEndIter,
-                    PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
-            PatternMatchPtr pivotMatch(new PatternMatch(pivotSeg));
-            allPivots->push_back(pivotMatch);
+            if((slidingPivotTestWindow.middleVal().low() <
+                  slidingPivotTestWindow.firstVal().low()) &&
+                    (slidingPivotTestWindow.middleVal().low() <
+                     slidingPivotTestWindow.lastVal().low())
+                   )
+             {
+
+                BOOST_LOG_TRIVIAL(debug) << "PivotLowScanner: found pivot low: "
+                        << "LHS=" << slidingPivotTestWindow.firstVal()
+                        << "Middle (pivot)=" << slidingPivotTestWindow.middleVal()
+                        << "RHS=" << slidingPivotTestWindow.lastVal() << std::endl;
+                ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
+                        slidingPivotTestWindow.windowFirst(),slidingPivotTestWindow.windowLast(),
+                        PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
+                PatternMatchPtr pivotMatch(new PatternMatch(pivotSeg));
+                allPivots->push_back(pivotMatch);
+
+              }
+              slidingPivotTestWindow.advanceWindow();
+
         }
     }
-*/
 
     PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestLowestLow(allPivots);
 

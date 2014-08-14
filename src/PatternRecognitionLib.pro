@@ -78,7 +78,8 @@ SOURCES += \
     patternShape/PatternShape.cpp \
     patternShape/PatternShapeGenerator.cpp \
     patternMatch/DoubleBottomPatternMatch.cpp \
-    patternShape/PatternShapePoint.cpp
+    patternShape/PatternShapePoint.cpp \
+    quoteData/PerValCltnSlidingWindow.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -162,7 +163,8 @@ HEADERS += patternrecognitionlib.h \
     patternShape/PatternShape.h \
     patternShape/PatternShapeGenerator.h \
     patternMatch/DoubleBottomPatternMatch.h \
-    patternShape/PatternShapePoint.h
+    patternShape/PatternShapePoint.h \
+    quoteData/PerValCltnSlidingWindow.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target
