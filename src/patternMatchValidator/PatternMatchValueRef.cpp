@@ -18,7 +18,7 @@ double DepthPercentPatternMatchValueRef::patternMatchVal(const PatternMatch &mat
 	return match.depthPercent();
 }
 
-double FixedPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+double FixedPatternMatchValueRef::patternMatchVal(const PatternMatch &) const
 {
 	return val_;
 }

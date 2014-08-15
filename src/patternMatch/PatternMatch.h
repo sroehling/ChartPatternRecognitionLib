@@ -72,6 +72,8 @@ public:
 
     virtual void acceptVisitor(PatternMatchVisitor &) {}
 
+    virtual std::string matchType() const { return "Match Type TBD"; }
+
 
 	virtual ~PatternMatch();
 };

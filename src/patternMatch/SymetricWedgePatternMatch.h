@@ -32,6 +32,9 @@ public:
     PeriodValCltn::iterator interceptEndIter() const;
 
 	virtual ~SymetricWedgePatternMatch() {}
+
+    virtual std::string matchType() const { return "Symetric Wedge"; }
+
 };
 
 #endif /* SYMETRICWEDGEPATTERNMATCH_H_ */

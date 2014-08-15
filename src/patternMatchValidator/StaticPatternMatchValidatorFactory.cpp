@@ -13,7 +13,7 @@ StaticPatternMatchValidatorFactory::StaticPatternMatchValidatorFactory(const Pat
 }
 
 PatternMatchValidatorPtr StaticPatternMatchValidatorFactory::createValidator(
-		const PatternMatchVector &previousMatches) const
+        const PatternMatchVector &) const
 {
 	// staticValidor_ is not dependent on the otherMatch for validation,
 	// just return the validator as is (hence the "static" in the class name).
