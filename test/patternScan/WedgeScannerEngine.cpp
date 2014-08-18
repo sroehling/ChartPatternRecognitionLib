@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
     genPatternMatchListInfo("Unique matches",*symetricTriangles);
 
-    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,17);
+    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,1);
 
 
     PatternMatchPtr wedgeMatch = symetricTriangles->back();
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
     PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
 
     verifyPatternMatch("WedgeScannerEngine_SynthesizedPattern match",
-            ptime(date(2013,4,29)),ptime(date(2013,10,14)),1,symetricTriangles,0);
+            ptime(date(2013,7,29)),ptime(date(2013,10,14)),1,symetricTriangles,0);
 
 
 }

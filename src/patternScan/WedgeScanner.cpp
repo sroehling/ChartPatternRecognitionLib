@@ -21,42 +21,117 @@ double WedgeScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine
 
 	XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
 	double numPeriodsToIntercept = trendlineIntercept.x() - firstPivotHighXVal;
-	assert(numPeriodsToIntercept > 0.0);
+
+    assert(numPeriodsToIntercept > 0.0);
 
 	return numPeriodsToIntercept;
 }
 
+bool WedgeScanner::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
+                       const ChartSegmentPtr &lowerTrendLine) const
+{
+    // The first and last value of the upper and lower trend lines are the pivot highs and lows used to
+    // define the trend lines. With this in mind, we don't want to consider a pattern valid if
+    // there is not a pivot low before the second pivot high; in other words, the pattern is not
+    // considered valid (i.e., well-balanced) if both the pivot lows occur after both the pivot highs.
+    if(lowerTrendLine->firstPeriodVal().periodTime() < upperTrendLine->lastPeriodVal().periodTime())
+    {
+        return true;
+    }
+
+    return false;
+
+}
+
+
+bool WedgeScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
+                       const ChartSegmentPtr &lowerTrendLine) const
+{
+    double numPerToIntercept = numPeriodsToIntercept(upperTrendLine,lowerTrendLine);
+    assert(numPerToIntercept > 0.0);
+
+    // If the distance between the pivot points doesn't cover a reasonable amount
+    // of the pattern, the pattern will look "bunched up" in one area.
+    double MIN_SPACING_PERC = 0.30;
+
+    double pivotLowSpacing = (double)lowerTrendLine->numPeriods();
+    assert(pivotLowSpacing <= numPerToIntercept);
+    if((pivotLowSpacing/numPerToIntercept) < MIN_SPACING_PERC)
+    {
+        return false;
+    }
+
+    double pivotHighSpacing = (double)upperTrendLine->numPeriods();
+    assert(pivotHighSpacing <= numPerToIntercept);
+    if(pivotHighSpacing > numPerToIntercept)
+    {
+        BOOST_LOG_TRIVIAL(debug) << "WedgeScanner: "
+                << " pivot high space: " << pivotHighSpacing
+                << " intercept periods: " << numPerToIntercept << std::endl;
+
+    }
+    if((pivotHighSpacing/numPerToIntercept) < MIN_SPACING_PERC)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool WedgeScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
+                                                 const ChartSegmentPtr &lowerTrendLine) const
+{
+    if(lowerTrendLine->segmentEq()->slope() == upperTrendLine->segmentEq()->slope())
+    {
+        // never intercept
+        return false;
+    }
+
+    // Check if the intercept occurs after the both the 1st and 2nd pivots "pseudo X" value
+    // (i.e., the unique numerical value assigned for each PeriodVal's date). Otherwise,
+    // we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
+    // at some point, but not here), or the trend-lines intersect before the 2nd pivots have occured.
+
+    XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
+    if(trendlineIntercept.x() > upperTrendLine->lastPeriodVal().pseudoXVal() &&
+       trendlineIntercept.x() > lowerTrendLine->lastPeriodVal().pseudoXVal())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 
 bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
-	if(lowerTrendLine->segmentEq()->slope() != upperTrendLine->segmentEq()->slope())
-	{
-		XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
+    // The first and last value of the upper and lower trend lines are the pivot highs and lows used to
+    // define the trend lines. With this in mind, we don't want to consider a pattern valid if
+    // there is not a pivot low before the second pivot high; in other words, the pattern is not
+    // considered valid (i.e., well-balanced) if both the pivot lows occur after both the pivot highs.
 
-		// Only continue if the intercept occurs after the first pivot high's "pseudo X" value
-		// (i.e., the unique numerical value assigned for each PeriodVal's date). If the intercept
-		// is before the first pivot high, then the lines are angled away from each other, and
-		// we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
-		// at some point, but not here).
-		double firstPivotHighXVal = upperTrendLine->firstPeriodVal().pseudoXVal();
-		if(trendlineIntercept.x() > firstPivotHighXVal)
-		{
-			BOOST_LOG_TRIVIAL(debug) << "WedgeScanner: "
-					<< " upper trend line: " << upperTrendLine
-					<< " lower trend line: " << lowerTrendLine
-					<< " intercept " << trendlineIntercept << std::endl;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		return false;
-	}
+    if(interceptAfter2ndLowerAndUpperPivot(upperTrendLine,lowerTrendLine))
+    {
+        if(!pivotsInterleaved(upperTrendLine,lowerTrendLine))
+        {
+            return false;
+        }
+
+        if(!pivotsSpacedOut(upperTrendLine,lowerTrendLine))
+        {
+            return false;
+        }
+
+        return true;
+
+    }
+    else
+    {
+        return false;
+    }
+
 }
 
 
