@@ -59,3 +59,31 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
 
 }
+
+
+BOOST_AUTO_TEST_CASE( WedgeScannerEngine_CELG_SymetricTriangle )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CELG_20140501_20140814_Daily.csv");
+
+    PatternScannerPtr scanner(new SymetricWedgeScanner());
+    PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
+
+    genPatternMatchListInfo("Unique matches",*symetricTriangles);
+
+    verifyMatchList("WedgeScannerEngine_CELG_SymetricTriangle: filtered matches",symetricTriangles,1);
+
+
+    PatternMatchPtr wedgeMatch = symetricTriangles->back();
+
+    PatternShapeGenerator shapeGen;
+    PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
+    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),2);
+
+    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+
+    verifyPatternMatch("WedgeScannerEngine_CELG_SymetricTriangle match",
+            ptime(date(2014,7,3)),ptime(date(2014,8,13)),1,symetricTriangles,0);
+
+
+}
+
