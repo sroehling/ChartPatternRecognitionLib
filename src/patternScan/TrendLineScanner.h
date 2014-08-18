@@ -13,14 +13,16 @@
 #include "PatternScannerEngine.h"
 #include "PatternMatchValidator.h"
 #include "DoubleRange.h"
+#include "UnsignedIntRange.h"
 
 
 class TrendLineScanner: public PatternScanner {
 private:
 	PatternScannerPtr trendScanner_;
 
-	void initTrendScanner(const DoubleRange &slopeRange,
-			const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation);
+    void initTrendScanner(const DoubleRange &slopeRange,
+                          const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation,
+                          const UnsignedIntRange &segmentLengthRange);
 public:
 	// matchConstraint is a constraint which must match for the whole trend line. The slope of the individual
 	// segments must be within the given slope range and also the pattern as a whole must match matchContraint.
@@ -28,6 +30,7 @@ public:
 
 	TrendLineScanner(const DoubleRange &slopeRange);
 	TrendLineScanner(const DoubleRange &slopeRange, double maxPercDistToLineEquation);
+    TrendLineScanner(const DoubleRange &slopeRange, double maxPercDistToLineEquation, const UnsignedIntRange segmentLengthRange);
 
 	static const DoubleRange DOWNTREND_SLOPE_RANGE;
 	static const DoubleRange UPTREND_SLOPE_RANGE;

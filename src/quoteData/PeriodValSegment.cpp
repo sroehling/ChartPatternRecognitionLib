@@ -147,6 +147,30 @@ PeriodValSegmentPtr PeriodValSegment::trailingValsWithLastVal() const
 	return trailing;
 }
 
+
+PeriodValSegmentPtr PeriodValSegment::trailingValsWithLastVal(unsigned int maxVals) const
+{
+    assert(maxVals > 0);
+    PeriodValCltn::iterator trailingStart = segEnd_;
+    if(segEnd_ != perValCltn_->begin())
+    {
+        trailingStart--;
+    }
+
+    unsigned int valsIncluded = 0;
+    PeriodValCltn::iterator trailingEnd = trailingStart;
+    while((valsIncluded < maxVals) && (trailingEnd != perValCltn_->end()))
+    {
+        trailingEnd++;
+        valsIncluded++;
+    }
+
+    PeriodValSegmentPtr trailing(new PeriodValSegment(perValCltn_,trailingStart,trailingEnd));
+
+    return trailing;
+}
+
+
 unsigned int PeriodValSegment::numVals() const
 {
 	return endPos_- startPos_;
@@ -159,7 +183,7 @@ const PeriodVal &PeriodValSegment::firstVal() const
 
 }
 
-const PeriodValCltn::iterator &PeriodValSegment::lastValIter() const
+const PeriodValCltn::iterator PeriodValSegment::lastValIter() const
 {
 	assert(numVals() > 0);
 	PeriodValCltn::iterator lastValIter = segEnd_;

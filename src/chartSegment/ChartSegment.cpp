@@ -47,7 +47,7 @@ const PeriodVal &ChartSegment::firstPeriodVal() const
 	return segmentVals_->firstVal();
 }
 
-const PeriodValCltn::iterator &ChartSegment::lastValIter() const
+const PeriodValCltn::iterator ChartSegment::lastValIter() const
 {
 	return segmentVals_->lastValIter();
 }

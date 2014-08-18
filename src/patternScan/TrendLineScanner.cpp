@@ -22,7 +22,8 @@ const DoubleRange TrendLineScanner::DOWNTREND_SLOPE_RANGE(-15.0,-0.5);
 const DoubleRange TrendLineScanner::FLAT_SLOPE_RANGE(-0.5,0.5);
 
 void TrendLineScanner::initTrendScanner(const DoubleRange &slopeRange,
-		const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation)
+        const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation,
+        const UnsignedIntRange &segmentLengthRange)
 {
 	SegmentConstraintPtr valsCloseToEquation(new SegmentValsCloseToLinearEq(maxPercDistanceToLineEquation));
 	SegmentConstraintPtr trendSlope(new SlopeWithinRangeConstraint(slopeRange));
@@ -36,26 +37,35 @@ void TrendLineScanner::initTrendScanner(const DoubleRange &slopeRange,
 
 	PatternMatchValidatorPtr trendPatternMatchValidator(matchConstraint);
 
-	trendScanner_ = PatternScannerPtr(new PatternScannerEngine(trendSegConstraints,trendSegListConstraint,trendPatternMatchValidator));
+    trendScanner_ = PatternScannerPtr(new PatternScannerEngine(trendSegConstraints,
+                          trendSegListConstraint,trendPatternMatchValidator,segmentLengthRange));
 
 }
 
 TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange, double maxPercDistToLineEquation)
 {
-	initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),maxPercDistToLineEquation);
+    initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),maxPercDistToLineEquation,
+                     PatternScannerEngine::DEFAULT_SCAN_SEGMENT_LENGTH_RANGE);
+
+}
+
+TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange, double maxPercDistToLineEquation, const UnsignedIntRange segmentLengthRange)
+{
+    initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),
+                     maxPercDistToLineEquation,segmentLengthRange);
 
 }
 
 
 TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange, const PatternMatchValidatorPtr &matchConstraint) {
 
-	initTrendScanner(slopeRange,matchConstraint,7.0);
+    initTrendScanner(slopeRange,matchConstraint,7.0,PatternScannerEngine::DEFAULT_SCAN_SEGMENT_LENGTH_RANGE);
 
 }
 
 TrendLineScanner::TrendLineScanner(const DoubleRange &slopeRange) {
 
-	initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),7.0);
+    initTrendScanner(slopeRange,PatternMatchValidatorPtr(new AnyPatternMatchValidator()),7.0,PatternScannerEngine::DEFAULT_SCAN_SEGMENT_LENGTH_RANGE);
 }
 
 

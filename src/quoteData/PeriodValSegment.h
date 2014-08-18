@@ -58,6 +58,7 @@ public:
 	// This is used when multiple segments are "stitched together" for
 	// purposes of pattern matching.
 	PeriodValSegmentPtr trailingValsWithLastVal() const;
+    PeriodValSegmentPtr trailingValsWithLastVal(unsigned int maxVals) const;
 
 	const PeriodValCltn::iterator &segBegin() const { return segBegin_; }
 	const PeriodValCltn::iterator &segEnd() const { return segEnd_; }
@@ -70,7 +71,7 @@ public:
 	const PeriodVal &firstVal() const;
 	const PeriodValCltn::iterator &firstValIter() const { return segBegin(); }
 	const PeriodVal &lastVal() const;
-	const PeriodValCltn::iterator &lastValIter() const;
+    const PeriodValCltn::iterator lastValIter() const;
 
 	double highestHigh() const; // Highest high within the segment
 	const PeriodVal highestHighVal() const; // PeriodVal with the highest high

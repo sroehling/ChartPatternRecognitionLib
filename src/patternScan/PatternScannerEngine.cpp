@@ -10,15 +10,28 @@
 #include "ChartSegment.h"
 #include "PeriodVal.h"
 
+const UnsignedIntRange PatternScannerEngine::DEFAULT_SCAN_SEGMENT_LENGTH_RANGE(3,200);
+
 PatternScannerEngine::PatternScannerEngine(const SegmentConstraintPtr &segmentConstraint,
 		const SegmentListConstraintPtr &segmentListConstraint,
 		const PatternMatchValidatorPtr &patternMatchValidator)
 : segmentConstraint_(segmentConstraint),
   segmentListConstraint_(segmentListConstraint),
-  patternMatchValidator_(patternMatchValidator)
+  patternMatchValidator_(patternMatchValidator),
+    segmentLengthRange_(PatternScannerEngine::DEFAULT_SCAN_SEGMENT_LENGTH_RANGE)
 {
-	minSegmentLength_ = 3;
-	maxSegmentLength_ = 200;
+}
+
+PatternScannerEngine::PatternScannerEngine(const SegmentConstraintPtr &segmentConstraint,
+        const SegmentListConstraintPtr &segmentListConstraint,
+        const PatternMatchValidatorPtr &patternMatchValidator,
+        const UnsignedIntRange &segmentLengthRange)
+    : segmentConstraint_(segmentConstraint),
+      segmentListConstraint_(segmentListConstraint),
+      patternMatchValidator_(patternMatchValidator),
+      segmentLengthRange_(segmentLengthRange)
+{
+
 }
 
 
@@ -32,7 +45,7 @@ PatternMatchListPtr PatternScannerEngine::scanPatternMatches(
 	// completed at this depth of recursion.
 	PatternMatchListPtr matchingPatterns = PatternMatchListPtr(new PatternMatchList());
 
-	unsigned int minRemSegmentLen = minSegmentLength_;
+    unsigned int minRemSegmentLen = segmentLengthRange_.minVal();
 	if(leadingSegments.size()>0)
 	{
 		// If there's at least one leading segment, then minRemSegmentLen
@@ -42,7 +55,7 @@ PatternMatchListPtr PatternScannerEngine::scanPatternMatches(
 		minRemSegmentLen--;
 	}
 	unsigned int maxRemSegmentLen = std::min((unsigned int)remainingVals->numVals(),
-					maxSegmentLength_);
+                    segmentLengthRange_.maxVal());
 
 	if(remainingVals->numVals() < minRemSegmentLen)
 	{

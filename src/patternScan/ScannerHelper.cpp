@@ -24,6 +24,14 @@ void logMatchInfo(const std::string &prefix, const PatternMatch &match)
 		<< ", last close = " << match.lastValue().close();
 }
 
+void logMatchesInfo(const std::string &prefix, const PatternMatchListPtr &matches)
+{
+    for(PatternMatchList::const_iterator matchIter = matches->begin(); matchIter != matches->end(); matchIter++)
+    {
+        logMatchInfo(prefix,**matchIter);
+    }
+}
+
 void appendValidatedMatches(const PatternMatchListPtr &appendTo,
 		const PatternMatchListPtr &unfilteredMatches,
 		const PatternMatchValidatorPtr &matchValidator)

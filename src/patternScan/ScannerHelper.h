@@ -15,6 +15,8 @@ namespace scannerHelper {
 
 	void logMatchInfo(const std::string &prefix, const PatternMatch &match);
 
+    void logMatchesInfo(const std::string &prefix, const PatternMatchListPtr &matches);
+
 	// Filter unfilteredMatches to only those pattern matches passing validation,
 	// then append the results to the end of appendTo.
 	void appendValidatedMatches(const PatternMatchListPtr &appendTo,

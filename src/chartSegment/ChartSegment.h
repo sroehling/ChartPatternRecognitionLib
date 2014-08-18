@@ -31,7 +31,7 @@ public:
 			const PeriodValueRefPtr &endPtValueRef);
 
 	const PeriodVal &lastPeriodVal() const;
-	const PeriodValCltn::iterator &lastValIter() const;
+    const PeriodValCltn::iterator lastValIter() const;
 
 	const PeriodVal &firstPeriodVal() const;
 	const PeriodValCltn::iterator &firstValIter() const;

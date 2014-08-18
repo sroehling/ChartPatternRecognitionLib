@@ -11,8 +11,10 @@
 #include "MultiPatternScanner.h"
 #include "PatternMatchFilter.h"
 #include "InvertedVScanner.h"
+#include "VScanner.h"
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include "DoubleBottomScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -44,5 +46,25 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_SynthesizedPivotHighs )
 			ptime(date(2014,1,1)),ptime(date(2014,1,8)),2,sortedUniquePivots,0);
 	verifyPatternMatch("MultiPatternScan_SynthesizedPivotHighs match",
 			ptime(date(2014,1,7)),ptime(date(2014,1,14)),2,sortedUniquePivots,1);
+
+}
+
+BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CELG_20140501_20140814_Daily.csv");
+
+    PatternScannerPtr vScanner(new VScanner());
+    MultiPatternScanner multiVScanner(vScanner);
+
+    PatternMatchListPtr vMatches = multiVScanner.scanPatternMatches(chartData);
+
+    PatternScannerPtr doubleBottomScanner(new DoubleBottomScanner(DoubleRange(7.0,40.0)));
+    MultiPatternScanner multiDblBottomScanner(doubleBottomScanner);
+    PatternMatchListPtr doubleBottoms = multiDblBottomScanner.scanUniquePatternMatches(chartData);
+
+
+    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,104);
+    verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
+
 
 }

@@ -64,6 +64,11 @@ PeriodValSegmentPtr PatternMatch::trailingValsWithLastVal() const
 	return segments_.back()->perValSegment()->trailingValsWithLastVal();
 }
 
+PeriodValSegmentPtr PatternMatch::trailingValsWithLastVal(unsigned int maxVals) const
+{
+    return segments_.back()->perValSegment()->trailingValsWithLastVal(maxVals);
+}
+
 PatternMatchPtr PatternMatch::appendMatch(const PatternMatch &matchToAppend) const
 {
 	ChartSegmentList appendedSegments = segments_;

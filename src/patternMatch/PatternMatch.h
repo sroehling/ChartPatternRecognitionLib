@@ -64,6 +64,8 @@ public:
 	// for matching sub-patterns, then putting/stitching together
 	// the sub-patterns into a combined pattern.
 	PeriodValSegmentPtr trailingValsWithLastVal() const;
+    PeriodValSegmentPtr trailingValsWithLastVal(unsigned int maxVals) const;
+
 
 	PatternMatchPtr appendMatch(const PatternMatch &matchToAppend) const;
 	PatternMatchListPtr appendMatchList(const PatternMatchList &appendList) const;
