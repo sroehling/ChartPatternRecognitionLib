@@ -18,7 +18,7 @@
 #include "UnsignedIntRange.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
-#define UPTREND_MAX_MULTIPLE_DOWNTREND 2
+#define UPTREND_MAX_MULTIPLE_DOWNTREND 3
 
 using namespace scannerHelper;
 
@@ -41,21 +41,17 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
-		PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal();
-
         UnsignedIntRange flatSegmentLengthRange(3,FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
-
-
+        PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal(flatSegmentLengthRange.maxVal());
         TrendLineScanner flatScanner(TrendLineScanner::FLAT_SLOPE_RANGE,trendlineMaxDistancePerc_,flatSegmentLengthRange);
-
         PatternMatchListPtr flatMatches = patternMatchFilter::filterUniqueStartEndTime(flatScanner.scanPatternMatches(valsForFlatScan));
         BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of flat matches: " << flatMatches->size();
 
 		for(PatternMatchList::const_iterator ftMatchIter = flatMatches->begin();
 				ftMatchIter!=flatMatches->end();ftMatchIter++)
 		{
-			PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal();
             UnsignedIntRange upTrendSegmentLengthRange(3,UPTREND_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
+            PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
             TrendLineScanner uptrendScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,trendlineMaxDistancePerc_,upTrendSegmentLengthRange);
             PatternMatchListPtr upTrendMatches = patternMatchFilter::filterUniqueStartEndTime(
                         uptrendScanner.scanPatternMatches(valsForUptrendScan));

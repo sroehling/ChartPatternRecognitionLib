@@ -77,8 +77,6 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
 
-    // TODO - The initial 39 matches needs to go down with more restrictive pattern matching.
-    // If these patterns are loaded in the UI, many of them are not good matches.
     verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,4);
 }
 
