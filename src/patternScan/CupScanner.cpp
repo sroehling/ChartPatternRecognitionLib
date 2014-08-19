@@ -11,6 +11,7 @@
 #include "TrendLineScanner.h"
 #include "ScannerHelper.h"
 #include "PatternMatchFilter.h"
+#include "CupPatternMatch.h"
 
 using namespace scannerHelper;
 
@@ -50,8 +51,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 					{
 						PatternMatchValidatorPtr overallValidator = overallValidatorFactory_.createValidator3(
 								*dtMatchIter,*ftMatchIter,*utMatchIter);
-						PatternMatchPtr overallMatch =
-									((*dtMatchIter)->appendMatch(**ftMatchIter))->appendMatch(**utMatchIter);
+                        PatternMatchPtr overallMatch(new CupPatternMatch(*dtMatchIter,*ftMatchIter,*utMatchIter));
 						if(overallValidator->validPattern(*overallMatch))
 						{
 							cupMatches->push_back(overallMatch);
