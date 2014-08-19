@@ -18,6 +18,7 @@ class CupScanner: public PatternScanner {
 private:
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
+    double trendlineMaxDistancePerc_;
 public:
 	CupScanner();
 

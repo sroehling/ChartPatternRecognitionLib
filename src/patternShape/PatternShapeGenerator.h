@@ -21,6 +21,7 @@ public:
     virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &);
     virtual void visitVPatternMatch(VPatternMatch &);
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &);
+    virtual void visitCupPatternMatch(CupPatternMatch &);
 
 };
 

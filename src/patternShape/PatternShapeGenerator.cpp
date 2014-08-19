@@ -1,6 +1,7 @@
 #include "PatternShapeGenerator.h"
 #include "VPatternMatch.h"
 #include "SymetricWedgePatternMatch.h"
+#include "CupPatternMatch.h"
 
 PatternShapeGenerator::PatternShapeGenerator()
 {
@@ -31,6 +32,23 @@ void PatternShapeGenerator::visitVPatternMatch(VPatternMatch &vMatch)
 
     shapePoints_->push_back(PatternShapePoint(vMatch.lowestLowTime(),vMatch.lowestLow()));
     shapePoints_->push_back(PatternShapePoint(vMatch.endTime(),vMatch.lastValue().high()));
+
+}
+
+void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
+{
+    PatternShapePointVectorPtr cupShapePoints(new PatternShapePointVector());
+
+    cupShapePoints->push_back(PatternShapePoint(cupMatch.downTrend()->firstValue().periodTime(),
+                              cupMatch.downTrend()->firstValue().high()));
+    cupShapePoints->push_back(PatternShapePoint(cupMatch.cupBottom()->firstValue().periodTime(),
+                              cupMatch.cupBottom()->firstValue().typicalPrice()));
+    cupShapePoints->push_back(PatternShapePoint(cupMatch.cupBottom()->lastValue().periodTime(),
+                              cupMatch.cupBottom()->lastValue().typicalPrice()));
+    cupShapePoints->push_back(PatternShapePoint(cupMatch.upTrend()->lastValue().periodTime(),
+                              cupMatch.upTrend()->lastValue().close()));
+
+    patternShape_->addCurveShape(cupShapePoints);
 
 }
 

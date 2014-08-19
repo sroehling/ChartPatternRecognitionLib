@@ -15,6 +15,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "DoubleBottomScanner.h"
+#include "CupScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -62,9 +63,23 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     MultiPatternScanner multiDblBottomScanner(doubleBottomScanner);
     PatternMatchListPtr doubleBottoms = multiDblBottomScanner.scanUniquePatternMatches(chartData);
 
-
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,104);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
-
-
 }
+
+
+BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Weekly_2013.csv");
+
+    PatternScannerPtr cupScanner(new CupScanner());
+    MultiPatternScanner multiVScanner(cupScanner);
+
+    PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
+
+    // TODO - The initial 39 matches needs to go down with more restrictive pattern matching.
+    // If these patterns are loaded in the UI, many of them are not good matches.
+    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,39);
+}
+
+

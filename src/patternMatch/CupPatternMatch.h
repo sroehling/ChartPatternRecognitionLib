@@ -15,6 +15,10 @@ public:
 
     virtual void acceptVisitor(PatternMatchVisitor &visitor);
 
+    const PatternMatchPtr &downTrend() const { return downTrend_; }
+    const PatternMatchPtr &cupBottom() const { return cupBottom_; }
+    const PatternMatchPtr &upTrend() const { return upTrend_; }
+
     virtual std::string matchType() const { return "Cup"; }
 
 };
