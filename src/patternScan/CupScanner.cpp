@@ -24,7 +24,7 @@ using namespace scannerHelper;
 
 CupScanner::CupScanner()
 {
-    trendlineMaxDistancePerc_ = 7.0;
+    trendlineMaxDistancePerc_ = 3.0;
 }
 
 PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const

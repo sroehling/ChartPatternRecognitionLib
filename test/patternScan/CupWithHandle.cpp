@@ -56,17 +56,12 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 {
 	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
-	PatternMatchValidatorList finalValidators;
-	finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(8.0)));
-	finalValidators.push_back(PatternMatchValidatorPtr(new EndWithinPercentOfStart(-3.0)));
-	PatternMatchValidatorPtr overallValidator(new ORPatternMatchValidator(finalValidators));
 	CupScanner scanner;
-	scanner.overallValidatorFactory().addStaticValidator(overallValidator);
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
 	verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);
 
 	verifyPatternMatch("Cup Match",
-			ptime(date(2013,7,22)),ptime(date(2013,10,7)),3,patternMatches->front());
+            ptime(date(2013,7,22)),ptime(date(2013,9,16)),3,patternMatches->front());
 
 }
