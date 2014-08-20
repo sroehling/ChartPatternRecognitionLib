@@ -82,6 +82,17 @@ static PatternMatchValueRefPtr firstHighValueRef()
 	return firstHighRef;
 }
 
+PatternMatchValidatorPtr highestHighBelowLastHigh()
+{
+    PatternMatchValueRefPtr lastHigh = lastHighValueRef();
+    PatternMatchValueRefPtr highestHigh(new HighestHighPatternMatchValueRef());
+    ValueComparatorPtr lessThanEqualCompare(new LessThanEqualValueComparator());
+    PatternMatchValidatorPtr lessThanLastHigh(
+            new ValueComparisonMatchValidator(highestHigh,lastHigh,lessThanEqualCompare));
+
+    return lessThanLastHigh;
+
+}
 
 PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue)
 {

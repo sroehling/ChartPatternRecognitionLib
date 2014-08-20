@@ -12,6 +12,11 @@ double LowestLowPatternMatchValueRef::patternMatchVal(const PatternMatch &match)
 	return match.lowestLow();
 }
 
+double HighestHighPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return match.highestHigh();
+}
+
 
 double DepthPercentPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {

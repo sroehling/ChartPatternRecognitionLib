@@ -65,12 +65,12 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
 
     PatternScannerPtr cupScanner(new CupScanner());
     MultiPatternScanner multiCupScanner(cupScanner);
-    PatternMatchListPtr cupMatches = multiCupScanner.scanPatternMatches(chartData);
+    PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
 
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,217);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
-    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,139);
+    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,19);
 }
 
 

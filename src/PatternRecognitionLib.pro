@@ -82,7 +82,8 @@ SOURCES += \
     quoteData/PerValCltnSlidingWindow.cpp \
     patternMatch/CupPatternMatch.cpp \
     patternMatchValidator/SecondPeriodValuePivotsLower.cpp \
-    patternMatchValidator/HighestHighLessThanFirstHigh.cpp
+    patternMatchValidator/HighestHighLessThanFirstHigh.cpp \
+    patternMatchValidator/LowerHighPatternMatchValidatorFactory.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -170,7 +171,8 @@ HEADERS += patternrecognitionlib.h \
     quoteData/PerValCltnSlidingWindow.h \
     patternMatch/CupPatternMatch.h \
     patternMatchValidator/SecondPeriodValuePivotsLower.h \
-    patternMatchValidator/HighestHighLessThanFirstHigh.h
+    patternMatchValidator/HighestHighLessThanFirstHigh.h \
+    patternMatchValidator/LowerHighPatternMatchValidatorFactory.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

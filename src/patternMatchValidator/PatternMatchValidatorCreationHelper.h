@@ -27,6 +27,8 @@ namespace patternMatchValidatorCreationHelper
 	PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue);
 	PatternMatchValidatorPtr lastHighAboveFirstHigh();
 
+    PatternMatchValidatorPtr highestHighBelowLastHigh();
+
 }
 
 

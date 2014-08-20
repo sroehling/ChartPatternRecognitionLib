@@ -26,6 +26,12 @@ public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class HighestHighPatternMatchValueRef : public PatternMatchValueRef {
+public:
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 class DepthPercentPatternMatchValueRef : public PatternMatchValueRef {
 public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
