@@ -15,6 +15,8 @@
 #include "ScannerHelper.h"
 #include "PatternMatchFilter.h"
 #include "CupPatternMatch.h"
+#include "StaticPatternMatchValidatorFactory.h"
+#include "SecondPeriodValuePivotsLower.h"
 #include "UnsignedIntRange.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
@@ -25,16 +27,23 @@ using namespace scannerHelper;
 CupScanner::CupScanner()
 {
     trendlineMaxDistancePerc_ = 3.0;
+
+       downTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
+                        new StaticPatternMatchValidatorFactory(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()))));
+
 }
 
 PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
 
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
-    PatternMatchListPtr downtrendMatches = patternMatchFilter::filterUniqueStartEndTime(
+    PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
+    PatternMatchListPtr uniqueDowntrendMatches = patternMatchFilter::filterUniqueStartEndTime(
                 downtrendScanner->scanPatternMatches(chartVals));
+    PatternMatchValidatorPtr downTrendValidator = downTrendValidatorFactory_.createValidator0();
+    PatternMatchListPtr downtrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,uniqueDowntrendMatches);
+
     BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of downtrend matches: " << downtrendMatches->size();
 
 

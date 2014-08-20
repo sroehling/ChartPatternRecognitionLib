@@ -16,13 +16,15 @@
 
 class CupScanner: public PatternScanner {
 private:
+    CompositePatternMatchValidatorFactory downTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
     double trendlineMaxDistancePerc_;
 public:
 	CupScanner();
 
-	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
+    CompositePatternMatchValidatorFactory &downTrendValidatorFactory() { return downTrendValidatorFactory_; }
+    CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
 	CompositePatternMatchValidatorFactory &overallValidatorFactory() { return overallValidatorFactory_; }
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;

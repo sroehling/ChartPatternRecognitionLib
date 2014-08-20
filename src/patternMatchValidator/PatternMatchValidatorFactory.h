@@ -28,6 +28,7 @@ public:
 
 	// Convenience/helper methods for creating validators with a certain number of previous
 	// matches.
+    PatternMatchValidatorPtr createValidator0() const;
 	PatternMatchValidatorPtr createValidator1(const PatternMatchPtr &otherMatch) const;
 	PatternMatchValidatorPtr createValidator2(const PatternMatchPtr &firstMatch,
 			const PatternMatchPtr &secondMatch) const;

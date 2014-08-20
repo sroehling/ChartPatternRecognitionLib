@@ -40,6 +40,8 @@ public:
 	const boost::posix_time::ptime &startTime() const;
 	const boost::posix_time::ptime &endTime() const;
 
+    const PeriodValSegmentPtr  &matchSegment() const { return matchSegment_; }
+
 	unsigned int numSegments() const;
 	unsigned int numPeriods() const;
 	const ChartSegmentList &segments() const;

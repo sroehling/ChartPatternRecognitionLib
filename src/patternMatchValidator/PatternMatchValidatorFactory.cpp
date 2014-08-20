@@ -10,6 +10,13 @@
 PatternMatchValidatorFactory::PatternMatchValidatorFactory() {
 }
 
+PatternMatchValidatorPtr PatternMatchValidatorFactory::createValidator0() const
+{
+    PatternMatchVector previousMatches;
+    return createValidator(previousMatches);
+}
+
+
 PatternMatchValidatorPtr PatternMatchValidatorFactory::createValidator1(const PatternMatchPtr &otherMatch) const
 {
 	PatternMatchVector previousMatches;
