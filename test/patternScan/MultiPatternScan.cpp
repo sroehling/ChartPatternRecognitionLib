@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     MultiPatternScanner multiDblBottomScanner(doubleBottomScanner);
     PatternMatchListPtr doubleBottoms = multiDblBottomScanner.scanUniquePatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,104);
+    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,51);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
 }
 

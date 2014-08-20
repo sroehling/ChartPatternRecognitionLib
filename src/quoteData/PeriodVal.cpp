@@ -99,7 +99,26 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 
 			// TODO - Add adjusted closed to PeriodVal (along with adjustments to
 			// normalize/adjust open,high,low,close too.
-			// double adjClose = lexical_cast<double>(vec[6]);
+            double adjClose = lexical_cast<double>(vec[6]);
+
+
+            // "Normalize" the data based upon the adjusted close value. Technical
+            // analysis and back-testing should always used adjusted values.
+            if(close <= 0.0)
+            {
+                std::string errorMsg = boost::str(
+                        boost::format("Malformed CSV data in file %s on line %d: expecting close >= 0.0, got %f")
+                        %fileName%currLineNum%close);
+                std::cerr << errorMsg << std::endl;
+                BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+            }
+
+            double adjScaleFactor = adjClose/close;
+            low = low*adjScaleFactor;
+            high = high*adjScaleFactor;
+            open = open*adjScaleFactor;
+            close = close*adjScaleFactor;
+            vol = floor((double)vol *adjScaleFactor);
 
 			// The data is read in reverse chronological order (most recent dates first),
 			// but needs to be be in chronological order for processing
