@@ -17,9 +17,9 @@
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 
-const DoubleRange TrendLineScanner::UPTREND_SLOPE_RANGE(0.5,15.0);
-const DoubleRange TrendLineScanner::DOWNTREND_SLOPE_RANGE(-15.0,-0.5);
-const DoubleRange TrendLineScanner::FLAT_SLOPE_RANGE(-0.5,0.5);
+const DoubleRange TrendLineScanner::UPTREND_SLOPE_RANGE(0.25,15.0);
+const DoubleRange TrendLineScanner::DOWNTREND_SLOPE_RANGE(-15.0,-0.25);
+const DoubleRange TrendLineScanner::FLAT_SLOPE_RANGE(-0.25,0.25);
 
 void TrendLineScanner::initTrendScanner(const DoubleRange &slopeRange,
         const PatternMatchValidatorPtr &matchConstraint, double maxPercDistanceToLineEquation,
