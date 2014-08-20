@@ -17,6 +17,7 @@
 #include "CupPatternMatch.h"
 #include "StaticPatternMatchValidatorFactory.h"
 #include "SecondPeriodValuePivotsLower.h"
+#include "HighestHighLessThanFirstHigh.h"
 #include "UnsignedIntRange.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
@@ -28,8 +29,10 @@ CupScanner::CupScanner()
 {
     trendlineMaxDistancePerc_ = 3.0;
 
-       downTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
-                        new StaticPatternMatchValidatorFactory(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()))));
+    downTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
+        new StaticPatternMatchValidatorFactory(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()))));
+    downTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
+        new StaticPatternMatchValidatorFactory(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()))));
 
 }
 
