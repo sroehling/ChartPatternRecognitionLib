@@ -23,9 +23,12 @@
 #include "PatternMatchValidatorCreationHelper.h"
 #include "RecoverPercentOfDepth.h"
 #include "LowestLowGreaterThanLastLow.h"
+#include "PrevPatternDepthThreshold.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
+#define FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_UPPER_THRESHOLD 0.35
+#define FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD 1.4
 
 using namespace scannerHelper;
 
@@ -33,11 +36,26 @@ CupScanner::CupScanner()
 {
     trendlineMaxDistancePerc_ = 3.0;
 
+    // Below is the definition of constraints for cup pattern matching. Through experimentation, what seems
+    // to work best is to define a multitude of loose contraints. Each (loose) constraint seems to disqualify
+    // candidate patterns which are obviously not well-formed. If a pattern doesn't match one constraint, it
+    // will likely be caught by another.
+
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()));
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()));
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
+
+    // Flat area should not go above FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_UPPER_THRESHOLD
+    // of the depth of the initial down-trend. Similarly, no values in the
+    // flat area should go below FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD of the depth.
+    flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new PrevPatternDepthThreshold(
+                  FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_UPPER_THRESHOLD,PatternMatchValueRefPtr(new HighestHighPatternMatchValueRef()),
+                     ValueComparatorPtr(new LessThanEqualValueComparator()))));
+    flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new PrevPatternDepthThreshold(
+                  FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD,PatternMatchValueRefPtr(new LowestLowPatternMatchValueRef()),
+                     ValueComparatorPtr(new GreaterThanEqualValueComparator()))));
 
     upTrendValidatorFactory_.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
     upTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(65.0)));

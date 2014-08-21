@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
 
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,217);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
-    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,16);
+    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,10);
 }
 
 
@@ -84,6 +84,23 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
     PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
 
     verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,2);
+}
+
+
+BOOST_AUTO_TEST_CASE( MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 )
+{
+    // When scanning for cup based patterns, there's a few patterns in this data where the bottom of the cup
+    // goes above the cup scanner's threshold for being below a percentage of the depth of the down-trend's
+    // depth. See the CupScanner.cpp where this constraint is defined.
+
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/VZ_SymTriangle_Weekly_2013_2014.csv");
+
+    PatternScannerPtr cupScanner(new CupScanner());
+    MultiPatternScanner multiVScanner(cupScanner);
+
+    PatternMatchListPtr cupMatches = multiVScanner.scanUniquePatternMatches(chartData);
+
+    verifyMatchList("MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 (cupMatches)",cupMatches,6);
 }
 
 
