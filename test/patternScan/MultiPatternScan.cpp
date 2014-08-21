@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
 
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,217);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
-    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,10);
+    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,7);
 }
 
 
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,2);
+    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,1);
 }
 
 
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanUniquePatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 (cupMatches)",cupMatches,6);
+    verifyMatchList("MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 (cupMatches)",cupMatches,5);
 }
 
 

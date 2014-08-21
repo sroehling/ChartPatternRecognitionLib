@@ -85,7 +85,8 @@ SOURCES += \
     patternMatchValidator/HighestHighLessThanFirstHigh.cpp \
     patternMatchValidator/LowerHighPatternMatchValidatorFactory.cpp \
     patternMatchValidator/LowestLowGreaterThanLastLow.cpp \
-    patternMatchValidator/PrevPatternDepthThreshold.cpp
+    patternMatchValidator/PrevPatternDepthThreshold.cpp \
+    patternMatchValidator/ValuesCloseToTrendlineValidator.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -176,7 +177,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatchValidator/HighestHighLessThanFirstHigh.h \
     patternMatchValidator/LowerHighPatternMatchValidatorFactory.h \
     patternMatchValidator/LowestLowGreaterThanLastLow.h \
-    patternMatchValidator/PrevPatternDepthThreshold.h
+    patternMatchValidator/PrevPatternDepthThreshold.h \
+    patternMatchValidator/ValuesCloseToTrendlineValidator.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

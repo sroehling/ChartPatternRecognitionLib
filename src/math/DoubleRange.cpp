@@ -27,6 +27,16 @@ double DoubleRange::percentWithinRange(double val) const
 	return (val-minVal_)/range;
 }
 
+double DoubleRange::percentMidpointVal(double percMid) const
+{
+    assert(percMid >=0.0);
+    assert(percMid <= 1.0);
+
+    double deltaVal = maxVal_-minVal_;
+
+    return minVal_ + percMid * deltaVal;
+}
+
 std::ostream& operator<<(std::ostream& os, const DoubleRange& range)
 {
 	os << "DoubleRange("

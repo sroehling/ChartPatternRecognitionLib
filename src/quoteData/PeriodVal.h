@@ -58,6 +58,9 @@ public:
 	// is used to test the closing price for cross-overs of a LinearEquation's line.
 	// (e.g. for wedge pattern matching).
 	XYCoord closeCoord() const { return XYCoord(pseudoXVal(),close()); }
+    XYCoord typicalCoord() const { return XYCoord(pseudoXVal(),typicalPrice()); }
+    XYCoord lowCoord() const { return XYCoord(pseudoXVal(),low()); }
+    XYCoord highCoord() const { return XYCoord(pseudoXVal(),high()); }
 
 	static void reAssignIndices(PeriodValCltn &perValCltn);
 

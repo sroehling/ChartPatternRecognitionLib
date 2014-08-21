@@ -16,6 +16,7 @@ public:
 	static double minDouble();
 	static double relativePercentVal(double comparisonVal, double baseVal);
 	static double absRelPercentVal(double comparisonVal, double baseVal);
+    static bool valuesClose(double val1, double val2, double tolerance);
 
 	virtual ~MathHelper();
 };

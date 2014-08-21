@@ -25,6 +25,8 @@ public:
 
 	double percentWithinRange(double val) const;
 
+    double percentMidpointVal(double percMid) const;
+
 	friend std::ostream& operator<<(std::ostream& os, const DoubleRange& range);
 
 	virtual ~DoubleRange() {}

@@ -24,6 +24,7 @@
 #include "RecoverPercentOfDepth.h"
 #include "LowestLowGreaterThanLastLow.h"
 #include "PrevPatternDepthThreshold.h"
+#include "ValuesCloseToTrendlineValidator.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -41,9 +42,15 @@ CupScanner::CupScanner()
     // candidate patterns which are obviously not well-formed. If a pattern doesn't match one constraint, it
     // will likely be caught by another.
 
+    // Another observation about these constraints: If a constraint disqualifies a given candidate pattern
+    // match, a shorter one ending no the same date may pass validation and be returned from scanning.
+    // After scanning, since pattern matches are filtered by unique end date, then earliest start date,
+    // setting constraints may surface different pattern matches in the final results.
+
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()));
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()));
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
+    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 
@@ -59,6 +66,8 @@ CupScanner::CupScanner()
 
     upTrendValidatorFactory_.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
     upTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(65.0)));
+    upTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+    // TODO - Uptrend needs to validate LowestLowGreaterThanFirstLow and HighestHighLessThanLastHigh
 
 }
 
