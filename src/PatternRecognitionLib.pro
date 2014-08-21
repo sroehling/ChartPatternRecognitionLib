@@ -83,7 +83,8 @@ SOURCES += \
     patternMatch/CupPatternMatch.cpp \
     patternMatchValidator/SecondPeriodValuePivotsLower.cpp \
     patternMatchValidator/HighestHighLessThanFirstHigh.cpp \
-    patternMatchValidator/LowerHighPatternMatchValidatorFactory.cpp
+    patternMatchValidator/LowerHighPatternMatchValidatorFactory.cpp \
+    patternMatchValidator/LowestLowGreaterThanLastLow.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -172,7 +173,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/CupPatternMatch.h \
     patternMatchValidator/SecondPeriodValuePivotsLower.h \
     patternMatchValidator/HighestHighLessThanFirstHigh.h \
-    patternMatchValidator/LowerHighPatternMatchValidatorFactory.h
+    patternMatchValidator/LowerHighPatternMatchValidatorFactory.h \
+    patternMatchValidator/LowestLowGreaterThanLastLow.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

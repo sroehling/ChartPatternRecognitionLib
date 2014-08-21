@@ -22,6 +22,7 @@
 #include "UnsignedIntRange.h"
 #include "PatternMatchValidatorCreationHelper.h"
 #include "RecoverPercentOfDepth.h"
+#include "LowestLowGreaterThanLastLow.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -34,6 +35,7 @@ CupScanner::CupScanner()
 
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()));
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()));
+    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 

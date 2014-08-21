@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
 
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,217);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
-    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,18);
+    verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,16);
 }
 
 
