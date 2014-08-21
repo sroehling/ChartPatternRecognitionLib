@@ -22,7 +22,8 @@ RecoverPercentOfDepth::RecoverPercentOfDepth(double depthPercRecover)
 PatternMatchValidatorPtr RecoverPercentOfDepth::createValidator(
 		const PatternMatchVector &previousMatches) const
 {
-	assert(previousMatches.size() ==1); // limited to working with 1 previous match
+    // This validator always compares against the first previous match.
+    assert(previousMatches.size() > 0);
 	PatternMatchPtr otherMatch = previousMatches[0];
 
 	// Create a pattern match constraint for the up-trend's close to exceed a

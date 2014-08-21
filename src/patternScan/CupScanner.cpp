@@ -21,6 +21,7 @@
 #include "LowerHighPatternMatchValidatorFactory.h"
 #include "UnsignedIntRange.h"
 #include "PatternMatchValidatorCreationHelper.h"
+#include "RecoverPercentOfDepth.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -37,6 +38,7 @@ CupScanner::CupScanner()
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 
     upTrendValidatorFactory_.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
+    upTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(65.0)));
 
 }
 
