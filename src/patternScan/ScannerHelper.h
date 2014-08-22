@@ -10,6 +10,7 @@
 
 #include "PatternMatch.h"
 #include "PatternMatchValidator.h"
+#include "CompositePatternMatchValidatorFactory.h"
 
 namespace scannerHelper {
 
@@ -22,6 +23,11 @@ namespace scannerHelper {
 	void appendValidatedMatches(const PatternMatchListPtr &appendTo,
 			const PatternMatchListPtr &unfilteredMatches,
 			const PatternMatchValidatorPtr &matchValidator);
+
+    void populateStandardDowntrendValidationFactories(
+            CompositePatternMatchValidatorFactory &downTrendValidatorFactory);
+    void populateStandardUpTrendValidationFactories(
+            CompositePatternMatchValidatorFactory &upTrendValidatorFactory);
 
 }
 

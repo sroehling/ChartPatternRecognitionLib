@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
 
-    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,217);
+    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,29);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
     verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,7);
 }
@@ -101,6 +101,27 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 )
     PatternMatchListPtr cupMatches = multiVScanner.scanUniquePatternMatches(chartData);
 
     verifyMatchList("MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 (cupMatches)",cupMatches,5);
+}
+
+
+BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GMCR_Daily_2014.csv");
+
+    PatternScannerPtr vScanner(new VScanner());
+    MultiPatternScanner multiVScanner(vScanner);
+    PatternMatchListPtr vMatches = multiVScanner.scanUniquePatternMatches(chartData);
+
+    PatternScannerPtr cupScanner(new CupScanner());
+    MultiPatternScanner multiCupScanner(cupScanner);
+    PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
+
+
+    verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,8);
+
+    // TODO - There are a couple more cup-like patterns in this chart. So, it may
+    // be necessary to further refine the cup pattern matching to catch these.
+    verifyMatchList("MultiPatternScan_GMCR_Daily (cups)",cupMatches,2);
 }
 
 

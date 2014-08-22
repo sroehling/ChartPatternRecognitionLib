@@ -54,9 +54,9 @@ BOOST_AUTO_TEST_CASE( DoubleBottom_Synthesized )
 	DoubleBottomScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	verifyMatchList("DoubleBottom_Synthesized",patternMatches,2);
+    verifyMatchList("DoubleBottom_Synthesized",patternMatches,1);
 	verifyPatternMatch("DoubleBottom_Synthesized match",
-			ptime(date(2014,1,1)),ptime(date(2014,1,13)),4,patternMatches->front());
+            ptime(date(2014,1,1)),ptime(date(2014,1,14)),4,patternMatches->front());
 
 }
 

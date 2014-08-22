@@ -47,10 +47,7 @@ CupScanner::CupScanner()
     // After scanning, since pattern matches are filtered by unique end date, then earliest start date,
     // setting constraints may surface different pattern matches in the final results.
 
-    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new SecondPeriodValuePivotsLower()));
-    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()));
-    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
-    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+    scannerHelper::populateStandardDowntrendValidationFactories(downTrendValidatorFactory_);
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 
@@ -64,10 +61,9 @@ CupScanner::CupScanner()
                   FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD,PatternMatchValueRefPtr(new LowestLowPatternMatchValueRef()),
                      ValueComparatorPtr(new GreaterThanEqualValueComparator()))));
 
-    upTrendValidatorFactory_.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
+    scannerHelper::populateStandardUpTrendValidationFactories(upTrendValidatorFactory_);
     upTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(65.0)));
-    upTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-    // TODO - Uptrend needs to validate LowestLowGreaterThanFirstLow and HighestHighLessThanLastHigh
+
 
 }
 
@@ -77,6 +73,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
     PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
+    // TODO - Need to filter based upon the constraints first, then the unique start & end time
     PatternMatchListPtr uniqueDowntrendMatches = patternMatchFilter::filterUniqueStartEndTime(
                 downtrendScanner->scanPatternMatches(chartVals));
     PatternMatchValidatorPtr downTrendValidator = downTrendValidatorFactory_.createValidator0();

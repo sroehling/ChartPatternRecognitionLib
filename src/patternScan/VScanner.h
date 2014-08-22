@@ -19,6 +19,8 @@
 class VScanner : public PatternScanner {
 private:
 	CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
+    CompositePatternMatchValidatorFactory downTrendValidatorFactory_;
+
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
 	double trendLineMaxDistancePerc_;
 
@@ -26,7 +28,8 @@ public:
 	VScanner();
 	VScanner(double trendLineMaxDistancePerc);
 
-	CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
+    CompositePatternMatchValidatorFactory &downTrendValidatorFactory() { return downTrendValidatorFactory_; }
+    CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }
 	CompositePatternMatchValidatorFactory &overallValidatorFactory() { return overallValidatorFactory_; }
 
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;

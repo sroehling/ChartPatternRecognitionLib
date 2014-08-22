@@ -26,6 +26,9 @@ using namespace scannerHelper;
 VScanner::VScanner()
 {
 	trendLineMaxDistancePerc_ = 7.0;
+
+    scannerHelper::populateStandardDowntrendValidationFactories(downTrendValidatorFactory_);
+    scannerHelper::populateStandardUpTrendValidationFactories(upTrendValidatorFactory_);
 }
 
 VScanner::VScanner(double trendLineMaxDistancePerc)
@@ -37,8 +40,14 @@ VScanner::VScanner(double trendLineMaxDistancePerc)
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE,trendLineMaxDistancePerc_));
-	PatternMatchListPtr downtrendMatches = downtrendScanner->scanPatternMatches(chartVals);
-	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of downtrend matches: " << downtrendMatches->size();
+
+
+    PatternMatchListPtr unfilteredDownTrendMatches = patternMatchFilter::filterUniqueStartEndTime(
+                downtrendScanner->scanPatternMatches(chartVals));
+    PatternMatchValidatorPtr downTrendValidator = downTrendValidatorFactory_.createValidator0();
+    PatternMatchListPtr downtrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,unfilteredDownTrendMatches);
+
+    BOOST_LOG_TRIVIAL(debug) << "VScanner: number of downtrend matches: " << downtrendMatches->size();
 
 	PatternMatchListPtr vMatches(new PatternMatchList());
 
@@ -57,12 +66,15 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 
         PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,trendLineMaxDistancePerc_,
                                 upTrendSegmentLengthRange));
-		PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(valsForUptrendScan);
+        PatternMatchListPtr unValidatedUptrendMatches = patternMatchFilter::filterUniqueStartEndTime(
+                    uptrendScanner->scanPatternMatches(valsForUptrendScan));
+        PatternMatchValidatorPtr upTrendValidator = upTrendValidatorFactory_.createValidator1(*dtMatchIter);
+        PatternMatchListPtr upTrendMatches = PatternMatchValidator::filterMatches(upTrendValidator,unValidatedUptrendMatches);
 
-        BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << uptrendMatches->size();
+        BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << upTrendMatches->size();
 
-		for(PatternMatchList::iterator utMatchIter = uptrendMatches->begin();
-				utMatchIter!=uptrendMatches->end();utMatchIter++)
+        for(PatternMatchList::iterator utMatchIter = upTrendMatches->begin();
+                utMatchIter!=upTrendMatches->end();utMatchIter++)
 		{
 			PatternMatchValidatorPtr upTrendValidator =
 						upTrendValidatorFactory_.createValidator1(*dtMatchIter);

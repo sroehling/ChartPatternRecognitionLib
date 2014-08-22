@@ -10,10 +10,10 @@ bool SecondPeriodValuePivotsLower::validPattern(const PatternMatch &candidateMat
     assert(candidateMatch.numPeriods() > 1);
     PeriodValCltn::iterator matchIter = candidateMatch.matchSegment()->segBegin();
 
-    double firstHigh = (*matchIter).high();
+    double firstVal = (*matchIter).typicalPrice();
 
     matchIter++;
-    double secondHigh = (*matchIter).high();
+    double secondVal = (*matchIter).typicalPrice();
 
-    return (secondHigh < firstHigh)? true : false;
+    return (firstVal < secondVal)? true : false;
 }
