@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE( DoubleBottomScanner_QCOR_20130819 )
 	verifyMatchList("Double bottom match",patternMatches,1);
 
 	verifyPatternMatch("Double bottom match",
-			ptime(date(2013,8,26)),ptime(date(2014,2,18)),5,patternMatches->front());
+            ptime(date(2013,8,26)),ptime(date(2014,2,18)),4,patternMatches->front());
 
 }
 

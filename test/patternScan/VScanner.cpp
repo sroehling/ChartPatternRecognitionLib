@@ -64,6 +64,6 @@ BOOST_AUTO_TEST_CASE( VScanner_QCOR_20130819_RHSofDoubleBottom )
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 
 	verifyPatternMatch("V Match on RHS",
-			ptime(date(2013,10,21)),ptime(date(2014,2,18)),3,thePatternMatch);
+            ptime(date(2013,10,21)),ptime(date(2014,2,18)),2,thePatternMatch);
 
 }

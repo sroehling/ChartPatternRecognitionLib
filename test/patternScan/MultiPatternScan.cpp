@@ -112,6 +112,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
     MultiPatternScanner multiVScanner(vScanner);
     PatternMatchListPtr vMatches = multiVScanner.scanUniquePatternMatches(chartData);
 
+
     PatternScannerPtr cupScanner(new CupScanner());
     MultiPatternScanner multiCupScanner(cupScanner);
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
