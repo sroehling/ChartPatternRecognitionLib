@@ -11,6 +11,11 @@ SingleSegmentPatternScannerEngine::SingleSegmentPatternScannerEngine()
 {
 }
 
+SingleSegmentPatternScannerEngine::SingleSegmentPatternScannerEngine(const UnsignedIntRange &segmentLengthRange)
+    : segmentLengthRange_(segmentLengthRange)
+{
+}
+
 
 PatternMatchListPtr SingleSegmentPatternScannerEngine::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {

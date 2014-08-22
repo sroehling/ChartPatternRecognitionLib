@@ -25,6 +25,9 @@
 #include "LowestLowGreaterThanLastLow.h"
 #include "PrevPatternDepthThreshold.h"
 #include "ValuesCloseToTrendlineValidator.h"
+#include "SingleSegmentPatternScannerEngine.h"
+#include "PatternSlopeWithinRange.h"
+
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -72,10 +75,14 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 
 	PatternMatchListPtr cupMatches(new PatternMatchList());
 
-    PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE));
     // TODO - Need to filter based upon the constraints first, then the unique start & end time
+    SingleSegmentPatternScannerEngine downTrendScanner;
+    downTrendScanner.validatorFactory().addStaticValidator(
+                PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::DOWNTREND_SLOPE_RANGE)));
+     downTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+
     PatternMatchListPtr uniqueDowntrendMatches = patternMatchFilter::filterUniqueStartEndTime(
-                downtrendScanner->scanPatternMatches(chartVals));
+                downTrendScanner.scanPatternMatches(chartVals));
     PatternMatchValidatorPtr downTrendValidator = downTrendValidatorFactory_.createValidator0();
     PatternMatchListPtr downtrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,uniqueDowntrendMatches);
 
@@ -87,7 +94,10 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	{
         UnsignedIntRange flatSegmentLengthRange(3,FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
         PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal(flatSegmentLengthRange.maxVal());
-        TrendLineScanner flatScanner(TrendLineScanner::FLAT_SLOPE_RANGE,trendlineMaxDistancePerc_,flatSegmentLengthRange);
+
+        SingleSegmentPatternScannerEngine flatScanner(flatSegmentLengthRange);
+        flatScanner.validatorFactory().addStaticValidator(
+                    PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::FLAT_SLOPE_RANGE)));
         PatternMatchListPtr uniqueFlatMatches = patternMatchFilter::filterUniqueStartEndTime(flatScanner.scanPatternMatches(valsForFlatScan));
         PatternMatchValidatorPtr flatValidator = flatBottomValidatorFactory_.createValidator1(*dtMatchIter);
         PatternMatchListPtr flatMatches = PatternMatchValidator::filterMatches(flatValidator,uniqueFlatMatches);
@@ -99,9 +109,14 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 		{
             UnsignedIntRange upTrendSegmentLengthRange(3,UPTREND_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
             PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
-            TrendLineScanner uptrendScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,trendlineMaxDistancePerc_,upTrendSegmentLengthRange);
+
+            SingleSegmentPatternScannerEngine upTrendScanner(upTrendSegmentLengthRange);
+            upTrendScanner.validatorFactory().addStaticValidator(
+                        PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::UPTREND_SLOPE_RANGE)));
+            upTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+
             PatternMatchListPtr uniqueUpTrendMatches = patternMatchFilter::filterUniqueStartEndTime(
-                        uptrendScanner.scanPatternMatches(valsForUptrendScan));
+                        upTrendScanner.scanPatternMatches(valsForUptrendScan));
             PatternMatchValidatorPtr upTrendValidator = upTrendValidatorFactory_.createValidator2(*dtMatchIter,*ftMatchIter);
             PatternMatchListPtr upTrendMatches = PatternMatchValidator::filterMatches(upTrendValidator,uniqueUpTrendMatches);
 

@@ -21,7 +21,7 @@ using namespace boost::posix_time;
 using namespace boost::gregorian;
 using namespace testHelper;
 
-BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
+BOOST_AUTO_TEST_CASE( MultiSegmentPatternScannerEngine_SAVE_20130722 )
 {
 
 	// "typical price" data for SAVE, starting on 2013-07-22,
@@ -41,13 +41,13 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722 )
 
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	verifyMatchList("CupWithHandle_SAVE_20130722",patternMatches,2);
+    verifyMatchList("MultiSegmentPatternScannerEngine_SAVE_20130722",patternMatches,2);
 
 	PatternMatchPtr thePatternMatch = patternMatches->front();
 	BOOST_CHECK(segListConstraint->validSegments(thePatternMatch->segments()) == true);
 
 	verifyPatternMatch("Cup Match",
-			ptime(date(2013,7,22)),ptime(date(2013,10,7)),4,thePatternMatch);
+            ptime(date(2013,7,22)),ptime(date(2013,10,7)),4,thePatternMatch);
 
 }
 
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 	CupScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-	verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);
+    verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,4);
 
 	verifyPatternMatch("Cup Match",
             ptime(date(2013,7,22)),ptime(date(2013,9,16)),3,patternMatches->front());

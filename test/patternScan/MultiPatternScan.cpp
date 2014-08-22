@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,1);
+    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,6);
 }
 
 
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
 
     // TODO - There are a couple more cup-like patterns in this chart. So, it may
     // be necessary to further refine the cup pattern matching to catch these.
-    verifyMatchList("MultiPatternScan_GMCR_Daily (cups)",cupMatches,2);
+    verifyMatchList("MultiPatternScan_GMCR_Daily (cups)",cupMatches,5);
 }
 
 

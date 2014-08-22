@@ -43,8 +43,6 @@ VScanner::VScanner(double trendLineMaxDistancePerc)
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-	PatternScannerPtr downtrendScanner(new TrendLineScanner(TrendLineScanner::DOWNTREND_SLOPE_RANGE,trendLineMaxDistancePerc_));
-
     SingleSegmentPatternScannerEngine downTrendScanner;
     downTrendScanner.validatorFactory().addStaticValidator(
                 PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::DOWNTREND_SLOPE_RANGE)));
@@ -72,7 +70,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
         // Only pass in the maximum number of values possibly needed for the up-trend scanning.
         PeriodValSegmentPtr valsForUptrendScan = (*dtMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
 
-        SingleSegmentPatternScannerEngine upTrendScanner;
+        SingleSegmentPatternScannerEngine upTrendScanner(upTrendSegmentLengthRange);
         upTrendScanner.validatorFactory().addStaticValidator(
                     PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::UPTREND_SLOPE_RANGE)));
         upTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));

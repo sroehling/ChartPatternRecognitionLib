@@ -6,6 +6,7 @@
 #include "PeriodValSegment.h"
 #include "PatternMatchValidatorFactory.h"
 #include "CompositePatternMatchValidatorFactory.h"
+#include "UnsignedIntRange.h"
 
 class SingleSegmentPatternScannerEngine
 {
@@ -17,6 +18,7 @@ private:
 
 public:
     SingleSegmentPatternScannerEngine();
+    SingleSegmentPatternScannerEngine(const UnsignedIntRange &segmentLengthRange);
 
     static const UnsignedIntRange DEFAULT_SCAN_LENGTH_RANGE;
 
