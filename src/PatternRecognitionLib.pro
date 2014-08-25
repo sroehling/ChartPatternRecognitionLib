@@ -89,7 +89,8 @@ SOURCES += \
     patternMatchValidator/ValuesCloseToTrendlineValidator.cpp \
     patternScan/SingleSegmentPatternScannerEngine.cpp \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.cpp \
-    patternMatchValidator/PatternSlopeWithinRange.cpp
+    patternMatchValidator/PatternSlopeWithinRange.cpp \
+    patternMatch/WedgePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -184,7 +185,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatchValidator/ValuesCloseToTrendlineValidator.h \
     patternScan/SingleSegmentPatternScannerEngine.h \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.h \
-    patternMatchValidator/PatternSlopeWithinRange.h
+    patternMatchValidator/PatternSlopeWithinRange.h \
+    patternMatch/WedgePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target
