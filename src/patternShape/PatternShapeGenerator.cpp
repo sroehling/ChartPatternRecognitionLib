@@ -26,12 +26,16 @@ void PatternShapeGenerator::visitVPatternMatch(VPatternMatch &vMatch)
 {
     if(!firstSubPatternVisited_)
     {
-        shapePoints_->push_back(PatternShapePoint(vMatch.startTime(),vMatch.firstValue().high()));
+        shapePoints_->push_back(PatternShapePoint(vMatch.firstValue().pseudoXVal(),
+                                                  vMatch.startTime(),vMatch.firstValue().high()));
     }
     firstSubPatternVisited_ = true;
 
-    shapePoints_->push_back(PatternShapePoint(vMatch.lowestLowTime(),vMatch.lowestLow()));
-    shapePoints_->push_back(PatternShapePoint(vMatch.endTime(),vMatch.lastValue().high()));
+    shapePoints_->push_back(PatternShapePoint(
+                                vMatch.lowestLowVal().pseudoXVal(),
+                                vMatch.lowestLowTime(),vMatch.lowestLow()));
+    shapePoints_->push_back(PatternShapePoint(vMatch.lastValue().pseudoXVal(),
+                                vMatch.endTime(),vMatch.lastValue().high()));
 
 }
 
@@ -39,13 +43,21 @@ void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
 {
     PatternShapePointVectorPtr cupShapePoints(new PatternShapePointVector());
 
-    cupShapePoints->push_back(PatternShapePoint(cupMatch.downTrend()->firstValue().periodTime(),
+    cupShapePoints->push_back(PatternShapePoint(
+                                  cupMatch.downTrend()->firstValue().pseudoXVal(),
+                                  cupMatch.downTrend()->firstValue().periodTime(),
                               cupMatch.downTrend()->firstValue().high()));
-    cupShapePoints->push_back(PatternShapePoint(cupMatch.cupBottom()->firstValue().periodTime(),
+    cupShapePoints->push_back(PatternShapePoint(
+                                  cupMatch.cupBottom()->firstValue().pseudoXVal(),
+                                  cupMatch.cupBottom()->firstValue().periodTime(),
                               cupMatch.cupBottom()->firstValue().typicalPrice()));
-    cupShapePoints->push_back(PatternShapePoint(cupMatch.cupBottom()->lastValue().periodTime(),
+    cupShapePoints->push_back(PatternShapePoint(
+                                  cupMatch.cupBottom()->lastValue().pseudoXVal(),
+                                  cupMatch.cupBottom()->lastValue().periodTime(),
                               cupMatch.cupBottom()->lastValue().typicalPrice()));
-    cupShapePoints->push_back(PatternShapePoint(cupMatch.upTrend()->lastValue().periodTime(),
+    cupShapePoints->push_back(PatternShapePoint(
+                                   cupMatch.upTrend()->lastValue().pseudoXVal(),
+                                  cupMatch.upTrend()->lastValue().periodTime(),
                               cupMatch.upTrend()->lastValue().close()));
 
     patternShape_->addCurveShape(cupShapePoints);
@@ -82,10 +94,12 @@ void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricWedgePatternM
         double xVal = (*drawTrendLineIter).pseudoXVal();
 
         double upperYVal = upperTrendLineEq->yVal(xVal);
-        upperShapePoints->push_back(PatternShapePoint((*drawTrendLineIter).periodTime(),upperYVal));
+        upperShapePoints->push_back(PatternShapePoint(xVal,
+                           (*drawTrendLineIter).periodTime(),upperYVal));
 
         double lowerYVal = lowerTrendLineEq->yVal(xVal);
-        lowerShapePoints->push_back(PatternShapePoint((*drawTrendLineIter).periodTime(),lowerYVal));
+        lowerShapePoints->push_back(PatternShapePoint(xVal,
+                                       (*drawTrendLineIter).periodTime(),lowerYVal));
     }
     patternShape_->addCurveShape(upperShapePoints);
     patternShape_->addCurveShape(lowerShapePoints);

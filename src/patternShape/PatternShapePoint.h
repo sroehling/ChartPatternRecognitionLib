@@ -8,12 +8,14 @@
 class PatternShapePoint
 {
 private:
+    double pseudoXVal_;
     boost::posix_time::ptime periodTime_;
     double periodVal_;
 public:
-    PatternShapePoint(const boost::posix_time::ptime &periodTime, double periodVal);
+    PatternShapePoint(double pseudoXVal,const boost::posix_time::ptime &periodTime, double periodVal);
     boost::posix_time::ptime periodTime() const { return periodTime_; }
     double periodVal() const { return periodVal_; }
+    double pseudoXVal() const { return pseudoXVal_; }
 };
 
 typedef std::vector<PatternShapePoint> PatternShapePointVector;
