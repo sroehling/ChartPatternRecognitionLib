@@ -63,14 +63,21 @@ bool WedgeScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
     // of the pattern, the pattern will look "bunched up" in one area.
     double MIN_SPACING_PERC = 0.30;
 
-    double pivotLowSpacing = (double)lowerTrendLine->numPeriods();
+    double pivotLowSpacing = lowerTrendLine->lastPeriodVal().pseudoXVal()-lowerTrendLine->firstPeriodVal().pseudoXVal();
     assert(pivotLowSpacing <= numPerToIntercept);
     if((pivotLowSpacing/numPerToIntercept) < MIN_SPACING_PERC)
     {
         return false;
     }
 
-    double pivotHighSpacing = (double)upperTrendLine->numPeriods();
+    double pivotHighSpacing = upperTrendLine->lastPeriodVal().pseudoXVal()-upperTrendLine->firstPeriodVal().pseudoXVal();
+    if(pivotHighSpacing >= numPerToIntercept)
+    {
+        BOOST_LOG_TRIVIAL(debug) << "ERROR: WedgeScanner: "
+                << " pivot high space: " << pivotHighSpacing
+                << " intercept periods: " << numPerToIntercept << std::endl;
+
+    }
     assert(pivotHighSpacing <= numPerToIntercept);
     if(pivotHighSpacing > numPerToIntercept)
     {
@@ -105,6 +112,11 @@ bool WedgeScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &up
     if(trendlineIntercept.x() > upperTrendLine->lastPeriodVal().pseudoXVal() &&
        trendlineIntercept.x() > lowerTrendLine->lastPeriodVal().pseudoXVal())
     {
+        BOOST_LOG_TRIVIAL(debug) << "WedgeScanner::interceptAfter2ndLowerAndUpperPivot: "
+                << " trend line intercept: " << trendlineIntercept.x()
+                << " first pivot high: " << upperTrendLine->firstPeriodVal().pseudoXVal()
+                << " last upper pivot high: " << upperTrendLine->lastPeriodVal().pseudoXVal()
+                << " last upper pivot low:: " << lowerTrendLine->lastPeriodVal().pseudoXVal() << std::endl;
         return true;
     }
     else

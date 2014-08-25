@@ -90,7 +90,11 @@ SOURCES += \
     patternScan/SingleSegmentPatternScannerEngine.cpp \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.cpp \
     patternMatchValidator/PatternSlopeWithinRange.cpp \
-    patternMatch/WedgePatternMatch.cpp
+    patternMatch/WedgePatternMatch.cpp \
+    patternScan/FallingWedgeScanner.cpp \
+    patternMatch/FallingWedgePatternMatch.cpp \
+    patternScan/RisingWedgeScanner.cpp \
+    patternMatch/RisingWedgePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -186,7 +190,11 @@ HEADERS += patternrecognitionlib.h \
     patternScan/SingleSegmentPatternScannerEngine.h \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.h \
     patternMatchValidator/PatternSlopeWithinRange.h \
-    patternMatch/WedgePatternMatch.h
+    patternMatch/WedgePatternMatch.h \
+    patternScan/FallingWedgeScanner.h \
+    patternMatch/FallingWedgePatternMatch.h \
+    patternScan/RisingWedgeScanner.h \
+    patternMatch/RisingWedgePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

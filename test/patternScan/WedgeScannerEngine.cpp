@@ -2,6 +2,7 @@
 #include "TestHelper.h"
 #include "SymetricWedgeScanner.h"
 #include "PatternShapeGenerator.h"
+#include "FallingWedgeScanner.h"
 #include "MultiPatternScanner.h"
 
 using namespace boost::posix_time;
@@ -59,6 +60,30 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
 
 }
+
+
+BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GLD_Wedges )
+{
+    // The chart data from 2013 to 2014 contains a number of potential wedge matches.
+
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GLD_Weekly_2013_2014.csv");
+
+    PatternScannerPtr scanner(new SymetricWedgeScanner());
+    PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
+    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,8);
+
+    PatternMatchPtr wedgeMatch = symetricTriangles->back();
+    PatternShapeGenerator shapeGen;
+    PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
+    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),2);
+    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+
+    FallingWedgeScanner fallingWedgeScanner;
+    PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
+    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: falling wedges",fallingWedges,7);
+
+}
+
 
 
 BOOST_AUTO_TEST_CASE( WedgeScannerEngine_CELG_SymetricTriangle )

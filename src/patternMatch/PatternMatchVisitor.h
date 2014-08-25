@@ -9,15 +9,22 @@
 #define PATTERNMATCHVISITOR_H_
 
 class SymetricWedgePatternMatch;
+class FallingWedgePatternMatch;
 class VPatternMatch;
 class DoubleBottomPatternMatch;
 class CupPatternMatch;
+class WedgePatternMatch;
+class RisingWedgePatternMatch;
 
 class PatternMatchVisitor {
 public:
 	PatternMatchVisitor();
 
+    virtual void visitWedgePatternMatch(WedgePatternMatch&) {}
     virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &) {}
+    virtual void visitFallingWedgePatternMatch(FallingWedgePatternMatch &) {}
+    virtual void visitRisingWedgePatternMatch(RisingWedgePatternMatch &) {}
+
     virtual void visitVPatternMatch(VPatternMatch &) {}
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &) {}
     virtual void visitCupPatternMatch(CupPatternMatch &) {}

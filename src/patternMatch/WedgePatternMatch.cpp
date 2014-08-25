@@ -1,5 +1,5 @@
 #include "WedgePatternMatch.h"
-
+#include "PatternMatchVisitor.h"
 
 WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
         const ChartSegmentPtr &upperTrendLine,
@@ -10,6 +10,12 @@ WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 {
 
 }
+
+void WedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
+{
+    visitor.visitWedgePatternMatch(*this);
+}
+
 
 PeriodValCltn::iterator WedgePatternMatch::patternBeginIter() const
 {

@@ -71,18 +71,16 @@ void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMat
 
 }
 
-
-void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &symetricWedge)
+void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
 {
-
     firstSubPatternVisited_ = true;
 
     // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
-    LinearEquationPtr upperTrendLineEq = symetricWedge.upperTrendLine()->segmentEq();
-    LinearEquationPtr lowerTrendLineEq = symetricWedge.lowerTrendLine()->segmentEq();
+    LinearEquationPtr upperTrendLineEq = wedge.upperTrendLine()->segmentEq();
+    LinearEquationPtr lowerTrendLineEq = wedge.lowerTrendLine()->segmentEq();
 
-    PeriodValCltn::iterator beginTrendlineShape = symetricWedge.patternBeginIter();
-    PeriodValCltn::iterator endTrendlineShape = symetricWedge.interceptEndIter();
+    PeriodValCltn::iterator beginTrendlineShape = wedge.patternBeginIter();
+    PeriodValCltn::iterator endTrendlineShape = wedge.interceptEndIter();
 
     PatternShapePointVectorPtr upperShapePoints(new PatternShapePointVector());
     PatternShapePointVectorPtr lowerShapePoints(new PatternShapePointVector());
@@ -104,4 +102,19 @@ void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricWedgePatternM
     patternShape_->addCurveShape(upperShapePoints);
     patternShape_->addCurveShape(lowerShapePoints);
 
+}
+
+void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &)
+{
+    // No-op: pattern shape generation handled by visitWedgePatternMatch
+}
+
+void PatternShapeGenerator::visitFallingWedgePatternMatch(FallingWedgePatternMatch &)
+{
+    // No-op: pattern shape generation handled by visitWedgePatternMatch
+}
+
+void PatternShapeGenerator::visitRisingWedgePatternMatch(RisingWedgePatternMatch &)
+{
+    // No-op: pattern shape generation handled by visitWedgePatternMatch
 }

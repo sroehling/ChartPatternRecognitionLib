@@ -23,6 +23,8 @@ public:
     PeriodValCltn::iterator patternBeginIter() const;
     PeriodValCltn::iterator interceptEndIter() const;
 
+    virtual void acceptVisitor(PatternMatchVisitor &visitor);
+
     virtual ~WedgePatternMatch() {}
 };
 

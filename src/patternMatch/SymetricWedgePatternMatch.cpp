@@ -19,5 +19,6 @@ SymetricWedgePatternMatch::SymetricWedgePatternMatch(const ChartSegmentPtr &wedg
 
 void SymetricWedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
+    WedgePatternMatch::acceptVisitor(visitor);
 	visitor.visitSymetricWedgePatternMatch(*this);
 }
