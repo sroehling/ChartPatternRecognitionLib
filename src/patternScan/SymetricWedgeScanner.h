@@ -12,8 +12,6 @@
 
 class SymetricWedgeScanner: public WedgeScanner {
 protected:
-	virtual bool validTrendLines(const ChartSegmentPtr &upperTrendLine,
-			const ChartSegmentPtr &lowerTrendLine) const;
 
 	// Test if a completed pattern match is found at the location pointed to by
 	// currPerValIter.
@@ -22,6 +20,7 @@ protected:
 			const ChartSegmentPtr &lowerTrendLine,
 			const PeriodValCltn::iterator &currPerValIter) const;
 public:
+    SymetricWedgeScanner();
 };
 
 #endif /* SYMETRICWEDGESCANNER_H_ */

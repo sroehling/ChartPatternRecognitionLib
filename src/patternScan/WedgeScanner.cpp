@@ -10,7 +10,16 @@
 #include <WedgeScanner.h>
 #include "ChartSegment.h"
 
-WedgeScanner::WedgeScanner() {
+const DoubleRange WedgeScanner::UPTREND_SLOPE_RANGE(0.10,100.0);
+const DoubleRange WedgeScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.10);
+const DoubleRange WedgeScanner::FLAT_SLOPE_RANGE(-0.10,0.10);
+
+
+WedgeScanner::WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
+                           const DoubleRange &lowerTrendLineSlopeRange)
+    : upperTrendLineSlopeRange_(upperTrendLineSlopeRange),
+      lowerTrendLineSlopeRange_(lowerTrendLineSlopeRange)
+{
 	minPercDistanceToUpperLowerTrendlineIntercept_ = 0.6;
 	minPercValsBetweenTrendlines_ = 0.85;
 }
@@ -107,6 +116,15 @@ bool WedgeScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &up
 
 bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
+
+    // For starters, the trend-line slope for the upper and lower trendlines must be within
+    // the acceptable ranges.
+    if(!(upperTrendLineSlopeRange_.valueWithinRange(upperTrendLine->slope()) &&
+            lowerTrendLineSlopeRange_.valueWithinRange(lowerTrendLine->slope())))
+    {
+        return false;
+    }
+
     // The first and last value of the upper and lower trend lines are the pivot highs and lows used to
     // define the trend lines. With this in mind, we don't want to consider a pattern valid if
     // there is not a pivot low before the second pivot high; in other words, the pattern is not

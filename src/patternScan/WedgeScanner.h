@@ -9,6 +9,7 @@
 #define WEDGESCANNER_H_
 
 #include <WedgeScannerEngine.h>
+#include "DoubleRange.h"
 
 class WedgeScanner: public WedgeScannerEngine {
 private:
@@ -29,6 +30,9 @@ private:
 	// lower trend line in fact have an intercept.
 	double numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine) const;
+
+    DoubleRange upperTrendLineSlopeRange_;
+    DoubleRange lowerTrendLineSlopeRange_;
 
 protected:
 
@@ -51,8 +55,14 @@ protected:
 			const ChartSegmentPtr &lowerTrendLine) const;
 
 	// The findPatternMatch method is still virtual
+
 public:
-	WedgeScanner();
+    WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
+                 const DoubleRange &lowerTrendLineSlopeRange);
+
+    static const DoubleRange DOWNTREND_SLOPE_RANGE;
+    static const DoubleRange UPTREND_SLOPE_RANGE;
+    static const DoubleRange FLAT_SLOPE_RANGE;
 
 	virtual ~WedgeScanner();
 };

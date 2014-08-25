@@ -10,22 +10,9 @@
 #include "ChartSegment.h"
 #include "SymetricWedgePatternMatch.h"
 
-bool SymetricWedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
-		const ChartSegmentPtr &lowerTrendLine) const
+SymetricWedgeScanner::SymetricWedgeScanner()
+    : WedgeScanner(WedgeScanner::DOWNTREND_SLOPE_RANGE,WedgeScanner::UPTREND_SLOPE_RANGE)
 {
-
-    DoubleRange upperTrendLineSlopeRange(-100.0,-0.10);
-    DoubleRange lowerTrendLineSlopeRange(0.10,100.0);
-
-	if(upperTrendLineSlopeRange.valueWithinRange(upperTrendLine->slope()) &&
-			lowerTrendLineSlopeRange.valueWithinRange(lowerTrendLine->slope()))
-	{
-		return WedgeScanner::validTrendLines(upperTrendLine,lowerTrendLine);
-	}
-	else
-	{
-		return false;
-	}
 }
 
 PatternMatchPtr SymetricWedgeScanner::findPatternMatch(const PeriodValSegmentPtr &chartVals,
