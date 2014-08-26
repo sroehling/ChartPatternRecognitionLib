@@ -6,15 +6,13 @@ RisingWedgeScanner::RisingWedgeScanner()
 {
 }
 
-PatternMatchPtr RisingWedgeScanner::findPatternMatch(const PeriodValSegmentPtr &chartVals,
-        const ChartSegmentPtr &upperTrendLine,
-        const ChartSegmentPtr &lowerTrendLine,
-        const PeriodValCltn::iterator &currPerValIter) const
+PatternMatchPtr RisingWedgeScanner::findPatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
-    if (upperTrendLineBreakout(chartVals,upperTrendLine,currPerValIter))
+    if (wedgeMatchValidationInfo.upperTrendLineBreakout())
     {
-        ChartSegmentPtr wedgeSeg = createWedgeSegment(chartVals,upperTrendLine,currPerValIter);
-        return PatternMatchPtr(new RisingWedgePatternMatch(wedgeSeg,upperTrendLine,lowerTrendLine));
+        ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
+        return PatternMatchPtr(new RisingWedgePatternMatch(wedgeSeg,
+                    wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
     }
 
     return PatternMatchPtr(); // NULL (smart) pointer

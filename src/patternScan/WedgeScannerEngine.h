@@ -53,18 +53,8 @@ protected:
 
 	// Test if a completed pattern match is found at the location pointed to by
 	// currPerValIter.
-	virtual PatternMatchPtr findPatternMatch(const PeriodValSegmentPtr &chartVals,
-			const ChartSegmentPtr &upperTrendLine,
-			const ChartSegmentPtr &lowerTrendLine,
-			const PeriodValCltn::iterator &currPerValIter) const = 0;
-
-	// Helper methods
-	ChartSegmentPtr createWedgeSegment(const PeriodValSegmentPtr &chartVals,
-			const ChartSegmentPtr &upperTrendLine,const PeriodValCltn::iterator &currPerValIter) const;
-	bool upperTrendLineBreakout(const PeriodValSegmentPtr &chartVals,
-			const ChartSegmentPtr &upperTrendLine,
-			const PeriodValCltn::iterator &currPerValIter) const;
-
+    virtual PatternMatchPtr findPatternMatch(
+            const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const = 0;
 
 public:
 	WedgeScannerEngine();

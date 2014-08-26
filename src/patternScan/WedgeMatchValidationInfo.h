@@ -24,6 +24,9 @@ public:
     const PeriodValCltn::iterator &currPerValIter() const { return currPerValIter_; }
     const PeriodValCltn::iterator patternBeginIter() const;
     const PeriodValCltn::iterator patternEndIter() const;
+    ChartSegmentPtr createWedgeSegment() const;
+
+    bool upperTrendLineBreakout() const;
 };
 
 #endif // WEDGEMATCHVALIDATIONINFO_H
