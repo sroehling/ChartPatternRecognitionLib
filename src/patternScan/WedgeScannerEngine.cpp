@@ -17,6 +17,11 @@
 #include "PivotHighScanner.h"
 #include "Math.h"
 #include "UnsignedIntRange.h"
+#include "WedgeMatchValidationInfo.h"
+
+const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
+const double WedgeScannerEngine::RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD = 3.0;
+const double WedgeScannerEngine::MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.25;
 
 WedgeScannerEngine::WedgeScannerEngine() {
 }
@@ -54,6 +59,157 @@ bool WedgeScannerEngine::upperTrendLineBreakout(const PeriodValSegmentPtr &chart
 	}
 
 }
+
+double WedgeScannerEngine::percClosingValsOutsideTrendLines(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    PeriodValCltn::iterator patternEndIter = wedgeMatchValidationInfo.patternEndIter();
+
+    double valsOutSideTrendLines = 0.0;
+    double totalVals = 0.0;
+    for(PeriodValCltn::iterator perValIter =  wedgeMatchValidationInfo.patternBeginIter();
+        perValIter != patternEndIter; perValIter++)
+    {
+        if (wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->aboveLine((*perValIter).closeCoord()) ||
+                wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->belowLine((*perValIter).closeCoord()))
+        {
+            valsOutSideTrendLines += 1.0;
+        }
+        totalVals ++;
+    }
+
+    assert(totalVals > 0.0);
+    double percOutsideTrendLines = valsOutSideTrendLines/totalVals;
+    return percOutsideTrendLines;
+}
+
+bool WedgeScannerEngine::allClosingValsWithinThresholdOutsideTrendLines(
+        const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    // The interation needs to end *before* currPerValIter, since
+    // wedgeMatchValidationInfo.currPerValIter() could include a break-out/break-down
+    // which invalidates this rule.
+    PeriodValCltn::iterator patternEndIter = wedgeMatchValidationInfo.currPerValIter();
+
+
+    for(PeriodValCltn::iterator perValIter =  wedgeMatchValidationInfo.patternBeginIter();
+        perValIter != patternEndIter; perValIter++)
+    {
+        double currXVal = (*perValIter).pseudoXVal();
+        double upperYVal = wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->yVal(currXVal);
+        double lowerYVal = wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->yVal(currXVal);
+        assert(upperYVal >= lowerYVal);
+        double currDepth = upperYVal-lowerYVal;
+        double currDistanceThresholdOutsideTrendLine = MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH * currDepth;
+        double currClose = (*perValIter).close();
+
+       if (wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->aboveLine((*perValIter).closeCoord()))
+       {
+            double distanceAbove = currClose-upperYVal;
+            assert(distanceAbove >= 0.0);
+            if(distanceAbove > currDistanceThresholdOutsideTrendLine)
+            {
+                return false;
+            }
+       }
+       else if (wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->belowLine((*perValIter).closeCoord()))
+       {
+            double distanceBelow = lowerYVal - currClose;
+            assert(distanceBelow >= 0.0);
+            if(distanceBelow > currDistanceThresholdOutsideTrendLine)
+            {
+                return false;
+            }
+       }
+    }
+
+    return true;
+}
+
+
+
+
+bool WedgeScannerEngine::percClosingValsOutsideTrendLinesWithinThreshold(
+        const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    if(percClosingValsOutsideTrendLines(wedgeMatchValidationInfo)
+            > PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD)
+    {
+        return false;
+    }
+
+    return true;
+
+}
+
+double WedgeScannerEngine::ratioClosingValsAboveVsBelowMidpoint(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    PeriodValCltn::iterator patternEndIter = wedgeMatchValidationInfo.patternEndIter();
+
+    // Start both the values with a small number, so we never get a divide by zero error.
+    double totalAboveMidpoint = 0.000001;
+    double totalBelowMidpoint = 0.000001;
+    for(PeriodValCltn::iterator perValIter =  wedgeMatchValidationInfo.patternBeginIter();
+        perValIter != patternEndIter; perValIter++)
+    {
+
+        double currXVal = (*perValIter).pseudoXVal();
+        double upperYVal = wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->yVal(currXVal);
+        double lowerYVal = wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->yVal(currXVal);
+        assert(upperYVal >= lowerYVal);
+        double midpointYVal = (upperYVal + lowerYVal) / 2.0;
+
+        if((*perValIter).close() >= midpointYVal)
+        {
+            totalAboveMidpoint += 1.0;
+        }
+        else
+        {
+            totalBelowMidpoint += 1.0;
+        }
+
+     }
+
+    double ratioAboveVsBelow = totalAboveMidpoint/totalBelowMidpoint;
+
+    return ratioAboveVsBelow;
+}
+
+bool WedgeScannerEngine::ratioAboveVsBelowMidpointWithinThreshold(
+        const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    double ratioAboveBelow = ratioClosingValsAboveVsBelowMidpoint(wedgeMatchValidationInfo);
+    if(ratioAboveBelow > RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD)
+    {
+        return false;
+    }
+    else if(ratioAboveBelow < (1.0/RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD))
+    {
+        return false;
+    }
+    return true;
+}
+
+
+bool WedgeScannerEngine::validWedgePatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    if(!percClosingValsOutsideTrendLinesWithinThreshold(wedgeMatchValidationInfo))
+    {
+        return false;
+    }
+
+    if(!ratioAboveVsBelowMidpointWithinThreshold(wedgeMatchValidationInfo))
+    {
+        return false;
+    }
+
+    if(!allClosingValsWithinThresholdOutsideTrendLines(wedgeMatchValidationInfo))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 
 
 PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
@@ -137,12 +293,18 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 							{
 								if(validPeriodRange.valueWithinRange(currNumPeriods))
 								{
-									PatternMatchPtr foundPatternMatch = findPatternMatch(chartVals,
-											upperTrendLine,lowerTrendLine,endPatternMatchIter);
-									if(foundPatternMatch)
-									{
-										wedgeMatches->push_back(foundPatternMatch);
-									}
+                                    WedgeMatchValidationInfo wedgeValidationInfo(chartVals,
+                                             upperTrendLine,lowerTrendLine,endPatternMatchIter);
+                                    if(validWedgePatternMatch(wedgeValidationInfo))
+                                    {
+                                        PatternMatchPtr foundPatternMatch = findPatternMatch(chartVals,
+                                                upperTrendLine,lowerTrendLine,endPatternMatchIter);
+                                        if(foundPatternMatch)
+                                        {
+                                            wedgeMatches->push_back(foundPatternMatch);
+                                        }
+
+                                    } // If the pattern match is well formed.
 								} // If the period length is within the valid range
 
 								assert(((*endPatternMatchIter).perValIndex()-(*firstPivotHighIter).perValIndex())==currNumPeriods);

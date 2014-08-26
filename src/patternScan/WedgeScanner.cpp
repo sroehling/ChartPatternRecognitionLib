@@ -164,7 +164,6 @@ bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const 
 
 }
 
-
 unsigned int WedgeScanner::minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 		const ChartSegmentPtr &lowerTrendLine) const
 {
