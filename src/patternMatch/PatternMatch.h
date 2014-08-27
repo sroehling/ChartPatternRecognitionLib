@@ -10,6 +10,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include "ChartSegment.h"
+#include "PatternMatchBreakoutInfo.h"
 
 class PatternMatchVisitor;
 
@@ -30,6 +31,8 @@ private:
 	// on pattern depth, lowest lows, etc.
 	void initMatchSegment();
 	PeriodValSegmentPtr matchSegment_;
+
+
 public:
 	PatternMatch(const ChartSegmentList &segments);
 	PatternMatch(const ChartSegmentPtr &singleSegment);
@@ -77,6 +80,10 @@ public:
     virtual void acceptVisitor(PatternMatchVisitor &) {}
 
     virtual std::string matchType() const { return "Match Type TBD"; }
+
+    // Optional, associated breakout information. Can can be NULL if
+    // no break-out is associated.
+    PatternMatchBreakoutInfoPtr breakoutInfo;
 
 
 	virtual ~PatternMatch();

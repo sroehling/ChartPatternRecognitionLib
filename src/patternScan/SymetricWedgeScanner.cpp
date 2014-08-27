@@ -18,11 +18,14 @@ SymetricWedgeScanner::SymetricWedgeScanner()
 PatternMatchPtr SymetricWedgeScanner::findPatternMatch(
         const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
-    if (wedgeMatchValidationInfo.upperTrendLineBreakout())
-	{
+    PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
+    if (breakoutInfo)
+    {
         ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
-        return PatternMatchPtr(new SymetricWedgePatternMatch(wedgeSeg,
+        PatternMatchPtr patternMatch = PatternMatchPtr(new SymetricWedgePatternMatch(wedgeSeg,
               wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
+        patternMatch->breakoutInfo = breakoutInfo;
+        return patternMatch;
 	}
 
 	return PatternMatchPtr(); // NULL (smart) pointer

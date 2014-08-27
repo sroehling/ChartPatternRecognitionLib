@@ -193,7 +193,6 @@ double PatternMatch::pointsAtPercentOfDepthBelowHigh(double percentFromHigh) con
 	return matchSegment_->pointsAtPercentOfDepthBelowHigh(percentFromHigh);
 }
 
-
 std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 {
 	os << "PatternMatch(num segments=" << patternMatch.numSegments()

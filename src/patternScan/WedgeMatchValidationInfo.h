@@ -3,6 +3,7 @@
 
 #include "PeriodValSegment.h"
 #include "ChartSegment.h"
+#include "PatternMatchBreakoutInfo.h"
 
 
 class WedgeMatchValidationInfo
@@ -26,7 +27,9 @@ public:
     const PeriodValCltn::iterator patternEndIter() const;
     ChartSegmentPtr createWedgeSegment() const;
 
-    bool upperTrendLineBreakout() const;
+    // Returns a non-null pointer to the breakout info if a breakout exists, otherwise
+    // returns the null smart pointer.
+    PatternMatchBreakoutInfoPtr upperTrendLineBreakout() const;
 };
 
 #endif // WEDGEMATCHVALIDATIONINFO_H

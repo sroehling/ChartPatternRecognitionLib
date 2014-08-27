@@ -8,11 +8,14 @@ RisingWedgeScanner::RisingWedgeScanner()
 
 PatternMatchPtr RisingWedgeScanner::findPatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
-    if (wedgeMatchValidationInfo.upperTrendLineBreakout())
+    PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
+    if (breakoutInfo)
     {
         ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
-        return PatternMatchPtr(new RisingWedgePatternMatch(wedgeSeg,
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new RisingWedgePatternMatch(wedgeSeg,
                     wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
+        patternMatch->breakoutInfo = breakoutInfo;
+        return patternMatch;
     }
 
     return PatternMatchPtr(); // NULL (smart) pointer
