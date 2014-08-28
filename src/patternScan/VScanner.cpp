@@ -22,31 +22,59 @@
 #include "PatternSlopeWithinRange.h"
 #include "PatternSegmentValsCloseToLinearEq.h"
 #include "ValuesCloseToTrendlineValidator.h"
+#include "LowestLowGreaterThanLastLow.h"
 
 using namespace scannerHelper;
 
 #define UP_TREND_MAX_MULTIPLE_DOWNTREND_PERIODS 2
+#define DEFAULT_V_SCANNER_MIN_SEGMENT_LENGTH 3
+#define DEFAULT_V_SCANNER_MAX_SEGMENT_LENGTH 200
+#define DEFAULT_V_SCANNER_MAX_PERC_DISTANCE_TRENDLINE 7.0
+
+void VScanner::initValidationConstraints()
+{
+    downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
+
+    if(validateWithTrendLineValidator_)
+    {
+        downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+        upTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+    }
+}
 
 VScanner::VScanner()
 {
-	trendLineMaxDistancePerc_ = 7.0;
+    trendLineMaxDistancePerc_ = DEFAULT_V_SCANNER_MAX_PERC_DISTANCE_TRENDLINE;
+    minTrendLineSegmentLength_ = DEFAULT_V_SCANNER_MIN_SEGMENT_LENGTH;
+    validateWithTrendLineValidator_ = true;
 
-    scannerHelper::populateStandardDowntrendValidationFactories(downTrendValidatorFactory_);
-    scannerHelper::populateStandardUpTrendValidationFactories(upTrendValidatorFactory_);
+    initValidationConstraints();
 }
 
-VScanner::VScanner(double trendLineMaxDistancePerc)
-: trendLineMaxDistancePerc_(trendLineMaxDistancePerc)
+VScanner::VScanner(double trendLineMaxDistancePerc, unsigned int minTrendLineSegmentLength, bool validateWithTrendLineValidator)
+: trendLineMaxDistancePerc_(trendLineMaxDistancePerc),
+  minTrendLineSegmentLength_(minTrendLineSegmentLength)
 {
 	assert(trendLineMaxDistancePerc > 0.0);
+    assert(minTrendLineSegmentLength > 1);
+    assert(minTrendLineSegmentLength <= 5);
+
+    validateWithTrendLineValidator_ = validateWithTrendLineValidator;
+
+    initValidationConstraints();
 }
 
 PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-    SingleSegmentPatternScannerEngine downTrendScanner;
+    UnsignedIntRange downTrendSegmentLengthRange(minTrendLineSegmentLength_,DEFAULT_V_SCANNER_MAX_SEGMENT_LENGTH);
+    SingleSegmentPatternScannerEngine downTrendScanner(downTrendSegmentLengthRange);
     downTrendScanner.validatorFactory().addStaticValidator(
                 PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::DOWNTREND_SLOPE_RANGE)));
-     downTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+
+    if(validateWithTrendLineValidator_)
+    {
+        downTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+    }
 
     PatternMatchListPtr unfilteredDownTrendMatches = patternMatchFilter::filterUniqueStartEndTime(
                 downTrendScanner.scanPatternMatches(chartVals));
@@ -65,7 +93,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
         // Constrain the length of the up-trend (in periods) to twice the down-trend. This ensures the up-trend is
         // relatively well-balance versus the down-trend and also greatly improves scanning performance.
         // TODO - Consider some kind of parameterization of this constraint.
-        UnsignedIntRange upTrendSegmentLengthRange(3,UP_TREND_MAX_MULTIPLE_DOWNTREND_PERIODS*(*dtMatchIter)->numPeriods());
+        UnsignedIntRange upTrendSegmentLengthRange(minTrendLineSegmentLength_,UP_TREND_MAX_MULTIPLE_DOWNTREND_PERIODS*(*dtMatchIter)->numPeriods());
 
         // Only pass in the maximum number of values possibly needed for the up-trend scanning.
         PeriodValSegmentPtr valsForUptrendScan = (*dtMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
@@ -73,7 +101,13 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
         SingleSegmentPatternScannerEngine upTrendScanner(upTrendSegmentLengthRange);
         upTrendScanner.validatorFactory().addStaticValidator(
                     PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::UPTREND_SLOPE_RANGE)));
-        upTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+
+        if(validateWithTrendLineValidator_)
+        {
+            upTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+        }
+
+
         PatternMatchListPtr unValidatedUptrendMatches = patternMatchFilter::filterUniqueStartEndTime(
                     upTrendScanner.scanPatternMatches(valsForUptrendScan));
         PatternMatchValidatorPtr upTrendValidator = upTrendValidatorFactory_.createValidator1(*dtMatchIter);

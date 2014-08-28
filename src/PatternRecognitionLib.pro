@@ -96,7 +96,9 @@ SOURCES += \
     patternScan/RisingWedgeScanner.cpp \
     patternMatch/RisingWedgePatternMatch.cpp \
     patternScan/WedgeMatchValidationInfo.cpp \
-    patternMatch/PatternMatchBreakoutInfo.cpp
+    patternMatch/PatternMatchBreakoutInfo.cpp \
+    patternScan/CupWithHandleScanner.cpp \
+    patternMatch/CupWithHandlePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -198,7 +200,9 @@ HEADERS += patternrecognitionlib.h \
     patternScan/RisingWedgeScanner.h \
     patternMatch/RisingWedgePatternMatch.h \
     patternScan/WedgeMatchValidationInfo.h \
-    patternMatch/PatternMatchBreakoutInfo.h
+    patternMatch/PatternMatchBreakoutInfo.h \
+    patternScan/CupWithHandleScanner.h \
+    patternMatch/CupWithHandlePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

@@ -15,6 +15,7 @@ class DoubleBottomPatternMatch;
 class CupPatternMatch;
 class WedgePatternMatch;
 class RisingWedgePatternMatch;
+class CupWithHandlePatternMatch;
 
 class PatternMatchVisitor {
 public:
@@ -27,7 +28,9 @@ public:
 
     virtual void visitVPatternMatch(VPatternMatch &) {}
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &) {}
+
     virtual void visitCupPatternMatch(CupPatternMatch &) {}
+    virtual void visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &) {}
 
 	virtual ~PatternMatchVisitor();
 };

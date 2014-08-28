@@ -13,6 +13,7 @@
 #include "EndWithinPercentOfStart.h"
 #include "PeriodValSegment.h"
 #include "CupScanner.h"
+#include "CupWithHandleScanner.h"
 #include "ORPatternMatchValidator.h"
 #include "PatternMatchValidator.h"
 #include "TestHelper.h"
@@ -56,12 +57,12 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
 {
 	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
-	CupScanner scanner;
+    CupWithHandleScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-    verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,4);
+    verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,3);
 
-	verifyPatternMatch("Cup Match",
-            ptime(date(2013,7,22)),ptime(date(2013,9,16)),3,patternMatches->front());
+    verifyPatternMatch("Cup with Handle Match",
+            ptime(date(2013,7,22)),ptime(date(2013,9,30)),5,patternMatches->front());
 
 }

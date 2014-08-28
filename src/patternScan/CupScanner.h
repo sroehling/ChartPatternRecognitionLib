@@ -20,9 +20,16 @@ private:
     CompositePatternMatchValidatorFactory flatBottomValidatorFactory_;
     CompositePatternMatchValidatorFactory upTrendValidatorFactory_;
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
+
     double trendlineMaxDistancePerc_;
+    unsigned int minTrendLineSegmentLength_;
+    bool validateWithTrendLineValidator_;
+
+    void initConstraints();
+
 public:
 	CupScanner();
+    CupScanner(unsigned int minTrendLineSegmentLength, bool validateWithTrendlineScanner);
 
     CompositePatternMatchValidatorFactory &downTrendValidatorFactory() { return downTrendValidatorFactory_; }
     CompositePatternMatchValidatorFactory &flatBottomValidatorFactory() { return flatBottomValidatorFactory_; }

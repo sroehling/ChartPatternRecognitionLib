@@ -71,6 +71,17 @@ void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMat
 
 }
 
+void PatternShapeGenerator::visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &)
+{
+    // The cup with handle will consist of a cup pattern, followed by either a V pattern or smaller cup.
+    // A cup shaped handle will add it's own curve shape, while a V shape will populate entries in
+    // patternShape_.
+    if(shapePoints_->size() > 0)
+    {
+        patternShape_->addCurveShape(shapePoints_);
+    }
+}
+
 void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
 {
     firstSubPatternVisited_ = true;

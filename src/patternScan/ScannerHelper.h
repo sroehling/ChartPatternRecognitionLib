@@ -23,12 +23,6 @@ namespace scannerHelper {
 	void appendValidatedMatches(const PatternMatchListPtr &appendTo,
 			const PatternMatchListPtr &unfilteredMatches,
 			const PatternMatchValidatorPtr &matchValidator);
-
-    void populateStandardDowntrendValidationFactories(
-            CompositePatternMatchValidatorFactory &downTrendValidatorFactory);
-    void populateStandardUpTrendValidationFactories(
-            CompositePatternMatchValidatorFactory &upTrendValidatorFactory);
-
 }
 
 

@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
 
-    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,29);
+    verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,24);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
     verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,7);
 }
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
 
-    verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,8);
+    verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,5);
 
     // TODO - There are a couple more cup-like patterns in this chart. So, it may
     // be necessary to further refine the cup pattern matching to catch these.

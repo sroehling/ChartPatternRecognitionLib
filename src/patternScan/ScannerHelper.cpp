@@ -50,21 +50,5 @@ void appendValidatedMatches(const PatternMatchListPtr &appendTo,
 
 }
 
-void populateStandardDowntrendValidationFactories(CompositePatternMatchValidatorFactory &downTrendValidatorFactory)
-{
-    // After visually inspecting some pattern matches which also used the constraint SecondPeriodValuePivotsLower
-    // and HighestHighLessThanFirstHigh, it was found that using ValuesCloseToTrendlineValidator by itself
-    // generated a better set of pattern matches.
-//    downTrendValidatorFactory.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
-    downTrendValidatorFactory.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-}
-
-void populateStandardUpTrendValidationFactories(CompositePatternMatchValidatorFactory &upTrendValidatorFactory)
-{
-    // TODO - Uptrend needs to validate LowestLowGreaterThanFirstLow and HighestHighLessThanLastHigh
-    upTrendValidatorFactory.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
-    upTrendValidatorFactory.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-}
-
 } // namespace
 
