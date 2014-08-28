@@ -16,6 +16,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "DoubleBottomScanner.h"
 #include "CupScanner.h"
+#include "CupWithHandleScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -67,10 +68,19 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     MultiPatternScanner multiCupScanner(cupScanner);
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
+    PatternScannerPtr cupWithHandleScanner(new CupWithHandleScanner());
+    MultiPatternScanner multiCupWithHandleScanner(cupWithHandleScanner);
+    PatternMatchListPtr cupWithHandleMatches = multiCupWithHandleScanner.scanUniquePatternMatches(chartData);
+
 
     verifyMatchList("MultiPatternScan_CELG_Daily (vMatches)",vMatches,24);
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
     verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,7);
+
+    verifyMatchList("MultiPatternScan_CELG_Daily (cup with handles)",cupWithHandleMatches,1);
+    verifyPatternMatch("Cup with Handle Match",
+            ptime(date(2014,5,14)),ptime(date(2014,6,4)),6,cupWithHandleMatches->front());
+
 }
 
 

@@ -45,6 +45,7 @@ const PeriodVal &PatternMatch::lastValue() const
 const PeriodVal &PatternMatch::secondToLastValue() const
 {
     PeriodValCltn::iterator lastValIter = matchSegment_->lastValIter();
+    assert(lastValIter != matchSegment_->segBegin());
     lastValIter--;
     return (*lastValIter);
 }

@@ -14,6 +14,7 @@ BreakoutAboveFirstHighValidatorFactory::BreakoutAboveFirstHighValidatorFactory()
 
 PatternMatchValidatorPtr BreakoutAboveFirstHighValidatorFactory::createValidator(const PatternMatchVector &previousMatches) const
 {
+    assert(previousMatches.size() >0);
     PatternMatchPtr prevMatch = previousMatches[0];
 
     ValueComparatorPtr greaterThanCompare(new GreaterThanValueComparator());

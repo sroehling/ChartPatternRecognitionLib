@@ -8,10 +8,12 @@
 #include "PatternSlopeWithinRange.h"
 #include "TrendLineScanner.h"
 #include "BreakoutAboveFirstHighValidatorFactory.h"
+#include "CloseWithinPercentOfDepthFromFirstHighValidator.h"
 
 
 #define DEFAULT_CUP_WITH_HANDLE_SCANNER_MIN_SEGMENT_LENGTH 2
 #define DEFAULT_CUP_WITH_HANDLE_SCANNER_HANDLE_MAX_PERC_DISTANCE_TRENDLINE 3.0
+#define CUP_WITH_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD 0.2
 
 CupWithHandleScanner::CupWithHandleScanner()
 {
@@ -23,6 +25,8 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
     PatternMatchListPtr cupWithHandleMatches(new PatternMatchList());
 
     CupScanner lhsCupScanner;
+    lhsCupScanner.overallValidatorFactory().addStaticValidator(PatternMatchValidatorPtr(new CloseWithinPercentOfDepthFromFirstHighValidator(
+            CUP_WITH_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD)));
     PatternMatchListPtr cupMatches = lhsCupScanner.scanPatternMatches(chartVals);
 
     BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of cup matches: " << cupMatches->size();
@@ -37,7 +41,8 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
         bool validateWithTrendLineValidator = false;
 
         CupScanner uShapedHandleScanner(minHandleSegmentLength,validateWithTrendLineValidator);
-        uShapedHandleScanner.overallValidatorFactory().addFactory(PatternMatchValidatorFactoryPtr(new BreakoutAboveFirstHighValidatorFactory()));
+        uShapedHandleScanner.overallValidatorFactory().addFactory(
+                    PatternMatchValidatorFactoryPtr(new BreakoutAboveFirstHighValidatorFactory()));
         PatternMatchListPtr uShapedHandleMatches = uShapedHandleScanner.scanPatternMatches(valsForHandleScan);
         BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of U shaped handle matches: " << uShapedHandleMatches->size();
 
