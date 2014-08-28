@@ -5,6 +5,7 @@
  *      Author: sroehling
  */
 
+#include <boost/log/trivial.hpp>
 #include <PatternMatchValidatorCreationHelper.h>
 #include "ANDPatternMatchValidator.h"
 #include "PatternMatchValueRef.h"
@@ -114,6 +115,30 @@ PatternMatchValidatorPtr lastHighAboveFirstHigh()
 	return aboveFirstHigh;
 }
 
+PatternMatchValidatorPtr lowAbovePercDepthOfOtherPattern(const PatternMatchPtr &otherPattern, double percDepthOther)
+{
+    ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
+    PatternMatchValueRefPtr validationLowRef(new LowestLowPatternMatchValueRef());
 
+    assert(percDepthOther >= 0.0);
+    assert(percDepthOther <= 1.0);
+
+    double firstHigh = otherPattern->firstValue().high();
+    double lowestLow = otherPattern->lowestLow();
+    assert(firstHigh >= lowestLow);
+    double depth = firstHigh-lowestLow;
+
+    double thresholdValue = firstHigh-(depth * percDepthOther);
+    PatternMatchValueRefPtr thresholdValRef(new FixedPatternMatchValueRef(thresholdValue));
+
+    BOOST_LOG_TRIVIAL(debug) << "lowAbovePercDepthOfOtherPattern: low threshold: " << thresholdValue;
+
+
+    PatternMatchValidatorPtr aboveDepthOther(
+            new ValueComparisonMatchValidator(validationLowRef,thresholdValRef,greaterEqualCompare));
+
+    return aboveDepthOther;
+
+}
 
 }

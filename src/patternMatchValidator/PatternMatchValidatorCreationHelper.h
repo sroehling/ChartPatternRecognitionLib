@@ -24,6 +24,8 @@ namespace patternMatchValidatorCreationHelper
 	// pattern has a lower low than compareWith.
 	PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith);
 
+    PatternMatchValidatorPtr lowAbovePercDepthOfOtherPattern(const PatternMatchPtr &otherPattern, double percDepthOther);
+
 	PatternMatchValidatorPtr lastHighAboveFixedValue(double thresholdValue);
 	PatternMatchValidatorPtr lastHighAboveFirstHigh();
 

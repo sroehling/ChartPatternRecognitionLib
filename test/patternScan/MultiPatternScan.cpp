@@ -110,6 +110,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanUniquePatternMatches(chartData);
 
+
     verifyMatchList("MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 (cupMatches)",cupMatches,5);
 }
 
@@ -127,12 +128,20 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
     MultiPatternScanner multiCupScanner(cupScanner);
     PatternMatchListPtr cupMatches = multiCupScanner.scanUniquePatternMatches(chartData);
 
+    PatternScannerPtr cupWithHandleScanner(new CupWithHandleScanner());
+    MultiPatternScanner multiCupWithHandleScanner(cupWithHandleScanner);
+    PatternMatchListPtr cupWithHandleMatches = multiCupWithHandleScanner.scanUniquePatternMatches(chartData);
 
     verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,5);
 
     // TODO - There are a couple more cup-like patterns in this chart. So, it may
     // be necessary to further refine the cup pattern matching to catch these.
     verifyMatchList("MultiPatternScan_GMCR_Daily (cups)",cupMatches,5);
+
+    // Without all the constraints in place, this chart data was matching 2 cup with handles
+    // which had handles which closed too deep w.r.t. the LHS cup.
+    verifyMatchList("MultiPatternScan_GMCR_Daily (cups with handles)",cupWithHandleMatches,0);
+
 }
 
 
