@@ -70,7 +70,6 @@ SOURCES += \
     patternScan/VScanner.cpp \
     patternScan/WedgeScanner.cpp \
     patternScan/WedgeScannerEngine.cpp \
-    quoteData/ClosePeriodValueRef.cpp \
     quoteData/PeriodVal.cpp \
     quoteData/PeriodValSegment.cpp \
     quoteData/PeriodValueRef.cpp \
@@ -98,7 +97,8 @@ SOURCES += \
     patternScan/WedgeMatchValidationInfo.cpp \
     patternMatch/PatternMatchBreakoutInfo.cpp \
     patternScan/CupWithHandleScanner.cpp \
-    patternMatch/CupWithHandlePatternMatch.cpp
+    patternMatch/CupWithHandlePatternMatch.cpp \
+    patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -174,7 +174,6 @@ HEADERS += patternrecognitionlib.h \
     patternScan/VScanner.h \
     patternScan/WedgeScanner.h \
     patternScan/WedgeScannerEngine.h \
-    quoteData/ClosePeriodValueRef.h \
     quoteData/PeriodVal.h \
     quoteData/PeriodValSegment.h \
     quoteData/PeriodValueRef.h \
@@ -202,7 +201,8 @@ HEADERS += patternrecognitionlib.h \
     patternScan/WedgeMatchValidationInfo.h \
     patternMatch/PatternMatchBreakoutInfo.h \
     patternScan/CupWithHandleScanner.h \
-    patternMatch/CupWithHandlePatternMatch.h
+    patternMatch/CupWithHandlePatternMatch.h \
+    patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

@@ -10,7 +10,7 @@
 #include <boost/log/trivial.hpp>
 #include "DoubleRange.h"
 #include "LastValueAbovePointValue.h"
-#include "ClosePeriodValueRef.h"
+#include "PeriodValueRef.h"
 
 RecoverPercentOfDepth::RecoverPercentOfDepth(double depthPercRecover)
 : depthPercRecover_(depthPercRecover)

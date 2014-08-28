@@ -14,7 +14,7 @@
 #include "PeriodValSegment.h"
 #include "TrendLineScanner.h"
 #include "LastValueAbovePointValue.h"
-#include "ClosePeriodValueRef.h"
+#include "PeriodValueRef.h"
 #include "TestHelper.h"
 
 using namespace boost::posix_time;

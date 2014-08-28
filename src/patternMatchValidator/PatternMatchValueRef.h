@@ -54,6 +54,15 @@ public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class SecondToLastPeriodValPatternMatchValueRef : public PatternMatchValueRef {
+private:
+    PeriodValueRefPtr valRefWithinPeriodVal_;
+public:
+    SecondToLastPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinPeriodVal);
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 class FirstPeriodValPatternMatchValueRef : public PatternMatchValueRef {
 private:
 	PeriodValueRefPtr valRefWithinPeriodVal_;

@@ -39,6 +39,7 @@ public:
 
 	const PeriodVal &firstValue() const;
 	const PeriodVal &lastValue() const;
+    const PeriodVal &secondToLastValue() const;
 
 	const boost::posix_time::ptime &startTime() const;
 	const boost::posix_time::ptime &endTime() const;

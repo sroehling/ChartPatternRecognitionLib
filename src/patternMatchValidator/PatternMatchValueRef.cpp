@@ -40,6 +40,18 @@ double LastPeriodValPatternMatchValueRef::patternMatchVal(const PatternMatch &ma
 	return valRefWithinLastPeriodVal_->referencedVal(match.lastValue());
 }
 
+SecondToLastPeriodValPatternMatchValueRef::SecondToLastPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinPeriodVal)
+    : valRefWithinPeriodVal_(valRefWithinPeriodVal)
+{
+
+}
+
+double SecondToLastPeriodValPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return valRefWithinPeriodVal_->referencedVal(match.secondToLastValue());
+}
+
+
 FirstPeriodValPatternMatchValueRef::FirstPeriodValPatternMatchValueRef(const PeriodValueRefPtr &valRefWithinPeriodVal)
 : valRefWithinPeriodVal_(valRefWithinPeriodVal)
 {

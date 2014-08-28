@@ -40,5 +40,11 @@ public:
 	virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.typicalPrice(); }
 };
 
+class ClosePeriodValueRef: public PeriodValueRef {
+public:
+    virtual double referencedVal(const PeriodVal &periodVal) const { return periodVal.close(); }
+};
+
+
 
 #endif /* PERIODVALUEREF_H_ */

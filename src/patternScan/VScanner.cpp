@@ -10,7 +10,6 @@
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 #include "LastValueAbovePointValue.h"
-#include "ClosePeriodValueRef.h"
 #include "AnyPatternMatchValidator.h"
 #include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"

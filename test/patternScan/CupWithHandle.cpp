@@ -53,16 +53,16 @@ BOOST_AUTO_TEST_CASE( MultiSegmentPatternScannerEngine_SAVE_20130722 )
 }
 
 
-BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupScanner )
+BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupWithHandleScanner )
 {
 	PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/SAVE_Cup_Weekly_20130722_20131028.csv");
 
     CupWithHandleScanner scanner;
 	PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
 
-    verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,3);
+    verifyMatchList("CupWithHandle_SAVE_20130722_CupScanner",patternMatches,1);
 
     verifyPatternMatch("Cup with Handle Match",
-            ptime(date(2013,7,22)),ptime(date(2013,9,30)),5,patternMatches->front());
+            ptime(date(2013,7,22)),ptime(date(2013,10,7)),5,patternMatches->front());
 
 }

@@ -42,6 +42,13 @@ const PeriodVal &PatternMatch::lastValue() const
 	return segments_.back()->lastPeriodVal();
 }
 
+const PeriodVal &PatternMatch::secondToLastValue() const
+{
+    PeriodValCltn::iterator lastValIter = matchSegment_->lastValIter();
+    lastValIter--;
+    return (*lastValIter);
+}
+
 const boost::posix_time::ptime &PatternMatch::startTime() const
 {
 	return this->firstValue().periodTime();
