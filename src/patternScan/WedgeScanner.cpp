@@ -36,23 +36,6 @@ double WedgeScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine
 	return numPeriodsToIntercept;
 }
 
-bool WedgeScanner::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
-                       const ChartSegmentPtr &lowerTrendLine) const
-{
-    // The first and last value of the upper and lower trend lines are the pivot highs and lows used to
-    // define the trend lines. With this in mind, we don't want to consider a pattern valid if
-    // there is not a pivot low before the second pivot high; in other words, the pattern is not
-    // considered valid (i.e., well-balanced) if both the pivot lows occur after both the pivot highs.
-    if(lowerTrendLine->firstPeriodVal().periodTime() < upperTrendLine->lastPeriodVal().periodTime())
-    {
-        return true;
-    }
-
-    return false;
-
-}
-
-
 bool WedgeScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const
 {

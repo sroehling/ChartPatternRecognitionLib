@@ -97,6 +97,22 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
 }
 
 
+BOOST_AUTO_TEST_CASE( MultiPatternScan_GLD_Weekly )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GLD_Weekly_2013_2014.csv");
+
+    PatternScannerPtr cupScanner(new CupScanner());
+    MultiPatternScanner multiVScanner(cupScanner);
+
+    PatternMatchListPtr cupMatches = multiVScanner.scanUniquePatternMatches(chartData);
+
+    // TODO - Several of the 5 matches don't look very much like cups. Most of the values
+    // are below the flat segment at the bottom. Need to add a constraint to ensure a reasonable
+    // ratio of values for the flat area of a cup close above vs below.
+    verifyMatchList("MultiPatternScan_GLD_Weekly (cupMatches)",cupMatches,5);
+ }
+
+
 BOOST_AUTO_TEST_CASE( MultiPatternScan_VZ_SymTriangle_Weekly_2013_2014 )
 {
     // When scanning for cup based patterns, there's a few patterns in this data where the bottom of the cup

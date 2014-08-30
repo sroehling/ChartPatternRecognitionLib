@@ -1,6 +1,7 @@
 #include "PatternShapeGenerator.h"
 #include "VPatternMatch.h"
 #include "SymetricWedgePatternMatch.h"
+#include "FlatBasePatternMatch.h"
 #include "CupPatternMatch.h"
 
 PatternShapeGenerator::PatternShapeGenerator()
@@ -92,6 +93,37 @@ void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
 
     PeriodValCltn::iterator beginTrendlineShape = wedge.patternBeginIter();
     PeriodValCltn::iterator endTrendlineShape = wedge.interceptEndIter();
+
+    PatternShapePointVectorPtr upperShapePoints(new PatternShapePointVector());
+    PatternShapePointVectorPtr lowerShapePoints(new PatternShapePointVector());
+
+    for(PeriodValCltn::iterator drawTrendLineIter = beginTrendlineShape;
+        drawTrendLineIter != endTrendlineShape;
+        drawTrendLineIter++)
+    {
+        double xVal = (*drawTrendLineIter).pseudoXVal();
+
+        double upperYVal = upperTrendLineEq->yVal(xVal);
+        upperShapePoints->push_back(PatternShapePoint(xVal,
+                           (*drawTrendLineIter).periodTime(),upperYVal));
+
+        double lowerYVal = lowerTrendLineEq->yVal(xVal);
+        lowerShapePoints->push_back(PatternShapePoint(xVal,
+                                       (*drawTrendLineIter).periodTime(),lowerYVal));
+    }
+    patternShape_->addCurveShape(upperShapePoints);
+    patternShape_->addCurveShape(lowerShapePoints);
+
+}
+
+void PatternShapeGenerator::visitFlatBasePatternMatch(FlatBasePatternMatch &flatBaseMatch)
+{
+    // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
+    LinearEquationPtr upperTrendLineEq = flatBaseMatch.upperTrendLine()->segmentEq();
+    LinearEquationPtr lowerTrendLineEq = flatBaseMatch.lowerTrendLine()->segmentEq();
+
+    PeriodValCltn::iterator beginTrendlineShape = flatBaseMatch.beginMatchIter();
+    PeriodValCltn::iterator endTrendlineShape = flatBaseMatch.endMatchIter();
 
     PatternShapePointVectorPtr upperShapePoints(new PatternShapePointVector());
     PatternShapePointVectorPtr lowerShapePoints(new PatternShapePointVector());

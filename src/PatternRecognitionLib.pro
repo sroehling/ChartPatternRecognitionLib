@@ -99,7 +99,9 @@ SOURCES += \
     patternScan/CupWithHandleScanner.cpp \
     patternMatch/CupWithHandlePatternMatch.cpp \
     patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.cpp \
-    patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.cpp
+    patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.cpp \
+    patternScan/FlatBaseScanner.cpp \
+    patternMatch/FlatBasePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -204,7 +206,9 @@ HEADERS += patternrecognitionlib.h \
     patternScan/CupWithHandleScanner.h \
     patternMatch/CupWithHandlePatternMatch.h \
     patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.h \
-    patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.h
+    patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.h \
+    patternScan/FlatBaseScanner.h \
+    patternMatch/FlatBasePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

@@ -44,6 +44,11 @@ public:
 	const boost::posix_time::ptime &startTime() const;
 	const boost::posix_time::ptime &endTime() const;
 
+    const PeriodValCltn::iterator &beginMatchIter() const;
+    const PeriodValCltn::iterator &endMatchIter() const;
+
+
+
     const PeriodValSegmentPtr  &matchSegment() const { return matchSegment_; }
 
 	unsigned int numSegments() const;

@@ -38,8 +38,6 @@ protected:
 
     bool pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
                            const ChartSegmentPtr &lowerTrendLine) const;
-    bool pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
-                           const ChartSegmentPtr &lowerTrendLine) const;
     bool interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
                         const ChartSegmentPtr &lowerTrendLine) const;
 

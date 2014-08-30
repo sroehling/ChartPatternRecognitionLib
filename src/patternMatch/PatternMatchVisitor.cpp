@@ -8,11 +8,8 @@
 #include <PatternMatchVisitor.h>
 
 PatternMatchVisitor::PatternMatchVisitor() {
-	// TODO Auto-generated constructor stub
-
 }
 
 PatternMatchVisitor::~PatternMatchVisitor() {
-	// TODO Auto-generated destructor stub
 }
 

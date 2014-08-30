@@ -60,6 +60,15 @@ const boost::posix_time::ptime &PatternMatch::endTime() const
 	return this->lastValue().periodTime();
 }
 
+const PeriodValCltn::iterator &PatternMatch::beginMatchIter() const
+{
+    return matchSegment_->segBegin();
+}
+
+const PeriodValCltn::iterator &PatternMatch::endMatchIter() const
+{
+    return matchSegment_->segEnd();
+}
 
 unsigned int PatternMatch::numSegments() const
 {

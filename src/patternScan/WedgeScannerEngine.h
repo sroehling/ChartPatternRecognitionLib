@@ -37,6 +37,10 @@ protected:
 	virtual unsigned int minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine) const = 0;
 
+    bool pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
+                           const ChartSegmentPtr &lowerTrendLine) const;
+
+
     // Validate the current pattern formation is valid (e.g., not too many
     // values outside the trend lines, not too heavily weighted to the top
     // or bottom of the pattern).
