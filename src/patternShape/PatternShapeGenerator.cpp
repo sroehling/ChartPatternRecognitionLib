@@ -12,12 +12,9 @@ PatternShapePtr PatternShapeGenerator::generateShape(PatternMatch &patternMatch)
 {
     patternShape_ = PatternShapePtr(new PatternShape());
 
-    shapePoints_ = PatternShapePointVectorPtr(new PatternShapePointVector());
-    firstSubPatternVisited_ = false;
-
     patternMatch.acceptVisitor(*this);
 
-    assert(patternShape_->numCurveShapes() > 0);
+    assert(patternShape_->numShapes() > 0);
 
     return patternShape_;
 }
@@ -30,19 +27,13 @@ static PatternShapePoint createTypicalPriceShapePoint(const PeriodVal &perVal)
 
 void PatternShapeGenerator::visitVPatternMatch(VPatternMatch &vMatch)
 {
-    if(!firstSubPatternVisited_)
-    {
-        PeriodVal vStartPoint = vMatch.firstValue();
-        shapePoints_->push_back(PatternShapePoint(createTypicalPriceShapePoint(vStartPoint)));
-    }
-    firstSubPatternVisited_ = true;
+    PatternShapePointVectorPtr vShapePoints(new PatternShapePointVector());
 
-    PeriodVal vMidPoint = vMatch.downTrend()->lastValue();
-    shapePoints_->push_back(createTypicalPriceShapePoint(vMidPoint));
+    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.firstValue()));
+    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.downTrend()->lastValue()));
+    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.lastValue()));
 
-    PeriodVal vEndPoint = vMatch.lastValue();
-    shapePoints_->push_back(createTypicalPriceShapePoint(vEndPoint));
-
+    patternShape_->addLineShape(vShapePoints);
 }
 
 void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
@@ -60,26 +51,17 @@ void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
 
 void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &)
 {
-    firstSubPatternVisited_ = true;
-    patternShape_->addCurveShape(shapePoints_);
-
+    // No-op: pattern shape generation handled by visitVPatternMatch
 }
 
 void PatternShapeGenerator::visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &)
 {
-    // The cup with handle will consist of a cup pattern, followed by either a V pattern or smaller cup.
-    // A cup shaped handle will add it's own curve shape, while a V shape will populate entries in
-    // patternShape_.
-    if(shapePoints_->size() > 0)
-    {
-        patternShape_->addCurveShape(shapePoints_);
-    }
+    // No-op: pattern shape generation handled by visitVPatternMatch and visitCupPatternMatch
+    // for both the initial base and handle.
 }
 
 void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
 {
-    firstSubPatternVisited_ = true;
-
     // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
     LinearEquationPtr upperTrendLineEq = wedge.upperTrendLine()->segmentEq();
     LinearEquationPtr lowerTrendLineEq = wedge.lowerTrendLine()->segmentEq();
@@ -104,8 +86,8 @@ void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
         lowerShapePoints->push_back(PatternShapePoint(xVal,
                                        (*drawTrendLineIter).periodTime(),lowerYVal));
     }
-    patternShape_->addCurveShape(upperShapePoints);
-    patternShape_->addCurveShape(lowerShapePoints);
+    patternShape_->addLineShape(upperShapePoints);
+    patternShape_->addLineShape(lowerShapePoints);
 
 }
 
@@ -135,8 +117,8 @@ void PatternShapeGenerator::visitFlatBasePatternMatch(FlatBasePatternMatch &flat
         lowerShapePoints->push_back(PatternShapePoint(xVal,
                                        (*drawTrendLineIter).periodTime(),lowerYVal));
     }
-    patternShape_->addCurveShape(upperShapePoints);
-    patternShape_->addCurveShape(lowerShapePoints);
+    patternShape_->addLineShape(upperShapePoints);
+    patternShape_->addLineShape(lowerShapePoints);
 
 }
 

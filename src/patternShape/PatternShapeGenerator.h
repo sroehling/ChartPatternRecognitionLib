@@ -10,9 +10,7 @@
 class PatternShapeGenerator : public PatternMatchVisitor
 {
 private:
-    PatternShapePointVectorPtr shapePoints_;
     PatternShapePtr patternShape_;
-    bool firstSubPatternVisited_;
 public:
     PatternShapeGenerator();
 

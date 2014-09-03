@@ -37,13 +37,13 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_QCOR_20130819 )
 
     PatternShapeGenerator shapeGen;
     PatternShapePtr patternShape = shapeGen.generateShape(*doubleBottomMatch);
-    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),1);
+    BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
 
-    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
-    PatternShapePointVectorPtr firstShape = (*curveShapes)[0];
+    PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
+    PatternShapePointVectorPtr firstShape = (*lineShapes)[0];
 
     BOOST_TEST_MESSAGE("PatternShape_DoubleBottom_QCOR_20130819: num points in shape: " << firstShape->size());
-    BOOST_CHECK_EQUAL(firstShape->size(),5);
+    BOOST_CHECK_EQUAL(firstShape->size(),3);
 
 }
 

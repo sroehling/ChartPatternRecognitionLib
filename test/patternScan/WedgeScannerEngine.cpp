@@ -30,9 +30,9 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
     PatternShapeGenerator shapeGen;
     PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
-    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),2);
+    BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
 
-    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+    PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
     verifyPatternMatch("WedgeScannerEngine_SynthesizedPattern match",
             ptime(date(2013,7,29)),ptime(date(2013,10,7)),1,symetricTriangles,0);
@@ -76,9 +76,9 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_CELG_SymetricTriangle )
 
     PatternShapeGenerator shapeGen;
     PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
-    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),2);
+    BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
 
-    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+    PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
     verifyPatternMatch("WedgeScannerEngine_CELG_SymetricTriangle match",
             ptime(date(2014,7,3)),ptime(date(2014,8,13)),1,symetricTriangles,0);
@@ -106,8 +106,8 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_FallingWedge )
     PatternMatchPtr wedgeMatch = fallingWedges->back();
     PatternShapeGenerator shapeGen;
     PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
-    BOOST_CHECK_EQUAL(patternShape->numCurveShapes(),2);
-    PatternShapePointVectorVectorPtr curveShapes = patternShape->curveShapes();
+    BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
+    PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
 
 }
