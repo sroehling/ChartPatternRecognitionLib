@@ -7,7 +7,7 @@ CupWithHandlePatternMatch::CupWithHandlePatternMatch(const PatternMatchPtr &cup,
       cup_(cup),
       handle_(handle)
 {
-
+    PatternMatch::initBreakoutAboveFirstHighBreakoutInfo(handle);
 }
 
 

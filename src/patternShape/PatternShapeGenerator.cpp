@@ -49,22 +49,10 @@ void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
 {
     PatternShapePointVectorPtr cupShapePoints(new PatternShapePointVector());
 
-    cupShapePoints->push_back(PatternShapePoint(
-                                  cupMatch.downTrend()->firstValue().pseudoXVal(),
-                                  cupMatch.downTrend()->firstValue().periodTime(),
-                              cupMatch.downTrend()->firstValue().high()));
-    cupShapePoints->push_back(PatternShapePoint(
-                                  cupMatch.cupBottom()->firstValue().pseudoXVal(),
-                                  cupMatch.cupBottom()->firstValue().periodTime(),
-                              cupMatch.cupBottom()->firstValue().typicalPrice()));
-    cupShapePoints->push_back(PatternShapePoint(
-                                  cupMatch.cupBottom()->lastValue().pseudoXVal(),
-                                  cupMatch.cupBottom()->lastValue().periodTime(),
-                              cupMatch.cupBottom()->lastValue().typicalPrice()));
-    cupShapePoints->push_back(PatternShapePoint(
-                                   cupMatch.upTrend()->lastValue().pseudoXVal(),
-                                  cupMatch.upTrend()->lastValue().periodTime(),
-                              cupMatch.upTrend()->lastValue().close()));
+    cupShapePoints->push_back(createTypicalPriceShapePoint(cupMatch.downTrend()->firstValue()));
+    cupShapePoints->push_back(createTypicalPriceShapePoint(cupMatch.cupBottom()->firstValue()));
+    cupShapePoints->push_back(createTypicalPriceShapePoint(cupMatch.cupBottom()->lastValue()));
+    cupShapePoints->push_back(createTypicalPriceShapePoint(cupMatch.upTrend()->lastValue()));
 
     patternShape_->addCurveShape(cupShapePoints);
 

@@ -141,6 +141,32 @@ bool PatternMatch::segmentsConnected(const ChartSegmentList &segments) const
 	return true;
 }
 
+void PatternMatch::initBreakoutAboveFirstHighBreakoutInfo(const PatternMatchPtr &match)
+{
+    PeriodVal firstVal = match->firstValue();
+    double breakoutThreshold = firstVal.high();
+
+    PeriodVal lastVal = match->lastValue();
+    PeriodVal preBreakoutVal = match->secondToLastValue();
+
+    double breakoutPseudoX = lastVal.pseudoXVal();
+
+    // If the pattern includes a breakout above the middle of the center V, include the breakout information
+    // so it can be plotted. Otherwise, the pattern match is likely a partial match which can be plotted, but doesn't
+    // include a breakout.
+    //
+    // TODO - Somehow support plotting of the partial breakout, where the threshold is known but the breakout hasn't
+    // occured yet.
+    if((preBreakoutVal.close() <= breakoutThreshold) &&
+            (lastVal.close() > breakoutThreshold))
+    {
+        this->breakoutInfo = PatternMatchBreakoutInfoPtr(new PatternMatchBreakoutInfo(breakoutPseudoX,breakoutThreshold));
+    }
+
+}
+
+
+
 const ChartSegmentList &PatternMatch::segments() const
 {
 	return segments_;

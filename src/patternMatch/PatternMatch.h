@@ -32,6 +32,10 @@ private:
 	void initMatchSegment();
 	PeriodValSegmentPtr matchSegment_;
 
+protected:
+    // Method for sub-classes to initialize the breakoutInfo when the last
+    // value cloases above the first high.
+    void initBreakoutAboveFirstHighBreakoutInfo(const PatternMatchPtr &match);
 
 public:
 	PatternMatch(const ChartSegmentList &segments);
@@ -90,7 +94,6 @@ public:
     // Optional, associated breakout information. Can can be NULL if
     // no break-out is associated.
     PatternMatchBreakoutInfoPtr breakoutInfo;
-
 
 	virtual ~PatternMatch();
 };
