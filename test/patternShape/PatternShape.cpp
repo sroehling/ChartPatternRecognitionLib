@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_QCOR_20130819 )
     verifyMatchList("Double bottom match",patternMatches,1);
 
     verifyPatternMatch("Double bottom match",
-            ptime(date(2013,8,26)),ptime(date(2014,2,18)),4,patternMatches->front());
+            ptime(date(2013,8,26)),ptime(date(2014,2,10)),4,patternMatches->front());
 
     PatternMatchPtr doubleBottomMatch = patternMatches->front();
 
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly 
 
     verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: filtered matches",uniqueMatches,1);
     verifyPatternMatch("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly match",
-            ptime(date(2013,8,19)),ptime(date(2014,2,18)),4,uniqueMatches,0);
+            ptime(date(2013,8,19)),ptime(date(2014,2,10)),4,uniqueMatches,0);
 
 
 

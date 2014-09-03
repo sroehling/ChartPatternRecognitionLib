@@ -22,21 +22,26 @@ PatternShapePtr PatternShapeGenerator::generateShape(PatternMatch &patternMatch)
     return patternShape_;
 }
 
+static PatternShapePoint createTypicalPriceShapePoint(const PeriodVal &perVal)
+{
+    return PatternShapePoint(perVal.pseudoXVal(),
+                             perVal.periodTime(),perVal.typicalPrice());
+}
 
 void PatternShapeGenerator::visitVPatternMatch(VPatternMatch &vMatch)
 {
     if(!firstSubPatternVisited_)
     {
-        shapePoints_->push_back(PatternShapePoint(vMatch.firstValue().pseudoXVal(),
-                                                  vMatch.startTime(),vMatch.firstValue().high()));
+        PeriodVal vStartPoint = vMatch.firstValue();
+        shapePoints_->push_back(PatternShapePoint(createTypicalPriceShapePoint(vStartPoint)));
     }
     firstSubPatternVisited_ = true;
 
-    shapePoints_->push_back(PatternShapePoint(
-                                vMatch.lowestLowVal().pseudoXVal(),
-                                vMatch.lowestLowTime(),vMatch.lowestLow()));
-    shapePoints_->push_back(PatternShapePoint(vMatch.lastValue().pseudoXVal(),
-                                vMatch.endTime(),vMatch.lastValue().high()));
+    PeriodVal vMidPoint = vMatch.downTrend()->lastValue();
+    shapePoints_->push_back(createTypicalPriceShapePoint(vMidPoint));
+
+    PeriodVal vEndPoint = vMatch.lastValue();
+    shapePoints_->push_back(createTypicalPriceShapePoint(vEndPoint));
 
 }
 

@@ -15,6 +15,7 @@
 #include "RecoverPercentOfDepth.h"
 #include "PatternMatchFilter.h"
 #include "DoubleBottomPatternMatch.h"
+#include "BreakoutAboveFirstHighValidatorFactory.h"
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
@@ -46,12 +47,13 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 	{
 		PeriodValSegmentPtr valsForRightVScan = (*leftMatchIter)->trailingValsWithLastVal();
 
-		// The RHS of the RHS V must recover 100% of of the LHS of this V. In other words,
-		// for the pattern match to be complete (confirmed), the right-most up-trend of the
-		// double-bottom must exceed the start of the 2nd down-trend of the double-bottom.
+        // The RHS of the RHS V must recover at lest 50% of of the LHS of this V to at least
+        // represent a partial pattern match. However, for the pattern match to be complete (confirmed),
+        // the last close on the RHS must be above the first high of the RHS V..
 		VScanner rightVScanner;
 		rightVScanner.upTrendValidatorFactory().addFactory(
-				PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(100.0)));
+                PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(50.0)));
+        rightVScanner.upTrendValidatorFactory().addFactory(PatternMatchValidatorFactoryPtr(new BreakoutAboveFirstHighValidatorFactory()));
 
 		// Filter down the scanned results for the RHS to those RHS V's which have a lower low
 		// than the LHS.
@@ -66,7 +68,8 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
         for(PatternMatchList::const_iterator rightMatchIter = rightVMatches->begin();
             rightMatchIter != rightVMatches->end(); rightMatchIter++)
         {
-            overallMatches->push_back(PatternMatchPtr(new DoubleBottomPatternMatch(*leftMatchIter,*rightMatchIter)));
+            PatternMatchPtr doubleBottomPatternMatch(new DoubleBottomPatternMatch(*leftMatchIter,*rightMatchIter));
+            overallMatches->push_back(doubleBottomPatternMatch);
         } // for each "right V" match
 
 		appendValidatedMatches(dblBottomMatches,overallMatches,depthWithinRangeValidator(minMaxDepthPerc_));
