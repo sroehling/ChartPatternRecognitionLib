@@ -76,5 +76,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
 
     }
 
+    BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of cup with handle matches: " << cupWithHandleMatches->size();
+
     return cupWithHandleMatches;
 }
