@@ -102,7 +102,8 @@ SOURCES += \
     patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.cpp \
     patternScan/FlatBaseScanner.cpp \
     patternMatch/FlatBasePatternMatch.cpp \
-    patternMatchValidator/PercentIntersectingPatternLineValidator.cpp
+    patternMatchValidator/PercentIntersectingPatternLineValidator.cpp \
+    patternMatchValidator/LengthVsPreviousRatioValidatorFactory.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -210,7 +211,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.h \
     patternScan/FlatBaseScanner.h \
     patternMatch/FlatBasePatternMatch.h \
-    patternMatchValidator/PercentIntersectingPatternLineValidator.h
+    patternMatchValidator/PercentIntersectingPatternLineValidator.h \
+    patternMatchValidator/LengthVsPreviousRatioValidatorFactory.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

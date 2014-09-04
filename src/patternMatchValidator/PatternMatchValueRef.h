@@ -37,6 +37,12 @@ public:
 	virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class NumPeriodsPatternMatchValueRef : public PatternMatchValueRef {
+public:
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 
 class FixedPatternMatchValueRef : public PatternMatchValueRef {
 private:

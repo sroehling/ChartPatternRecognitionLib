@@ -28,7 +28,7 @@
 #include "SingleSegmentPatternScannerEngine.h"
 #include "PatternSlopeWithinRange.h"
 #include "PercentIntersectingPatternLineValidator.h"
-
+#include "LengthVsPreviousRatioValidatorFactory.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -67,6 +67,7 @@ void CupScanner::initConstraints()
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new PrevPatternDepthThreshold(
                   FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD,PatternMatchValueRefPtr(new LowestLowPatternMatchValueRef()),
                      ValueComparatorPtr(new GreaterThanEqualValueComparator()))));
+    flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LengthVsPreviousRatioValidatorFactory()));
 
     flatBottomValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new PercentIntersectingPatternLineValidator()));
 
