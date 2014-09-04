@@ -26,6 +26,7 @@ public:
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &);
     virtual void visitCupPatternMatch(CupPatternMatch &);
     virtual void visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &);
+    virtual void visitCupWithoutHandlePatternMatch(CupWithoutHandlePatternMatch &);
 
 };
 

@@ -132,6 +132,12 @@ void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
 
 }
 
+void PatternShapeGenerator::visitCupWithoutHandlePatternMatch(CupWithoutHandlePatternMatch &)
+{
+    // No-op: pattern shape generation handled in visitCupPatternMatch
+}
+
+
 void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &)
 {
     // No-op: pattern shape generation handled by visitVPatternMatch

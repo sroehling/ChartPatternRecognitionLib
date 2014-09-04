@@ -26,6 +26,9 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
     PatternMatchListPtr cupWithHandleMatches(new PatternMatchList());
 
     CupScanner lhsCupScanner;
+
+    // TODO - Evaluate whether this is necessary. Using the CloseWithinPercentOfDepthFromFirstHighValidator constraint
+    // with CupWithoutHandleScanner caused the validation code not match certain patterns.
     lhsCupScanner.overallValidatorFactory().addStaticValidator(PatternMatchValidatorPtr(new CloseWithinPercentOfDepthFromFirstHighValidator(
             CUP_WITH_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD)));
     PatternMatchListPtr cupMatches = lhsCupScanner.scanPatternMatches(chartVals);
