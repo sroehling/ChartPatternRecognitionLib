@@ -23,13 +23,22 @@ PeriodValCltn::iterator WedgePatternMatch::patternBeginIter() const
     return upperTrendLine_->firstValIter();
 }
 
-PeriodValCltn::iterator WedgePatternMatch::interceptEndIter() const
+
+XYCoord WedgePatternMatch::trendLineIntercept() const
 {
     XYCoord interceptCoord = lowerTrendLine_->segmentEq()->intercept(*(upperTrendLine_->segmentEq()));
 
     // Intercept must start after initial pivot high occuring at the first value
     // of the upper trend line.
     assert(interceptCoord.x() > (*patternBeginIter()).pseudoXVal());
+
+    return interceptCoord;
+}
+
+
+PeriodValCltn::iterator WedgePatternMatch::interceptEndIter() const
+{
+    XYCoord interceptCoord = trendLineIntercept();
 
     // Throughout this library, all the calculations are done on a "fly-weight" to the
     // same underlying PeriodValCltnPtr. Assuming this, the unerlyting PeriodValCltnPtr

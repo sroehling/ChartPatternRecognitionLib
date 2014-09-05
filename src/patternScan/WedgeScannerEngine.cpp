@@ -18,6 +18,7 @@
 #include "Math.h"
 #include "UnsignedIntRange.h"
 #include "WedgeMatchValidationInfo.h"
+#include "PatternMatchFilter.h"
 
 const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
 const double WedgeScannerEngine::RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD = 3.0;
@@ -304,7 +305,12 @@ PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmen
 
 	} // for each starting/first pivot high (forming the upper trend-line)
 
-	return wedgeMatches;
+
+    PatternMatchListPtr uniqueFilteredMatches =
+            patternMatchFilter::filterUniqueLongestPatternSameEndDate(wedgeMatches);
+
+
+    return uniqueFilteredMatches;
 
 }
 

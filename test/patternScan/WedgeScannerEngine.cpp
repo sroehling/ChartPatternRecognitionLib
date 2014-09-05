@@ -97,9 +97,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_FallingWedge )
     FallingWedgeScanner fallingWedgeScanner;
     PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
 
-    // TODO - The falling wedge scanner is not currently removing duplicates. When it does, there
-    // should only be 1 instead of 3 falling wedges returned from the scanner.
-    verifyMatchList("WedgeScannerEngine_GMCR_FallingWedge: falling wedges",fallingWedges,3);
+    verifyMatchList("WedgeScannerEngine_GMCR_FallingWedge: falling wedges",fallingWedges,1);
     verifyPatternMatch("WedgeScannerEngine_CELG_SymetricTriangle falling wedge match",
             ptime(date(2014,5,13)),ptime(date(2014,6,6)),1,fallingWedges,0);
 

@@ -8,6 +8,8 @@ class WedgePatternMatch: public PatternMatch {
 private:
     ChartSegmentPtr upperTrendLine_;
     ChartSegmentPtr lowerTrendLine_;
+
+    XYCoord trendLineIntercept() const;
 public:
     WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
             const ChartSegmentPtr &upperTrendLine,
