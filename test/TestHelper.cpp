@@ -170,5 +170,14 @@ PatternMatchPtr segmentSpiceToPatternMatch(const PeriodValSegmentPtr &seg, unsig
 	return patternMatch;
 }
 
+PatternMatchPtr segmentToPatternMatch(const PeriodValSegmentPtr &seg)
+{
+    ChartSegmentList matchSegments;
+    matchSegments.push_back(ChartSegmentPtr(new ChartSegment(seg)));
+    PatternMatchPtr patternMatch(new PatternMatch(matchSegments));
+    return patternMatch;
+}
+
+
 
 } // namespace TestHelper

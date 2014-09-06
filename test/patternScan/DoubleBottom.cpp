@@ -14,6 +14,7 @@
 #include "PeriodValSegment.h"
 #include "DoubleBottomScanner.h"
 #include "TestHelper.h"
+#include "MultiPatternScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -105,5 +106,22 @@ BOOST_AUTO_TEST_CASE( DoubleBottom_Synthesized_MinMaxDepth )
 
 
 }
+
+
+BOOST_AUTO_TEST_CASE( DoubleBottomScanner_GBX )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GBX_Daily.csv");
+    genPeriodValSegmentInfo("Double bottom segment data",*chartData);
+
+    MultiPatternScanner scanner(PatternScannerPtr(new DoubleBottomScanner(DoubleRange(7.0,40.0))));
+
+    PatternMatchListPtr patternMatches = scanner.scanPatternMatches(chartData);
+
+    // Shouldn't match any double bottoms. The potential double bottom in this pattern data
+    // has a middle which goes higher than the beginning of the pattern, and is thus mal-formed.
+    verifyMatchList("Double bottom match",patternMatches,0);
+
+}
+
 
 

@@ -16,16 +16,25 @@
 #include "PatternMatchFilter.h"
 #include "DoubleBottomPatternMatch.h"
 #include "BreakoutAboveFirstHighValidatorFactory.h"
+#include "HighestHighLessThanFirstHigh.h"
+
+void DoubleBottomScanner::initValidators()
+{
+    // Final high for the LHS of the double bottom must be lower than the first high.
+    lhsVValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new HighestHighLessThanFirstHigh()));
+}
 
 DoubleBottomScanner::DoubleBottomScanner(const DoubleRange &minMaxDepthPerc)
 : minMaxDepthPerc_(minMaxDepthPerc)
 {
 	assert(minMaxDepthPerc.positiveVals());
+    initValidators();
 }
 
 DoubleBottomScanner::DoubleBottomScanner()
 : minMaxDepthPerc_(DoubleRange(7.0,30.0))
 {
+    initValidators();
 }
 
 PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
@@ -38,7 +47,10 @@ PatternMatchListPtr DoubleBottomScanner::scanPatternMatches(const PeriodValSegme
 	VScanner leftVScanner;
 	leftVScanner.upTrendValidatorFactory().addFactory(
 			PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(60.0)));
-	PatternMatchListPtr leftVMatches = leftVScanner.scanPatternMatches(chartVals);
+    PatternMatchValidatorPtr lhsVValidator(lhsVValidatorFactory_.createValidator0());
+
+    PatternMatchListPtr leftVMatches = PatternMatchValidator::filterMatches(lhsVValidator,
+                                             leftVScanner.scanPatternMatches(chartVals));
 
 	PatternMatchListPtr dblBottomMatches(new PatternMatchList());
 

@@ -11,10 +11,17 @@
 #include <PatternScanner.h>
 #include "PatternMatchValidator.h"
 #include "DoubleRange.h"
+#include "CompositePatternMatchValidatorFactory.h"
 
 class DoubleBottomScanner: public PatternScanner {
 private:
 	DoubleRange minMaxDepthPerc_;
+
+    CompositePatternMatchValidatorFactory rhsVValidatorFactory_;
+    CompositePatternMatchValidatorFactory lhsVValidatorFactory_;
+
+    void initValidators();
+
 public:
 	DoubleBottomScanner(const DoubleRange &minMaxDepthPerc);
 	DoubleBottomScanner();

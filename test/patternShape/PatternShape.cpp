@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly 
     // TODO - The scanning seems to be working fine, but the actual pattern matches for a double-bottom don't appear to
     // be correct. In particular, the start dates for some of the matches occur below the RHS of the first dip in the
     // double bottom.
-    verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: unfiltered matches",doubleBottoms,2);
+    verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: unfiltered matches",doubleBottoms,1);
 
     PatternMatchListPtr  uniqueMatches = patternMatchFilter::filterUniqueLongestPatternSameEndDate(doubleBottoms);
 
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE( PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly 
 
     verifyMatchList("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly: filtered matches",uniqueMatches,1);
     verifyPatternMatch("PatternShape_DoubleBottom_MultiScan_QCOR_2013_2014_Weekly match",
-            ptime(date(2013,8,19)),ptime(date(2014,2,10)),4,uniqueMatches,0);
+            ptime(date(2013,8,26)),ptime(date(2014,2,10)),4,uniqueMatches,0);
 
 
 
