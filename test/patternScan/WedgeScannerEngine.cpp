@@ -107,6 +107,5 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_FallingWedge )
     BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
     PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
-
 }
 

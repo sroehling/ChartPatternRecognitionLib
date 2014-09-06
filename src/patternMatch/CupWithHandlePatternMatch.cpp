@@ -14,6 +14,10 @@ CupWithHandlePatternMatch::CupWithHandlePatternMatch(const PatternMatchPtr &cup,
 void CupWithHandlePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
     cup_->acceptVisitor(visitor);
+
+    visitor.visitCupWithHandleHandleStart(*this);
+
     handle_->acceptVisitor(visitor);
+
     visitor.visitCupWithHandlePatternMatch(*this);
 }

@@ -3,6 +3,9 @@
 #include "SymetricWedgePatternMatch.h"
 #include "FlatBasePatternMatch.h"
 #include "CupPatternMatch.h"
+#include "CupWithHandlePatternMatch.h"
+#include "DoubleBottomPatternMatch.h"
+#include "CupWithoutHandlePatternMatch.h"
 
 PatternShapeGenerator::PatternShapeGenerator()
 {
@@ -11,6 +14,8 @@ PatternShapeGenerator::PatternShapeGenerator()
 PatternShapePtr PatternShapeGenerator::generateShape(PatternMatch &patternMatch)
 {
     patternShape_ = PatternShapePtr(new PatternShape());
+
+    breakoutInfo_ = PatternMatchBreakoutInfoPtr(); // reset to NULL (smart pointer)
 
     patternMatch.acceptVisitor(*this);
 
@@ -24,14 +29,25 @@ static PatternShapePoint createTypicalPriceShapePoint(const PeriodVal &perVal)
     return PatternShapePoint(perVal.pseudoXVal(),perVal.typicalPrice());
 }
 
-
 void PatternShapeGenerator::visitVPatternMatch(VPatternMatch &vMatch)
 {
     PatternShapePointVectorPtr vShapePoints(new PatternShapePointVector());
 
-    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.firstValue()));
-    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.downTrend()->lastValue()));
-    vShapePoints->push_back(createTypicalPriceShapePoint(vMatch.lastValue()));
+    XYCoord startVCoord = vMatch.firstValue().highCoord();
+    vShapePoints->push_back(PatternShapePoint(startVCoord.x(),startVCoord.y()));
+
+    XYCoord midVCoord = vMatch.downTrend()->lastValue().lowCoord();
+    vShapePoints->push_back(PatternShapePoint(midVCoord.x(),midVCoord.y()));
+
+    // Plot either the high value or breakout/confirmation level as the last point.
+    // See the comment for cup shape generation.
+    XYCoord endVCoord =  vMatch.lastValue().highCoord();
+    if(breakoutInfo_)
+    {
+        endVCoord = breakoutInfo_->xyCoord();
+    }
+
+    vShapePoints->push_back(PatternShapePoint(endVCoord.x(),endVCoord.y()));
 
     patternShape_->addLineShape(vShapePoints);
 }
@@ -95,52 +111,113 @@ static void populateSplinePoints(PatternShapePointVectorPtr &curvePoints, XYCoor
     populateSplinePoint(curvePoints, p1,p2,p3,p4,0.90);
 }
 
+static void populateSplinePoints(PatternShapePointVectorPtr &curvePoints,
+           XYCoord p1, XYCoord p2, XYCoord p3, XYCoord p4, double maxY)
+{
+    double splineTInterval = 0.05;
+    double currSplineT = splineTInterval;
+    XYCoord currPoint = pointOnCurve(p1,p2,p3,p4,currSplineT);
+
+    while((currSplineT < 1.0) && (currPoint.y() < maxY))
+    {
+        PatternShapePoint shapePt(currPoint.x(),currPoint.y());
+        curvePoints->push_back(shapePt);
+
+        currSplineT += splineTInterval;
+        currPoint = pointOnCurve(p1,p2,p3,p4,currSplineT);
+    }
+}
+
 
 
 void PatternShapeGenerator::visitCupPatternMatch(CupPatternMatch &cupMatch)
 {
     PatternShapePointVectorPtr cupPoints(new PatternShapePointVector());
-    cupPoints->push_back(createTypicalPriceShapePoint(cupMatch.downTrend()->firstValue()));
+
+
+    PeriodVal startCupVal = cupMatch.downTrend()->firstValue();
+
+    // Although the pattern matching algorithms use typical values,
+    // a cup technically starts with the high of the first value.
+    // TODO - Consider updating/evaluating the pattern matching to use
+    // the high value as the first value in the initial downtrend line.
+    // However, to the extent a high value doesn't reflect the true conviction of
+    // the traders (perhaps just a whipsaw for intraday trading), arguably
+    // typical values (or even closing values) are still better for the
+    // underlying pattern match.
+    XYCoord startCupCoord = startCupVal.highCoord();
+    XYCoord startCupBottomCoord = cupMatch.cupBottom()->firstValue().typicalCoord();
+    XYCoord endCupBottomCoord = cupMatch.cupBottom()->lastValue().typicalCoord();
+    PeriodVal endCupVal = cupMatch.upTrend()->lastValue();
+
+    // The high coordinate is applicable for the LHS of the cup with handle.
+    XYCoord endCupCoord =  endCupVal.highCoord();
+    if(breakoutInfo_)
+    {
+        endCupCoord = breakoutInfo_->xyCoord();
+    }
+
+    cupPoints->push_back(PatternShapePoint(startCupCoord.x(),startCupCoord.y()));
 
     XYCoord extendedDownTrendCoord(extrapolatedMatchCoord(
                                 cupMatch.downTrend(),cupMatch.downTrend()->firstValue(),-2.0));
-
     populateSplinePoints(cupPoints,extendedDownTrendCoord,
-                         cupMatch.downTrend()->firstValue().typicalCoord(),
-                         cupMatch.cupBottom()->firstValue().typicalCoord(),
-                         cupMatch.cupBottom()->lastValue().typicalCoord());
+                         startCupCoord,startCupBottomCoord,endCupBottomCoord);
 
     cupPoints->push_back(createTypicalPriceShapePoint(cupMatch.cupBottom()->firstValue()));
 
-    populateSplinePoints(cupPoints,cupMatch.downTrend()->firstValue().typicalCoord(),
-                         cupMatch.cupBottom()->firstValue().typicalCoord(),
-                         cupMatch.cupBottom()->lastValue().typicalCoord(),
-                         cupMatch.upTrend()->lastValue().typicalCoord());
+    populateSplinePoints(cupPoints,startCupCoord,
+                         startCupBottomCoord,endCupBottomCoord,endCupCoord);
 
     cupPoints->push_back(createTypicalPriceShapePoint(cupMatch.cupBottom()->lastValue()));
 
-    XYCoord extendedUpTrendCoord(extrapolatedMatchCoord(
-                   cupMatch.upTrend(),cupMatch.upTrend()->lastValue(),2.0));
-    populateSplinePoints(cupPoints,cupMatch.cupBottom()->firstValue().typicalCoord(),
-                         cupMatch.cupBottom()->lastValue().typicalCoord(),
-                         cupMatch.upTrend()->lastValue().typicalCoord(),
-                          extendedUpTrendCoord);
+    // If this cup is being generated with a breakout price in place, then don't extend
+    // the line beyond the breakout price.
+    double maxY = endCupCoord.y();
+    if(breakoutInfo_)
+    {
+        maxY = breakoutInfo_->breakoutPrice();
+    }
 
-    cupPoints->push_back(createTypicalPriceShapePoint(cupMatch.upTrend()->lastValue()));
+    XYCoord extendedUpTrendCoord(extrapolatedMatchCoord(cupMatch.upTrend(),endCupVal,2.0));
+    populateSplinePoints(cupPoints,startCupBottomCoord,
+                         endCupBottomCoord,endCupCoord,extendedUpTrendCoord,maxY);
+
+    cupPoints->push_back(PatternShapePoint(endCupCoord.x(),endCupCoord.y()));
 
     patternShape_->addLineShape(cupPoints);
 
 }
+
+
+void PatternShapeGenerator::visitDoubleBottomMiddle(DoubleBottomPatternMatch &doubleBottom)
+{
+    breakoutInfo_ = doubleBottom.breakoutInfo;
+}
+
+void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &)
+{
+    // No-op: pattern shape generation handled by visitVPatternMatch
+}
+
+void PatternShapeGenerator::visitCupWithoutHandleStart(CupWithoutHandlePatternMatch &cupWithoutHandle)
+{
+    // Initialize the breakoutInfo_, so the next cup pattern generation will use this as the end-point
+    // for drawing the pattern.
+    breakoutInfo_ = cupWithoutHandle.breakoutInfo;
+}
+
 
 void PatternShapeGenerator::visitCupWithoutHandlePatternMatch(CupWithoutHandlePatternMatch &)
 {
     // No-op: pattern shape generation handled in visitCupPatternMatch
 }
 
-
-void PatternShapeGenerator::visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &)
+void PatternShapeGenerator::visitCupWithHandleHandleStart(CupWithHandlePatternMatch &cupWithHandle)
 {
-    // No-op: pattern shape generation handled by visitVPatternMatch
+    // Initialize the breakoutInfo_, so the next cup pattern generation will use this as the end-point
+    // for drawing the pattern.
+    breakoutInfo_ = cupWithHandle.breakoutInfo;
 }
 
 void PatternShapeGenerator::visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &)
@@ -173,6 +250,12 @@ void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
         double lowerYVal = lowerTrendLineEq->yVal(xVal);
         lowerShapePoints->push_back(PatternShapePoint(xVal,lowerYVal));
     }
+
+    XYCoord interceptCoord = wedge.trendLineIntercept();
+    PatternShapePoint interceptPt(interceptCoord.x(),interceptCoord.y());
+    upperShapePoints->push_back(interceptPt);
+    lowerShapePoints->push_back(interceptPt);
+
     patternShape_->addLineShape(upperShapePoints);
     patternShape_->addLineShape(lowerShapePoints);
 

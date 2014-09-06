@@ -10,6 +10,7 @@ CupWithoutHandlePatternMatch::CupWithoutHandlePatternMatch(const PatternMatchPtr
 
 void CupWithoutHandlePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
+    visitor.visitCupWithoutHandleStart(*this);
     cup_->acceptVisitor(visitor);
     visitor.visitCupWithoutHandlePatternMatch(*this);
 }

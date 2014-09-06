@@ -13,6 +13,7 @@ DoubleBottomPatternMatch::DoubleBottomPatternMatch(const PatternMatchPtr &lhsV, 
 void DoubleBottomPatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
     lhsV_->acceptVisitor(visitor);
+    visitor.visitDoubleBottomMiddle(*this);
     rhsV_->acceptVisitor(visitor);
     visitor.visitDoubleBottomPatternMatch(*this);
 }

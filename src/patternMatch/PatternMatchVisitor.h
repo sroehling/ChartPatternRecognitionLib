@@ -30,10 +30,16 @@ public:
     virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &) {}
 
     virtual void visitVPatternMatch(VPatternMatch &) {}
+
+    virtual void visitDoubleBottomMiddle(DoubleBottomPatternMatch &) {}
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &) {}
 
     virtual void visitCupPatternMatch(CupPatternMatch &) {}
+
     virtual void visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &) {}
+    virtual void visitCupWithHandleHandleStart(CupWithHandlePatternMatch &) {}
+
+    virtual void visitCupWithoutHandleStart(CupWithoutHandlePatternMatch &) {}
     virtual void visitCupWithoutHandlePatternMatch(CupWithoutHandlePatternMatch &) {}
 
 	virtual ~PatternMatchVisitor();

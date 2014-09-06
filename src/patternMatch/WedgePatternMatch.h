@@ -9,7 +9,6 @@ private:
     ChartSegmentPtr upperTrendLine_;
     ChartSegmentPtr lowerTrendLine_;
 
-    XYCoord trendLineIntercept() const;
 public:
     WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
             const ChartSegmentPtr &upperTrendLine,
@@ -17,6 +16,9 @@ public:
 
     ChartSegmentPtr upperTrendLine() const { return upperTrendLine_; }
     ChartSegmentPtr lowerTrendLine() const { return lowerTrendLine_; }
+
+    XYCoord trendLineIntercept() const;
+
 
     // Iterators defining the beginning and end of the trend lines
     // comprising the pattern. These methods are useful for iterating

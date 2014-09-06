@@ -6,11 +6,15 @@
 #include "PatternMatch.h"
 #include "PatternShapePoint.h"
 #include "PatternShape.h"
+#include "PatternMatchBreakoutInfo.h"
 
 class PatternShapeGenerator : public PatternMatchVisitor
 {
 private:
     PatternShapePtr patternShape_;
+
+    PatternMatchBreakoutInfoPtr breakoutInfo_;
+
 public:
     PatternShapeGenerator();
 
@@ -23,9 +27,16 @@ public:
     virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &);
 
     virtual void visitVPatternMatch(VPatternMatch &);
+
+    virtual void visitDoubleBottomMiddle(DoubleBottomPatternMatch &);
     virtual void visitDoubleBottomPatternMatch(DoubleBottomPatternMatch &);
+
     virtual void visitCupPatternMatch(CupPatternMatch &);
+
     virtual void visitCupWithHandlePatternMatch(CupWithHandlePatternMatch &);
+    virtual void visitCupWithHandleHandleStart(CupWithHandlePatternMatch &);
+
+    virtual void visitCupWithoutHandleStart(CupWithoutHandlePatternMatch &);
     virtual void visitCupWithoutHandlePatternMatch(CupWithoutHandlePatternMatch &);
 
 };
