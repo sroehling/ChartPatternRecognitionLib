@@ -105,7 +105,9 @@ SOURCES += \
     patternMatchValidator/PercentIntersectingPatternLineValidator.cpp \
     patternMatchValidator/LengthVsPreviousRatioValidatorFactory.cpp \
     patternScan/CupWithoutHandleScanner.cpp \
-    patternMatch/CupWithoutHandlePatternMatch.cpp
+    patternMatch/CupWithoutHandlePatternMatch.cpp \
+    patternMatchValidator/PrevPatternValueRatioValidatorFactory.cpp \
+    patternMatchValidator/PrevPatternValueCompareValidatorFactory.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -216,7 +218,9 @@ HEADERS += patternrecognitionlib.h \
     patternMatchValidator/PercentIntersectingPatternLineValidator.h \
     patternMatchValidator/LengthVsPreviousRatioValidatorFactory.h \
     patternScan/CupWithoutHandleScanner.h \
-    patternMatch/CupWithoutHandlePatternMatch.h
+    patternMatch/CupWithoutHandlePatternMatch.h \
+    patternMatchValidator/PrevPatternValueRatioValidatorFactory.h \
+    patternMatchValidator/PrevPatternValueCompareValidatorFactory.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

@@ -44,6 +44,8 @@ namespace testHelper {
 
 	PatternMatchPtr segmentSpiceToPatternMatch(const PeriodValSegmentPtr &seg, unsigned int beginRange, unsigned int endRange);
     PatternMatchPtr segmentToPatternMatch(const PeriodValSegmentPtr &seg);
+    PatternMatchPtr synthesizePatternMatch(const boost::gregorian::date &startDate,
+                                           const TestPerValRangeList &ranges);
 
 };
 

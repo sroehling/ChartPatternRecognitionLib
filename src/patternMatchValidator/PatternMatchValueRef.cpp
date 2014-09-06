@@ -24,6 +24,11 @@ double DepthPercentPatternMatchValueRef::patternMatchVal(const PatternMatch &mat
 }
 
 
+double DepthPointsPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return match.depthPoints();
+}
+
 double NumPeriodsPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {
     return (double)match.numPeriods();

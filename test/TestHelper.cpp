@@ -178,6 +178,13 @@ PatternMatchPtr segmentToPatternMatch(const PeriodValSegmentPtr &seg)
     return patternMatch;
 }
 
+PatternMatchPtr synthesizePatternMatch(const boost::gregorian::date &startDate,
+                                       const TestPerValRangeList &ranges)
+{
+    PeriodValSegmentPtr perValSeg = synthesizePeriodValSegment(startDate,ranges);
+    return segmentToPatternMatch(perValSeg);
+}
+
 
 
 } // namespace TestHelper
