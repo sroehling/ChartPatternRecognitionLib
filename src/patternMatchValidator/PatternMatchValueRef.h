@@ -43,6 +43,12 @@ public:
 };
 
 
+class DepthPointsFirstHighLowestLowPatternMatchValueRef : public PatternMatchValueRef {
+public:
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 class NumPeriodsPatternMatchValueRef : public PatternMatchValueRef {
 public:
     virtual double patternMatchVal(const PatternMatch &match) const;

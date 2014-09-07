@@ -89,3 +89,20 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_SAVE_20130722_CupWithHandle_V_Shaped_Handle 
     verifyMatchList("CupWithHandle_SAVE_20130722_CupWithHandle_V_Shaped_Handle",patternMatches,1);
 }
 
+
+BOOST_AUTO_TEST_CASE( CupWithHandle_CELG_CupWithHandleScanner )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CELG_20140501_20140814_Daily.csv");
+    PeriodValSegmentPair splitSeg = chartData->split(9);
+    PeriodValSegmentPtr cupWithHandleData = splitSeg.second;
+    genPeriodValSegmentInfo("cup data",*cupWithHandleData);
+
+    CupWithHandleScanner scanner;
+    PatternMatchListPtr patternMatches = scanner.scanPatternMatches(cupWithHandleData);
+
+    verifyMatchList("CupWithHandle_CELG_CupWithHandleScanner",patternMatches,1);
+    PatternMatchPtr thePatternMatch = patternMatches->front();
+    verifyPatternMatch("Cup with handle Match",
+            ptime(date(2014,5,14)),ptime(date(2014,6,4)),6,thePatternMatch);
+}
+

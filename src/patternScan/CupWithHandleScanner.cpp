@@ -10,14 +10,27 @@
 #include "BreakoutAboveFirstHighValidatorFactory.h"
 #include "CloseWithinPercentOfDepthFromFirstHighValidator.h"
 #include "PatternMatchValidatorCreationHelper.h"
+#include "PrevPatternValueRatioValidatorFactory.h"
+#include "ScannerHelper.h"
+
 
 #define DEFAULT_CUP_WITH_HANDLE_SCANNER_MIN_SEGMENT_LENGTH 2
 #define DEFAULT_CUP_WITH_HANDLE_SCANNER_HANDLE_MAX_PERC_DISTANCE_TRENDLINE 3.0
 #define CUP_WITH_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD 0.2
 #define CUP_WITH_HANDLE_SCANNER_MAX_DEPTH_HANDLE_LHS_CUP 0.5
 
+#define CUP_WITH_HANDLE_MIN_HANDLE_VS_CUP_DEPTH_RATIO 0.15
+#define CUP_WITH_HANDLE_MAX_HANDLE_VS_CUP_DEPTH_RATIO 0.65
+
+using namespace scannerHelper;
+
 CupWithHandleScanner::CupWithHandleScanner()
 {
+    DoubleRange validDepthRatios(CUP_WITH_HANDLE_MIN_HANDLE_VS_CUP_DEPTH_RATIO,
+                                  CUP_WITH_HANDLE_MAX_HANDLE_VS_CUP_DEPTH_RATIO);
+    handleValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
+        new PrevPatternValueRatioValidatorFactory(validDepthRatios,
+                PatternMatchValueRefPtr(new DepthPointsFirstHighLowestLowPatternMatchValueRef()))));
 }
 
 
@@ -39,6 +52,9 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
     for(PatternMatchList::const_iterator cupMatchIter = cupMatches->begin();
             cupMatchIter!=cupMatches->end();cupMatchIter++)
     {
+
+        logMatchInfo("CupWithHandleScanner: cup match",**cupMatchIter);
+
         PeriodValSegmentPtr valsForHandleScan = (*cupMatchIter)->trailingValsWithLastVal();
 
         unsigned int minHandleSegmentLength = DEFAULT_CUP_WITH_HANDLE_SCANNER_MIN_SEGMENT_LENGTH;
@@ -50,12 +66,17 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
         uShapedHandleScanner.overallValidatorFactory().addStaticValidator(
                     patternMatchValidatorCreationHelper::lowAbovePercDepthOfOtherPattern(*cupMatchIter,
                     CUP_WITH_HANDLE_SCANNER_MAX_DEPTH_HANDLE_LHS_CUP));
-        PatternMatchListPtr uShapedHandleMatches = uShapedHandleScanner.scanPatternMatches(valsForHandleScan);
+        PatternMatchValidatorPtr handleValidator = handleValidatorFactory_.createValidator1(*cupMatchIter);
+
+        PatternMatchListPtr uShapedHandleMatches = PatternMatchValidator::filterMatches(handleValidator,
+                                           uShapedHandleScanner.scanPatternMatches(valsForHandleScan));
         BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of U shaped handle matches: " << uShapedHandleMatches->size();
 
         for(PatternMatchList::const_iterator uShapedHandleMatchIter = uShapedHandleMatches->begin();
             uShapedHandleMatchIter != uShapedHandleMatches->end(); uShapedHandleMatchIter++)
         {
+            logMatchInfo("CupWithHandleScanner: u shaped handle match",**uShapedHandleMatchIter);
+
             cupWithHandleMatches->push_back(
                         PatternMatchPtr(new CupWithHandlePatternMatch(*cupMatchIter,*uShapedHandleMatchIter)));
         } // for each u-shaped handle match
@@ -67,12 +88,14 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
         vShapedHandleScanner.overallValidatorFactory().addStaticValidator(
                     patternMatchValidatorCreationHelper::lowAbovePercDepthOfOtherPattern(*cupMatchIter,
                     CUP_WITH_HANDLE_SCANNER_MAX_DEPTH_HANDLE_LHS_CUP));
-        PatternMatchListPtr vShapedHandleMatches = vShapedHandleScanner.scanPatternMatches(valsForHandleScan);
+        PatternMatchListPtr vShapedHandleMatches = PatternMatchValidator::filterMatches(handleValidator,
+                                            vShapedHandleScanner.scanPatternMatches(valsForHandleScan));
         BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of V shaped handle matches: " << vShapedHandleMatches->size();
 
         for(PatternMatchList::const_iterator vShapedHandleMatchIter = vShapedHandleMatches->begin();
             vShapedHandleMatchIter != vShapedHandleMatches->end(); vShapedHandleMatchIter++)
         {
+            logMatchInfo("CupWithHandleScanner: v shaped handle match",**vShapedHandleMatchIter);
             cupWithHandleMatches->push_back(
                         PatternMatchPtr(new CupWithHandlePatternMatch(*cupMatchIter,*vShapedHandleMatchIter)));
         } // for each v-shaped handle match

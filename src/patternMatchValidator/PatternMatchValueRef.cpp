@@ -29,6 +29,13 @@ double DepthPointsPatternMatchValueRef::patternMatchVal(const PatternMatch &matc
     return match.depthPoints();
 }
 
+double DepthPointsFirstHighLowestLowPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    double depthHighLow = match.firstValue().high()-match.lowestLow();
+    assert(depthHighLow > 0.0);
+    return depthHighLow;
+}
+
 double NumPeriodsPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {
     return (double)match.numPeriods();
