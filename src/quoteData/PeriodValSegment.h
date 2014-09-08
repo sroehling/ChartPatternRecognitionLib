@@ -67,6 +67,12 @@ public:
 	PeriodValSegmentPair split(unsigned int splitPos) const;
 	PeriodValSegmentPtr spliceRange(unsigned int startPos, unsigned int endPos) const;
 
+    PeriodValCltn::iterator highestValIter(const PeriodValueRef &perValRef) const;
+    double highestVal(const PeriodValueRef &perValRef) const;
+
+    PeriodValCltn::iterator lowestValIter(const PeriodValueRef &perValRef) const;
+    double lowestVal(const PeriodValueRef &perValRef) const;
+
 	unsigned int numVals() const;
 	const PeriodVal &firstVal() const;
 	const PeriodValCltn::iterator &firstValIter() const { return segBegin(); }

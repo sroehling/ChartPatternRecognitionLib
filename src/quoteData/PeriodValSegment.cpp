@@ -8,36 +8,65 @@
 #include <PeriodValSegment.h>
 #include <iterator>
 #include "MathHelper.h"
+#include "PeriodValueRef.h"
+
+
+PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &perValRef) const
+{
+    double maxVal = MathHelper::minDouble();
+    PeriodValCltn::iterator highValIter = segBegin();
+    for(PeriodValCltn::iterator perValIter = segBegin();
+            perValIter != segEnd(); perValIter++)
+    {
+        double perVal = perValRef.referencedVal(*perValIter);
+        if(perVal > maxVal)
+        {
+            maxVal = perVal;
+            highValIter = perValIter;
+        }
+    }
+    return highValIter;
+}
+
+double PeriodValSegment::highestVal(const PeriodValueRef &perValRef) const
+{
+    PeriodValCltn::iterator valIter = highestValIter(perValRef);
+    return perValRef.referencedVal(*valIter);
+}
+
+
+PeriodValCltn::iterator PeriodValSegment::lowestValIter(const PeriodValueRef &perValRef) const
+{
+    double minVal = MathHelper::maxDouble();
+    PeriodValCltn::iterator lowValIter = segBegin();
+    for(PeriodValCltn::iterator perValIter = segBegin();
+            perValIter != segEnd(); perValIter++)
+    {
+        double perVal = perValRef.referencedVal(*perValIter);
+        if((*perValIter).low() < minVal)
+        {
+            minVal = perVal;
+            lowValIter = perValIter;
+        }
+    }
+    return lowValIter;
+}
+
+double PeriodValSegment::lowestVal(const PeriodValueRef &perValRef) const
+{
+    PeriodValCltn::iterator valIter = lowestValIter(perValRef);
+    return perValRef.referencedVal(*valIter);
+}
 
 
 void PeriodValSegment::initHighestHighValIter()
 {
-	double maxVal = MathHelper::minDouble();
-	highestHighValIter_ = segBegin();
-	for(PeriodValCltn::iterator perValIter = segBegin();
-			perValIter != segEnd(); perValIter++)
-	{
-		if((*perValIter).high() > maxVal)
-		{
-			maxVal = (*perValIter).high();
-			highestHighValIter_ = perValIter;
-		}
-	}
+    highestHighValIter_ = highestValIter(HighPeriodValueRef());
 }
 
 void PeriodValSegment::initLowestLowValIter()
 {
-	double minVal = MathHelper::maxDouble();
-	lowestLowValIter_ = segBegin();
-	for(PeriodValCltn::iterator perValIter = segBegin();
-			perValIter != segEnd(); perValIter++)
-	{
-		if((*perValIter).low() < minVal)
-		{
-			minVal = (*perValIter).low();
-			lowestLowValIter_ = perValIter;
-		}
-	}
+    lowestLowValIter_ = lowestValIter(LowPeriodValueRef());
 }
 
 bool PeriodValSegment::validPeriodValIndices() const
