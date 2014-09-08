@@ -12,7 +12,7 @@
 #include "PatternMatchValueRef.h"
 #include "ValueComparisonMatchValidator.h"
 #include "DoubleRange.h"
-
+#include "PeriodValueRef.h"
 
 namespace patternMatchValidatorCreationHelper
 {
@@ -30,6 +30,8 @@ namespace patternMatchValidatorCreationHelper
 	PatternMatchValidatorPtr lastHighAboveFirstHigh();
 
     PatternMatchValidatorPtr highestHighBelowLastHigh();
+
+    PatternMatchValidatorPtr highestCloseBelowFirstHigh();
 
 }
 

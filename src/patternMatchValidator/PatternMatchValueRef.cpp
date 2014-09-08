@@ -18,6 +18,20 @@ double HighestHighPatternMatchValueRef::patternMatchVal(const PatternMatch &matc
 }
 
 
+HighestValPatternMatchValueRef::HighestValPatternMatchValueRef(const PeriodValueRefPtr &valueRef)
+    : valueRef_(valueRef)
+{
+
+}
+
+
+double HighestValPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return match.matchSegment()->highestVal(*valueRef_);
+}
+
+
+
 double DepthPercentPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {
 	return match.depthPercent();

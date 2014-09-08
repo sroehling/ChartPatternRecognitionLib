@@ -22,8 +22,10 @@
 #include "PatternSegmentValsCloseToLinearEq.h"
 #include "ValuesCloseToTrendlineValidator.h"
 #include "LowestLowGreaterThanLastLow.h"
+#include "PatternMatchValidatorCreationHelper.h"
 
 using namespace scannerHelper;
+using namespace patternMatchValidatorCreationHelper;
 
 #define UP_TREND_MAX_MULTIPLE_DOWNTREND_PERIODS 2
 #define DEFAULT_V_SCANNER_MIN_SEGMENT_LENGTH 3
@@ -33,6 +35,7 @@ using namespace scannerHelper;
 void VScanner::initValidationConstraints()
 {
     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new LowestLowGreaterThanLastLow()));
+    downTrendValidatorFactory_.addStaticValidator(highestCloseBelowFirstHigh());
 
     if(validateWithTrendLineValidator_)
     {

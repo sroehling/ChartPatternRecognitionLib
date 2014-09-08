@@ -39,6 +39,7 @@
 #define DEFAULT_CUP_SCANNER_MAX_PERC_TRENDLINE_FIT 3.0
 
 using namespace scannerHelper;
+using namespace patternMatchValidatorCreationHelper;
 
 void CupScanner::initConstraints()
 {
@@ -55,6 +56,7 @@ void CupScanner::initConstraints()
     {
         downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
     }
+    downTrendValidatorFactory_.addStaticValidator(highestCloseBelowFirstHigh());
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 
