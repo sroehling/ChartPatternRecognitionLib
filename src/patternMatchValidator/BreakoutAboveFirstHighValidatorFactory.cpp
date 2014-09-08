@@ -35,9 +35,18 @@ PatternMatchValidatorPtr BreakoutAboveFirstHighValidatorFactory::createValidator
     PatternMatchValidatorPtr secondToLastCloseBelowHighValidator(
             new ValueComparisonMatchValidator(secondToLastCloseRef,firstHigh,lessThanCompare));
 
+    // Except for the last value, ensure none of the previous close values exceeds the first high.
+    // This ensures breakout for the last value is preceded by another value which also goes
+    // above the first high.
+    ValueComparatorPtr lessCompare(new LessThanValueComparator());
+    PatternMatchValueRefPtr highestCloseExceptLast(new HighestValExceptLastPatternMatchValueRef(closeValueRef));
+    PatternMatchValidatorPtr highestCloseExceptLastBelowFirstHigh(
+                new ValueComparisonMatchValidator(highestCloseExceptLast,firstHigh,lessCompare));
+
     PatternMatchValidatorList breakoutValidators;
     breakoutValidators.push_back(closeAboveHighValidator);
     breakoutValidators.push_back(secondToLastCloseBelowHighValidator);
+    breakoutValidators.push_back(highestCloseExceptLastBelowFirstHigh);
 
     PatternMatchValidatorPtr upSideBreakoutValidator(new ANDPatternMatchValidator(breakoutValidators));
 

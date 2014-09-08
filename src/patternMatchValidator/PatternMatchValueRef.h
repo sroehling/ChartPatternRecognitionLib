@@ -40,6 +40,14 @@ public:
     virtual double patternMatchVal(const PatternMatch &match) const;
 };
 
+class HighestValExceptLastPatternMatchValueRef : public PatternMatchValueRef {
+private:
+    PeriodValueRefPtr valueRef_;
+public:
+    HighestValExceptLastPatternMatchValueRef(const PeriodValueRefPtr &valueRef);
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
 
 class DepthPercentPatternMatchValueRef : public PatternMatchValueRef {
 public:

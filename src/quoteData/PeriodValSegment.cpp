@@ -11,12 +11,13 @@
 #include "PeriodValueRef.h"
 
 
-PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &perValRef) const
+PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &perValRef,
+    const PeriodValCltn::iterator &beginRange, const PeriodValCltn::iterator &endRange) const
 {
     double maxVal = MathHelper::minDouble();
-    PeriodValCltn::iterator highValIter = segBegin();
-    for(PeriodValCltn::iterator perValIter = segBegin();
-            perValIter != segEnd(); perValIter++)
+    PeriodValCltn::iterator highValIter = beginRange;
+    for(PeriodValCltn::iterator perValIter = beginRange;
+            perValIter != endRange; perValIter++)
     {
         double perVal = perValRef.referencedVal(*perValIter);
         if(perVal > maxVal)
@@ -28,9 +29,22 @@ PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &p
     return highValIter;
 }
 
+
+PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &perValRef) const
+{
+    return highestValIter(perValRef,segBegin(), segEnd());
+}
+
 double PeriodValSegment::highestVal(const PeriodValueRef &perValRef) const
 {
     PeriodValCltn::iterator valIter = highestValIter(perValRef);
+    return perValRef.referencedVal(*valIter);
+}
+
+double PeriodValSegment::highestValExceptLast(const PeriodValueRef &perValRef) const
+{
+    assert(numVals() >= 2);
+    PeriodValCltn::iterator valIter = highestValIter(perValRef,segBegin(),lastValIter());
     return perValRef.referencedVal(*valIter);
 }
 

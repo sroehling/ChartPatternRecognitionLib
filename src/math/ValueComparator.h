@@ -36,11 +36,18 @@ class LessThanEqualValueComparator: public ValueComparator {
 
 
 class GreaterThanValueComparator: public ValueComparator {
+
 	bool compare(double lhs, double rhs) const { return lhs>rhs; }
 };
 
 class GreaterThanEqualValueComparator: public ValueComparator {
-	bool compare(double lhs, double rhs) const { return lhs>=rhs; }
+private:
+    double tolerance_;
+public:
+    GreaterThanEqualValueComparator(double tolerance) :tolerance_(tolerance) {}
+    GreaterThanEqualValueComparator(): tolerance_(0.0) {}
+
+    bool compare(double lhs, double rhs) const { return (lhs+tolerance_)>=rhs; }
 };
 
 

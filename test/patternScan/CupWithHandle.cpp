@@ -19,6 +19,7 @@
 #include "TestHelper.h"
 #include "VScanner.h"
 #include "BreakoutAboveFirstHighValidatorFactory.h"
+#include "MultiPatternScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -104,5 +105,23 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_CELG_CupWithHandleScanner )
     PatternMatchPtr thePatternMatch = patternMatches->front();
     verifyPatternMatch("Cup with handle Match",
             ptime(date(2014,5,14)),ptime(date(2014,6,4)),6,thePatternMatch);
+}
+
+
+BOOST_AUTO_TEST_CASE( CupWithHandle_CMG )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CMG_Daily.csv");
+
+    PatternScannerPtr cupWithHandleScanner(new CupWithHandleScanner());
+    MultiPatternScanner multiCupWithHandleScanner(cupWithHandleScanner);
+
+    PatternMatchListPtr cupWithHandleMatches = multiCupWithHandleScanner.scanUniquePatternMatches(chartData);
+
+
+    // Without the pattern matching constraints, several mal-formed cup with handles
+    // are matched in the CMG data. None of these looked very well-formed, and were
+    // used to add rules to cup and handle scanning to rule them out.
+    // TODO: The 3 remaining matches are still mal-formed. Add constraints to rule these out.
+    verifyMatchList("CupWithHandle_CMG (cup with handle matches)",cupWithHandleMatches,3);
 }
 
