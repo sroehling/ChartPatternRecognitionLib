@@ -77,10 +77,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_CELG_Daily )
     verifyMatchList("MultiPatternScan_CELG_Daily (double bottom)",doubleBottoms,0);
     verifyMatchList("MultiPatternScan_CELG_Daily (cups)",cupMatches,7);
 
-    verifyMatchList("MultiPatternScan_CELG_Daily (cup with handles)",cupWithHandleMatches,1);
-    verifyPatternMatch("Cup with Handle Match",
-            ptime(date(2014,5,14)),ptime(date(2014,6,4)),6,cupWithHandleMatches->front());
-
+    verifyMatchList("MultiPatternScan_CELG_Daily (cup with handles)",cupWithHandleMatches,0);
 }
 
 

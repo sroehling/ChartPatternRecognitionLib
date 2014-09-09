@@ -101,10 +101,9 @@ BOOST_AUTO_TEST_CASE( CupWithHandle_CELG_CupWithHandleScanner )
     CupWithHandleScanner scanner;
     PatternMatchListPtr patternMatches = scanner.scanPatternMatches(cupWithHandleData);
 
-    verifyMatchList("CupWithHandle_CELG_CupWithHandleScanner",patternMatches,1);
-    PatternMatchPtr thePatternMatch = patternMatches->front();
-    verifyPatternMatch("Cup with handle Match",
-            ptime(date(2014,5,14)),ptime(date(2014,6,4)),6,thePatternMatch);
+    // This pattern previously matched a cup with handle, but no longer does due to the
+    // depth restrictions (i.e., pattern must be > 8% deep from the high of the LHS cup.
+    verifyMatchList("CupWithHandle_CELG_CupWithHandleScanner",patternMatches,0);
 }
 
 

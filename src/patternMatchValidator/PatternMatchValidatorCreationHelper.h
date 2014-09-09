@@ -16,9 +16,8 @@
 
 namespace patternMatchValidatorCreationHelper
 {
-	PatternMatchValidatorPtr minDepthPercentValidator(double minDepthPerc);
-	PatternMatchValidatorPtr maxDepthPercentValidator(double maxDepthPerc);
 	PatternMatchValidatorPtr depthWithinRangeValidator(const DoubleRange &minMaxDepthPerc);
+    PatternMatchValidatorPtr depthSinceStartWithinRangeValidator(const DoubleRange &minMaxDepthPerc);
 
 	// In comparison with another pattern 'compareWith', validate that the given
 	// pattern has a lower low than compareWith.

@@ -6,6 +6,7 @@
  */
 
 #include <PatternMatchValueRef.h>
+#include "MathHelper.h"
 
 double LowestLowPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {
@@ -61,6 +62,11 @@ double DepthPointsFirstHighLowestLowPatternMatchValueRef::patternMatchVal(const 
     double depthHighLow = match.firstValue().high()-match.lowestLow();
     assert(depthHighLow > 0.0);
     return depthHighLow;
+}
+
+double DepthPercentFirstHighLowestLowPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return MathHelper::absRelPercentVal(match.lowestLow(),match.firstValue().high());
 }
 
 double NumPeriodsPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const

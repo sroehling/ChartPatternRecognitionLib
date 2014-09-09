@@ -16,44 +16,50 @@ namespace patternMatchValidatorCreationHelper
 {
 
 
-PatternMatchValidatorPtr minDepthPercentValidator(double minDepthPerc)
+PatternMatchValidatorPtr minValValidator(double minVal, const PatternMatchValueRefPtr &comparisonValRef)
 {
-	assert(DoubleRange(0.0,100.0).valueWithinRange(minDepthPerc));
-
-	ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
-	PatternMatchValueRefPtr depthVal(new DepthPercentPatternMatchValueRef());
-	PatternMatchValueRefPtr minDepthVal(new FixedPatternMatchValueRef(minDepthPerc));
-	PatternMatchValidatorPtr minDepthValidator(
-			new ValueComparisonMatchValidator(depthVal,minDepthVal,greaterEqualCompare));
-	return minDepthValidator;
+     ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
+     PatternMatchValueRefPtr minValRef(new FixedPatternMatchValueRef(minVal));
+    PatternMatchValidatorPtr minValidator(
+            new ValueComparisonMatchValidator(comparisonValRef,minValRef,greaterEqualCompare));
+    return minValidator;
 }
 
-PatternMatchValidatorPtr maxDepthPercentValidator(double maxDepthPerc)
+PatternMatchValidatorPtr maxValValidator(double maxVal,const PatternMatchValueRefPtr &comparisonValRef)
 {
-	assert(DoubleRange(0.0,100.0).valueWithinRange(maxDepthPerc));
-
-	ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
-	PatternMatchValueRefPtr maxDepthVal(new FixedPatternMatchValueRef(maxDepthPerc));
-	PatternMatchValueRefPtr depthVal(new DepthPercentPatternMatchValueRef());
-	PatternMatchValidatorPtr maxDepthValidator(
-			new ValueComparisonMatchValidator(depthVal,maxDepthVal,lessEqualCompare));
-	return maxDepthValidator;
+    ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
+    PatternMatchValueRefPtr maxValRef(new FixedPatternMatchValueRef(maxVal));
+    PatternMatchValidatorPtr maxValidator(
+            new ValueComparisonMatchValidator(comparisonValRef,maxValRef,lessEqualCompare));
+    return maxValidator;
 }
+
+PatternMatchValidatorPtr valWithinRangeValidator(const DoubleRange &minMaxVal,const PatternMatchValueRefPtr &comparisonValRef)
+{
+    PatternMatchValidatorPtr minVal = minValValidator(minMaxVal.minVal(),comparisonValRef);
+    PatternMatchValidatorPtr maxVal = maxValValidator(minMaxVal.maxVal(),comparisonValRef);
+
+    PatternMatchValidatorList andList;
+    andList.push_back(minVal);
+    andList.push_back(maxVal);
+
+    PatternMatchValidatorPtr valInRange(new ANDPatternMatchValidator(andList));
+    return valInRange;
+}
+
 
 
 PatternMatchValidatorPtr depthWithinRangeValidator(const DoubleRange &minMaxDepthPerc)
 {
 	assert(minMaxDepthPerc.positiveVals());
+    return valWithinRangeValidator(minMaxDepthPerc, PatternMatchValueRefPtr(new DepthPercentPatternMatchValueRef()));
 
-	PatternMatchValidatorPtr minDepth = minDepthPercentValidator(minMaxDepthPerc.minVal());
-	PatternMatchValidatorPtr maxDepth = maxDepthPercentValidator(minMaxDepthPerc.maxVal());
+}
 
-	PatternMatchValidatorList andList;
-	andList.push_back(minDepth);
-	andList.push_back(maxDepth);
-
-	PatternMatchValidatorPtr depthInRange(new ANDPatternMatchValidator(andList));
-	return depthInRange;
+PatternMatchValidatorPtr depthSinceStartWithinRangeValidator(const DoubleRange &minMaxDepthPerc)
+{
+    assert(minMaxDepthPerc.positiveVals());
+    return valWithinRangeValidator(minMaxDepthPerc, PatternMatchValueRefPtr(new DepthPercentFirstHighLowestLowPatternMatchValueRef()));
 }
 
 PatternMatchValidatorPtr lowerLowValidator(const PatternMatchPtr &compareWith)

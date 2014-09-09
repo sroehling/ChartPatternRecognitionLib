@@ -22,7 +22,11 @@
 #define CUP_WITH_HANDLE_MIN_HANDLE_VS_CUP_DEPTH_RATIO 0.15
 #define CUP_WITH_HANDLE_MAX_HANDLE_VS_CUP_DEPTH_RATIO 0.65
 
+#define CUP_WITH_HANDLE_MIN_DEPTH_PERC_SINCE_START 8.0
+#define CUP_WITH_HANDLE_MAX_DEPTH_PERC_SINCE_START 30.0
+
 using namespace scannerHelper;
+using namespace patternMatchValidatorCreationHelper;
 
 CupWithHandleScanner::CupWithHandleScanner()
 {
@@ -44,6 +48,9 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
     // with CupWithoutHandleScanner caused the validation code not match certain patterns.
     lhsCupScanner.overallValidatorFactory().addStaticValidator(PatternMatchValidatorPtr(new CloseWithinPercentOfDepthFromFirstHighValidator(
             CUP_WITH_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD)));
+    lhsCupScanner.overallValidatorFactory().addStaticValidator(depthSinceStartWithinRangeValidator(
+        DoubleRange(CUP_WITH_HANDLE_MIN_DEPTH_PERC_SINCE_START,CUP_WITH_HANDLE_MAX_DEPTH_PERC_SINCE_START)));
+
     PatternMatchListPtr cupMatches = lhsCupScanner.scanPatternMatches(chartVals);
 
     BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of cup matches: " << cupMatches->size();
