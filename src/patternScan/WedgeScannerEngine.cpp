@@ -22,7 +22,8 @@
 
 const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
 const double WedgeScannerEngine::RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD = 3.0;
-const double WedgeScannerEngine::MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.25;
+const double WedgeScannerEngine::MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.20;
+const double WedgeScannerEngine::MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.30;
 
 WedgeScannerEngine::WedgeScannerEngine() {
 }
@@ -41,6 +42,47 @@ bool WedgeScannerEngine::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine
 
     return false;
 
+}
+
+bool WedgeScannerEngine::first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    double wedgeBeginXVal = wedgeMatchValidationInfo.patternBeginIter()->pseudoXVal();
+    double wedgeEndXVal = wedgeMatchValidationInfo.patternEndIter()->pseudoXVal();
+    double midPointXVal = wedgeBeginXVal + ((wedgeEndXVal-wedgeBeginXVal) * 0.5);
+
+    unsigned int upperPivotsBeforeMidPoint = 0;
+
+    if(wedgeMatchValidationInfo.upperTrendLine()->firstPeriodVal().pseudoXVal() <= midPointXVal)
+    {
+        upperPivotsBeforeMidPoint++;
+    }
+
+    if(wedgeMatchValidationInfo.upperTrendLine()->lastPeriodVal().pseudoXVal() <= midPointXVal)
+    {
+        upperPivotsBeforeMidPoint++;
+    }
+
+    unsigned int lowerPivotsBeforeMidPoint = 0;
+
+
+    if(wedgeMatchValidationInfo.lowerTrendLine()->firstPeriodVal().pseudoXVal() <= midPointXVal)
+    {
+        lowerPivotsBeforeMidPoint++;
+    }
+
+    if(wedgeMatchValidationInfo.lowerTrendLine()->lastPeriodVal().pseudoXVal() <= midPointXVal)
+    {
+        lowerPivotsBeforeMidPoint++;
+    }
+
+    if((upperPivotsBeforeMidPoint > 0) && (lowerPivotsBeforeMidPoint > 0))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
@@ -66,14 +108,17 @@ double WedgeScannerEngine::percClosingValsOutsideTrendLines(const WedgeMatchVali
     return percOutsideTrendLines;
 }
 
-bool WedgeScannerEngine::allClosingValsWithinThresholdOutsideTrendLines(
-        const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+bool WedgeScannerEngine::allPeriodValsWithinThresholdOutsideTrendLines(
+        const WedgeMatchValidationInfo &wedgeMatchValidationInfo, const PeriodValueRef &perValRef,
+        double distanceAboveOrBelowPercDepthThreshold) const
 {
     // The interation needs to end *before* currPerValIter, since
     // wedgeMatchValidationInfo.currPerValIter() could include a break-out/break-down
     // which invalidates this rule.
     PeriodValCltn::iterator patternEndIter = wedgeMatchValidationInfo.currPerValIter();
 
+    assert(distanceAboveOrBelowPercDepthThreshold >= 0.0);
+    assert(distanceAboveOrBelowPercDepthThreshold <= 1.0);
 
     for(PeriodValCltn::iterator perValIter =  wedgeMatchValidationInfo.patternBeginIter();
         perValIter != patternEndIter; perValIter++)
@@ -83,21 +128,23 @@ bool WedgeScannerEngine::allClosingValsWithinThresholdOutsideTrendLines(
         double lowerYVal = wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->yVal(currXVal);
         assert(upperYVal >= lowerYVal);
         double currDepth = upperYVal-lowerYVal;
-        double currDistanceThresholdOutsideTrendLine = MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH * currDepth;
-        double currClose = (*perValIter).close();
+        double currDistanceThresholdOutsideTrendLine = distanceAboveOrBelowPercDepthThreshold * currDepth;
+        double currVal = perValRef.referencedVal(*perValIter);
 
-       if (wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->aboveLine((*perValIter).closeCoord()))
+        XYCoord currValCoord(currXVal,currVal);
+
+       if (wedgeMatchValidationInfo.upperTrendLine()->segmentEq()->aboveLine(currValCoord))
        {
-            double distanceAbove = currClose-upperYVal;
+            double distanceAbove = currVal-upperYVal;
             assert(distanceAbove >= 0.0);
             if(distanceAbove > currDistanceThresholdOutsideTrendLine)
             {
                 return false;
             }
        }
-       else if (wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->belowLine((*perValIter).closeCoord()))
+       else if (wedgeMatchValidationInfo.lowerTrendLine()->segmentEq()->belowLine(currValCoord))
        {
-            double distanceBelow = lowerYVal - currClose;
+            double distanceBelow = lowerYVal - currVal;
             assert(distanceBelow >= 0.0);
             if(distanceBelow > currDistanceThresholdOutsideTrendLine)
             {
@@ -108,6 +155,14 @@ bool WedgeScannerEngine::allClosingValsWithinThresholdOutsideTrendLines(
 
     return true;
 }
+
+
+bool WedgeScannerEngine::allClosingValsWithinThresholdOutsideTrendLines(
+        const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    return allPeriodValsWithinThresholdOutsideTrendLines(wedgeMatchValidationInfo,
+                            ClosePeriodValueRef(),MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH);
+ }
 
 
 
@@ -187,6 +242,23 @@ bool WedgeScannerEngine::validWedgePatternMatch(const WedgeMatchValidationInfo &
     }
 
     if(!allClosingValsWithinThresholdOutsideTrendLines(wedgeMatchValidationInfo))
+    {
+        return false;
+    }
+
+    if(!allPeriodValsWithinThresholdOutsideTrendLines(wedgeMatchValidationInfo,
+        HighPeriodValueRef(),MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH))
+    {
+        return false;
+    }
+
+    if(!allPeriodValsWithinThresholdOutsideTrendLines(wedgeMatchValidationInfo,
+        LowPeriodValueRef(),MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH))
+    {
+        return false;
+    }
+
+    if(!first2PivotsInLHSOfWedge(wedgeMatchValidationInfo))
     {
         return false;
     }

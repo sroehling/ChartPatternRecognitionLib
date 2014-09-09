@@ -39,6 +39,7 @@ protected:
 
     bool pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                            const ChartSegmentPtr &lowerTrendLine) const;
+    bool first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
 
 
     // Validate the current pattern formation is valid (e.g., not too many
@@ -50,6 +51,9 @@ protected:
             const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
     bool ratioAboveVsBelowMidpointWithinThreshold(
             const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
+    bool allPeriodValsWithinThresholdOutsideTrendLines(
+            const WedgeMatchValidationInfo &wedgeMatchValidationInfo, const PeriodValueRef &perValRef,
+            double distanceAboveOrBelowPercDepthThreshold) const;
     bool allClosingValsWithinThresholdOutsideTrendLines(
             const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
     virtual bool validWedgePatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
@@ -66,6 +70,7 @@ public:
     static const double PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD;
     static const double RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD;
     static const double MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
+    static const double MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
 
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 

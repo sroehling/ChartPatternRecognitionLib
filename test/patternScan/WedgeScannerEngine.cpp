@@ -87,18 +87,15 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_CELG_SymetricTriangle )
 }
 
 
-BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_FallingWedge )
+BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_Wedge )
 {
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GMCR_Daily_2014.csv");
-
-    PatternScannerPtr scanner(new SymetricWedgeScanner());
-    PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
 
     FallingWedgeScanner fallingWedgeScanner;
     PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("WedgeScannerEngine_GMCR_FallingWedge: falling wedges",fallingWedges,1);
-    verifyPatternMatch("WedgeScannerEngine_CELG_SymetricTriangle falling wedge match",
+    verifyMatchList("WedgeScannerEngine_GMCR_Wedge: falling wedges",fallingWedges,1);
+    verifyPatternMatch("WedgeScannerEngine_GMCR_Wedge falling wedge match",
             ptime(date(2014,5,13)),ptime(date(2014,6,6)),1,fallingWedges,0);
 
     PatternMatchPtr wedgeMatch = fallingWedges->back();
@@ -108,4 +105,15 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_FallingWedge )
     PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
 }
+
+BOOST_AUTO_TEST_CASE( WedgeScannerEngine_CMG_Wedge )
+{
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CMG_Daily.csv");
+
+    PatternScannerPtr symetricScanner(new SymetricWedgeScanner());
+    PatternMatchListPtr symetricTriangles = symetricScanner->scanPatternMatches(chartData);
+    verifyMatchList("WedgeScannerEngine_GMCR_Wedge: symetric triangles",symetricTriangles,4);
+
+}
+
 
