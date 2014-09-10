@@ -24,12 +24,11 @@ private:
 	CompositePatternMatchValidatorFactory overallValidatorFactory_;
 	double trendLineMaxDistancePerc_;
     unsigned int minTrendLineSegmentLength_;
-    bool validateWithTrendLineValidator_;
 
     void initValidationConstraints();
 public:
 	VScanner();
-    VScanner(double trendLineMaxDistancePerc, unsigned int minTrendLineSegmentLength, bool validateWithTrendLineValidator);
+    VScanner(double trendLineMaxDistancePerc, unsigned int minTrendLineSegmentLength);
 
     CompositePatternMatchValidatorFactory &downTrendValidatorFactory() { return downTrendValidatorFactory_; }
     CompositePatternMatchValidatorFactory &upTrendValidatorFactory() { return upTrendValidatorFactory_; }

@@ -52,11 +52,8 @@ void CupScanner::initConstraints()
     // match, a shorter one ending no the same date may pass validation and be returned from scanning.
     // After scanning, since pattern matches are filtered by unique end date, then earliest start date,
     // setting constraints may surface different pattern matches in the final results.
-    if(validateWithTrendLineValidator_)
-    {
-        downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-    }
-    downTrendValidatorFactory_.addStaticValidator(highestCloseBelowFirstHigh());
+     downTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
+     downTrendValidatorFactory_.addStaticValidator(highestCloseBelowFirstHigh());
 
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LowerHighPatternMatchValidatorFactory()));
 
@@ -74,10 +71,7 @@ void CupScanner::initConstraints()
     flatBottomValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new PercentIntersectingPatternLineValidator()));
 
     upTrendValidatorFactory_.addStaticValidator(patternMatchValidatorCreationHelper::highestHighBelowLastHigh());
-    if(validateWithTrendLineValidator_)
-    {
-        upTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-    }
+    upTrendValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
 
     upTrendValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new RecoverPercentOfDepth(65.0)));
 
@@ -87,20 +81,16 @@ CupScanner::CupScanner()
 {
     trendlineMaxDistancePerc_ = DEFAULT_CUP_SCANNER_MAX_PERC_TRENDLINE_FIT;
     minTrendLineSegmentLength_ = DEFAULT_CUP_SCANNER_MIN_SEGMENT_LENGTH;
-    validateWithTrendLineValidator_ = true;
-
     initConstraints();
 }
 
-CupScanner::CupScanner(unsigned int minTrendLineSegmentLength, bool validateWithTrendlineScanner)
+CupScanner::CupScanner(unsigned int minTrendLineSegmentLength)
     : minTrendLineSegmentLength_(minTrendLineSegmentLength)
 {
     assert(minTrendLineSegmentLength > 1); // Segment length <= 1 doesn't make sense
     assert(minTrendLineSegmentLength < 5); // constraint to something sensible
 
     trendlineMaxDistancePerc_ = DEFAULT_CUP_SCANNER_MAX_PERC_TRENDLINE_FIT;
-    validateWithTrendLineValidator_ = validateWithTrendlineScanner;
-
     initConstraints();
 }
 
@@ -114,15 +104,10 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
     downTrendScanner.validatorFactory().addStaticValidator(
                 PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::DOWNTREND_SLOPE_RANGE)));
 
-    if(validateWithTrendLineValidator_)
-    {
-        downTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-    }
-
-    PatternMatchListPtr uniqueDowntrendMatches = patternMatchFilter::filterUniqueStartEndTime(
-                downTrendScanner.scanPatternMatches(chartVals));
     PatternMatchValidatorPtr downTrendValidator = downTrendValidatorFactory_.createValidator0();
-    PatternMatchListPtr downtrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,uniqueDowntrendMatches);
+    PatternMatchListPtr validatedDowntrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,
+                       downTrendScanner.scanPatternMatches(chartVals));
+    PatternMatchListPtr downtrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedDowntrendMatches);
 
     BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of downtrend matches: " << downtrendMatches->size();
 
@@ -136,9 +121,9 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
         SingleSegmentPatternScannerEngine flatScanner(flatSegmentLengthRange);
         flatScanner.validatorFactory().addStaticValidator(
                     PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::FLAT_SLOPE_RANGE)));
-        PatternMatchListPtr uniqueFlatMatches = patternMatchFilter::filterUniqueStartEndTime(flatScanner.scanPatternMatches(valsForFlatScan));
         PatternMatchValidatorPtr flatValidator = flatBottomValidatorFactory_.createValidator1(*dtMatchIter);
-        PatternMatchListPtr flatMatches = PatternMatchValidator::filterMatches(flatValidator,uniqueFlatMatches);
+        PatternMatchListPtr validatedFlatMatches = PatternMatchValidator::filterMatches(flatValidator,flatScanner.scanPatternMatches(valsForFlatScan));
+        PatternMatchListPtr flatMatches = patternMatchFilter::filterUniqueStartEndTime(validatedFlatMatches);
 
         BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of flat matches: " << flatMatches->size();
 
@@ -151,15 +136,11 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
             SingleSegmentPatternScannerEngine upTrendScanner(upTrendSegmentLengthRange);
             upTrendScanner.validatorFactory().addStaticValidator(
                         PatternMatchValidatorPtr(new PatternSlopeWithinRange(TrendLineScanner::UPTREND_SLOPE_RANGE)));
-            if(validateWithTrendLineValidator_)
-            {
-                upTrendScanner.validatorFactory().addStaticValidator(PatternMatchValidatorPtr(new ValuesCloseToTrendlineValidator()));
-            }
 
-            PatternMatchListPtr uniqueUpTrendMatches = patternMatchFilter::filterUniqueStartEndTime(
-                        upTrendScanner.scanPatternMatches(valsForUptrendScan));
             PatternMatchValidatorPtr upTrendValidator = upTrendValidatorFactory_.createValidator2(*dtMatchIter,*ftMatchIter);
-            PatternMatchListPtr upTrendMatches = PatternMatchValidator::filterMatches(upTrendValidator,uniqueUpTrendMatches);
+            PatternMatchListPtr validatedUpTrendMatches = PatternMatchValidator::filterMatches(upTrendValidator,
+                                  upTrendScanner.scanPatternMatches(valsForUptrendScan));
+            PatternMatchListPtr upTrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedUpTrendMatches);
 
             BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of uptrend matches: " << upTrendMatches->size();
 

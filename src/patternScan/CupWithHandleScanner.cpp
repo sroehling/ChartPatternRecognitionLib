@@ -65,9 +65,8 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
         PeriodValSegmentPtr valsForHandleScan = (*cupMatchIter)->trailingValsWithLastVal();
 
         unsigned int minHandleSegmentLength = DEFAULT_CUP_WITH_HANDLE_SCANNER_MIN_SEGMENT_LENGTH;
-        bool validateWithTrendLineValidator = false;
 
-        CupScanner uShapedHandleScanner(minHandleSegmentLength,validateWithTrendLineValidator);
+        CupScanner uShapedHandleScanner(minHandleSegmentLength);
         uShapedHandleScanner.overallValidatorFactory().addFactory(
                     PatternMatchValidatorFactoryPtr(new BreakoutAboveFirstHighValidatorFactory()));
         uShapedHandleScanner.overallValidatorFactory().addStaticValidator(
@@ -90,7 +89,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
 
 
         VScanner vShapedHandleScanner(DEFAULT_CUP_WITH_HANDLE_SCANNER_HANDLE_MAX_PERC_DISTANCE_TRENDLINE,
-                                      minHandleSegmentLength,validateWithTrendLineValidator);
+                                      minHandleSegmentLength);
         vShapedHandleScanner.overallValidatorFactory().addFactory(PatternMatchValidatorFactoryPtr(new BreakoutAboveFirstHighValidatorFactory()));
         vShapedHandleScanner.overallValidatorFactory().addStaticValidator(
                     patternMatchValidatorCreationHelper::lowAbovePercDepthOfOtherPattern(*cupMatchIter,

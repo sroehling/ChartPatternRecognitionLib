@@ -23,13 +23,12 @@ private:
 
     double trendlineMaxDistancePerc_;
     unsigned int minTrendLineSegmentLength_;
-    bool validateWithTrendLineValidator_;
 
     void initConstraints();
 
 public:
 	CupScanner();
-    CupScanner(unsigned int minTrendLineSegmentLength, bool validateWithTrendlineScanner);
+    CupScanner(unsigned int minTrendLineSegmentLength);
 
     CompositePatternMatchValidatorFactory &downTrendValidatorFactory() { return downTrendValidatorFactory_; }
     CompositePatternMatchValidatorFactory &flatBottomValidatorFactory() { return flatBottomValidatorFactory_; }
