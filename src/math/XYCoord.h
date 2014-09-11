@@ -9,7 +9,7 @@
 #define XYCOORD_H_
 
 #include <ostream>
-
+#include <vector>
 
 class XYCoord {
 private:
@@ -25,6 +25,8 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const XYCoord& coord);
 
 };
+
+typedef std::vector<XYCoord> XYCoordVector;
 
 
 #endif /* XYCOORD_H_ */

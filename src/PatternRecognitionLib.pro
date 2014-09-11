@@ -107,7 +107,8 @@ SOURCES += \
     patternScan/CupWithoutHandleScanner.cpp \
     patternMatch/CupWithoutHandlePatternMatch.cpp \
     patternMatchValidator/PrevPatternValueRatioValidatorFactory.cpp \
-    patternMatchValidator/PrevPatternValueCompareValidatorFactory.cpp
+    patternMatchValidator/PrevPatternValueCompareValidatorFactory.cpp \
+    patternShape/PatternShapeCurveGenerator.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -220,7 +221,8 @@ HEADERS += patternrecognitionlib.h \
     patternScan/CupWithoutHandleScanner.h \
     patternMatch/CupWithoutHandlePatternMatch.h \
     patternMatchValidator/PrevPatternValueRatioValidatorFactory.h \
-    patternMatchValidator/PrevPatternValueCompareValidatorFactory.h
+    patternMatchValidator/PrevPatternValueCompareValidatorFactory.h \
+    patternShape/PatternShapeCurveGenerator.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target
