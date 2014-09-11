@@ -16,17 +16,17 @@ PatternMatchValidatorPtr PrevPatternValueRatioValidatorFactory::createValidator(
 {
     // This validator always compares against the first previous match.
     assert(previousMatches.size() > 0);
-    PatternMatchPtr otherMatch = previousMatches[0];
+    PatternMatchPtr prevMatch = previousMatches[0];
 
-    double otherRatioVal = ratioValueRef_->patternMatchVal(*otherMatch);
+    double prevVal = ratioValueRef_->patternMatchVal(*prevMatch);
 
-    double minRatioThreshold = otherRatioVal*validRatios_.minVal();
+    double minRatioThreshold = prevVal*validRatios_.minVal();
     PatternMatchValueRefPtr minThresholdValueRef(new FixedPatternMatchValueRef(minRatioThreshold));
     ValueComparatorPtr greaterEqualCompare(new GreaterThanEqualValueComparator());
     PatternMatchValidatorPtr minRatioValidator(
             new ValueComparisonMatchValidator(ratioValueRef_,minThresholdValueRef,greaterEqualCompare));
 
-    double maxRatioThreshold = otherRatioVal*validRatios_.maxVal();
+    double maxRatioThreshold = prevVal*validRatios_.maxVal();
     PatternMatchValueRefPtr maxThresholdValueRef(new FixedPatternMatchValueRef(maxRatioThreshold));
     ValueComparatorPtr lessEqualCompare(new LessThanEqualValueComparator());
     PatternMatchValidatorPtr maxRatioValidator(

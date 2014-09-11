@@ -21,7 +21,8 @@ SOURCES += RunTests.cpp \
     TestHelper.cpp \
     TestPerValRange.cpp \
     patternShape/PatternShape.cpp \
-    patternScan/PivotScanner.cpp
+    patternScan/PivotScanner.cpp \
+    patternScan/CupWithoutHandle.cpp
 
 HEADERS += \
     TestHelper.h \

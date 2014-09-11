@@ -28,7 +28,7 @@
 #include "SingleSegmentPatternScannerEngine.h"
 #include "PatternSlopeWithinRange.h"
 #include "PercentIntersectingPatternLineValidator.h"
-#include "LengthVsPreviousRatioValidatorFactory.h"
+#include "PrevPatternValueRatioValidatorFactory.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -37,6 +37,13 @@
 #define DEFAULT_CUP_SCANNER_MIN_SEGMENT_LENGTH 3
 #define DEFAULT_CUP_SCANNER_MAX_SEGMENT_LENGTH 200
 #define DEFAULT_CUP_SCANNER_MAX_PERC_TRENDLINE_FIT 3.0
+
+// The number of periods in the cup bottom must be a little more than 1/2 the number
+// of periods in the initial down-trend. So, for example, if the downtrend is 6 periods
+// the cup bottom must have at least 4 periods. Otherwise, the cup will look more V like
+// than cup like.There is really no maximum bottom length, but 20 should suffice.
+#define CUP_MIN_BOTTOM_VS_DOWNTREND_LENGTH_RATIO 0.55
+#define CUP_MAX_BOTTOM_VS_DOWNTREND_LENGTH_RATIO 20.0
 
 using namespace scannerHelper;
 using namespace patternMatchValidatorCreationHelper;
@@ -66,7 +73,16 @@ void CupScanner::initConstraints()
     flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new PrevPatternDepthThreshold(
                   FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD,PatternMatchValueRefPtr(new LowestLowPatternMatchValueRef()),
                      ValueComparatorPtr(new GreaterThanEqualValueComparator()))));
-    flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(new LengthVsPreviousRatioValidatorFactory()));
+
+    // TODO - Consider OR'ing the constraint below with one that simply verifies the length is at least
+    // 4. If the length is at least 4, no matter how long the downtrend is, the cup should be reasonably
+    // well formed.
+    DoubleRange validFlatBottomVsDowntrendRatios(CUP_MIN_BOTTOM_VS_DOWNTREND_LENGTH_RATIO,
+                                  CUP_MAX_BOTTOM_VS_DOWNTREND_LENGTH_RATIO);
+    flatBottomValidatorFactory_.addFactory(PatternMatchValidatorFactoryPtr(
+        new PrevPatternValueRatioValidatorFactory(validFlatBottomVsDowntrendRatios,
+                PatternMatchValueRefPtr(new NumPeriodsPatternMatchValueRef()))));
+
 
     flatBottomValidatorFactory_.addStaticValidator(PatternMatchValidatorPtr(new PercentIntersectingPatternLineValidator()));
 
