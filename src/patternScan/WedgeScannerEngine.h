@@ -72,6 +72,9 @@ public:
     static const double MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
     static const double MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
 
+    // TODO - Provide an interface which allows passing in a pre-configured list of pivot highs
+    // and lows. When there are multiple calls to the wedge scanners, this would facilitate
+    // not having to
 	virtual PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
 	virtual ~WedgeScannerEngine();

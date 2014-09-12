@@ -13,6 +13,19 @@ MultiPatternScanner::MultiPatternScanner(const PatternScannerPtr &singlePatternS
 {
 }
 
+void MultiPatternScanner::scanFromStartingPoint(const PatternMatchListPtr &matches,
+      const PeriodValCltn::iterator &scanStartIter, const PeriodValSegmentPtr &chartVals) const
+{
+    PeriodValSegmentPtr subSegmentForScanning(new PeriodValSegment(chartVals->perValCltn(),
+                    scanStartIter, chartVals->segEnd()));
+    PatternMatchListPtr currSubSegmentMatches =
+            singlePatternScanner_->scanPatternMatches(subSegmentForScanning);
+
+    matches->insert(matches->end(),
+            currSubSegmentMatches->begin(), currSubSegmentMatches->end());
+
+}
+
 PatternMatchListPtr MultiPatternScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
 
@@ -23,16 +36,25 @@ PatternMatchListPtr MultiPatternScanner::scanPatternMatches(const PeriodValSegme
 	for(PeriodValCltn::iterator scanStartIter = chartVals->segBegin();
 			scanStartIter != chartVals->segEnd(); scanStartIter++)
 	{
-		PeriodValSegmentPtr subSegmentForScanning(new PeriodValSegment(chartVals->perValCltn(),
-						scanStartIter, chartVals->segEnd()));
-		PatternMatchListPtr currSubSegmentMatches =
-				singlePatternScanner_->scanPatternMatches(subSegmentForScanning);
-
-		allSubSegmentMatches->insert(allSubSegmentMatches->end(),
-				currSubSegmentMatches->begin(), currSubSegmentMatches->end());
+        scanFromStartingPoint(allSubSegmentMatches,scanStartIter,chartVals);
 	}
 
 	return allSubSegmentMatches;
+}
+
+PatternMatchListPtr MultiPatternScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals,
+                                                            const PeriodValCltnIterListPtr &scanStartingPoints) const
+{
+    PatternMatchListPtr allSubSegmentMatches(new PatternMatchList());
+
+    for(PeriodValCltnIterList::iterator scanStartIter = scanStartingPoints->begin();
+        scanStartIter != scanStartingPoints->end(); scanStartIter++)
+    {
+        scanFromStartingPoint(allSubSegmentMatches,*scanStartIter,chartVals);
+
+    }
+
+    return allSubSegmentMatches;
 }
 
 PatternMatchListPtr MultiPatternScanner::scanUniquePatternMatches(const PeriodValSegmentPtr &chartVals) const
@@ -41,6 +63,17 @@ PatternMatchListPtr MultiPatternScanner::scanUniquePatternMatches(const PeriodVa
     PatternMatchListPtr uniqueFilteredMatches =
             patternMatchFilter::filterUniqueLongestPatternSameEndDate(unfilteredMatches);
     return uniqueFilteredMatches;
+}
+
+
+PatternMatchListPtr MultiPatternScanner::scanUniquePatternMatches(const PeriodValSegmentPtr &chartVals,
+             const PeriodValCltnIterListPtr &scanStartingPoints) const
+{
+    PatternMatchListPtr unfilteredMatches = scanPatternMatches(chartVals,scanStartingPoints);
+    PatternMatchListPtr uniqueFilteredMatches =
+            patternMatchFilter::filterUniqueLongestPatternSameEndDate(unfilteredMatches);
+    return uniqueFilteredMatches;
+
 }
 
 

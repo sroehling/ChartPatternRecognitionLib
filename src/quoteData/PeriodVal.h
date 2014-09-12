@@ -17,6 +17,8 @@
 class PeriodVal;
 typedef std::list<PeriodVal> PeriodValCltn;
 typedef boost::shared_ptr<PeriodValCltn> PeriodValCltnPtr;
+typedef std::list<PeriodValCltn::iterator> PeriodValCltnIterList;
+typedef boost::shared_ptr<PeriodValCltnIterList> PeriodValCltnIterListPtr;
 
 
 class PeriodVal {

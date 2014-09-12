@@ -25,16 +25,8 @@ PivotHighScanner::PivotHighScanner(double maxTrendLineDistancePerc)
 
 PatternMatchListPtr PivotHighScanner::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
 {
-    /*
-	PatternScannerPtr pivotHighScanner(new InvertedVScanner(pivotHighMaxTrendLineDistancePerc_));
-	MultiPatternScanner pivotHighMultiPatternScanner(pivotHighScanner);
-	PatternMatchListPtr pivotHighs = pivotHighMultiPatternScanner.scanPatternMatches(chartVals);
-	PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(pivotHighs);
-*/
-
-    /* The code below is experimental code for matching pivots. Rather than progressively scanning for
-     * using the InvertedVScanner, use a sliding window to determine where pivots have taken place.
-    */
+    //The code below is experimental code for matching pivots. Rather than progressively scanning for
+    // using the InvertedVScanner, use a sliding window to determine where pivots have taken place.
     PatternMatchListPtr allPivots(new PatternMatchList());
 
     unsigned int pivotWindowLen = 6;
@@ -79,6 +71,22 @@ PatternMatchListPtr PivotHighScanner::scanPatternMatches(const PeriodValSegmentP
 	}
 
 	return sortedUniquePivots;
+}
+
+PeriodValCltnIterListPtr PivotHighScanner::scanPivotHighBeginIters(const PeriodValSegmentPtr &chartVals) const
+{
+    PatternMatchListPtr pivotHighMatches = scanPatternMatches(chartVals);
+
+    PeriodValCltnIterListPtr pivotHighIters(new PeriodValCltnIterList());
+
+    for(PatternMatchList::iterator matchIter = pivotHighMatches->begin(); matchIter != pivotHighMatches->end();
+        matchIter++)
+    {
+        pivotHighIters->push_back((*matchIter)->highestHighIter());
+    }
+
+    return pivotHighIters;
+
 }
 
 

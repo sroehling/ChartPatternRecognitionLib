@@ -20,6 +20,8 @@ public:
 
 	PatternMatchListPtr scanPatternMatches(const PeriodValSegmentPtr &chartVals) const;
 
+    PeriodValCltnIterListPtr scanPivotHighBeginIters(const PeriodValSegmentPtr &chartVals) const;
+
 	virtual ~PivotHighScanner();
 };
 

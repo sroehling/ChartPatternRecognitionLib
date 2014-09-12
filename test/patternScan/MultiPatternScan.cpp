@@ -17,6 +17,8 @@
 #include "DoubleBottomScanner.h"
 #include "CupScanner.h"
 #include "CupWithHandleScanner.h"
+#include "CupWithoutHandleScanner.h"
+#include "PivotHighScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -145,7 +147,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
     MultiPatternScanner multiCupWithHandleScanner(cupWithHandleScanner);
     PatternMatchListPtr cupWithHandleMatches = multiCupWithHandleScanner.scanUniquePatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,5);
+    verifyMatchList("MultiPatternScan_GMCR_Daily (vMatches)",vMatches,8);
 
     // TODO - There are a couple more cup-like patterns in this chart. So, it may
     // be necessary to further refine the cup pattern matching to catch these.
@@ -154,6 +156,21 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_GMCR_Daily )
     // Without all the constraints in place, this chart data was matching 2 cup with handles
     // which had handles which closed too deep w.r.t. the LHS cup.
     verifyMatchList("MultiPatternScan_GMCR_Daily (cups with handles)",cupWithHandleMatches,0);
+
+
+    // Scan for cups without handles. When starting on any day, there should be 3 matches.
+    // However, if only starting on pivot highs, there should be only 1 match.
+    PatternScannerPtr cupWithoutHandleScanner(new CupWithoutHandleScanner());
+    MultiPatternScanner multiCupWithoutHandleScanner(cupWithoutHandleScanner);
+    PatternMatchListPtr cupWithoutHandleMatches = multiCupWithoutHandleScanner.scanUniquePatternMatches(chartData);
+    verifyMatchList("MultiPatternScan_GMCR_Daily (cups with handles - start any day)",cupWithoutHandleMatches,3);
+
+    PeriodValCltnIterListPtr pivotHighBeginIters = PivotHighScanner().scanPivotHighBeginIters(chartData);
+    PatternMatchListPtr cupWithoutHandleMatchesStartingOnPivotHigh = multiCupWithoutHandleScanner.scanUniquePatternMatches(
+               chartData,pivotHighBeginIters);
+    verifyMatchList("MultiPatternScan_GMCR_Daily (cups with handles - start pivot high)",cupWithoutHandleMatchesStartingOnPivotHigh,1);
+
+
 
 }
 
