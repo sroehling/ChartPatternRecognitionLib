@@ -32,6 +32,9 @@ namespace testHelper {
 
 	void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &perSegment);
 
+    void genPivotLowInfo(const PatternMatchListPtr &pivotLows);
+    void genPivotHighInfo(const PatternMatchListPtr &pivotLows);
+
 	void verifyPatternMatch(const std::string &prefix,const boost::posix_time::ptime &expectedStart,
 			const boost::posix_time::ptime &expectedEnd, unsigned int expectedSegments,
 			const PatternMatchPtr &patternMatch);

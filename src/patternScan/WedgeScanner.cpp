@@ -10,9 +10,9 @@
 #include <WedgeScanner.h>
 #include "ChartSegment.h"
 
-const DoubleRange WedgeScanner::UPTREND_SLOPE_RANGE(0.10,100.0);
-const DoubleRange WedgeScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.10);
-const DoubleRange WedgeScanner::FLAT_SLOPE_RANGE(-0.10,0.10);
+const DoubleRange WedgeScanner::UPTREND_SLOPE_RANGE(0.020,100.0);
+const DoubleRange WedgeScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
+const DoubleRange WedgeScanner::FLAT_SLOPE_RANGE(-0.020,0.020);
 
 
 WedgeScanner::WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,

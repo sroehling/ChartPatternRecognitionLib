@@ -4,6 +4,8 @@
 #include "PatternShapeGenerator.h"
 #include "FallingWedgeScanner.h"
 #include "MultiPatternScanner.h"
+#include "PivotHighScanner.h"
+#include "PivotLowScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -23,7 +25,7 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_VZ_SymetricTriangle )
 
     genPatternMatchListInfo("Unique matches",*symetricTriangles);
 
-    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,1);
+    verifyMatchList("WedgeScannerEngine_VZ_SymetricTriangle: filtered matches",symetricTriangles,4);
 
 
     PatternMatchPtr wedgeMatch = symetricTriangles->back();
@@ -91,10 +93,24 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_Wedge )
 {
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GMCR_Daily_2014.csv");
 
+    PatternMatchListPtr pivotHighs = PivotHighScanner().scanPatternMatches(chartData);
+    PatternMatchListPtr pivotLows = PivotLowScanner().scanPatternMatches(chartData);
+
+    genPivotHighInfo(pivotHighs);
+    genPivotLowInfo(pivotLows);
+
+
     FallingWedgeScanner fallingWedgeScanner;
     PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("WedgeScannerEngine_GMCR_Wedge: falling wedges",fallingWedges,1);
+    verifyMatchList("WedgeScannerEngine_GMCR_Wedge: falling wedges",fallingWedges,0);
+
+    /*
+
+      TODO - This test case previously matched the following. The FallingWedgeScanner
+      is really matching DescendingTriangles and needs to be renamed to FallingTriangleScanner.
+      With this in place, the pattern dated below should not match as a falling triange, but
+      as a falling wedge (i.e., with both bottom and top trend-lines angled downward).
     verifyPatternMatch("WedgeScannerEngine_GMCR_Wedge falling wedge match",
             ptime(date(2014,5,13)),ptime(date(2014,6,6)),1,fallingWedges,0);
 
@@ -103,6 +119,8 @@ BOOST_AUTO_TEST_CASE( WedgeScannerEngine_GMCR_Wedge )
     PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
     BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
     PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
+*/
+
 
 }
 

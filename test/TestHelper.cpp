@@ -185,6 +185,33 @@ PatternMatchPtr synthesizePatternMatch(const boost::gregorian::date &startDate,
     return segmentToPatternMatch(perValSeg);
 }
 
+void genPivotLowInfo(const PatternMatchListPtr &pivotLows)
+{
+    for(PatternMatchList::iterator pivLowIter = pivotLows->begin();
+            pivLowIter != pivotLows->end(); pivLowIter++)
+    {
+        BOOST_TEST_MESSAGE("PivotLowScanner: pivot low:"
+                << " time=" << (*pivLowIter)->lowestLowVal().periodTime()
+                << " (psuedo) x val=" << (*pivLowIter)->lowestLowVal().pseudoXVal()
+                << ", lowest low=" << (*pivLowIter)->lowestLow());
+    }
+
+}
+
+void genPivotHighInfo(const PatternMatchListPtr &pivotHighs)
+{
+    // Each of the pivot highs serves as a potential starting point for the pattern match.
+    for(PatternMatchList::iterator pivHighIter = pivotHighs->begin();
+            pivHighIter != pivotHighs->end(); pivHighIter++)
+    {
+        BOOST_TEST_MESSAGE("PivotHighScanner: pivot high:"
+                << " time=" << (*pivHighIter)->highestHighVal().periodTime()
+                << " (psuedo) x val=" << (*pivHighIter)->highestHighVal().pseudoXVal()
+                << ", highest high=" << (*pivHighIter)->highestHigh());
+    }
+
+}
+
 
 
 } // namespace TestHelper

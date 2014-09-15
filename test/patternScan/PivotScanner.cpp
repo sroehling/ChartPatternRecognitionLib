@@ -8,37 +8,13 @@
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 #include "PatternMatchValidator.h"
+#include "PivotHighScanner.h"
+#include "PivotLowScanner.h"
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 using namespace testHelper;
 
-static void genPivotLowInfo(const PatternMatchListPtr &pivotLows)
-{
-    for(PatternMatchList::iterator pivLowIter = pivotLows->begin();
-            pivLowIter != pivotLows->end(); pivLowIter++)
-    {
-        BOOST_TEST_MESSAGE("PivotLowScanner: pivot low:"
-                << " time=" << (*pivLowIter)->lowestLowVal().periodTime()
-                << " (psuedo) x val=" << (*pivLowIter)->lowestLowVal().pseudoXVal()
-                << ", lowest low=" << (*pivLowIter)->lowestLow());
-    }
-
-}
-
-static void genPivotHighInfo(const PatternMatchListPtr &pivotHighs)
-{
-    // Each of the pivot highs serves as a potential starting point for the pattern match.
-    for(PatternMatchList::iterator pivHighIter = pivotHighs->begin();
-            pivHighIter != pivotHighs->end(); pivHighIter++)
-    {
-        BOOST_TEST_MESSAGE("PivotHighScanner: pivot high:"
-                << " time=" << (*pivHighIter)->highestHighVal().periodTime()
-                << " (psuedo) x val=" << (*pivHighIter)->highestHighVal().pseudoXVal()
-                << ", highest high=" << (*pivHighIter)->highestHigh());
-    }
-
-}
 
 BOOST_AUTO_TEST_CASE( PivotScanner_VZ_SymetricTriangle )
 {
