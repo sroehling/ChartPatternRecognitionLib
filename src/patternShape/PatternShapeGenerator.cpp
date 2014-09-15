@@ -1,7 +1,7 @@
 #include "PatternShapeGenerator.h"
 #include "VPatternMatch.h"
 #include "SymetricTrianglePatternMatch.h"
-#include "FlatBasePatternMatch.h"
+#include "RectanglePatternMatch.h"
 #include "CupPatternMatch.h"
 #include "CupWithHandlePatternMatch.h"
 #include "DoubleBottomPatternMatch.h"
@@ -152,7 +152,7 @@ void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
 
 }
 
-void PatternShapeGenerator::visitFlatBasePatternMatch(FlatBasePatternMatch &flatBaseMatch)
+void PatternShapeGenerator::visitRectanglePatternMatch(RectanglePatternMatch &flatBaseMatch)
 {
     // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
     LinearEquationPtr upperTrendLineEq = flatBaseMatch.upperTrendLine()->segmentEq();

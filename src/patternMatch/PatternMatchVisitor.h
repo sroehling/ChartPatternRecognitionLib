@@ -17,17 +17,20 @@ class WedgePatternMatch;
 class AscendingTrianglePatternMatch;
 class CupWithHandlePatternMatch;
 class CupWithoutHandlePatternMatch;
-class FlatBasePatternMatch;
+class RectanglePatternMatch;
 
 class PatternMatchVisitor {
 public:
 	PatternMatchVisitor();
 
     virtual void visitWedgePatternMatch(WedgePatternMatch&) {}
+
+    // Triangles
     virtual void visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &) {}
     virtual void visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &) {}
     virtual void visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &) {}
-    virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &) {}
+
+    virtual void visitRectanglePatternMatch(RectanglePatternMatch &) {}
 
     virtual void visitVPatternMatch(VPatternMatch &) {}
 

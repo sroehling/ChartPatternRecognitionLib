@@ -24,7 +24,7 @@ public:
     virtual void visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &);
     virtual void visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &);
     virtual void visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &);
-    virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &);
+    virtual void visitRectanglePatternMatch(RectanglePatternMatch &);
 
     virtual void visitVPatternMatch(VPatternMatch &);
 

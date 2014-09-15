@@ -1,22 +1,22 @@
-#include "FlatBaseScanner.h"
+#include "RectangleScanner.h"
 #include "TriangleScanner.h"
 #include "DoubleRange.h"
-#include "FlatBasePatternMatch.h"
+#include "RectanglePatternMatch.h"
 
 #define FLAT_BASE_SCANNER_DEFAULT_MIN_PERIODS 8
 #define FLAT_BASE_SCANNER_DEFAULT_MAX_PERIODS 200
 
-FlatBaseScanner::FlatBaseScanner(const UnsignedIntRange &validPeriodRange)
+RectangleScanner::RectangleScanner(const UnsignedIntRange &validPeriodRange)
     : validPeriodRange_(validPeriodRange)
 {
 }
 
-FlatBaseScanner::FlatBaseScanner()
+RectangleScanner::RectangleScanner()
     : validPeriodRange_(UnsignedIntRange(FLAT_BASE_SCANNER_DEFAULT_MIN_PERIODS,FLAT_BASE_SCANNER_DEFAULT_MAX_PERIODS))
 {
 }
 
-bool FlatBaseScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
+bool RectangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine) const
 {
     DoubleRange validSlopeRange = TriangleScanner::FLAT_SLOPE_RANGE;
@@ -35,24 +35,24 @@ bool FlatBaseScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
     return true;
 }
 
-unsigned int FlatBaseScanner::minPatternPeriods(const ChartSegmentPtr &,
+unsigned int RectangleScanner::minPatternPeriods(const ChartSegmentPtr &,
         const ChartSegmentPtr &) const
 {
     return validPeriodRange_.minVal();
 }
 
-unsigned int FlatBaseScanner::maxPatternPeriods(const ChartSegmentPtr &, const ChartSegmentPtr &) const
+unsigned int RectangleScanner::maxPatternPeriods(const ChartSegmentPtr &, const ChartSegmentPtr &) const
 {
     return validPeriodRange_.maxVal();
 }
 
-PatternMatchPtr FlatBaseScanner::findPatternMatch(
+PatternMatchPtr RectangleScanner::findPatternMatch(
         const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
     PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
     if (breakoutInfo)
     {
-        PatternMatchPtr patternMatch =  PatternMatchPtr(new FlatBasePatternMatch(wedgeMatchValidationInfo));
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new RectanglePatternMatch(wedgeMatchValidationInfo));
         patternMatch->breakoutInfo = breakoutInfo;
         return patternMatch;
     }

@@ -1,16 +1,16 @@
-#ifndef FLATBASESCANNER_H
-#define FLATBASESCANNER_H
+#ifndef RECTANGLESCANNER_H
+#define RECTANGLESCANNER_H
 
 #include "UnsignedIntRange.h"
 #include "WedgeScannerEngine.h"
 
-class FlatBaseScanner : public WedgeScannerEngine
+class RectangleScanner : public WedgeScannerEngine
 {
 private:
     UnsignedIntRange validPeriodRange_;
 public:
-    FlatBaseScanner(const UnsignedIntRange &validPeriodRange);
-    FlatBaseScanner();
+    RectangleScanner(const UnsignedIntRange &validPeriodRange);
+    RectangleScanner();
 
     virtual bool validTrendLines(const ChartSegmentPtr &upperTrendLine,
             const ChartSegmentPtr &lowerTrendLine) const;
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif // FLATBASESCANNER_H
+#endif // RECTANGLESCANNER_H

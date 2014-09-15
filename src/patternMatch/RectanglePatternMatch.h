@@ -1,24 +1,24 @@
-#ifndef FLATBASEPATTERNMATCH_H
-#define FLATBASEPATTERNMATCH_H
+#ifndef RECTANGLEPATTERNMATCH_H
+#define RECTANGLEPATTERNMATCH_H
 
 #include "PatternMatch.h"
 #include "WedgeMatchValidationInfo.h"
 
-class FlatBasePatternMatch : public PatternMatch
+class RectanglePatternMatch : public PatternMatch
 {
 private:
     ChartSegmentPtr upperTrendLine_;
     ChartSegmentPtr lowerTrendLine_;
 public:
-    FlatBasePatternMatch(const WedgeMatchValidationInfo &wedgeMatchInfo);
+    RectanglePatternMatch(const WedgeMatchValidationInfo &wedgeMatchInfo);
 
     virtual void acceptVisitor(PatternMatchVisitor &visitor);
 
     const ChartSegmentPtr &lowerTrendLine() const { return lowerTrendLine_; }
     const ChartSegmentPtr &upperTrendLine() const { return upperTrendLine_; }
 
-    virtual std::string matchType() const { return "Flat Base"; }
+    virtual std::string matchType() const { return "Rectangle"; }
 
 };
 
-#endif // FLATBASEPATTERNMATCH_H
+#endif // RECTANGLEPATTERNMATCH_H

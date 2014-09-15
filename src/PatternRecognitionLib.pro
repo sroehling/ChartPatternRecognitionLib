@@ -93,8 +93,6 @@ SOURCES += \
     patternMatch/CupWithHandlePatternMatch.cpp \
     patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.cpp \
     patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.cpp \
-    patternScan/FlatBaseScanner.cpp \
-    patternMatch/FlatBasePatternMatch.cpp \
     patternMatchValidator/PercentIntersectingPatternLineValidator.cpp \
     patternScan/CupWithoutHandleScanner.cpp \
     patternMatch/CupWithoutHandlePatternMatch.cpp \
@@ -107,7 +105,9 @@ SOURCES += \
     patternScan/DescendingTriangleScanner.cpp \
     patternMatch/SymetricTrianglePatternMatch.cpp \
     patternMatch/AscendingTrianglePatternMatch.cpp \
-    patternMatch/DescendingTrianglePatternMatch.cpp
+    patternMatch/DescendingTrianglePatternMatch.cpp \
+    patternScan/RectangleScanner.cpp \
+    patternMatch/RectanglePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -206,8 +206,6 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/CupWithHandlePatternMatch.h \
     patternMatchValidator/BreakoutAboveFirstHighValidatorFactory.h \
     patternMatchValidator/CloseWithinPercentOfDepthFromFirstHighValidator.h \
-    patternScan/FlatBaseScanner.h \
-    patternMatch/FlatBasePatternMatch.h \
     patternMatchValidator/PercentIntersectingPatternLineValidator.h \
     patternScan/CupWithoutHandleScanner.h \
     patternMatch/CupWithoutHandlePatternMatch.h \
@@ -220,7 +218,9 @@ HEADERS += patternrecognitionlib.h \
     patternScan/DescendingTriangleScanner.h \
     patternMatch/SymetricTrianglePatternMatch.h \
     patternMatch/AscendingTrianglePatternMatch.h \
-    patternMatch/DescendingTrianglePatternMatch.h
+    patternMatch/DescendingTrianglePatternMatch.h \
+    patternScan/RectangleScanner.h \
+    patternMatch/RectanglePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target
