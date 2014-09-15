@@ -1,16 +1,16 @@
-#ifndef WEDGEPATTERNMATCH_H
-#define WEDGEPATTERNMATCH_H
+#ifndef TRIANGLEPATTERNMATCH_H
+#define TRIANGLEPATTERNMATCH_H
 
 #include "PatternMatch.h"
 #include "ChartSegment.h"
 
-class WedgePatternMatch: public PatternMatch {
+class TrianglePatternMatch: public PatternMatch {
 private:
     ChartSegmentPtr upperTrendLine_;
     ChartSegmentPtr lowerTrendLine_;
 
 public:
-    WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+    TrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
             const ChartSegmentPtr &upperTrendLine,
             const ChartSegmentPtr &lowerTrendLine);
 
@@ -29,7 +29,7 @@ public:
 
     virtual void acceptVisitor(PatternMatchVisitor &visitor);
 
-    virtual ~WedgePatternMatch() {}
+    virtual ~TrianglePatternMatch() {}
 };
 
 

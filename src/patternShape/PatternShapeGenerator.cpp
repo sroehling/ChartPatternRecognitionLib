@@ -117,7 +117,7 @@ void PatternShapeGenerator::visitCupWithHandlePatternMatch(CupWithHandlePatternM
     // for both the initial base and handle.
 }
 
-void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedge)
+void PatternShapeGenerator::visitTrianglePatternMatch(TrianglePatternMatch &wedge)
 {
     // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
     LinearEquationPtr upperTrendLineEq = wedge.upperTrendLine()->segmentEq();
@@ -186,12 +186,12 @@ void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricTrianglePatte
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }
 
-void PatternShapeGenerator::visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &)
+void PatternShapeGenerator::visitDescendingTrianglePatternMatch(DescendingTrianglePatternMatch &)
 {
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }
 
-void PatternShapeGenerator::visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &)
+void PatternShapeGenerator::visitAscendingTrianglePatternMatch(AscendingTrianglePatternMatch &)
 {
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }

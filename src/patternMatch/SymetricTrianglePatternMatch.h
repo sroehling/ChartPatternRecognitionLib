@@ -11,9 +11,9 @@
 #include <PatternMatch.h>
 #include "ChartSegment.h"
 
-#include "WedgePatternMatch.h"
+#include "TrianglePatternMatch.h"
 
-class SymetricTrianglePatternMatch: public WedgePatternMatch {
+class SymetricTrianglePatternMatch: public TrianglePatternMatch {
 public:
     SymetricTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
             const ChartSegmentPtr &upperTrendLine,

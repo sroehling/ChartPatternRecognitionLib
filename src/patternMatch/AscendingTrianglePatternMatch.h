@@ -1,9 +1,9 @@
 #ifndef ASCENDINGTRIANGLEPATTERNMATCH_H
 #define ASCENDINGTRIANGLEPATTERNMATCH_H
 
-#include "WedgePatternMatch.h"
+#include "TrianglePatternMatch.h"
 
-class AscendingTrianglePatternMatch : public WedgePatternMatch
+class AscendingTrianglePatternMatch : public TrianglePatternMatch
 {
 public:
     AscendingTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,

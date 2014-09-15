@@ -4,13 +4,13 @@
 AscendingTrianglePatternMatch::AscendingTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
         const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine)
-    : WedgePatternMatch(wedgeSegment,upperTrendLine,lowerTrendLine)
+    : TrianglePatternMatch(wedgeSegment,upperTrendLine,lowerTrendLine)
 {
 
 }
 
 void AscendingTrianglePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
-    WedgePatternMatch::acceptVisitor(visitor);
-    visitor.visitRisingWedgePatternMatch(*this);
+    TrianglePatternMatch::acceptVisitor(visitor);
+    visitor.visitAscendingTrianglePatternMatch(*this);
 }

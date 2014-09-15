@@ -12,13 +12,13 @@
 SymetricTrianglePatternMatch::SymetricTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
         const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine)
-    : WedgePatternMatch(wedgeSegment,upperTrendLine,lowerTrendLine)
+    : TrianglePatternMatch(wedgeSegment,upperTrendLine,lowerTrendLine)
 {
 
 }
 
 void SymetricTrianglePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
-    WedgePatternMatch::acceptVisitor(visitor);
+    TrianglePatternMatch::acceptVisitor(visitor);
 	visitor.visitSymetricWedgePatternMatch(*this);
 }

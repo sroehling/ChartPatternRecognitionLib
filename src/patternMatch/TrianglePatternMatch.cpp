@@ -1,7 +1,7 @@
-#include "WedgePatternMatch.h"
+#include "TrianglePatternMatch.h"
 #include "PatternMatchVisitor.h"
 
-WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+TrianglePatternMatch::TrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
         const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine)
 : PatternMatch(wedgeSegment),
@@ -11,20 +11,20 @@ WedgePatternMatch::WedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
 
 }
 
-void WedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
+void TrianglePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
-    visitor.visitWedgePatternMatch(*this);
+    visitor.visitTrianglePatternMatch(*this);
 }
 
 
-PeriodValCltn::iterator WedgePatternMatch::patternBeginIter() const
+PeriodValCltn::iterator TrianglePatternMatch::patternBeginIter() const
 {
     // The pattern always beings with the pivot high which starts the first trend line.
     return upperTrendLine_->firstValIter();
 }
 
 
-XYCoord WedgePatternMatch::trendLineIntercept() const
+XYCoord TrianglePatternMatch::trendLineIntercept() const
 {
     XYCoord interceptCoord = lowerTrendLine_->segmentEq()->intercept(*(upperTrendLine_->segmentEq()));
 
@@ -36,7 +36,7 @@ XYCoord WedgePatternMatch::trendLineIntercept() const
 }
 
 
-PeriodValCltn::iterator WedgePatternMatch::interceptEndIter() const
+PeriodValCltn::iterator TrianglePatternMatch::interceptEndIter() const
 {
     XYCoord interceptCoord = trendLineIntercept();
 

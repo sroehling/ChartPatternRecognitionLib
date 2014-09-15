@@ -86,7 +86,6 @@ SOURCES += \
     patternScan/SingleSegmentPatternScannerEngine.cpp \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.cpp \
     patternMatchValidator/PatternSlopeWithinRange.cpp \
-    patternMatch/WedgePatternMatch.cpp \
     patternScan/WedgeMatchValidationInfo.cpp \
     patternMatch/PatternMatchBreakoutInfo.cpp \
     patternScan/CupWithHandleScanner.cpp \
@@ -107,7 +106,8 @@ SOURCES += \
     patternMatch/AscendingTrianglePatternMatch.cpp \
     patternMatch/DescendingTrianglePatternMatch.cpp \
     patternScan/RectangleScanner.cpp \
-    patternMatch/RectanglePatternMatch.cpp
+    patternMatch/RectanglePatternMatch.cpp \
+    patternMatch/TrianglePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -199,7 +199,6 @@ HEADERS += patternrecognitionlib.h \
     patternScan/SingleSegmentPatternScannerEngine.h \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.h \
     patternMatchValidator/PatternSlopeWithinRange.h \
-    patternMatch/WedgePatternMatch.h \
     patternScan/WedgeMatchValidationInfo.h \
     patternMatch/PatternMatchBreakoutInfo.h \
     patternScan/CupWithHandleScanner.h \
@@ -220,7 +219,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/AscendingTrianglePatternMatch.h \
     patternMatch/DescendingTrianglePatternMatch.h \
     patternScan/RectangleScanner.h \
-    patternMatch/RectanglePatternMatch.h
+    patternMatch/RectanglePatternMatch.h \
+    patternMatch/TrianglePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target
