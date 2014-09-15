@@ -1,6 +1,6 @@
 #include "PatternShapeGenerator.h"
 #include "VPatternMatch.h"
-#include "SymetricWedgePatternMatch.h"
+#include "SymetricTrianglePatternMatch.h"
 #include "FlatBasePatternMatch.h"
 #include "CupPatternMatch.h"
 #include "CupWithHandlePatternMatch.h"
@@ -181,17 +181,17 @@ void PatternShapeGenerator::visitFlatBasePatternMatch(FlatBasePatternMatch &flat
 
 }
 
-void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &)
+void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &)
 {
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }
 
-void PatternShapeGenerator::visitFallingWedgePatternMatch(FallingWedgePatternMatch &)
+void PatternShapeGenerator::visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &)
 {
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }
 
-void PatternShapeGenerator::visitRisingWedgePatternMatch(RisingWedgePatternMatch &)
+void PatternShapeGenerator::visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &)
 {
     // No-op: pattern shape generation handled by visitWedgePatternMatch
 }

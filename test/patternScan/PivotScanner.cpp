@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include "TestHelper.h"
-#include "SymetricWedgeScanner.h"
+#include "SymetricTriangleScanner.h"
 #include "MultiPatternScanner.h"
 #include "PivotHighScanner.h"
 #include "PivotLowScanner.h"

@@ -5,24 +5,24 @@
  *      Author: sroehling
  */
 
-#ifndef SYMETRICWEDGEPATTERNMATCH_H_
-#define SYMETRICWEDGEPATTERNMATCH_H_
+#ifndef SYMETRICTRIANGLEPATTERNMATCH_H_
+#define SYMETRICTRIANGLEPATTERNMATCH_H_
 
 #include <PatternMatch.h>
 #include "ChartSegment.h"
 
 #include "WedgePatternMatch.h"
 
-class SymetricWedgePatternMatch: public WedgePatternMatch {
+class SymetricTrianglePatternMatch: public WedgePatternMatch {
 public:
-    SymetricWedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+    SymetricTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
             const ChartSegmentPtr &upperTrendLine,
             const ChartSegmentPtr &lowerTrendLine);
 
 	virtual void acceptVisitor(PatternMatchVisitor &visitor);
 
-    virtual std::string matchType() const { return "Symetric Wedge"; }
+    virtual std::string matchType() const { return "Symetric Triangle"; }
 
 };
 
-#endif /* SYMETRICWEDGEPATTERNMATCH_H_ */
+#endif /* SYMETRICTRIANGLEPATTERNMATCH_H_ */

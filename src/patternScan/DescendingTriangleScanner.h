@@ -1,9 +1,9 @@
-#ifndef FALLINGWEDGESCANNER_H
-#define FALLINGWEDGESCANNER_H
+#ifndef DESCEDNDINGTRIANGLESCANNER_H
+#define DESCEDNDINGTRIANGLESCANNER_H
 
-#include "WedgeScanner.h"
+#include "TriangleScanner.h"
 
-class FallingWedgeScanner : public WedgeScanner
+class DescendingTriangleScanner : public TriangleScanner
 {
 protected:
 
@@ -12,7 +12,7 @@ protected:
     virtual PatternMatchPtr findPatternMatch(
             const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
 public:
-    FallingWedgeScanner();
+    DescendingTriangleScanner();
 };
 
 #endif // FALLINGWEDGESCANNER_H

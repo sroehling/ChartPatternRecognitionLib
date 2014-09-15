@@ -15,14 +15,14 @@ SOURCES += RunTests.cpp \
     patternScan/MultiPatternScan.cpp \
     patternScan/TrendLine.cpp \
     patternScan/VScanner.cpp \
-    patternScan/WedgeScannerEngine.cpp \
     quoteData/PeriodVal.cpp \
     quoteData/PeriodValSegment.cpp \
     TestHelper.cpp \
     TestPerValRange.cpp \
     patternShape/PatternShape.cpp \
     patternScan/PivotScanner.cpp \
-    patternScan/CupWithoutHandle.cpp
+    patternScan/CupWithoutHandle.cpp \
+    patternScan/TriangleScanners.cpp
 
 HEADERS += \
     TestHelper.h \

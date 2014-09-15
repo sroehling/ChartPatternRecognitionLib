@@ -34,7 +34,6 @@ SOURCES += \
     math/XYCoord.cpp \
     patternMatch/PatternMatch.cpp \
     patternMatch/PatternMatchVisitor.cpp \
-    patternMatch/SymetricWedgePatternMatch.cpp \
     patternMatchFilter/PatternMatchFilter.cpp \
     patternMatchFilter/PatternMatchFindPredicate.cpp \
     patternMatchFilter/PatternMatchSortFunctor.cpp \
@@ -65,10 +64,8 @@ SOURCES += \
     patternScan/PivotHighScanner.cpp \
     patternScan/PivotLowScanner.cpp \
     patternScan/ScannerHelper.cpp \
-    patternScan/SymetricWedgeScanner.cpp \
     patternScan/TrendLineScanner.cpp \
     patternScan/VScanner.cpp \
-    patternScan/WedgeScanner.cpp \
     patternScan/WedgeScannerEngine.cpp \
     quoteData/PeriodVal.cpp \
     quoteData/PeriodValSegment.cpp \
@@ -90,10 +87,6 @@ SOURCES += \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.cpp \
     patternMatchValidator/PatternSlopeWithinRange.cpp \
     patternMatch/WedgePatternMatch.cpp \
-    patternScan/FallingWedgeScanner.cpp \
-    patternMatch/FallingWedgePatternMatch.cpp \
-    patternScan/RisingWedgeScanner.cpp \
-    patternMatch/RisingWedgePatternMatch.cpp \
     patternScan/WedgeMatchValidationInfo.cpp \
     patternMatch/PatternMatchBreakoutInfo.cpp \
     patternScan/CupWithHandleScanner.cpp \
@@ -107,7 +100,14 @@ SOURCES += \
     patternMatch/CupWithoutHandlePatternMatch.cpp \
     patternMatchValidator/PrevPatternValueRatioValidatorFactory.cpp \
     patternMatchValidator/PrevPatternValueCompareValidatorFactory.cpp \
-    patternShape/PatternShapeCurveGenerator.cpp
+    patternShape/PatternShapeCurveGenerator.cpp \
+    patternScan/TriangleScanner.cpp \
+    patternScan/SymetricTriangleScanner.cpp \
+    patternScan/AscendingTriangleScanner.cpp \
+    patternScan/DescendingTriangleScanner.cpp \
+    patternMatch/SymetricTrianglePatternMatch.cpp \
+    patternMatch/AscendingTrianglePatternMatch.cpp \
+    patternMatch/DescendingTrianglePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -146,7 +146,6 @@ HEADERS += patternrecognitionlib.h \
     math/XYCoord.h \
     patternMatch/PatternMatch.h \
     patternMatch/PatternMatchVisitor.h \
-    patternMatch/SymetricWedgePatternMatch.h \
     patternMatchFilter/PatternMatchFilter.h \
     patternMatchFilter/PatternMatchFindPredicate.h \
     patternMatchFilter/PatternMatchSortFunctor.h \
@@ -178,10 +177,8 @@ HEADERS += patternrecognitionlib.h \
     patternScan/PivotHighScanner.h \
     patternScan/PivotLowScanner.h \
     patternScan/ScannerHelper.h \
-    patternScan/SymetricWedgeScanner.h \
     patternScan/TrendLineScanner.h \
     patternScan/VScanner.h \
-    patternScan/WedgeScanner.h \
     patternScan/WedgeScannerEngine.h \
     quoteData/PeriodVal.h \
     quoteData/PeriodValSegment.h \
@@ -203,10 +200,6 @@ HEADERS += patternrecognitionlib.h \
     patternMatchValidator/PatternSegmentValsCloseToLinearEq.h \
     patternMatchValidator/PatternSlopeWithinRange.h \
     patternMatch/WedgePatternMatch.h \
-    patternScan/FallingWedgeScanner.h \
-    patternMatch/FallingWedgePatternMatch.h \
-    patternScan/RisingWedgeScanner.h \
-    patternMatch/RisingWedgePatternMatch.h \
     patternScan/WedgeMatchValidationInfo.h \
     patternMatch/PatternMatchBreakoutInfo.h \
     patternScan/CupWithHandleScanner.h \
@@ -220,7 +213,14 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/CupWithoutHandlePatternMatch.h \
     patternMatchValidator/PrevPatternValueRatioValidatorFactory.h \
     patternMatchValidator/PrevPatternValueCompareValidatorFactory.h \
-    patternShape/PatternShapeCurveGenerator.h
+    patternShape/PatternShapeCurveGenerator.h \
+    patternScan/TriangleScanner.h \
+    patternScan/SymetricTriangleScanner.h \
+    patternScan/AscendingTriangleScanner.h \
+    patternScan/DescendingTriangleScanner.h \
+    patternMatch/SymetricTrianglePatternMatch.h \
+    patternMatch/AscendingTrianglePatternMatch.h \
+    patternMatch/DescendingTrianglePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

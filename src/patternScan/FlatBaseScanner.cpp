@@ -1,5 +1,5 @@
 #include "FlatBaseScanner.h"
-#include "WedgeScanner.h"
+#include "TriangleScanner.h"
 #include "DoubleRange.h"
 #include "FlatBasePatternMatch.h"
 
@@ -19,7 +19,7 @@ FlatBaseScanner::FlatBaseScanner()
 bool FlatBaseScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine) const
 {
-    DoubleRange validSlopeRange = WedgeScanner::FLAT_SLOPE_RANGE;
+    DoubleRange validSlopeRange = TriangleScanner::FLAT_SLOPE_RANGE;
 
     if(!(validSlopeRange.valueWithinRange(upperTrendLine->slope()) &&
             validSlopeRange.valueWithinRange(lowerTrendLine->slope())))

@@ -1,9 +1,9 @@
-#ifndef RISINGWEDGESCANNER_H
-#define RISINGWEDGESCANNER_H
+#ifndef ASCENDINGTRIANGLESCANNER_H
+#define ASCENDINGTRIANGLESCANNER_H
 
-#include "WedgeScanner.h"
+#include "TriangleScanner.h"
 
-class RisingWedgeScanner : public WedgeScanner
+class AscendingTriangleScanner : public TriangleScanner
 {
 protected:
 
@@ -11,7 +11,7 @@ protected:
     // currPerValIter.
     virtual PatternMatchPtr findPatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
 public:
-    RisingWedgeScanner();
+    AscendingTriangleScanner();
 };
 
-#endif // RISINGWEDGESCANNER_H
+#endif // ASCENDINGTRIANGLESCANNER_H

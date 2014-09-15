@@ -21,9 +21,9 @@ public:
     PatternShapePtr generateShape(PatternMatch &patternMatch);
 
     virtual void visitWedgePatternMatch(WedgePatternMatch&);
-    virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &);
-    virtual void visitFallingWedgePatternMatch(FallingWedgePatternMatch &);
-    virtual void visitRisingWedgePatternMatch(RisingWedgePatternMatch &);
+    virtual void visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &);
+    virtual void visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &);
+    virtual void visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &);
     virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &);
 
     virtual void visitVPatternMatch(VPatternMatch &);

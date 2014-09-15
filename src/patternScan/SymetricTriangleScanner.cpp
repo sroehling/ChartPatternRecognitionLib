@@ -5,24 +5,24 @@
  *      Author: sroehling
  */
 
-#include <SymetricWedgeScanner.h>
+#include <SymetricTriangleScanner.h>
 #include "TrendLineScanner.h"
 #include "ChartSegment.h"
-#include "SymetricWedgePatternMatch.h"
+#include "SymetricTrianglePatternMatch.h"
 
-SymetricWedgeScanner::SymetricWedgeScanner()
-    : WedgeScanner(WedgeScanner::DOWNTREND_SLOPE_RANGE,WedgeScanner::UPTREND_SLOPE_RANGE)
+SymetricTriangleScanner::SymetricTriangleScanner()
+    : TriangleScanner(TriangleScanner::DOWNTREND_SLOPE_RANGE,TriangleScanner::UPTREND_SLOPE_RANGE)
 {
 }
 
-PatternMatchPtr SymetricWedgeScanner::findPatternMatch(
+PatternMatchPtr SymetricTriangleScanner::findPatternMatch(
         const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
     PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
     if (breakoutInfo)
     {
         ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
-        PatternMatchPtr patternMatch = PatternMatchPtr(new SymetricWedgePatternMatch(wedgeSeg,
+        PatternMatchPtr patternMatch = PatternMatchPtr(new SymetricTrianglePatternMatch(wedgeSeg,
               wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
         patternMatch->breakoutInfo = breakoutInfo;
         return patternMatch;

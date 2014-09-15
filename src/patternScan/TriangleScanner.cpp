@@ -7,15 +7,15 @@
 
 #include <boost/log/trivial.hpp>
 
-#include <WedgeScanner.h>
+#include <TriangleScanner.h>
 #include "ChartSegment.h"
 
-const DoubleRange WedgeScanner::UPTREND_SLOPE_RANGE(0.020,100.0);
-const DoubleRange WedgeScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
-const DoubleRange WedgeScanner::FLAT_SLOPE_RANGE(-0.020,0.020);
+const DoubleRange TriangleScanner::UPTREND_SLOPE_RANGE(0.020,100.0);
+const DoubleRange TriangleScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
+const DoubleRange TriangleScanner::FLAT_SLOPE_RANGE(-0.020,0.020);
 
 
-WedgeScanner::WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
+TriangleScanner::TriangleScanner(const DoubleRange &upperTrendLineSlopeRange,
                            const DoubleRange &lowerTrendLineSlopeRange)
     : upperTrendLineSlopeRange_(upperTrendLineSlopeRange),
       lowerTrendLineSlopeRange_(lowerTrendLineSlopeRange)
@@ -24,7 +24,7 @@ WedgeScanner::WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
 	minPercValsBetweenTrendlines_ = 0.85;
 }
 
-double WedgeScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,const ChartSegmentPtr &lowerTrendLine) const
+double TriangleScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,const ChartSegmentPtr &lowerTrendLine) const
 {
 	double firstPivotHighXVal = upperTrendLine->firstPeriodVal().pseudoXVal();
 
@@ -36,7 +36,7 @@ double WedgeScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine
 	return numPeriodsToIntercept;
 }
 
-bool WedgeScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
+bool TriangleScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const
 {
     double numPerToIntercept = numPeriodsToIntercept(upperTrendLine,lowerTrendLine);
@@ -77,7 +77,7 @@ bool WedgeScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
     return true;
 }
 
-bool WedgeScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
+bool TriangleScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
                                                  const ChartSegmentPtr &lowerTrendLine) const
 {
     if(lowerTrendLine->segmentEq()->slope() == upperTrendLine->segmentEq()->slope())
@@ -109,7 +109,7 @@ bool WedgeScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &up
 }
 
 
-bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
+bool TriangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
 
     // For starters, the trend-line slope for the upper and lower trendlines must be within
@@ -147,7 +147,7 @@ bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const 
 
 }
 
-unsigned int WedgeScanner::minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
+unsigned int TriangleScanner::minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 		const ChartSegmentPtr &lowerTrendLine) const
 {
 	assert(validTrendLines(upperTrendLine,lowerTrendLine));
@@ -158,7 +158,7 @@ unsigned int WedgeScanner::minPatternPeriods(const ChartSegmentPtr &upperTrendLi
 	return minPeriods;
 }
 
-unsigned int WedgeScanner::maxPatternPeriods(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
+unsigned int TriangleScanner::maxPatternPeriods(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
 	assert(validTrendLines(upperTrendLine,lowerTrendLine));
 
@@ -171,6 +171,6 @@ unsigned int WedgeScanner::maxPatternPeriods(const ChartSegmentPtr &upperTrendLi
 
 
 
-WedgeScanner::~WedgeScanner() {
+TriangleScanner::~TriangleScanner() {
 }
 

@@ -8,13 +8,13 @@
 #ifndef PATTERNMATCHVISITOR_H_
 #define PATTERNMATCHVISITOR_H_
 
-class SymetricWedgePatternMatch;
-class FallingWedgePatternMatch;
+class SymetricTrianglePatternMatch;
+class DescendingTrianglePatternMatch;
 class VPatternMatch;
 class DoubleBottomPatternMatch;
 class CupPatternMatch;
 class WedgePatternMatch;
-class RisingWedgePatternMatch;
+class AscendingTrianglePatternMatch;
 class CupWithHandlePatternMatch;
 class CupWithoutHandlePatternMatch;
 class FlatBasePatternMatch;
@@ -24,9 +24,9 @@ public:
 	PatternMatchVisitor();
 
     virtual void visitWedgePatternMatch(WedgePatternMatch&) {}
-    virtual void visitSymetricWedgePatternMatch(SymetricWedgePatternMatch &) {}
-    virtual void visitFallingWedgePatternMatch(FallingWedgePatternMatch &) {}
-    virtual void visitRisingWedgePatternMatch(RisingWedgePatternMatch &) {}
+    virtual void visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &) {}
+    virtual void visitFallingWedgePatternMatch(DescendingTrianglePatternMatch &) {}
+    virtual void visitRisingWedgePatternMatch(AscendingTrianglePatternMatch &) {}
     virtual void visitFlatBasePatternMatch(FlatBasePatternMatch &) {}
 
     virtual void visitVPatternMatch(VPatternMatch &) {}

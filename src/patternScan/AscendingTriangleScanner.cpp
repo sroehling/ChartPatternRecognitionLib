@@ -1,18 +1,18 @@
-#include "RisingWedgeScanner.h"
-#include "RisingWedgePatternMatch.h"
+#include "AscendingTriangleScanner.h"
+#include "AscendingTrianglePatternMatch.h"
 
-RisingWedgeScanner::RisingWedgeScanner()
-    : WedgeScanner(WedgeScanner::FLAT_SLOPE_RANGE,WedgeScanner::UPTREND_SLOPE_RANGE)
+AscendingTriangleScanner::AscendingTriangleScanner()
+    : TriangleScanner(TriangleScanner::FLAT_SLOPE_RANGE,TriangleScanner::UPTREND_SLOPE_RANGE)
 {
 }
 
-PatternMatchPtr RisingWedgeScanner::findPatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+PatternMatchPtr AscendingTriangleScanner::findPatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
     PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
     if (breakoutInfo)
     {
         ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
-        PatternMatchPtr patternMatch =  PatternMatchPtr(new RisingWedgePatternMatch(wedgeSeg,
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new AscendingTrianglePatternMatch(wedgeSeg,
                     wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
         patternMatch->breakoutInfo = breakoutInfo;
         return patternMatch;

@@ -1,17 +1,17 @@
 /*
- * WedgeScanner.h
+ * TriangleScanner.h
  *
  *  Created on: Aug 1, 2014
  *      Author: sroehling
  */
 
-#ifndef WEDGESCANNER_H_
-#define WEDGESCANNER_H_
+#ifndef TRIANGLESCANNER_H_
+#define TRIANGLESCANNER_H_
 
 #include <WedgeScannerEngine.h>
 #include "DoubleRange.h"
 
-class WedgeScanner: public WedgeScannerEngine {
+class TriangleScanner: public WedgeScannerEngine {
 private:
 	// Threshold for how far a PeriodVal must be to the intercept between
 	// the lower and upper trend line for a break-out to be valid.
@@ -55,14 +55,14 @@ protected:
 	// The findPatternMatch method is still virtual
 
 public:
-    WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
+    TriangleScanner(const DoubleRange &upperTrendLineSlopeRange,
                  const DoubleRange &lowerTrendLineSlopeRange);
 
     static const DoubleRange DOWNTREND_SLOPE_RANGE;
     static const DoubleRange UPTREND_SLOPE_RANGE;
     static const DoubleRange FLAT_SLOPE_RANGE;
 
-	virtual ~WedgeScanner();
+    virtual ~TriangleScanner();
 };
 
-#endif /* WEDGESCANNER_H_ */
+#endif /* TRIANGLESCANNER_H_ */

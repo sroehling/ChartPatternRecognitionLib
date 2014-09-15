@@ -1,7 +1,7 @@
-#include "RisingWedgePatternMatch.h"
+#include "AscendingTrianglePatternMatch.h"
 #include "PatternMatchVisitor.h"
 
-RisingWedgePatternMatch::RisingWedgePatternMatch(const ChartSegmentPtr &wedgeSegment,
+AscendingTrianglePatternMatch::AscendingTrianglePatternMatch(const ChartSegmentPtr &wedgeSegment,
         const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine)
     : WedgePatternMatch(wedgeSegment,upperTrendLine,lowerTrendLine)
@@ -9,7 +9,7 @@ RisingWedgePatternMatch::RisingWedgePatternMatch(const ChartSegmentPtr &wedgeSeg
 
 }
 
-void RisingWedgePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
+void AscendingTrianglePatternMatch::acceptVisitor(PatternMatchVisitor &visitor)
 {
     WedgePatternMatch::acceptVisitor(visitor);
     visitor.visitRisingWedgePatternMatch(*this);
