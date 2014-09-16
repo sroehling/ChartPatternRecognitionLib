@@ -13,6 +13,7 @@
 #include "ChartSegment.h"
 #include "PatternScanner.h"
 #include "WedgeMatchValidationInfo.h"
+#include "DoubleRange.h"
 
 // TODO Refactor to change the name of this class to UpperLowerTrendlinePatternScanner (or similar),
 // since derived classes can scan anything from a flat base to a rising/falling/symetric wedge.
@@ -41,6 +42,15 @@ protected:
                            const ChartSegmentPtr &lowerTrendLine) const;
     bool first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
 
+
+    // The number of periods from the first pivot high to the intercept
+    // of the upper and lower trend line. Only works when the upper and
+    // lower trend line in fact have an intercept.
+    double numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,
+            const ChartSegmentPtr &lowerTrendLine) const;
+
+    bool interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
+                        const ChartSegmentPtr &lowerTrendLine) const;
 
     // Validate the current pattern formation is valid (e.g., not too many
     // values outside the trend lines, not too heavily weighted to the top
@@ -71,6 +81,12 @@ public:
     static const double RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD;
     static const double MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
     static const double MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH;
+
+
+    static const DoubleRange DOWNTREND_SLOPE_RANGE;
+    static const DoubleRange UPTREND_SLOPE_RANGE;
+    static const DoubleRange FLAT_SLOPE_RANGE;
+
 
     // TODO - Provide an interface which allows passing in a pre-configured list of pivot highs
     // and lows. When there are multiple calls to the wedge scanners, this would facilitate

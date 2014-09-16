@@ -3,6 +3,7 @@
 #include "SymetricTrianglePatternMatch.h"
 #include "RectanglePatternMatch.h"
 #include "CupPatternMatch.h"
+#include "WedgePatternMatch.h"
 #include "CupWithHandlePatternMatch.h"
 #include "DoubleBottomPatternMatch.h"
 #include "CupWithoutHandlePatternMatch.h"
@@ -152,14 +153,13 @@ void PatternShapeGenerator::visitTrianglePatternMatch(TrianglePatternMatch &wedg
 
 }
 
-void PatternShapeGenerator::visitRectanglePatternMatch(RectanglePatternMatch &flatBaseMatch)
+void PatternShapeGenerator::generateWedgeShape(const PatternMatch &match,
+                                               const LinearEquationPtr &upperTrendLineEq,
+                                               const LinearEquationPtr &lowerTrendLineEq)
 {
     // The starting point for drawing the upper and lower trendlines is the first value in upper trend line.
-    LinearEquationPtr upperTrendLineEq = flatBaseMatch.upperTrendLine()->segmentEq();
-    LinearEquationPtr lowerTrendLineEq = flatBaseMatch.lowerTrendLine()->segmentEq();
-
-    PeriodValCltn::iterator beginTrendlineShape = flatBaseMatch.beginMatchIter();
-    PeriodValCltn::iterator endTrendlineShape = flatBaseMatch.endMatchIter();
+    PeriodValCltn::iterator beginTrendlineShape = match.beginMatchIter();
+    PeriodValCltn::iterator endTrendlineShape = match.endMatchIter();
 
     PatternShapePointVectorPtr upperShapePoints(new PatternShapePointVector());
     PatternShapePointVectorPtr lowerShapePoints(new PatternShapePointVector());
@@ -179,6 +179,16 @@ void PatternShapeGenerator::visitRectanglePatternMatch(RectanglePatternMatch &fl
     patternShape_->addLineShape(upperShapePoints);
     patternShape_->addLineShape(lowerShapePoints);
 
+}
+
+void PatternShapeGenerator::visitRectanglePatternMatch(RectanglePatternMatch &flatBaseMatch)
+{
+    generateWedgeShape(flatBaseMatch,flatBaseMatch.upperTrendLine()->segmentEq(),flatBaseMatch.lowerTrendLine()->segmentEq());
+}
+
+void PatternShapeGenerator::visitWedgePatternMatch(WedgePatternMatch &wedgeMatch)
+{
+    generateWedgeShape(wedgeMatch,wedgeMatch.upperTrendLine()->segmentEq(),wedgeMatch.lowerTrendLine()->segmentEq());
 }
 
 void PatternShapeGenerator::visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &)

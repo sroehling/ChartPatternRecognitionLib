@@ -20,6 +20,11 @@
 #include "WedgeMatchValidationInfo.h"
 #include "PatternMatchFilter.h"
 
+const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.020,100.0);
+const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
+const DoubleRange WedgeScannerEngine::FLAT_SLOPE_RANGE(-0.020,0.020);
+
+
 const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
 const double WedgeScannerEngine::RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHOLD = 3.0;
 const double WedgeScannerEngine::MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.20;
@@ -43,6 +48,50 @@ bool WedgeScannerEngine::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine
     return false;
 
 }
+
+bool WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
+                                                 const ChartSegmentPtr &lowerTrendLine) const
+{
+    if(lowerTrendLine->segmentEq()->slope() == upperTrendLine->segmentEq()->slope())
+    {
+        // never intercept
+        return false;
+    }
+
+    // Check if the intercept occurs after the both the 1st and 2nd pivots "pseudo X" value
+    // (i.e., the unique numerical value assigned for each PeriodVal's date). Otherwise,
+    // we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
+    // at some point, but not here), or the trend-lines intersect before the 2nd pivots have occured.
+
+    XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
+    if(trendlineIntercept.x() > upperTrendLine->lastPeriodVal().pseudoXVal() &&
+       trendlineIntercept.x() > lowerTrendLine->lastPeriodVal().pseudoXVal())
+    {
+        BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot: "
+                << " trend line intercept: " << trendlineIntercept.x()
+                << " first pivot high: " << upperTrendLine->firstPeriodVal().pseudoXVal()
+                << " last upper pivot high: " << upperTrendLine->lastPeriodVal().pseudoXVal()
+                << " last upper pivot low:: " << lowerTrendLine->lastPeriodVal().pseudoXVal() << std::endl;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+double WedgeScannerEngine::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,const ChartSegmentPtr &lowerTrendLine) const
+{
+    double firstPivotHighXVal = upperTrendLine->firstPeriodVal().pseudoXVal();
+
+    XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
+    double numPeriodsToIntercept = trendlineIntercept.x() - firstPivotHighXVal;
+
+    assert(numPeriodsToIntercept > 0.0);
+
+    return numPeriodsToIntercept;
+}
+
 
 bool WedgeScannerEngine::first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {

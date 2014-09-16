@@ -11,7 +11,7 @@
 #include "SymetricTrianglePatternMatch.h"
 
 SymetricTriangleScanner::SymetricTriangleScanner()
-    : TriangleScanner(TriangleScanner::DOWNTREND_SLOPE_RANGE,TriangleScanner::UPTREND_SLOPE_RANGE)
+    : TriangleScanner(WedgeScannerEngine::DOWNTREND_SLOPE_RANGE,WedgeScannerEngine::UPTREND_SLOPE_RANGE)
 {
 }
 

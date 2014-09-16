@@ -18,6 +18,7 @@ class AscendingTrianglePatternMatch;
 class CupWithHandlePatternMatch;
 class CupWithoutHandlePatternMatch;
 class RectanglePatternMatch;
+class WedgePatternMatch;
 
 class PatternMatchVisitor {
 public:
@@ -29,6 +30,8 @@ public:
     virtual void visitSymetricWedgePatternMatch(SymetricTrianglePatternMatch &) {}
     virtual void visitDescendingTrianglePatternMatch(DescendingTrianglePatternMatch &) {}
     virtual void visitAscendingTrianglePatternMatch(AscendingTrianglePatternMatch &) {}
+
+    virtual void visitWedgePatternMatch(WedgePatternMatch &) {}
 
     virtual void visitRectanglePatternMatch(RectanglePatternMatch &) {}
 

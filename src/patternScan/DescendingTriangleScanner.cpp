@@ -2,7 +2,7 @@
 #include "DescendingTrianglePatternMatch.h"
 
 DescendingTriangleScanner::DescendingTriangleScanner()
-    : TriangleScanner(TriangleScanner::DOWNTREND_SLOPE_RANGE,TriangleScanner::FLAT_SLOPE_RANGE)
+    : TriangleScanner(WedgeScannerEngine::DOWNTREND_SLOPE_RANGE,WedgeScannerEngine::FLAT_SLOPE_RANGE)
 {
 }
 

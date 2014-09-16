@@ -107,7 +107,13 @@ SOURCES += \
     patternMatch/DescendingTrianglePatternMatch.cpp \
     patternScan/RectangleScanner.cpp \
     patternMatch/RectanglePatternMatch.cpp \
-    patternMatch/TrianglePatternMatch.cpp
+    patternMatch/TrianglePatternMatch.cpp \
+    patternScan/WedgeScanner.cpp \
+    patternScan/RisingWedgeScanner.cpp \
+    patternMatch/WedgePatternMatch.cpp \
+    patternMatch/RisingWedgePatternMatch.cpp \
+    patternScan/FallingWedgeScanner.cpp \
+    patternMatch/FallingWedgePatternMatch.cpp
 
 INCLUDEPATH += segmentContraint\
     chartSegment\
@@ -220,7 +226,13 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/DescendingTrianglePatternMatch.h \
     patternScan/RectangleScanner.h \
     patternMatch/RectanglePatternMatch.h \
-    patternMatch/TrianglePatternMatch.h
+    patternMatch/TrianglePatternMatch.h \
+    patternScan/WedgeScanner.h \
+    patternScan/RisingWedgeScanner.h \
+    patternMatch/WedgePatternMatch.h \
+    patternMatch/RisingWedgePatternMatch.h \
+    patternScan/FallingWedgeScanner.h \
+    patternMatch/FallingWedgePatternMatch.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

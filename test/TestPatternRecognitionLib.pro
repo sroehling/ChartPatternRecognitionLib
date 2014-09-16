@@ -22,7 +22,8 @@ SOURCES += RunTests.cpp \
     patternShape/PatternShape.cpp \
     patternScan/PivotScanner.cpp \
     patternScan/CupWithoutHandle.cpp \
-    patternScan/TriangleScanners.cpp
+    patternScan/TriangleScanners.cpp \
+    patternScan/WedgeScanners.cpp
 
 HEADERS += \
     TestHelper.h \

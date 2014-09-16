@@ -10,9 +10,6 @@
 #include <TriangleScanner.h>
 #include "ChartSegment.h"
 
-const DoubleRange TriangleScanner::UPTREND_SLOPE_RANGE(0.020,100.0);
-const DoubleRange TriangleScanner::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
-const DoubleRange TriangleScanner::FLAT_SLOPE_RANGE(-0.020,0.020);
 
 
 TriangleScanner::TriangleScanner(const DoubleRange &upperTrendLineSlopeRange,
@@ -24,17 +21,6 @@ TriangleScanner::TriangleScanner(const DoubleRange &upperTrendLineSlopeRange,
 	minPercValsBetweenTrendlines_ = 0.85;
 }
 
-double TriangleScanner::numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,const ChartSegmentPtr &lowerTrendLine) const
-{
-	double firstPivotHighXVal = upperTrendLine->firstPeriodVal().pseudoXVal();
-
-	XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
-	double numPeriodsToIntercept = trendlineIntercept.x() - firstPivotHighXVal;
-
-    assert(numPeriodsToIntercept > 0.0);
-
-	return numPeriodsToIntercept;
-}
 
 bool TriangleScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const
@@ -77,36 +63,6 @@ bool TriangleScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
     return true;
 }
 
-bool TriangleScanner::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
-                                                 const ChartSegmentPtr &lowerTrendLine) const
-{
-    if(lowerTrendLine->segmentEq()->slope() == upperTrendLine->segmentEq()->slope())
-    {
-        // never intercept
-        return false;
-    }
-
-    // Check if the intercept occurs after the both the 1st and 2nd pivots "pseudo X" value
-    // (i.e., the unique numerical value assigned for each PeriodVal's date). Otherwise,
-    // we're dealing with a "megaphone" type pattern (which may also be a valid pattern match
-    // at some point, but not here), or the trend-lines intersect before the 2nd pivots have occured.
-
-    XYCoord trendlineIntercept = lowerTrendLine->segmentEq()->intercept(*(upperTrendLine->segmentEq()));
-    if(trendlineIntercept.x() > upperTrendLine->lastPeriodVal().pseudoXVal() &&
-       trendlineIntercept.x() > lowerTrendLine->lastPeriodVal().pseudoXVal())
-    {
-        BOOST_LOG_TRIVIAL(debug) << "WedgeScanner::interceptAfter2ndLowerAndUpperPivot: "
-                << " trend line intercept: " << trendlineIntercept.x()
-                << " first pivot high: " << upperTrendLine->firstPeriodVal().pseudoXVal()
-                << " last upper pivot high: " << upperTrendLine->lastPeriodVal().pseudoXVal()
-                << " last upper pivot low:: " << lowerTrendLine->lastPeriodVal().pseudoXVal() << std::endl;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 
 bool TriangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const

@@ -25,11 +25,6 @@ private:
 	double minPercValsBetweenTrendlines_;
 
 
-	// The number of periods from the first pivot high to the intercept
-	// of the upper and lower trend line. Only works when the upper and
-	// lower trend line in fact have an intercept.
-	double numPeriodsToIntercept(const ChartSegmentPtr &upperTrendLine,
-			const ChartSegmentPtr &lowerTrendLine) const;
 
     DoubleRange upperTrendLineSlopeRange_;
     DoubleRange lowerTrendLineSlopeRange_;
@@ -38,8 +33,6 @@ protected:
 
     bool pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
                            const ChartSegmentPtr &lowerTrendLine) const;
-    bool interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
-                        const ChartSegmentPtr &lowerTrendLine) const;
 
 
 	virtual bool validTrendLines(const ChartSegmentPtr &upperTrendLine,
@@ -57,10 +50,6 @@ protected:
 public:
     TriangleScanner(const DoubleRange &upperTrendLineSlopeRange,
                  const DoubleRange &lowerTrendLineSlopeRange);
-
-    static const DoubleRange DOWNTREND_SLOPE_RANGE;
-    static const DoubleRange UPTREND_SLOPE_RANGE;
-    static const DoubleRange FLAT_SLOPE_RANGE;
 
     virtual ~TriangleScanner();
 };

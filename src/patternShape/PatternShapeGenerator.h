@@ -15,6 +15,9 @@ private:
 
     PatternMatchBreakoutInfoPtr breakoutInfo_;
 
+    void generateWedgeShape(const PatternMatch &match,
+          const LinearEquationPtr &upperTrendlineEq, const LinearEquationPtr &lowerTrendLineEq);
+
 public:
     PatternShapeGenerator();
 
@@ -28,6 +31,8 @@ public:
     virtual void visitAscendingTrianglePatternMatch(AscendingTrianglePatternMatch &);
 
     virtual void visitRectanglePatternMatch(RectanglePatternMatch &);
+
+    virtual void visitWedgePatternMatch(WedgePatternMatch &);
 
     virtual void visitVPatternMatch(VPatternMatch &);
 
