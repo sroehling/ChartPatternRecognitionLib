@@ -36,17 +36,27 @@ WedgeScannerEngine::WedgeScannerEngine() {
 bool WedgeScannerEngine::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const
 {
-    // The first and last value of the upper and lower trend lines are the pivot highs and lows used to
-    // define the trend lines. With this in mind, we don't want to consider a pattern valid if
-    // there is not a pivot low before the second pivot high; in other words, the pattern is not
-    // considered valid (i.e., well-balanced) if both the pivot lows occur after both the pivot highs.
-    if(lowerTrendLine->firstPeriodVal().periodTime() < upperTrendLine->lastPeriodVal().periodTime())
+
+    boost::posix_time::ptime firstPivotHigh = upperTrendLine->firstPeriodVal().periodTime();
+    boost::posix_time::ptime secondPivotHigh = upperTrendLine->lastPeriodVal().periodTime();
+
+    boost::posix_time::ptime firstPivotLow = lowerTrendLine->firstPeriodVal().periodTime();
+    boost::posix_time::ptime secondPivotLow = lowerTrendLine->lastPeriodVal().periodTime();
+
+    if((firstPivotHigh < firstPivotLow) && (firstPivotLow < secondPivotHigh) && (secondPivotHigh < secondPivotLow))
     {
+        // firstPivotHigh < firstPivotLow < secondPivotHigh < secondPivotLow
         return true;
+     }
+    else if((firstPivotLow < firstPivotHigh) && (firstPivotHigh < secondPivotLow) && (secondPivotLow < secondPivotHigh))
+    {
+        // firstPivotLow < firstPivotHigh < secondPivotLow < secondPivotHigh
+        return true;
+     }
+    else
+    {
+        return false;
     }
-
-    return false;
-
 }
 
 bool WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentPtr &upperTrendLine,
