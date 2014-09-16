@@ -33,6 +33,12 @@ public:
 	bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
 };
 
+class ReverseSortPatternMatchByEndTimeThenLength : public PatternMatchSortFunctor {
+public:
+    bool operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const;
+};
+
+
 // Sort first by start date, then by end date, from earliest to latest dates for each
 class SortPatternMatchByStartAndEndDate  : public PatternMatchSortFunctor {
 public:

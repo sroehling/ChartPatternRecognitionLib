@@ -33,6 +33,34 @@ bool SortPatternMatchByEndTimeThenLength::operator() (const PatternMatchPtr &fir
 
 }
 
+bool ReverseSortPatternMatchByEndTimeThenLength::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
+{
+    // First sort by endTime()
+    if(first->endTime() > second->endTime())
+    {
+        return true;
+    }
+    else if(first->endTime() == second->endTime())
+    {
+        // Then sort by startTime(), earliest startTime() first
+        if(first->startTime() < second->startTime())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
+
+
 bool SortPatternMatchByStartAndEndDate::operator() (const PatternMatchPtr &first, const PatternMatchPtr &second) const
 {
 
