@@ -3,7 +3,7 @@
 #include "DoubleRange.h"
 #include "RectanglePatternMatch.h"
 
-#define FLAT_BASE_SCANNER_DEFAULT_MIN_PERIODS 8
+#define FLAT_BASE_SCANNER_DEFAULT_MIN_PERIODS 15
 #define FLAT_BASE_SCANNER_DEFAULT_MAX_PERIODS 200
 
 RectangleScanner::RectangleScanner(const UnsignedIntRange &validPeriodRange)

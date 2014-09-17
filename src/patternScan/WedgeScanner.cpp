@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <math.h>
 
-#define WEDGE_SCANNER_DEFAULT_MIN_PERIODS 8
+#define WEDGE_SCANNER_DEFAULT_MIN_PERIODS 15
 #define WEDGE_SCANNER_DEFAULT_MAX_PERIODS 200
 #define WEDGE_SCANNER_MAX_NUM_PERIODS_TO_INTERCEPT 100.0
 
@@ -24,11 +24,19 @@ bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const 
         return false;
     }
 
+
     // For wedges, both the upper and lower trend-lines will be facing upward or downward, respectively.
     // However, they still must "point toward each other" (i.e., not a megaphone type shape), such
     // that they intercept somewhere after the 2 pivot points.
     if(!interceptAfter2ndLowerAndUpperPivot(upperTrendLine,lowerTrendLine))
     {
+        return false;
+    }
+
+    unsigned int interceptPers = floor(WedgeScannerEngine::numPeriodsToIntercept(upperTrendLine,lowerTrendLine));
+    if(interceptPers < validPeriodRange_.minVal())
+    {
+        // Lines can't converge before the minimum pattern length
         return false;
     }
 

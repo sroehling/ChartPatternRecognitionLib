@@ -20,9 +20,9 @@
 #include "WedgeMatchValidationInfo.h"
 #include "PatternMatchFilter.h"
 
-const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.020,100.0);
-const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-100.0,-0.020);
-const DoubleRange WedgeScannerEngine::FLAT_SLOPE_RANGE(-0.020,0.020);
+const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.010,100.0);
+const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-100.0,-0.010);
+const DoubleRange WedgeScannerEngine::FLAT_SLOPE_RANGE(-0.010,0.010);
 
 
 const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
