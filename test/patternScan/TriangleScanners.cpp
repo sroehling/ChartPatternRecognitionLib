@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_VZ_SymetricTriangle )
 
     genPatternMatchListInfo("Unique matches",*symetricTriangles);
 
-    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: filtered matches",symetricTriangles,4);
+    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: filtered matches",symetricTriangles,2);
 
 
     PatternMatchPtr triangleMatch = symetricTriangles->back();
@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_VZ_SymetricTriangle )
     PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
 
     verifyPatternMatch("TriangleScanners_SynthesizedPattern match",
-            ptime(date(2013,7,29)),ptime(date(2013,10,7)),1,symetricTriangles,0);
+            ptime(date(2013,7,29)),ptime(date(2014,5,5)),1,symetricTriangles,0);
 
 
 }
@@ -105,23 +105,6 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_GMCR_Wedge )
 
     verifyMatchList("TriangleScanners_GMCR_Wedge: descending triangles",descTriangles,0);
 
-    /*
-
-      TODO - This test case previously matched the following. The FallingWedgeScanner
-      is really matching DescendingTriangles and needs to be renamed to FallingTriangleScanner.
-      With this in place, the pattern dated below should not match as a falling triange, but
-      as a falling wedge (i.e., with both bottom and top trend-lines angled downward).
-    verifyPatternMatch("TriangleScanners_GMCR_Wedge falling wedge match",
-            ptime(date(2014,5,13)),ptime(date(2014,6,6)),1,fallingWedges,0);
-
-    PatternMatchPtr wedgeMatch = fallingWedges->back();
-    PatternShapeGenerator shapeGen;
-    PatternShapePtr patternShape = shapeGen.generateShape(*wedgeMatch);
-    BOOST_CHECK_EQUAL(patternShape->numLineShapes(),2);
-    PatternShapePointVectorVectorPtr lineShapes = patternShape->lineShapes();
-*/
-
-
 }
 
 BOOST_AUTO_TEST_CASE( TriangleScanners_CMG_Wedge )
@@ -130,7 +113,11 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_CMG_Wedge )
 
     PatternScannerPtr symetricScanner(new SymetricTriangleScanner());
     PatternMatchListPtr symetricTriangles = symetricScanner->scanPatternMatches(chartData);
-    verifyMatchList("TriangleScanners_GMCR_Wedge: symetric triangles",symetricTriangles,4);
+
+    // Should match 0 patterns, since the patterns have the pivots spaced out quite a bit, leaving
+    // a lot of "empty space" in the middle. However, the test WedgeScanners_CMG_Falling_Wedge
+    // finds a well-formed falling wedge.
+    verifyMatchList("TriangleScanners_GMCR_Wedge: symetric triangles",symetricTriangles,0);
 
 }
 

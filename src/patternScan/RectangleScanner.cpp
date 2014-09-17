@@ -21,6 +21,11 @@ bool RectangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
 {
     DoubleRange validSlopeRange = TriangleScanner::FLAT_SLOPE_RANGE;
 
+    if(!WedgeScannerEngine::validTrendLines(upperTrendLine,lowerTrendLine))
+    {
+        return false;
+    }
+
     if(!(validSlopeRange.valueWithinRange(upperTrendLine->slope()) &&
             validSlopeRange.valueWithinRange(lowerTrendLine->slope())))
     {

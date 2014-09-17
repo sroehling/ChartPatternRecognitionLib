@@ -68,6 +68,12 @@ bool TriangleScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
 bool TriangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
 
+    if(!WedgeScannerEngine::validTrendLines(upperTrendLine,lowerTrendLine))
+    {
+        return false;
+    }
+
+
     // For starters, the trend-line slope for the upper and lower trendlines must be within
     // the acceptable ranges.
     if(!(upperTrendLineSlopeRange_.valueWithinRange(upperTrendLine->slope()) &&

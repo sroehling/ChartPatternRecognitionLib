@@ -20,15 +20,13 @@ BOOST_AUTO_TEST_CASE( WedgeScanners_GMCR_Falling_Wedge )
 }
 
 
-BOOST_AUTO_TEST_CASE( WedgeScanners_CMG_Rising_Wedge )
+BOOST_AUTO_TEST_CASE( WedgeScanners_CMG_Falling_Wedge )
 {
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/CMG_Daily.csv");
 
-    RisingWedgeScanner risingWedgeScanner;
-    PatternMatchListPtr risingWedges = risingWedgeScanner.scanPatternMatches(chartData);
+    FallingWedgeScanner fallingWedgeScanner;
+    PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
 
-    // TODO - 2 of the 3 rising wedge matches look more like ascending triangles. Further
-    // adjustment to the acceptable angles for flat versus up/down trend lines need to be made.
-    verifyMatchList("WedgeScanners_CMG_Rising_Wedge: rising wedges",risingWedges,3);
+    verifyMatchList("WedgeScanners_CMG_Falling_Wedge: falling wedges",fallingWedges,1);
 
 }

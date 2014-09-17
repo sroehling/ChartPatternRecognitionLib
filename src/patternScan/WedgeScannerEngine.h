@@ -29,7 +29,7 @@ protected:
 	// return true only if the trend lines have an intercept
 	// after the first pivot high.
 	virtual bool validTrendLines(const ChartSegmentPtr &upperTrendLine,
-			const ChartSegmentPtr &lowerTrendLine) const = 0;
+            const ChartSegmentPtr &lowerTrendLine) const;
 
 	// Calculate the minimum and maximum number of periods for a valid
 	// pattern match.
@@ -38,6 +38,7 @@ protected:
 	virtual unsigned int minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine) const = 0;
 
+    bool pivotsSpacedOut(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
     bool pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                            const ChartSegmentPtr &lowerTrendLine) const;
     bool first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;

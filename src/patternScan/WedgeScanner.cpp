@@ -18,6 +18,12 @@ WedgeScanner::WedgeScanner(const DoubleRange &upperTrendLineSlopeRange,
 
 bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const ChartSegmentPtr &lowerTrendLine) const
 {
+    if(!WedgeScannerEngine::validTrendLines(upperTrendLine,lowerTrendLine))
+    {
+        return false;
+    }
+
+
     if(!(upperTrendLineSlopeRange_.valueWithinRange(upperTrendLine->slope()) &&
             lowerTrendLineSlopeRange_.valueWithinRange(lowerTrendLine->slope())))
     {

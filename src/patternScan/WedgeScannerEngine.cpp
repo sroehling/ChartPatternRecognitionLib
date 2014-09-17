@@ -19,6 +19,7 @@
 #include "UnsignedIntRange.h"
 #include "WedgeMatchValidationInfo.h"
 #include "PatternMatchFilter.h"
+#include <vector>
 
 const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.010,100.0);
 const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-100.0,-0.010);
@@ -30,8 +31,105 @@ const double WedgeScannerEngine::RATIO_ABOVE_VS_BELOW_TRENDLINE_MIDPOINT_THRESHO
 const double WedgeScannerEngine::MAX_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.20;
 const double WedgeScannerEngine::MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF_CURR_DEPTH = 0.30;
 
+// Minimum and maximum time (as percentage of total time between pivots) between
+// pivots of the same type (either pivot high or pivot low). What we're looking
+// for is for a reasonable amount of space between pivot highs and low, such that
+// the pattern looks like it is oscillating.
+#define WEDGE_SCANNER_ENGINE_MIN_SAME_TYPE_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME 0.10
+#define WEDGE_SCANNER_ENGINE_MAX_SAME_TYPE_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME 0.65
+
+// Minimum and maximum time (as percentage of total time between pivots) it can take
+// to go between "interleaved" pivots; e.g. from a pivot high to a pivot low, or vice-versa.
+// The minimum value can be quite small, since the price can rise or fall between
+// quite quickly between pivot lows and highs. However, we don't want to match patterns
+// where it takes longer than 50% of the time to oscillate between the top and bottom.
+#define WEDGE_SCANNER_ENGINE_MIN_INTERLEAVED_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME 0.01
+#define WEDGE_SCANNER_ENGINE_MAX_INTERLEAVED_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME 0.50
+
+using namespace boost::posix_time;
+
 WedgeScannerEngine::WedgeScannerEngine() {
 }
+
+static double timeDifferenceMsec(const ptime &startTime, const ptime &endTime)
+{
+    assert(endTime>startTime);
+    time_duration startEndPivotTimeDiff = endTime - startTime;
+    double startEndPivotTimeDiffMsec = (double)startEndPivotTimeDiff.total_milliseconds();
+    assert(startEndPivotTimeDiffMsec > 0.0);
+    return startEndPivotTimeDiffMsec;
+}
+
+static bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
+                              const ptime &startTime, const ptime &endTime)
+{
+    if(validTimeDifferences.valueWithinRange(timeDifferenceMsec(startTime,endTime)))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
+bool WedgeScannerEngine::pivotsSpacedOut(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
+{
+    ChartSegmentPtr upperTrendLine = wedgeMatchValidationInfo.upperTrendLine();
+    ChartSegmentPtr lowerTrendLine = wedgeMatchValidationInfo.lowerTrendLine();
+
+    std::vector<ptime> pivots;
+    pivots.push_back(upperTrendLine->firstPeriodVal().periodTime());
+    pivots.push_back(upperTrendLine->lastPeriodVal().periodTime());
+    pivots.push_back(lowerTrendLine->firstPeriodVal().periodTime());
+    pivots.push_back(lowerTrendLine->lastPeriodVal().periodTime());
+    std::sort(pivots.begin(),pivots.end());
+
+    ptime beginTime = wedgeMatchValidationInfo.patternBeginIter()->periodTime();
+    ptime endTime = wedgeMatchValidationInfo.currPerValIter()->periodTime();
+    double totalMsec = timeDifferenceMsec(beginTime,endTime);
+
+    // Expecting the pivots to be interleaved (i.e., pivot high, then pivot low,
+    // then pivot high, then pivot low), validate that pivots of the same type
+    // (pivot high or pivot low respectively) are reasonably spaced.
+    DoubleRange validSameTypePivotDistances(
+                totalMsec * WEDGE_SCANNER_ENGINE_MIN_SAME_TYPE_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME,
+                totalMsec * WEDGE_SCANNER_ENGINE_MAX_SAME_TYPE_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME);
+    if(!timeDifferenceValid(validSameTypePivotDistances,pivots[0],pivots[2]))
+    {
+        return false;
+    }
+    if(!timeDifferenceValid(validSameTypePivotDistances,pivots[1],pivots[3]))
+    {
+        return false;
+    }
+
+
+    // Also check that the time between interleaved pivots (i.e., time going from a pivot high
+    // to pivot low is valid). We want the pattern to "fill in" the space between the 2 trend-lines
+    // (i.e., have a "coiling" type shape), rather than riding along the top or bottom of the pattern
+    // for too long.
+    DoubleRange validInterleavedPivotDistances(
+            totalMsec * WEDGE_SCANNER_ENGINE_MIN_INTERLEAVED_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME,
+            totalMsec * WEDGE_SCANNER_ENGINE_MAX_INTERLEAVED_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME);
+    if(!timeDifferenceValid(validInterleavedPivotDistances,pivots[0],pivots[1]))
+    {
+        return false;
+    }
+    if(!timeDifferenceValid(validInterleavedPivotDistances,pivots[1],pivots[2]))
+    {
+        return false;
+    }
+    if(!timeDifferenceValid(validInterleavedPivotDistances,pivots[2],pivots[3]))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
 
 bool WedgeScannerEngine::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const
@@ -290,6 +388,11 @@ bool WedgeScannerEngine::ratioAboveVsBelowMidpointWithinThreshold(
 
 bool WedgeScannerEngine::validWedgePatternMatch(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
+    if(!pivotsSpacedOut(wedgeMatchValidationInfo))
+    {
+        return false;
+    }
+
     if(!percClosingValsOutsideTrendLinesWithinThreshold(wedgeMatchValidationInfo))
     {
         return false;
@@ -325,6 +428,19 @@ bool WedgeScannerEngine::validWedgePatternMatch(const WedgeMatchValidationInfo &
     return true;
 }
 
+bool WedgeScannerEngine::validTrendLines(const ChartSegmentPtr &upperTrendLine,
+        const ChartSegmentPtr &lowerTrendLine) const
+{
+    // Verify the pivots are interleaved *before* checking if they are spaced out.
+    // pivotsSpacedOut() only functions if the pivots to not overlap (i.e., none of them
+    // occur on the same date).
+    if(!pivotsInterleaved(upperTrendLine,lowerTrendLine))
+    {
+        return false;
+    }
+
+    return true;
+}
 
 
 PatternMatchListPtr WedgeScannerEngine::scanPatternMatches(const PeriodValSegmentPtr &chartVals) const
