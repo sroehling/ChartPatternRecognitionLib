@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_CASE( WedgeScanners_GMCR_Falling_Wedge )
     FallingWedgeScanner fallingWedgeScanner;
     PatternMatchListPtr fallingWedges = fallingWedgeScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("WedgeScanners_GMCR_Falling_Wedge: falling wedges",fallingWedges,3);
+    verifyMatchList("WedgeScanners_GMCR_Falling_Wedge: falling wedges",fallingWedges,2);
 
 }
 
