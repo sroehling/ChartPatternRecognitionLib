@@ -19,3 +19,5 @@ PatternRecognitionLibTest
 src/build-*
 test/build-*
 build-*
+
+*.pro.user.*
