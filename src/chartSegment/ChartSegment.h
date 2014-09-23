@@ -43,6 +43,14 @@ public:
 
 	double slope() const;
 
+    // Relative to the first value, how much the price is changing per year?
+    // This CAGR serves as a "normalized" slope calculation which can be useful for trendline
+    // slope validation. These values are per calendar year, not trading days/weeks.
+    // Using %change in price is considered a more normalized slope calculation,
+    // since the regular slope() function returns a slope dependent upon whatever the
+    // price range is for the given data set.
+    double percentChangePerYear() const;
+
 	friend std::ostream& operator<<(std::ostream& os, const ChartSegment& chartSeg);
 
 

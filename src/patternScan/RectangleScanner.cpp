@@ -26,11 +26,14 @@ bool RectangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
         return false;
     }
 
-    if(!(validSlopeRange.valueWithinRange(upperTrendLine->slope()) &&
-            validSlopeRange.valueWithinRange(lowerTrendLine->slope())))
+    // For starters, the trend-line slope for the upper and lower trendlines must be within
+    // the acceptable ranges.
+    if(!(WedgeScannerEngine::validTrendlinePercChangePerYear(validSlopeRange,upperTrendLine) &&
+            WedgeScannerEngine::validTrendlinePercChangePerYear(validSlopeRange,lowerTrendLine)))
     {
         return false;
     }
+
 
     if(!pivotsInterleaved(upperTrendLine,lowerTrendLine))
     {

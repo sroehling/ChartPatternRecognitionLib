@@ -23,13 +23,13 @@ bool WedgeScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, const 
         return false;
     }
 
-
-    if(!(upperTrendLineSlopeRange_.valueWithinRange(upperTrendLine->slope()) &&
-            lowerTrendLineSlopeRange_.valueWithinRange(lowerTrendLine->slope())))
+    // For starters, the trend-line slope for the upper and lower trendlines must be within
+    // the acceptable ranges.
+    if(!(WedgeScannerEngine::validTrendlinePercChangePerYear(upperTrendLineSlopeRange_,upperTrendLine) &&
+            WedgeScannerEngine::validTrendlinePercChangePerYear(lowerTrendLineSlopeRange_,lowerTrendLine)))
     {
         return false;
     }
-
 
     // For wedges, both the upper and lower trend-lines will be facing upward or downward, respectively.
     // However, they still must "point toward each other" (i.e., not a megaphone type shape), such

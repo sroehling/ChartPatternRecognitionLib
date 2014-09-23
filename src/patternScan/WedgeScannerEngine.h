@@ -38,6 +38,8 @@ protected:
 	virtual unsigned int minPatternPeriods(const ChartSegmentPtr &upperTrendLine,
 			const ChartSegmentPtr &lowerTrendLine) const = 0;
 
+    bool validTrendlinePercChangePerYear(const DoubleRange &validPercRange,
+                                      const ChartSegmentPtr &trendLine) const;
     bool pivotsSpacedOut(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const;
     bool pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                            const ChartSegmentPtr &lowerTrendLine) const;

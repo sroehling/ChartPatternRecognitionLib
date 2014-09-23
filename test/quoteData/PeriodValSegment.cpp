@@ -77,6 +77,10 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
 
+    BOOST_TEST_MESSAGE( "Average days per period (test seg): " << testSeg->averageDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(testSeg->averageDaysPerPeriod(),30.0,0.1);
+
+
     BOOST_CHECK(testSeg->lowestLow() == 1.0);
     BOOST_CHECK(testSeg->highestHigh() == 5.0);
 
@@ -94,6 +98,59 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 
     BOOST_CHECK_CLOSE( cupSeg->pointsAtPercentOfDepthBelowHigh(25.0),41.297,0.01);
 
+    // In cupData, thera are 15 weekly periods, starting on 7/22/2013 and ending on 10/28/2013.
+    // From the start of the first period, to the start of the last period is 98 days.
+    // So, each period (on average) spans 98 / (15-1) = 7 days.
+    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << cupSeg->segmentSpanMonths() );
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << cupSeg->averageDaysPerPeriod() );
+    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << cupSeg->averagePeriodsPerYear() );
+    BOOST_CHECK_CLOSE(cupSeg->averageDaysPerPeriod(),7.0,0.01);
+    BOOST_CHECK_CLOSE(cupSeg->segmentSpanMonths(),3.219,0.1);
+    BOOST_CHECK_CLOSE(cupSeg->averagePeriodsPerYear(),52.17,0.1);
+
+    XYCoord startLine(cupSeg->firstVal().pseudoXVal(),100.0);
+    XYCoord endLine(cupSeg->lastVal().pseudoXVal(),114.0);
+    LinearEquation testSegmentSlope(startLine,endLine);
+    BOOST_TEST_MESSAGE( "Per Period % Change across segment " << cupSeg->perPeriodPercChangeAlongLine(testSegmentSlope) );
+    BOOST_TEST_MESSAGE( "CAGR of line across segment " << cupSeg->percChangePerYearAlongLine(testSegmentSlope) );
+    BOOST_CHECK_CLOSE(cupSeg->percChangePerYearAlongLine(testSegmentSlope),0.629,0.1);
+
+}
+
+BOOST_AUTO_TEST_CASE( PeriodValSegment_CAGR )
+{
+    PeriodValCltnPtr yearlyData = PeriodVal::readFromFile("./patternScan/AAPL_Daily_2013.csv");
+    PeriodValSegmentPtr yearSeg(new PeriodValSegment(yearlyData));
+
+    // In cupData, thera are 15 weekly periods, starting on 7/22/2013 and ending on 10/28/2013.
+    // From the start of the first period, to the start of the last period is 98 days.
+    // So, each period (on average) spans 98 / (15-1) = 7 days.
+    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << yearSeg->segmentSpanMonths() );
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << yearSeg->averageDaysPerPeriod() );
+    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << yearSeg->averagePeriodsPerYear() );
+    BOOST_CHECK_CLOSE(yearSeg->averageDaysPerPeriod(),1.44622,0.01);
+    BOOST_CHECK_CLOSE(yearSeg->segmentSpanMonths(),11.92,0.1);
+    BOOST_CHECK_CLOSE(yearSeg->averagePeriodsPerYear(),252.556,0.1);
+
+    XYCoord startLine(yearSeg->firstVal().pseudoXVal(),100.0);
+    XYCoord endLine(yearSeg->lastVal().pseudoXVal(),120.0);
+    LinearEquation testSegmentSlope(startLine,endLine);
+    BOOST_TEST_MESSAGE( "Per Period % Change across segment " << yearSeg->perPeriodPercChangeAlongLine(testSegmentSlope) );
+    BOOST_TEST_MESSAGE( "CAGR of line across segment " << yearSeg->percChangePerYearAlongLine(testSegmentSlope) );
+    BOOST_CHECK_CLOSE(yearSeg->percChangePerYearAlongLine(testSegmentSlope),0.201357,0.1);
+    BOOST_CHECK_CLOSE(yearSeg->perPeriodPercChangeAlongLine(testSegmentSlope),0.000726645,0.1);
+
+
+    // TODO - The results below almost certainly look correct, but it may make sense to do some further validation.
+    // In particular, why is the negative percentage value slighly different than the positive one? However,
+    // since these calculations are used for setting constraints on lines, the results look close enough.
+    XYCoord startLineNeg(yearSeg->firstVal().pseudoXVal(),100.0);
+    XYCoord endLineNeg(yearSeg->lastVal().pseudoXVal(),80.0);
+    LinearEquation testSegmentSlopeNeg(startLineNeg,endLineNeg);
+    BOOST_TEST_MESSAGE( "Per Period % Change across segment (negative slope) " << yearSeg->perPeriodPercChangeAlongLine(testSegmentSlopeNeg) );
+    BOOST_TEST_MESSAGE( "CAGR of line across segment (negative slope) " << yearSeg->percChangePerYearAlongLine(testSegmentSlopeNeg) );
+    BOOST_CHECK_CLOSE(yearSeg->percChangePerYearAlongLine(testSegmentSlopeNeg),-0.201105,0.1);
+    BOOST_CHECK_CLOSE(yearSeg->perPeriodPercChangeAlongLine(testSegmentSlopeNeg),-0.000888623,0.1);
 
 }
 

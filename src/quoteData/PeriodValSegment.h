@@ -62,7 +62,27 @@ public:
 
 	const PeriodValCltn::iterator &segBegin() const { return segBegin_; }
 	const PeriodValCltn::iterator &segEnd() const { return segEnd_; }
-	const PeriodValCltnPtr perValCltn() const { return perValCltn_; }
+
+    // Whereby a PeriodValSegment is a "fly-weight" pointer to the same
+    // underlying PeriodValCltn, perValCltn is the entire data set
+    // for which this PeriodValSegment is a subset.
+    const PeriodValCltnPtr perValCltn() const { return perValCltn_; }
+
+    // Based upon the time difference across all the periods in the underlying
+    // PeriodValCltn (for all the data, not just this (sub)segment), calculate average
+    // milliseconds calendar timespan per period. This is helpful for trend-line and
+    // other constraints calculations based upon a slope over time rather than periods.
+    double averageMsecPerPeriod() const;
+    double averageDaysPerPeriod() const;
+    double averageMonthsPerPeriod() const;
+    double segmentSpanMonths() const;
+    double averagePeriodsPerYear() const;
+
+    // Percent change from the start to the end of the segment along the given line.
+    // This is used for constraint calculations involving percent changes (e.g.,
+    // for wedges and triangles).
+    double perPeriodPercChangeAlongLine(const LinearEquation &line) const;
+    double percChangePerYearAlongLine(const LinearEquation &line) const;
 
 	PeriodValSegmentPair split(unsigned int splitPos) const;
 	PeriodValSegmentPtr spliceRange(unsigned int startPos, unsigned int endPos) const;

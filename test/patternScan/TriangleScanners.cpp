@@ -15,6 +15,9 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_VZ_SymetricTriangle )
 {
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/VZ_SymTriangle_Weekly_2013_2014.csv");
 
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(chartData->averageDaysPerPeriod(),6.9863,0.1);
+
     PatternScannerPtr scanner(new SymetricTriangleScanner());
     PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
 
@@ -26,6 +29,8 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_VZ_SymetricTriangle )
     genPatternMatchListInfo("Unique matches",*symetricTriangles);
 
     verifyMatchList("TriangleScanners_VZ_SymetricTriangle: filtered matches",symetricTriangles,2);
+
+
 
 
     PatternMatchPtr triangleMatch = symetricTriangles->back();
@@ -48,6 +53,9 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_GLD_Wedges )
     // The chart data from 2013 to 2014 contains a number of potential wedge matches.
 
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GLD_Weekly_2013_2014.csv");
+
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(chartData->averageDaysPerPeriod(),6.945,0.01);
 
     PatternScannerPtr scanner(new SymetricTriangleScanner());
     PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);

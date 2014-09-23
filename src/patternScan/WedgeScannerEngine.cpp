@@ -17,13 +17,19 @@
 #include "PivotHighScanner.h"
 #include "Math.h"
 #include "UnsignedIntRange.h"
+#include "TimeHelper.h"
+#include "MathHelper.h"
 #include "WedgeMatchValidationInfo.h"
 #include "PatternMatchFilter.h"
 #include <vector>
 
-const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.010,100.0);
-const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-100.0,-0.010);
-const DoubleRange WedgeScannerEngine::FLAT_SLOPE_RANGE(-0.010,0.010);
+// The slope calculations for wedge and triangle scanning use the validTrendlineSlopePercPerMonth()
+// and these slope ranges. So, since the "valid slope" calculations are based upon calendar days
+// and % change in values, the slope ranges below are also calculated based upon calendar days.
+// In particular, the constants below assume approximately 21 trading days per month (252/12)
+const DoubleRange WedgeScannerEngine::UPTREND_SLOPE_RANGE(0.02,100.00);
+const DoubleRange WedgeScannerEngine::DOWNTREND_SLOPE_RANGE(-.99999,-0.02);
+const DoubleRange WedgeScannerEngine::FLAT_SLOPE_RANGE(-0.02,0.02);
 
 
 const double WedgeScannerEngine::PERC_CLOSING_VALS_INSIDE_TRENDLINES_THRESHOLD = 0.20;
@@ -47,31 +53,9 @@ const double WedgeScannerEngine::MAX_HIGH_LOW_DISTANCE_OUTSIDE_TRENDLINE_PERC_OF
 #define WEDGE_SCANNER_ENGINE_MAX_INTERLEAVED_PIVOT_DISTANCE_TIME_PERC_ALL_PATTERN_TIME 0.50
 
 using namespace boost::posix_time;
+using namespace timeHelper;
 
 WedgeScannerEngine::WedgeScannerEngine() {
-}
-
-static double timeDifferenceMsec(const ptime &startTime, const ptime &endTime)
-{
-    assert(endTime>startTime);
-    time_duration startEndPivotTimeDiff = endTime - startTime;
-    double startEndPivotTimeDiffMsec = (double)startEndPivotTimeDiff.total_milliseconds();
-    assert(startEndPivotTimeDiffMsec > 0.0);
-    return startEndPivotTimeDiffMsec;
-}
-
-static bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
-                              const ptime &startTime, const ptime &endTime)
-{
-    if(validTimeDifferences.valueWithinRange(timeDifferenceMsec(startTime,endTime)))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-
 }
 
 bool WedgeScannerEngine::pivotsSpacedOut(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
@@ -130,6 +114,14 @@ bool WedgeScannerEngine::pivotsSpacedOut(const WedgeMatchValidationInfo &wedgeMa
 }
 
 
+bool WedgeScannerEngine::validTrendlinePercChangePerYear(const DoubleRange &validPercRange,
+                                                       const ChartSegmentPtr &trendLine) const
+{
+    double percChangePerYear = trendLine->percentChangePerYear();
+
+    return validPercRange.valueWithinRange(percChangePerYear);
+
+}
 
 bool WedgeScannerEngine::pivotsInterleaved(const ChartSegmentPtr &upperTrendLine,
                        const ChartSegmentPtr &lowerTrendLine) const

@@ -73,9 +73,14 @@ bool TriangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine, con
         return false;
     }
 
-
     // For starters, the trend-line slope for the upper and lower trendlines must be within
     // the acceptable ranges.
+    if(!(WedgeScannerEngine::validTrendlinePercChangePerYear(upperTrendLineSlopeRange_,upperTrendLine) &&
+            WedgeScannerEngine::validTrendlinePercChangePerYear(lowerTrendLineSlopeRange_,lowerTrendLine)))
+    {
+        return false;
+    }
+
     if(!(upperTrendLineSlopeRange_.valueWithinRange(upperTrendLine->slope()) &&
             lowerTrendLineSlopeRange_.valueWithinRange(lowerTrendLine->slope())))
     {

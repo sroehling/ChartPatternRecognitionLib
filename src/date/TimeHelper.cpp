@@ -8,11 +8,11 @@
 #include "TimeHelper.h"
 #include <sstream>
 
-TimeHelper::TimeHelper() {
-}
+using namespace boost::posix_time;
 
+namespace timeHelper {
 
-std::string TimeHelper::formatDate(const boost::posix_time::ptime &dateToFormat)
+std::string formatDate(const boost::posix_time::ptime &dateToFormat)
 {
   using namespace boost::posix_time;
 
@@ -26,6 +26,29 @@ std::string TimeHelper::formatDate(const boost::posix_time::ptime &dateToFormat)
   return oss.str();
 }
 
-TimeHelper::~TimeHelper() {
+double timeDifferenceMsec(const ptime &startTime, const ptime &endTime)
+{
+    assert(endTime>startTime);
+    time_duration startEndPivotTimeDiff = endTime - startTime;
+    double startEndPivotTimeDiffMsec = (double)startEndPivotTimeDiff.total_milliseconds();
+    assert(startEndPivotTimeDiffMsec > 0.0);
+    return startEndPivotTimeDiffMsec;
+}
+
+bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
+                              const ptime &startTime, const ptime &endTime)
+{
+    if(validTimeDifferences.valueWithinRange(timeDifferenceMsec(startTime,endTime)))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
+
 }
 

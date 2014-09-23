@@ -21,14 +21,16 @@
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
+using namespace timeHelper;
+
 namespace testHelper
 {
 
 void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patternMatch)
 {
 	BOOST_TEST_MESSAGE(prefix << ": pattern match: "
-			<< "start = " << TimeHelper::formatDate(patternMatch->firstValue().periodTime())
-			<< ", end = " << TimeHelper::formatDate(patternMatch->lastValue().periodTime())
+            << "start = " << formatDate(patternMatch->firstValue().periodTime())
+            << ", end = " << formatDate(patternMatch->lastValue().periodTime())
 			<< ", num segments = " << patternMatch->numSegments()
 			<< ", depth % = " << patternMatch->depthPercent()
 		<< ", last close = " << patternMatch->lastValue().close());
@@ -59,7 +61,7 @@ void genPeriodValSegmentInfo(const std::string prefix, const PeriodValSegment &p
 	for(PeriodValCltn::iterator segIter = perSegment.segBegin(); segIter != perSegment.segEnd(); segIter++)
 	{
 		BOOST_TEST_MESSAGE(prefix << ": period val: "
-				<< TimeHelper::formatDate((*segIter).periodTime())
+                << formatDate((*segIter).periodTime())
 				<< ",c=" << (*segIter).close()
 		);
 	}

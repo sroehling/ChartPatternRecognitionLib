@@ -9,15 +9,16 @@
 #define TIMEHELPER_H_
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include "DoubleRange.h"
 
+namespace timeHelper {
 
-class TimeHelper {
-public:
-	TimeHelper();
+std::string formatDate(const boost::posix_time::ptime &dateToFormat);
 
-	static std::string formatDate(const boost::posix_time::ptime &dateToFormat);
+double timeDifferenceMsec(const boost::posix_time::ptime &startTime, const boost::posix_time::ptime &endTime);
+bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
+                              const boost::posix_time::ptime &startTime, const boost::posix_time::ptime &endTime);
 
-	virtual ~TimeHelper();
-};
+} // namespace timeHelper
 
 #endif /* DATEHELPER_H_ */

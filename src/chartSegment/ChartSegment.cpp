@@ -9,6 +9,7 @@
 #include "XYCoord.h"
 #include "MathHelper.h"
 #include "PeriodValueRef.h"
+#include "TimeHelper.h"
 
 ChartSegment::ChartSegment(const PeriodValSegmentPtr &segmentVals)
 : segmentVals_(segmentVals)
@@ -68,6 +69,20 @@ double ChartSegment::slope() const
 {
 	return segmentEq_->slope();
 }
+
+double ChartSegment::percentChangePerYear() const
+{
+    // Any given start and end time could be "skewed" because of
+    // gaps on weekends, etc. However, using the entire underlying
+    // period data values, an average amount of time for each period
+    // can be calculated. We use this average time as a basis for
+    // calculating the slope in terms of days.
+    double percChangePerYear =
+          this->perValSegment()->percChangePerYearAlongLine(*segmentEq());
+
+    return percChangePerYear;
+}
+
 
 
 double ChartSegment::maxRelPercentVsLinearEq() const

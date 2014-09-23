@@ -9,6 +9,7 @@
 #include <iterator>
 #include "MathHelper.h"
 #include "PeriodValueRef.h"
+#include "TimeHelper.h"
 
 
 PeriodValCltn::iterator PeriodValSegment::highestValIter(const PeriodValueRef &perValRef,
@@ -218,6 +219,95 @@ unsigned int PeriodValSegment::numVals() const
 {
 	return endPos_- startPos_;
 }
+
+double PeriodValSegment::averageMsecPerPeriod() const
+{
+    using namespace boost::posix_time;
+    using namespace timeHelper;
+
+    PeriodValCltnPtr overallPerValCltn = this->perValCltn();
+    assert(overallPerValCltn->size() > 1);
+
+    ptime endPeriodDataTime = overallPerValCltn->back().periodTime();
+    ptime startPeriodDataTime = overallPerValCltn->front().periodTime();
+    assert(endPeriodDataTime > startPeriodDataTime);
+
+    double overallDiffMsec = timeHelper::timeDifferenceMsec(startPeriodDataTime,endPeriodDataTime);
+
+    double msecPerPeriod = overallDiffMsec/((double)overallPerValCltn->size()-1.0);
+
+    return msecPerPeriod;
+
+}
+
+double PeriodValSegment::averageDaysPerPeriod() const
+{
+    double msecPerPeriod = averageMsecPerPeriod();
+
+    assert(msecPerPeriod > 0.0);
+
+    double secsPerPeriod = msecPerPeriod / 1000.0;
+
+    double daysPerPeriod = secsPerPeriod / 86400.0;
+
+    return daysPerPeriod;
+}
+
+double PeriodValSegment::averageMonthsPerPeriod() const
+{
+    double avgDaysPerMonthIncludingLeapYear = 365.25 / 12.0;
+
+    double monthsPerPeriod = averageDaysPerPeriod()/avgDaysPerMonthIncludingLeapYear;
+
+    return monthsPerPeriod;
+}
+
+double PeriodValSegment::averagePeriodsPerYear() const
+{
+    double daysPerYear = 365.25;
+
+    return daysPerYear / averageDaysPerPeriod();
+
+}
+
+double PeriodValSegment::segmentSpanMonths() const
+{
+    unsigned int startSegmentPeriod = firstVal().perValIndex();
+    unsigned int endSegmentPeriod = lastVal().perValIndex();
+    assert(endSegmentPeriod > startSegmentPeriod);
+
+    double diffMonths = (double)(endSegmentPeriod - startSegmentPeriod) * averageMonthsPerPeriod();
+
+    return diffMonths;
+}
+
+double PeriodValSegment::perPeriodPercChangeAlongLine(const LinearEquation &line) const
+{
+    // Compute the overall percent change from the start to the end of the segment
+    double startYVal = line.yVal(firstVal().pseudoXVal());
+    assert(startYVal > 0.0);
+    double endYVal = line.yVal(lastVal().pseudoXVal());
+    double startEndDiffPerc = (endYVal - startYVal)/startYVal;
+
+    // Total number of periods from the start to the end of segment
+    unsigned int startSegmentPeriod = firstVal().perValIndex();
+    unsigned int endSegmentPeriod = lastVal().perValIndex();
+    assert(endSegmentPeriod > startSegmentPeriod);
+    unsigned int startEndNumPeriods = endSegmentPeriod - startSegmentPeriod;
+
+    // Using interest rate conversion, determine the per-period percent change
+    double perPeriodPercChange = std::pow(1.0+startEndDiffPerc,1.0/(double)startEndNumPeriods)-1.0;
+
+    return perPeriodPercChange;
+}
+
+double PeriodValSegment::percChangePerYearAlongLine(const LinearEquation &line) const
+{
+    double yearlyPercChange = std::pow(1.0+perPeriodPercChangeAlongLine(line),averagePeriodsPerYear())-1.0;
+
+    return yearlyPercChange;
+}
+
 
 const PeriodVal &PeriodValSegment::firstVal() const
 {
