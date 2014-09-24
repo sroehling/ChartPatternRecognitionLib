@@ -19,6 +19,15 @@ PatternMatchPtr FallingWedgeScanner::findPatternMatch(
         return patternMatch;
     }
 
+    PatternMatchBreakoutInfoPtr breakdownInfo = wedgeMatchValidationInfo.lowerTrendLineBreakdown();
+    if (breakdownInfo)
+    {
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new FallingWedgePatternMatch(wedgeMatchValidationInfo));
+        patternMatch->breakdownInfo = breakdownInfo;
+        return patternMatch;
+    }
+
+
     return PatternMatchPtr(); // NULL (smart) pointer
 
 }

@@ -18,6 +18,17 @@ PatternMatchPtr AscendingTriangleScanner::findPatternMatch(const WedgeMatchValid
         return patternMatch;
     }
 
+    PatternMatchBreakoutInfoPtr breakdownInfo = wedgeMatchValidationInfo.lowerTrendLineBreakdown();
+    if (breakdownInfo)
+    {
+        ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new AscendingTrianglePatternMatch(wedgeSeg,
+                    wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
+        patternMatch->breakdownInfo = breakdownInfo;
+        return patternMatch;
+    }
+
+
     return PatternMatchPtr(); // NULL (smart) pointer
 
 }

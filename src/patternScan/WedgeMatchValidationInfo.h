@@ -30,6 +30,7 @@ public:
     // Returns a non-null pointer to the breakout info if a breakout exists, otherwise
     // returns the null smart pointer.
     PatternMatchBreakoutInfoPtr upperTrendLineBreakout() const;
+    PatternMatchBreakoutInfoPtr lowerTrendLineBreakdown() const;
 };
 
 #endif // WEDGEMATCHVALIDATIONINFO_H

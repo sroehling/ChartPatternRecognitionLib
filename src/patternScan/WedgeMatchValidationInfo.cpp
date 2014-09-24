@@ -63,4 +63,31 @@ PatternMatchBreakoutInfoPtr WedgeMatchValidationInfo::upperTrendLineBreakout() c
 
 }
 
+PatternMatchBreakoutInfoPtr WedgeMatchValidationInfo::lowerTrendLineBreakdown() const
+{
+    PeriodValCltn::iterator prevPerValIter = currPerValIter_;
+    prevPerValIter--;
+
+    assert(prevPerValIter != chartVals_->segBegin());
+
+    double currXVal = (*currPerValIter_).pseudoXVal();
+    double breakoutYVal = lowerTrendLine_->segmentEq()->yVal(currXVal);
+
+
+    if (lowerTrendLine_->segmentEq()->aboveLine((*prevPerValIter).closeCoord()) &&
+            lowerTrendLine_->segmentEq()->belowLine((*currPerValIter_).closeCoord()))
+    {
+        BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: lower trend line breakdown: "
+                    << "prev val=" << (*prevPerValIter).closeCoord()
+                    << ", curr val=" << (*currPerValIter_).closeCoord()
+                    << ", curr period val=" << (*currPerValIter_) << std::endl;
+        return PatternMatchBreakoutInfoPtr(new PatternMatchBreakoutInfo(currXVal,breakoutYVal));
+    }
+    else
+    {
+        return PatternMatchBreakoutInfoPtr(); // NULL (smart) pointer
+    }
+
+}
+
 

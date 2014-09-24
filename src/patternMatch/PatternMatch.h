@@ -94,6 +94,7 @@ public:
     // Optional, associated breakout information. Can can be NULL if
     // no break-out is associated.
     PatternMatchBreakoutInfoPtr breakoutInfo;
+    PatternMatchBreakoutInfoPtr breakdownInfo;
 
 	virtual ~PatternMatch();
 };

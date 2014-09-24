@@ -28,6 +28,17 @@ PatternMatchPtr SymetricTriangleScanner::findPatternMatch(
         return patternMatch;
 	}
 
+    PatternMatchBreakoutInfoPtr breakdownInfo = wedgeMatchValidationInfo.lowerTrendLineBreakdown();
+    if (breakdownInfo)
+    {
+        ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
+        PatternMatchPtr patternMatch = PatternMatchPtr(new SymetricTrianglePatternMatch(wedgeSeg,
+              wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
+        patternMatch->breakdownInfo = breakdownInfo;
+        return patternMatch;
+    }
+
+
 	return PatternMatchPtr(); // NULL (smart) pointer
 
 }
