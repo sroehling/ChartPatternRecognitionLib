@@ -220,7 +220,7 @@ unsigned int PeriodValSegment::numVals() const
 	return endPos_- startPos_;
 }
 
-double PeriodValSegment::averageMsecPerPeriod() const
+double PeriodValSegment::averageCalendarMsecPerPeriod() const
 {
     using namespace boost::posix_time;
     using namespace timeHelper;
@@ -240,9 +240,9 @@ double PeriodValSegment::averageMsecPerPeriod() const
 
 }
 
-double PeriodValSegment::averageDaysPerPeriod() const
+double PeriodValSegment::averageCalendarDaysPerPeriod() const
 {
-    double msecPerPeriod = averageMsecPerPeriod();
+    double msecPerPeriod = averageCalendarMsecPerPeriod();
 
     assert(msecPerPeriod > 0.0);
 
@@ -253,32 +253,35 @@ double PeriodValSegment::averageDaysPerPeriod() const
     return daysPerPeriod;
 }
 
-double PeriodValSegment::averageMonthsPerPeriod() const
+double PeriodValSegment::averageCalendarMonthsPerPeriod() const
 {
     double avgDaysPerMonthIncludingLeapYear = 365.25 / 12.0;
 
-    double monthsPerPeriod = averageDaysPerPeriod()/avgDaysPerMonthIncludingLeapYear;
+    double monthsPerPeriod = averageCalendarDaysPerPeriod()/avgDaysPerMonthIncludingLeapYear;
 
     return monthsPerPeriod;
 }
 
-double PeriodValSegment::averagePeriodsPerYear() const
+double PeriodValSegment::averageCalendarPeriodsPerYear() const
 {
     double daysPerYear = 365.25;
 
-    return daysPerYear / averageDaysPerPeriod();
+    return daysPerYear / averageCalendarDaysPerPeriod();
 
 }
 
-double PeriodValSegment::segmentSpanMonths() const
+unsigned int PeriodValSegment::segmentSpanPeriods() const
 {
     unsigned int startSegmentPeriod = firstVal().perValIndex();
     unsigned int endSegmentPeriod = lastVal().perValIndex();
     assert(endSegmentPeriod > startSegmentPeriod);
+    unsigned int segmentSpan = endSegmentPeriod-startSegmentPeriod;
+    return segmentSpan;
+}
 
-    double diffMonths = (double)(endSegmentPeriod - startSegmentPeriod) * averageMonthsPerPeriod();
-
-    return diffMonths;
+double PeriodValSegment::segmentSpanCalendarMonths() const
+{
+    return (double)(segmentSpanPeriods()) * averageCalendarMonthsPerPeriod();
 }
 
 double PeriodValSegment::perPeriodPercChangeAlongLine(const LinearEquation &line) const
@@ -303,7 +306,7 @@ double PeriodValSegment::perPeriodPercChangeAlongLine(const LinearEquation &line
 
 double PeriodValSegment::percChangePerYearAlongLine(const LinearEquation &line) const
 {
-    double yearlyPercChange = std::pow(1.0+perPeriodPercChangeAlongLine(line),averagePeriodsPerYear())-1.0;
+    double yearlyPercChange = std::pow(1.0+perPeriodPercChangeAlongLine(line),averageCalendarPeriodsPerYear())-1.0;
 
     return yearlyPercChange;
 }

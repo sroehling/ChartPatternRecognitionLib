@@ -68,15 +68,19 @@ public:
     // for which this PeriodValSegment is a subset.
     const PeriodValCltnPtr perValCltn() const { return perValCltn_; }
 
+
+    unsigned int segmentSpanPeriods() const;
+
+
     // Based upon the time difference across all the periods in the underlying
     // PeriodValCltn (for all the data, not just this (sub)segment), calculate average
     // milliseconds calendar timespan per period. This is helpful for trend-line and
     // other constraints calculations based upon a slope over time rather than periods.
-    double averageMsecPerPeriod() const;
-    double averageDaysPerPeriod() const;
-    double averageMonthsPerPeriod() const;
-    double segmentSpanMonths() const;
-    double averagePeriodsPerYear() const;
+    double averageCalendarMsecPerPeriod() const;
+    double averageCalendarDaysPerPeriod() const;
+    double averageCalendarMonthsPerPeriod() const;
+    double segmentSpanCalendarMonths() const;
+    double averageCalendarPeriodsPerYear() const;
 
     // Percent change from the start to the end of the segment along the given line.
     // This is used for constraint calculations involving percent changes (e.g.,

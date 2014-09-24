@@ -15,8 +15,8 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_VZ_SymetricTriangle )
 {
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/VZ_SymTriangle_Weekly_2013_2014.csv");
 
-    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageDaysPerPeriod() );
-    BOOST_CHECK_CLOSE(chartData->averageDaysPerPeriod(),6.9863,0.1);
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageCalendarDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(chartData->averageCalendarDaysPerPeriod(),6.9863,0.1);
 
     PatternScannerPtr scanner(new SymetricTriangleScanner());
     PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
@@ -54,8 +54,8 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_GLD_Wedges )
 
     PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/GLD_Weekly_2013_2014.csv");
 
-    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageDaysPerPeriod() );
-    BOOST_CHECK_CLOSE(chartData->averageDaysPerPeriod(),6.945,0.01);
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageCalendarDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(chartData->averageCalendarDaysPerPeriod(),6.945,0.01);
 
     PatternScannerPtr scanner(new SymetricTriangleScanner());
     PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);

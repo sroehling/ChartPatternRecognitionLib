@@ -77,8 +77,8 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
 
 	PeriodValSegmentPtr testSeg(new PeriodValSegment(testData));
 
-    BOOST_TEST_MESSAGE( "Average days per period (test seg): " << testSeg->averageDaysPerPeriod() );
-    BOOST_CHECK_CLOSE(testSeg->averageDaysPerPeriod(),30.0,0.1);
+    BOOST_TEST_MESSAGE( "Average days per period (test seg): " << testSeg->averageCalendarDaysPerPeriod() );
+    BOOST_CHECK_CLOSE(testSeg->averageCalendarDaysPerPeriod(),30.0,0.1);
 
 
     BOOST_CHECK(testSeg->lowestLow() == 1.0);
@@ -101,12 +101,12 @@ BOOST_AUTO_TEST_CASE( PeriodValSegmentMinMax )
     // In cupData, thera are 15 weekly periods, starting on 7/22/2013 and ending on 10/28/2013.
     // From the start of the first period, to the start of the last period is 98 days.
     // So, each period (on average) spans 98 / (15-1) = 7 days.
-    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << cupSeg->segmentSpanMonths() );
-    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << cupSeg->averageDaysPerPeriod() );
-    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << cupSeg->averagePeriodsPerYear() );
-    BOOST_CHECK_CLOSE(cupSeg->averageDaysPerPeriod(),7.0,0.01);
-    BOOST_CHECK_CLOSE(cupSeg->segmentSpanMonths(),3.219,0.1);
-    BOOST_CHECK_CLOSE(cupSeg->averagePeriodsPerYear(),52.17,0.1);
+    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << cupSeg->segmentSpanCalendarMonths() );
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << cupSeg->averageCalendarDaysPerPeriod() );
+    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << cupSeg->averageCalendarPeriodsPerYear() );
+    BOOST_CHECK_CLOSE(cupSeg->averageCalendarDaysPerPeriod(),7.0,0.01);
+    BOOST_CHECK_CLOSE(cupSeg->segmentSpanCalendarMonths(),3.219,0.1);
+    BOOST_CHECK_CLOSE(cupSeg->averageCalendarPeriodsPerYear(),52.17,0.1);
 
     XYCoord startLine(cupSeg->firstVal().pseudoXVal(),100.0);
     XYCoord endLine(cupSeg->lastVal().pseudoXVal(),114.0);
@@ -125,12 +125,12 @@ BOOST_AUTO_TEST_CASE( PeriodValSegment_CAGR )
     // In cupData, thera are 15 weekly periods, starting on 7/22/2013 and ending on 10/28/2013.
     // From the start of the first period, to the start of the last period is 98 days.
     // So, each period (on average) spans 98 / (15-1) = 7 days.
-    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << yearSeg->segmentSpanMonths() );
-    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << yearSeg->averageDaysPerPeriod() );
-    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << yearSeg->averagePeriodsPerYear() );
-    BOOST_CHECK_CLOSE(yearSeg->averageDaysPerPeriod(),1.44622,0.01);
-    BOOST_CHECK_CLOSE(yearSeg->segmentSpanMonths(),11.92,0.1);
-    BOOST_CHECK_CLOSE(yearSeg->averagePeriodsPerYear(),252.556,0.1);
+    BOOST_TEST_MESSAGE( "Segment span in months (weekly data): " << yearSeg->segmentSpanCalendarMonths() );
+    BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << yearSeg->averageCalendarDaysPerPeriod() );
+    BOOST_TEST_MESSAGE( "Average periods per year (weekly data): " << yearSeg->averageCalendarPeriodsPerYear() );
+    BOOST_CHECK_CLOSE(yearSeg->averageCalendarDaysPerPeriod(),1.44622,0.01);
+    BOOST_CHECK_CLOSE(yearSeg->segmentSpanCalendarMonths(),11.92,0.1);
+    BOOST_CHECK_CLOSE(yearSeg->averageCalendarPeriodsPerYear(),252.556,0.1);
 
     XYCoord startLine(yearSeg->firstVal().pseudoXVal(),100.0);
     XYCoord endLine(yearSeg->lastVal().pseudoXVal(),120.0);
