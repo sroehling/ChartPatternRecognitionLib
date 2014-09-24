@@ -19,6 +19,8 @@ double timeDifferenceMsec(const boost::posix_time::ptime &startTime, const boost
 bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
                               const boost::posix_time::ptime &startTime, const boost::posix_time::ptime &endTime);
 
+double msecToDays(double msecs);
+
 } // namespace timeHelper
 
 #endif /* DATEHELPER_H_ */

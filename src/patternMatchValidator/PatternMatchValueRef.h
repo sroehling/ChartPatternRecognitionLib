@@ -113,5 +113,11 @@ public:
 };
 
 
+class CalendarDaysLengthPatternMatchValueRef : public PatternMatchValueRef {
+public:
+    virtual double patternMatchVal(const PatternMatch &match) const;
+};
+
+
 
 #endif /* PATTERNMATCHVALUEREF_H_ */

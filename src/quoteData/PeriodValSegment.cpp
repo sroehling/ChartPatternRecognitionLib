@@ -220,6 +220,28 @@ unsigned int PeriodValSegment::numVals() const
 	return endPos_- startPos_;
 }
 
+
+double PeriodValSegment::segmentSpanCalendarMsec() const
+{
+    using namespace boost::posix_time;
+    using namespace timeHelper;
+
+    ptime startSegmentTime = firstVal().periodTime();
+    ptime endSegmentTime = lastVal().periodTime();
+
+    assert(endSegmentTime >= startSegmentTime);
+
+    double segmentDiffMsec = timeHelper::timeDifferenceMsec(startSegmentTime,endSegmentTime);
+
+    return segmentDiffMsec;
+}
+
+double PeriodValSegment::segmentSpanCalendarDays() const
+{
+    return timeHelper::msecToDays(segmentSpanCalendarMsec());
+}
+
+
 double PeriodValSegment::averageCalendarMsecPerPeriod() const
 {
     using namespace boost::posix_time;
@@ -246,9 +268,7 @@ double PeriodValSegment::averageCalendarDaysPerPeriod() const
 
     assert(msecPerPeriod > 0.0);
 
-    double secsPerPeriod = msecPerPeriod / 1000.0;
-
-    double daysPerPeriod = secsPerPeriod / 86400.0;
+    double daysPerPeriod =  timeHelper::msecToDays(msecPerPeriod);
 
     return daysPerPeriod;
 }

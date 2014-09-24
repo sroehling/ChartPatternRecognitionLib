@@ -45,6 +45,11 @@ double HighestValExceptLastPatternMatchValueRef::patternMatchVal(const PatternMa
 }
 
 
+double CalendarDaysLengthPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
+{
+    return match.matchSegment()->segmentSpanCalendarDays();
+}
+
 
 double DepthPercentPatternMatchValueRef::patternMatchVal(const PatternMatch &match) const
 {

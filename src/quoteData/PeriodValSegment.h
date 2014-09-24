@@ -70,6 +70,8 @@ public:
 
 
     unsigned int segmentSpanPeriods() const;
+    double segmentSpanCalendarMsec() const;
+    double segmentSpanCalendarDays() const;
 
 
     // Based upon the time difference across all the periods in the underlying

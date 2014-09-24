@@ -16,6 +16,9 @@
 
 namespace patternMatchValidatorCreationHelper
 {
+
+    PatternMatchValidatorPtr minValValidator(double minVal, const PatternMatchValueRefPtr &comparisonValRef);
+
 	PatternMatchValidatorPtr depthWithinRangeValidator(const DoubleRange &minMaxDepthPerc);
     PatternMatchValidatorPtr depthSinceStartWithinRangeValidator(const DoubleRange &minMaxDepthPerc);
 

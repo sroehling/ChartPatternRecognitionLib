@@ -10,6 +10,9 @@
 
 using namespace boost::posix_time;
 
+#define TIME_HELPER_MSEC_PER_SEC 1000.0
+#define TIME_HELPER_SEC_PER_DAY 86400.0
+
 namespace timeHelper {
 
 std::string formatDate(const boost::posix_time::ptime &dateToFormat)
@@ -49,6 +52,17 @@ bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
 
 }
 
+
+double msecToDays(double msecs)
+{
+    assert(msecs >= 0.0);
+
+    double secs = msecs / TIME_HELPER_MSEC_PER_SEC;
+
+    double days = secs / TIME_HELPER_SEC_PER_DAY;
+
+    return days;
+}
 
 }
 
