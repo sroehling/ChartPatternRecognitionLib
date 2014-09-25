@@ -24,7 +24,13 @@ public:
     const ChartSegmentPtr &lowerTrendLine() const { return lowerTrendLine_; }
     const PeriodValCltn::iterator &currPerValIter() const { return currPerValIter_; }
     const PeriodValCltn::iterator patternBeginIter() const;
+
+    // Return an end to the potential pattern match. This is an ending iterator
+    // in the same sense as STL's standard end() for collections. In other words,
+    // don't reference the underlying PeriodValCltn using what is returned from
+    // this function.
     const PeriodValCltn::iterator patternEndIter() const;
+
     ChartSegmentPtr createWedgeSegment() const;
 
     // Returns a non-null pointer to the breakout info if a breakout/breakdown exists,

@@ -196,7 +196,8 @@ double WedgeScannerEngine::numPeriodsToIntercept(const ChartSegmentPtr &upperTre
 bool WedgeScannerEngine::first2PivotsInLHSOfWedge(const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
     double wedgeBeginXVal = wedgeMatchValidationInfo.patternBeginIter()->pseudoXVal();
-    double wedgeEndXVal = wedgeMatchValidationInfo.patternEndIter()->pseudoXVal();
+    // currPerValIter() points to the potential end of the pattern.
+    double wedgeEndXVal = wedgeMatchValidationInfo.currPerValIter()->pseudoXVal();
     double midPointXVal = wedgeBeginXVal + ((wedgeEndXVal-wedgeBeginXVal) * 0.5);
 
     unsigned int upperPivotsBeforeMidPoint = 0;

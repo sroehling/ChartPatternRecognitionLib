@@ -1,4 +1,4 @@
-/*
+ /*
  * PatternMatch.cpp
  *
  *  Created on: Jun 10, 2014
@@ -259,9 +259,9 @@ std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 }
 
 
-bool PatternMatch::isIncompleteMatch() const
+bool PatternMatch::isConfirmedMatch() const
 {
-    if((!this->breakdownInfo) && (!this->breakoutInfo))
+    if((this->breakdownInfo) || (this->breakoutInfo))
     {
         return true;
     }

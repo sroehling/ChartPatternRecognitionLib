@@ -19,7 +19,7 @@ RectangleScanner::RectangleScanner()
 bool RectangleScanner::validTrendLines(const ChartSegmentPtr &upperTrendLine,
         const ChartSegmentPtr &lowerTrendLine) const
 {
-    DoubleRange validSlopeRange = TriangleScanner::FLAT_SLOPE_RANGE;
+    DoubleRange validSlopeRange = WedgeScannerEngine::FLAT_SLOPE_RANGE;
 
     if(!WedgeScannerEngine::validTrendLines(upperTrendLine,lowerTrendLine))
     {

@@ -3,6 +3,7 @@
 #include "SymetricTriangleScanner.h"
 #include "PatternShapeGenerator.h"
 #include "DescendingTriangleScanner.h"
+#include "RisingWedgeScanner.h"
 #include "MultiPatternScanner.h"
 #include "PivotHighScanner.h"
 #include "PivotLowScanner.h"
@@ -57,9 +58,31 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_GLD_Wedges )
     BOOST_TEST_MESSAGE( "Average days per period (weekly data): " << chartData->averageCalendarDaysPerPeriod() );
     BOOST_CHECK_CLOSE(chartData->averageCalendarDaysPerPeriod(),6.945,0.01);
 
-    PatternScannerPtr scanner(new SymetricTriangleScanner());
-    PatternMatchListPtr symetricTriangles = scanner->scanPatternMatches(chartData);
-    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: filtered matches",symetricTriangles,0);
+
+    // The scanning for symetric triangles and rising wedges is unique for this chart data, in that
+    // the pattern matches end on the last period of of the chart data. There was an off-by-one-bug
+    // related to matching patterns ending on the last period. The 2 patterns matched here
+    // were only showing intermittently before fixing this bug (the code was indexing beyond the
+    // end of the last period).
+
+    PatternScannerPtr symetricTriangleScanner(new SymetricTriangleScanner());
+    PatternMatchListPtr symetricTriangles = symetricTriangleScanner->scanPatternMatches(chartData);
+    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: filtered matches",symetricTriangles,1);
+
+    verifyPatternMatch("TriangleScanners_VZ_SymetricTriangle symetric triangle",
+            ptime(date(2013,8,26)),ptime(date(2014,8,18)),1,symetricTriangles,0);
+
+    BOOST_CHECK_EQUAL(symetricTriangles->front()->isConfirmedMatch(),true);
+
+
+    PatternScannerPtr risingWedgeScanner(new RisingWedgeScanner());
+    PatternMatchListPtr risingWedges = risingWedgeScanner->scanPatternMatches(chartData);
+    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: rising wedges",risingWedges,1);
+
+    verifyPatternMatch("TriangleScanners_VZ_SymetricTriangle rising wedge",
+            ptime(date(2014,5,5)),ptime(date(2014,8,18)),1,risingWedges,0);
+
+    BOOST_CHECK_EQUAL(risingWedges->front()->isConfirmedMatch(),true);
 
 
     DescendingTriangleScanner descTriangleScanner;

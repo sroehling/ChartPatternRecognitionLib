@@ -96,7 +96,8 @@ public:
     PatternMatchBreakoutInfoPtr breakoutInfo;
     PatternMatchBreakoutInfoPtr breakdownInfo;
 
-    bool isIncompleteMatch() const;
+    // Match with a breakout or breakdown?
+    bool isConfirmedMatch() const;
 
 	virtual ~PatternMatch();
 };

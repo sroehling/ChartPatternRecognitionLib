@@ -39,16 +39,13 @@ BOOST_AUTO_TEST_CASE( WedgeScanners_VZ_IncompleteRectanglePattern)
     RectangleScanner rectangleScanner;
     PatternMatchListPtr rectangles = rectangleScanner.scanPatternMatches(chartData);
 
-//    verifyMatchList("WedgeScanners_VZ_IncompletePattern: rectangles",rectangles,1);
+    verifyMatchList("WedgeScanners_VZ_IncompletePattern: rectangles",rectangles,1);
 
-    for(int i = 0; i < 100; i++)
-    {
-        RectangleScanner rectangleScanner;
-        PatternMatchListPtr rectangles = rectangleScanner.scanPatternMatches(chartData);
-         BOOST_TEST_MESSAGE("WedgeScanners_VZ_IncompletePattern: rectangles " << rectangles->size());
+    verifyPatternMatch("WedgeScanners_VZ_IncompletePattern match",
+            ptime(date(2013,7,29)),ptime(date(2014,5,27)),1,rectangles,0);
 
-    }
-//    verifyMatchList("WedgeScanners_VZ_IncompletePattern: rectangles",rectangles,1);
+    BOOST_CHECK_EQUAL(rectangles->front()->isConfirmedMatch(),false);
+
 
 }
 
