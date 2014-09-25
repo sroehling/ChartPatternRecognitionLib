@@ -259,6 +259,18 @@ std::ostream& operator<<(std::ostream& os, const PatternMatch& patternMatch)
 }
 
 
+bool PatternMatch::isIncompleteMatch() const
+{
+    if((!this->breakdownInfo) && (!this->breakoutInfo))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 PatternMatch::~PatternMatch() {
 }
 

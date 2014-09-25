@@ -27,6 +27,11 @@ PatternMatchPtr RisingWedgeScanner::findPatternMatch(
         return patternMatch;
     }
 
+    if(wedgeMatchValidationInfo.incompletePatternMatch())
+    {
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new RisingWedgePatternMatch(wedgeMatchValidationInfo));
+        return patternMatch;
+    }
 
     return PatternMatchPtr(); // NULL (smart) pointer
 

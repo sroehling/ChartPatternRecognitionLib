@@ -27,10 +27,12 @@ public:
     const PeriodValCltn::iterator patternEndIter() const;
     ChartSegmentPtr createWedgeSegment() const;
 
-    // Returns a non-null pointer to the breakout info if a breakout exists, otherwise
-    // returns the null smart pointer.
+    // Returns a non-null pointer to the breakout info if a breakout/breakdown exists,
+    // otherwise returns the null smart pointer.
     PatternMatchBreakoutInfoPtr upperTrendLineBreakout() const;
     PatternMatchBreakoutInfoPtr lowerTrendLineBreakdown() const;
+
+    bool incompletePatternMatch() const;
 };
 
 #endif // WEDGEMATCHVALIDATIONINFO_H

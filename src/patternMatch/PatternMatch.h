@@ -96,6 +96,8 @@ public:
     PatternMatchBreakoutInfoPtr breakoutInfo;
     PatternMatchBreakoutInfoPtr breakdownInfo;
 
+    bool isIncompleteMatch() const;
+
 	virtual ~PatternMatch();
 };
 

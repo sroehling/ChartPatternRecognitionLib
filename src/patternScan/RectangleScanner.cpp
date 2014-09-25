@@ -73,6 +73,12 @@ PatternMatchPtr RectangleScanner::findPatternMatch(
         return patternMatch;
     }
 
+    if(wedgeMatchValidationInfo.incompletePatternMatch())
+    {
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new RectanglePatternMatch(wedgeMatchValidationInfo));
+        return patternMatch;
+    }
+
 
     return PatternMatchPtr(); // NULL (smart) pointer
 

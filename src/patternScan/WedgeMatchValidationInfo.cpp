@@ -90,4 +90,30 @@ PatternMatchBreakoutInfoPtr WedgeMatchValidationInfo::lowerTrendLineBreakdown() 
 
 }
 
+bool WedgeMatchValidationInfo::incompletePatternMatch() const
+{
+    // Validate/confirm an incomplete pattern match if the closing coordinate
+    // is still within both the upper and lower trendlines, but is also the last
+    // coordinate in the chart data.
+    if (lowerTrendLine_->segmentEq()->aboveLine((*currPerValIter_).closeCoord()) &&
+            upperTrendLine_->segmentEq()->belowLine((*currPerValIter_).closeCoord()))
+    {
+        if((*currPerValIter_).perValIndex() ==
+                chartVals_->perValCltn()->back().perValIndex())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+
+}
+
 

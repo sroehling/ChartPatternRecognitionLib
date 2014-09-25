@@ -29,6 +29,16 @@ PatternMatchPtr DescendingTriangleScanner::findPatternMatch(
         return patternMatch;
     }
 
+    if(wedgeMatchValidationInfo.incompletePatternMatch())
+    {
+        ChartSegmentPtr wedgeSeg = wedgeMatchValidationInfo.createWedgeSegment();
+        PatternMatchPtr patternMatch =  PatternMatchPtr(new DescendingTrianglePatternMatch(wedgeSeg,
+                    wedgeMatchValidationInfo.upperTrendLine(),wedgeMatchValidationInfo.lowerTrendLine()));
+        return patternMatch;
+    }
+
+
+
     return PatternMatchPtr(); // NULL (smart) pointer
 
 }
