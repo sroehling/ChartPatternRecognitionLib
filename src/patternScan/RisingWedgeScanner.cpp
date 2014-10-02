@@ -1,6 +1,10 @@
 #include "RisingWedgeScanner.h"
 
 #include "RisingWedgePatternMatch.h"
+#include "DoubleRange.h"
+
+#define RISING_WEDGE_SCANNER_MIN_LAST_TO_FIRST_TRENDLINE_DISTANCE_RATIO 0.1
+#define RISING_WEDGE_SCANNER_MAX_LAST_TO_FIRST_TRENDLINE_DISTANCE_RATIO 0.5
 
 RisingWedgeScanner::RisingWedgeScanner()
     : WedgeScanner(WedgeScannerEngine::UPTREND_SLOPE_RANGE,WedgeScannerEngine::UPTREND_SLOPE_RANGE)
@@ -11,6 +15,14 @@ RisingWedgeScanner::RisingWedgeScanner()
 PatternMatchPtr RisingWedgeScanner::findPatternMatch(
         const WedgeMatchValidationInfo &wedgeMatchValidationInfo) const
 {
+
+    if(!DoubleRange(RISING_WEDGE_SCANNER_MIN_LAST_TO_FIRST_TRENDLINE_DISTANCE_RATIO,
+                    RISING_WEDGE_SCANNER_MAX_LAST_TO_FIRST_TRENDLINE_DISTANCE_RATIO).valueWithinRange(
+                wedgeMatchValidationInfo.lastToFirstTrendlineDistanceRatio()))
+    {
+        return PatternMatchPtr(); // NULL (smart) pointer
+    }
+
     PatternMatchBreakoutInfoPtr breakoutInfo = wedgeMatchValidationInfo.upperTrendLineBreakout();
     if (breakoutInfo)
     {

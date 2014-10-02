@@ -75,15 +75,12 @@ BOOST_AUTO_TEST_CASE( TriangleScanners_GLD_Wedges )
     BOOST_CHECK_EQUAL(symetricTriangles->front()->isConfirmedMatch(),true);
 
 
+    // Previously there was a match of a rising wedge in this test case. However,
+    // with the addition of a constraint to ensure the trend lines angle towards each
+    // other, the only matching rising wedge was disqualified.
     PatternScannerPtr risingWedgeScanner(new RisingWedgeScanner());
     PatternMatchListPtr risingWedges = risingWedgeScanner->scanPatternMatches(chartData);
-    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: rising wedges",risingWedges,1);
-
-    verifyPatternMatch("TriangleScanners_VZ_SymetricTriangle rising wedge",
-            ptime(date(2014,5,5)),ptime(date(2014,8,18)),1,risingWedges,0);
-
-    BOOST_CHECK_EQUAL(risingWedges->front()->isConfirmedMatch(),true);
-
+    verifyMatchList("TriangleScanners_VZ_SymetricTriangle: rising wedges",risingWedges,0);
 
     DescendingTriangleScanner descTriangleScanner;
     PatternMatchListPtr descTriangles = descTriangleScanner.scanPatternMatches(chartData);

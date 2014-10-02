@@ -1,6 +1,7 @@
 #include "WedgeMatchValidationInfo.h"
 #include <boost/log/trivial.hpp>
 #include <assert.h>
+#include <cmath>
 
 WedgeMatchValidationInfo::WedgeMatchValidationInfo(const PeriodValSegmentPtr &chartVals,
         const ChartSegmentPtr &upperTrendLine,
@@ -16,6 +17,37 @@ WedgeMatchValidationInfo::WedgeMatchValidationInfo(const PeriodValSegmentPtr &ch
 const PeriodValCltn::iterator WedgeMatchValidationInfo::patternBeginIter() const
 {
     return upperTrendLine_->firstValIter();
+}
+
+double WedgeMatchValidationInfo::firstXVal() const
+{
+    PeriodValCltn::iterator beginIter = patternBeginIter();
+    return (*beginIter).pseudoXVal();
+}
+
+double WedgeMatchValidationInfo::lastXVal() const
+{
+    PeriodValCltn::iterator beginIter = currPerValIter();
+    return (*beginIter).pseudoXVal();
+}
+
+
+double WedgeMatchValidationInfo::distanceBetweenTrendLines(double pseudoXVal) const
+{
+    double upperTrendLineYVal = upperTrendLine_->segmentEq()->yVal(pseudoXVal);
+    double lowerTrendLineYVal = lowerTrendLine_->segmentEq()->yVal(pseudoXVal);
+
+    return std::abs(upperTrendLineYVal-lowerTrendLineYVal);
+}
+
+double WedgeMatchValidationInfo::lastToFirstTrendlineDistanceRatio() const
+{
+    double lastDistance = distanceBetweenTrendLines(lastXVal());
+    double firstDistance = distanceBetweenTrendLines(firstXVal());
+
+    assert(firstDistance > 0.0);
+
+    return lastDistance/firstDistance;
 }
 
 

@@ -31,6 +31,14 @@ public:
     // this function.
     const PeriodValCltn::iterator patternEndIter() const;
 
+
+    // Helper functions for validation
+    double firstXVal() const;
+    double lastXVal() const;
+    double distanceBetweenTrendLines(double pseudoXVal) const;
+    double lastToFirstTrendlineDistanceRatio() const;
+
+
     ChartSegmentPtr createWedgeSegment() const;
 
     // Returns a non-null pointer to the breakout info if a breakout/breakdown exists,
