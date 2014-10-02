@@ -13,8 +13,10 @@ CONFIG += staticlib
 # Configure compiling and linking against libc++ instead of libstdc++
 # This is needed to ensure consistency for all components, including
 # the boost library.
-QMAKE_CXXFLAGS += -mmacosx-version-min=10.7 -std=c++11 -stdlib=libc++
-LIBS += -mmacosx-version-min=10.7 -stdlib=libc++
+macx: QMAKE_CXXFLAGS += -mmacosx-version-min=10.7
+QMAKE_CXXFLAGS += -std=c++11
+macx: LIBS += -mmacosx-version-min=10.7 -stdlib=libc++
+macx: LIBS += -stdlib=libc++
 CONFIG += c++11
 
 SOURCES += \
@@ -127,9 +129,12 @@ INCLUDEPATH += segmentContraint\
     patternShape\
     quoteData
 
-# Include the boost headers using the -system flag, suppressing warnigns
+# Include the boost headers using the -system flag, suppressing warnings
 # from these files.
 macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
+win32: QMAKE_CXXFLAGS += -isystem c:/boost_1_56_0
+# win32: DEPENDPATH += c:/boost_1_47_0/
+
 DEFINES += BOOST_ALL_DYN_LINK
 DEFINES += BOOST_LOG_DYN_LINK
 
