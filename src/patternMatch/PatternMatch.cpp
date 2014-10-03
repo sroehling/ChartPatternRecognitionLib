@@ -271,6 +271,22 @@ bool PatternMatch::isConfirmedMatch() const
     }
 }
 
+double PatternMatch::confirmationPrice() const
+{
+    assert(isConfirmedMatch()); // undefined if not a confirmed match
+
+    if(this->breakdownInfo)
+    {
+        return this->breakdownInfo->breakoutPrice();
+    }
+    else if(this->breakoutInfo)
+    {
+        return this->breakoutInfo->breakoutPrice();
+    }
+    return -1.0; // undefined, should not get here
+
+}
+
 PatternMatch::~PatternMatch() {
 }
 

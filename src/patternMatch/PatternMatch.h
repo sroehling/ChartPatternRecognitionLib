@@ -98,6 +98,7 @@ public:
 
     // Match with a breakout or breakdown?
     bool isConfirmedMatch() const;
+    double confirmationPrice() const;
 
 	virtual ~PatternMatch();
 };
