@@ -26,17 +26,37 @@ BOOST_AUTO_TEST_CASE( PeriodValTest_WithAdjustedValues )
 	BOOST_CHECK(periodData->size()==26);
 
 	PeriodVal firstVal = periodData->front();
-    // Note - both the volume and close values are adjusted, based
+    // The close values are adjusted, based
     // upon the difference between the close and adjusted close.
-    BOOST_CHECK_EQUAL(firstVal.volume(),1449323);
-    BOOST_CHECK_CLOSE(firstVal.close(),65.76,0.001);
+    // Since this test data came from Yahoo Finance, however, the
+    // volume is also adjusted.
+    //
+    // The values from the CSV file are as follows:
+    // Date,Open,High,Low,Close,Volume,Adj Close
+    // 2013-08-26,72.41,74.76,66.01,66.68,1469600,65.76
+    //
+    // The "scale factor to adjust the open, high, and low is
+    // as follows: (from PerVal.cpp source):
+    //      double adjScaleFactor = adjClose/close;
+    // So, in this case, we expect the scale factor to be: 65.76/66.68 = 0.9862
+    double scaleFactor = 65.76/66.68;
+    BOOST_CHECK_EQUAL(firstVal.volume(),1469600);
+    BOOST_CHECK_CLOSE(firstVal.close(),65.76,0.01);
+    BOOST_CHECK_CLOSE(firstVal.open(),scaleFactor*72.41,0.01);
+    BOOST_CHECK_CLOSE(firstVal.high(),scaleFactor*74.76,0.01);
+    BOOST_CHECK_CLOSE(firstVal.low(),scaleFactor*66.01,0.01);
+
 
 	ClosePeriodValueRef closeRef;
     BOOST_CHECK_CLOSE(closeRef.referencedVal(firstVal),65.76,0.001);
 
-	PeriodVal lastVal = periodData->back();
-    BOOST_CHECK_EQUAL(lastVal.volume(),3755681);
-	BOOST_CHECK_EQUAL(lastVal.periodTime(),ptime(date(2014,2,18)));
+    // The values from the CSV file are as follows:
+    // Date,Open,High,Low,Close,Volume,Adj Close
+    // 2014-02-18,70.37,76.46,69.73,75.83,3770100,75.54
+    PeriodVal lastVal = periodData->back();
+    BOOST_CHECK_EQUAL(lastVal.volume(),3770100);
+    BOOST_CHECK_CLOSE(lastVal.close(),75.54,0.001);
+    BOOST_CHECK_EQUAL(lastVal.periodTime(),ptime(date(2014,2,18)));
 
 }
 
@@ -76,7 +96,7 @@ BOOST_AUTO_TEST_CASE( PeriodValTest_ValidCSV )
 
 }
 
-BOOST_AUTO_TEST_CASE( PeriodValTest_HeaderErrors )
+BOOST_AUTO_TEST_CASE( PeriodValTest_MalformedHeaders )
 {
     BOOST_CHECK_THROW(PeriodVal::readFromFile("./quoteData/MalformedHeader.csv"),std::runtime_error);
     BOOST_CHECK_THROW(PeriodVal::readFromFile("./quoteData/MalformedHeaderNoCloseField.csv"),std::runtime_error);

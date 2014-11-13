@@ -213,8 +213,11 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
                 high = high*adjScaleFactor;
                 open = open*adjScaleFactor;
                 close = close*adjScaleFactor;
-                vol = floor((double)vol *adjScaleFactor);
 
+                // Note that we *do not* adjust volume like the other fields. For Yahoo Finance EOD data,
+                // in particular, the volume is already adjusted. This was verified with by looking at the
+                // unadjusted and adjusted charts on stockcharts.com. On 2014-06-06, the unadjusted volume was
+                // 12M, or 87M adjusted. By comparison, the EOD from Google adjusts all the columns by default.
             }
 
 			// The data is read in reverse chronological order (most recent dates first),
