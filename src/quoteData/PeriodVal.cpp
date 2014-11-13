@@ -18,6 +18,10 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
+#include "TimeHelper.h"
+
+#define UNDEFINED_CSV_HEADER_INDEX -1
 
 
 PeriodVal::PeriodVal(boost::posix_time::ptime &periodTime,
@@ -35,6 +39,23 @@ double PeriodVal::typicalPrice() const
 }
 
 PeriodVal::~PeriodVal() {
+}
+
+static bool notCSVHeaderChar(char c)
+{
+    if(isalpha(c) || c==' ')
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+static void stripNonHeaderChars(std::string &str)
+{
+    str.erase(std::remove_if(str.begin(), str.end(), notCSVHeaderChar), str.end());
 }
 
 PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
@@ -55,17 +76,88 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 				boost::str(boost::format("Unable to open file %s")%fileName)));
 	}
 
-	typedef tokenizer< escaped_list_separator<char> > Tokenizer;
-	vector< string > vec;
-	string line;
+    typedef tokenizer< escaped_list_separator<char> > CSVTokenizer;
 
+	string line;
 	unsigned int currLineNum = 0;
-	if(!getline(in,line)) // Skip the header
+
+
+    // ---------------------------------------------------------------------------------------------
+    // Parse the CSV header
+    // ---------------------------------------------------------------------------------------------
+
+    // Each of the required fields are
+    int openFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int highFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int lowFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int closeFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int volumeFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int dateFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    int adjCloseFieldIndex = UNDEFINED_CSV_HEADER_INDEX;
+    bool hasAdjustedCloseField = false;
+    if(!getline(in,line))
 	{
 		std::string errorMsg = boost::str(boost::format("Missing CSV header in file %s")%fileName);
 		std::cerr << errorMsg << std::endl;
 		BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
 	}
+    vector< string > headerFields;
+    CSVTokenizer headerTokenizer(line);
+    headerFields.assign(headerTokenizer.begin(),headerTokenizer.end());
+
+    unsigned int numHeaderFields = headerFields.size();
+
+    for(unsigned int headerIndex = 0; headerIndex < headerFields.size(); headerIndex++)
+    {
+        std::string headerFieldName = boost::to_upper_copy(headerFields[headerIndex]);
+        stripNonHeaderChars(headerFieldName);
+
+        if(headerFieldName == std::string("DATE"))
+        {
+            dateFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "OPEN")
+        {
+            openFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "HIGH")
+        {
+            highFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "LOW")
+        {
+            lowFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "CLOSE")
+        {
+            closeFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "VOLUME")
+        {
+            volumeFieldIndex = headerIndex;
+        }
+        else if(headerFieldName == "ADJ CLOSE")
+        {
+            adjCloseFieldIndex = headerIndex;
+            hasAdjustedCloseField = true;
+        }
+    }
+    if((openFieldIndex==UNDEFINED_CSV_HEADER_INDEX) ||
+        (highFieldIndex==UNDEFINED_CSV_HEADER_INDEX) ||
+        (lowFieldIndex == UNDEFINED_CSV_HEADER_INDEX) ||
+        (closeFieldIndex == UNDEFINED_CSV_HEADER_INDEX) ||
+            (dateFieldIndex == UNDEFINED_CSV_HEADER_INDEX) ||
+        (volumeFieldIndex == UNDEFINED_CSV_HEADER_INDEX))
+    {
+        std::string errorMsg = boost::str(boost::format("Missing CSV header field(s) in file %s, got malformed header=%s")%fileName%line);
+        std::cerr << errorMsg << std::endl;
+        BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // End header parsing
+    // ---------------------------------------------------------------------------------------------
+
 	currLineNum++;
 
 	// Expect data in format: Date,Open,High,Low,Close,Volume,Adj Close
@@ -73,52 +165,57 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 	while (getline(in,line))
 	{
 		currLineNum++;
-		Tokenizer tok(line);
-		vec.assign(tok.begin(),tok.end());
+        CSVTokenizer csvDataTokenizer(line);
 
-		if(vec.size() != 7)
+        vector< string > csvDataFields;
+        csvDataFields.assign(csvDataTokenizer.begin(),csvDataTokenizer.end());
+
+        if(csvDataFields.size() != numHeaderFields)
 		{
 			std::string errorMsg = boost::str(
-					boost::format("Malformed CSV data in file %s on line %d: expecting 7 fields, got %d")
-					%fileName%currLineNum%vec.size());
+                    boost::format("Malformed CSV data in file %s on line %d: expecting %d fields, got %d")
+                    %fileName%currLineNum%numHeaderFields%csvDataFields.size());
 			std::cerr << errorMsg << std::endl;
 			BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
 		}
 
 		try
 		{
-			ptime perTime(date(from_simple_string(vec[0])));
-			double open = lexical_cast<double>(vec[1]);
-			double high = lexical_cast<double>(vec[2]);
-			double low = lexical_cast<double>(vec[3]);
-			double close = lexical_cast<double>(vec[4]);
-			unsigned int vol = lexical_cast<unsigned int>(vec[5]);
+            std::string dateField = csvDataFields[dateFieldIndex];
+            ptime perTime(timeHelper::parseDateFromString(dateField));
+
+            double open = lexical_cast<double>(csvDataFields[openFieldIndex]);
+            double high = lexical_cast<double>(csvDataFields[highFieldIndex]);
+            double low = lexical_cast<double>(csvDataFields[lowFieldIndex]);
+            double close = lexical_cast<double>(csvDataFields[closeFieldIndex]);
+            unsigned int vol = lexical_cast<unsigned int>(csvDataFields[volumeFieldIndex]);
 
 			// TODO - Validate high >= low, etc.
 
-
-			// TODO - Add adjusted closed to PeriodVal (along with adjustments to
-			// normalize/adjust open,high,low,close too.
-            double adjClose = lexical_cast<double>(vec[6]);
-
-
-            // "Normalize" the data based upon the adjusted close value. Technical
-            // analysis and back-testing should always used adjusted values.
-            if(close <= 0.0)
+            if(hasAdjustedCloseField)
             {
-                std::string errorMsg = boost::str(
-                        boost::format("Malformed CSV data in file %s on line %d: expecting close >= 0.0, got %f")
-                        %fileName%currLineNum%close);
-                std::cerr << errorMsg << std::endl;
-                BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
-            }
+                double adjClose = lexical_cast<double>(csvDataFields[adjCloseFieldIndex]);
 
-            double adjScaleFactor = adjClose/close;
-            low = low*adjScaleFactor;
-            high = high*adjScaleFactor;
-            open = open*adjScaleFactor;
-            close = close*adjScaleFactor;
-            vol = floor((double)vol *adjScaleFactor);
+
+                // "Normalize" the data based upon the adjusted close value. Technical
+                // analysis and back-testing should always used adjusted values.
+                if(close <= 0.0)
+                {
+                    std::string errorMsg = boost::str(
+                            boost::format("Malformed CSV data in file %s on line %d: expecting close >= 0.0, got %f")
+                            %fileName%currLineNum%close);
+                    std::cerr << errorMsg << std::endl;
+                    BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+                }
+
+                double adjScaleFactor = adjClose/close;
+                low = low*adjScaleFactor;
+                high = high*adjScaleFactor;
+                open = open*adjScaleFactor;
+                close = close*adjScaleFactor;
+                vol = floor((double)vol *adjScaleFactor);
+
+            }
 
 			// The data is read in reverse chronological order (most recent dates first),
 			// but needs to be be in chronological order for processing
@@ -130,8 +227,8 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 		catch(const std::exception &e)
 		{
 			std::string errorMsg = boost::str(
-					boost::format("Malformed CSV data in file %s on line %d: %s")
-					%fileName%currLineNum%e.what());
+                    boost::format("Malformed CSV data in file %s on line %d: %s, csv data =%s")
+                    %fileName%currLineNum%e.what()%line);
 			std::cerr << errorMsg << std::endl;
 			BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
 		}
@@ -151,8 +248,6 @@ void PeriodVal::reAssignIndices(PeriodValCltn &perValCltn)
 		currIndex++;
 	}
 }
-
-
 
 std::ostream& operator<<(std::ostream& os, const PeriodVal& perVal)
 {

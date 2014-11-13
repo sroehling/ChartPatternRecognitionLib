@@ -15,6 +15,8 @@ namespace timeHelper {
 
 std::string formatDate(const boost::posix_time::ptime &dateToFormat);
 
+boost::posix_time::ptime parseDateFromString(const std::string &dateStr);
+
 double timeDifferenceMsec(const boost::posix_time::ptime &startTime, const boost::posix_time::ptime &endTime);
 bool timeDifferenceValid(const DoubleRange &validTimeDifferences,
                               const boost::posix_time::ptime &startTime, const boost::posix_time::ptime &endTime);

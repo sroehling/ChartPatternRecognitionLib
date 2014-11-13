@@ -59,3 +59,6 @@ macx: INCLUDEPATH += $$PWD/../src/chartSegment\
     $$PWD/../src/patternScan\
     $$PWD/../src/patternShape\
     $$PWD/../src/quoteData
+
+OTHER_FILES += \
+    README.md
