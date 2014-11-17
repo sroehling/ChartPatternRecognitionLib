@@ -35,6 +35,20 @@ void genPatternMatchInfo(const std::string &prefix, const PatternMatchPtr &patte
 			<< ", depth % = " << patternMatch->depthPercent()
 		<< ", last close = " << patternMatch->lastValue().close());
 
+    unsigned int segmentNum = 0;
+    for(ChartSegmentList::const_iterator segIter = patternMatch->segments().begin();
+        segIter != patternMatch->segments().end(); segIter++)
+    {
+        BOOST_TEST_MESSAGE(prefix << ": pattern match: "
+                           << " segment # = " << segmentNum
+                           << ", start = " << formatDate((*segIter)->firstPeriodVal().periodTime())
+                           << ", start = " << formatDate((*segIter)->lastPeriodVal().periodTime())
+                           << ", num periods = " << (*segIter)->numPeriods()
+                           << ", % yearly change (slope) = " << (*segIter)->percentChangePerYear()
+                           );
+        segmentNum++;
+    }
+
 }
 
 void genPatternMatchListInfo(const std::string prefix, const PatternMatchList &matchList)

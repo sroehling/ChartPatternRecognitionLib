@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE( MultiPatternScan_Save_Weekly )
 
     PatternMatchListPtr cupMatches = multiVScanner.scanPatternMatches(chartData);
 
-    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,6);
+    verifyMatchList("MultiPatternScan_Save_Weekly (cupMatches)",cupMatches,5);
 }
 
 

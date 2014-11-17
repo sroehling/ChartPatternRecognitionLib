@@ -32,6 +32,7 @@
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
+#define UPTREND_MAX_MULTIPLE_FLAT_TREND 3
 #define FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_UPPER_THRESHOLD 0.35
 #define FLAT_BOTTOM_PERCENT_DOWNTREND_DEPTH_LOWER_THRESHOLD 1.4
 #define DEFAULT_CUP_SCANNER_MIN_SEGMENT_LENGTH 3
@@ -131,6 +132,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
 				dtMatchIter!=downtrendMatches->end();dtMatchIter++)
 	{
+
         UnsignedIntRange flatSegmentLengthRange(minTrendLineSegmentLength_,FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
         PeriodValSegmentPtr valsForFlatScan = (*dtMatchIter)->trailingValsWithLastVal(flatSegmentLengthRange.maxVal());
 
@@ -146,7 +148,17 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
 		for(PatternMatchList::const_iterator ftMatchIter = flatMatches->begin();
 				ftMatchIter!=flatMatches->end();ftMatchIter++)
 		{
-            UnsignedIntRange upTrendSegmentLengthRange(minTrendLineSegmentLength_,UPTREND_MAX_MULTIPLE_DOWNTREND*(*dtMatchIter)->numPeriods());
+
+            // Impose some constraints on the number of periods in the uptrend versus both the
+            // preceding downtrend and flat-area/trend. If the uptrend is much longer than either the
+            // preceding downtrend or flat area, the cup will have a more "V like" appearance.
+            unsigned int maxVsFlatTrend = UPTREND_MAX_MULTIPLE_FLAT_TREND * (*ftMatchIter)->numPeriods();
+            unsigned int maxVsDownTrend = UPTREND_MAX_MULTIPLE_DOWNTREND * (*dtMatchIter)->numPeriods();
+            unsigned int overallUpTrendMaxPeriods = std::min(maxVsFlatTrend,maxVsDownTrend);
+            assert(overallUpTrendMaxPeriods >= minTrendLineSegmentLength_);
+            BOOST_LOG_TRIVIAL(debug) << "CupScanner: max uptrend periods:  " << overallUpTrendMaxPeriods;
+
+            UnsignedIntRange upTrendSegmentLengthRange(minTrendLineSegmentLength_,overallUpTrendMaxPeriods);
             PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
 
             SingleSegmentPatternScannerEngine upTrendScanner(upTrendSegmentLengthRange);

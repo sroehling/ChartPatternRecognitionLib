@@ -36,3 +36,26 @@ BOOST_AUTO_TEST_CASE( CupWithoutHandle_GBX )
 
     BOOST_TEST_MESSAGE("CupWithoutHandle_GBX");
 }
+
+BOOST_AUTO_TEST_CASE( CupWithoutHandle_AMBA )
+{
+
+    PeriodValSegmentPtr chartData = PeriodValSegment::readFromFile("./patternScan/AMBA_Daily_2014.csv");
+
+    PatternScannerPtr cupWithoutHandleScanner(new CupWithoutHandleScanner());
+    MultiPatternScanner multiCupWithoutHandleScanner(cupWithoutHandleScanner);
+    PatternMatchListPtr cupWithoutHandleMatches = multiCupWithoutHandleScanner.scanUniquePatternMatches(chartData);
+
+    // This data includes a mal-formed cup without handle, one which is  V-like and
+    // should be disqualified using the CupScanners constraints on the ratio for the length of the
+    // flat bottom versus the LHS downtrend.
+    //
+    // In particular: Scanning was identifying the following as a valid cup without handle, when it shouldn't:
+    //            CupWithoutHandle_AMBA: pattern match: start = 2014-01-30, end = 2014-02-27,
+    //            num segments = 3, depth % = 27.5741, last close = 33.91
+
+    verifyMatchList("CupWithoutHandle_AMBA",cupWithoutHandleMatches,0);
+
+
+    BOOST_TEST_MESSAGE("CupWithoutHandle_AMBA");
+}
