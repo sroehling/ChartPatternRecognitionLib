@@ -41,7 +41,7 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
     // the %d format requires a leading zero. We accommodate this by padding the date string with
     // a leading zero if the first part of the date only has 1 character.
     std::vector<std::string> dateParts;
-    boost::split(dateParts, dateStr, boost::is_any_of("-"));
+    boost::split(dateParts, dateStr, boost::is_any_of("-/"));
     if(dateParts.size() != 3)
     {
         std::string errorMsg = boost::str(boost::format("Invalid date format: [%s]")%dateStr);
@@ -54,10 +54,17 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
         firstDatePartWithLeadingZero.append(dateParts[0]);
         dateParts[0] = firstDatePartWithLeadingZero;
     }
+    if(dateParts[1].size() ==1)
+    {
+        std::string firstDatePartWithLeadingZero("0");
+        firstDatePartWithLeadingZero.append(dateParts[1]);
+        dateParts[1] = firstDatePartWithLeadingZero;
+    }
     std::string dateStrWithLeadingZero = boost::algorithm::join(dateParts, "-");
 
     const std::locale formats[] = {
         std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%y")), // e.g.: 11-Nov-12, 07-Nov-12 (note the leading zero)
+        std::locale(std::locale::classic(),new bt::time_input_facet("%m-%d-%Y")), // e.g. 01-12-2012 (note the leading zero on the month)
         std::locale(std::locale::classic(),new bt::time_input_facet("%Y-%m-%d")) // e.g. 2012-11-12
     };
 
@@ -77,6 +84,21 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
     std::string errorMsg = boost::str(boost::format("Invalid date format: [%s]")%dateStr);
     std::cerr << "parseDateFromString: " << errorMsg << std::endl;
     BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+}
+
+bool findDateInString(const std::string &dateStr, boost::posix_time::ptime &foundDate)
+{
+    try
+    {
+        foundDate = parseDateFromString(dateStr);
+        return true;
+    }
+    catch (std::exception &e)
+    {
+        return false;
+    }
+
+    return false;
 }
 
 double timeDifferenceMsec(const ptime &startTime, const ptime &endTime)
