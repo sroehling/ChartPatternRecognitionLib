@@ -112,5 +112,5 @@ bool PerValCltnSlidingWindow::windowFitsWithinRange(unsigned int windowSize,
        const PeriodValCltn::iterator &cltnEnd)
 {
     assert(windowSize > 0);
-    return (std::distance(cltnBegin,cltnEnd) >= windowSize)?true:false;
+    return (std::distance(cltnBegin,cltnEnd) >= (int)windowSize)?true:false;
 }

@@ -19,6 +19,11 @@ macx: LIBS += -mmacosx-version-min=10.7 -stdlib=libc++
 macx: LIBS += -stdlib=libc++
 CONFIG += c++11
 
+CONFIG(debug, debug|release) {
+} else {
+DEFINES += NDEBUG
+}
+
 SOURCES += \
     chartSegment/ANDSegmentConstraint.cpp \
     chartSegment/ChartSegment.cpp \

@@ -120,7 +120,7 @@ void PeriodValSegment::initSegments(const PeriodValCltn::iterator &segBegin,
 	startPos_ = std::distance(perValCltn_->begin(),segBegin);
 	endPos_ = std::distance(perValCltn_->begin(),segEnd);
 
-	assert((endPos_-startPos_) >= 0);
+    assert(endPos_>= startPos_);
 	assert(numVals() <= perValCltn_->size());
 
 	initHighestHighValIter();
@@ -154,7 +154,6 @@ PeriodValSegmentPtr  PeriodValSegment::moveSegBeginToPrev() const
 
 PeriodValSegmentPair PeriodValSegment::split(unsigned int splitPos) const
 {
-	assert(splitPos >= 0);
 	assert(splitPos <= numVals());
 
 	PeriodValCltn::iterator splitIter = segBegin_;
