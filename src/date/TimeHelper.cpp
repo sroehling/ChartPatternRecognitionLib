@@ -63,8 +63,11 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
     std::string dateStrWithLeadingZero = boost::algorithm::join(dateParts, "-");
 
     const std::locale formats[] = {
-        std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%y")), // e.g.: 11-Nov-12, 07-Nov-12 (note the leading zero)
+        // The order in this list is important. We try to match the longer formats first. Otherwise a date like 07-Nov-2020
+        // Could be matched as November 7, 2020 (only using the first 2 letters of the year).
+        std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%Y")), // e.g.: 07-Nov-2012 (note the leading zero)
         std::locale(std::locale::classic(),new bt::time_input_facet("%m-%d-%Y")), // e.g. 01-12-2012 (note the leading zero on the month)
+        std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%y")), // e.g.: 11-Nov-12, 07-Nov-12 (note the leading zero)
         std::locale(std::locale::classic(),new bt::time_input_facet("%Y-%m-%d")) // e.g. 2012-11-12
     };
 

@@ -107,6 +107,20 @@ BOOST_AUTO_TEST_CASE( PeriodValTest_ValidCSV_yLoader )
 
 }
 
+BOOST_AUTO_TEST_CASE( PeriodValTest_ValidCSV_eodData )
+{
+    PeriodValCltnPtr periodData = PeriodVal::readFromFile("./quoteData/eodDataFormat_AAPL_20140101_20141117.csv");
+    BOOST_TEST_MESSAGE( "eod data formatted CSV Data - AAPL: number of rows: " << periodData->size() );
+    BOOST_CHECK(periodData->size()==229);
+    PeriodVal lastVal = periodData->back();
+    BOOST_CHECK_EQUAL(lastVal.periodTime(),ptime(date(2014,11,17)));
+    BOOST_CHECK_EQUAL(lastVal.volume(),46746700);
+    PeriodVal firstVal = periodData->front();
+    BOOST_CHECK_EQUAL(firstVal.periodTime(),ptime(date(2014,01,01)));
+
+}
+
+
 BOOST_AUTO_TEST_CASE( PeriodValTest_MalformedHeaders )
 {
     BOOST_CHECK_THROW(PeriodVal::readFromFile("./quoteData/MalformedHeader.csv"),std::runtime_error);

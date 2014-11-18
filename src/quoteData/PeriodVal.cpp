@@ -119,7 +119,7 @@ public:
         {
             return false;
         }
-        if((!((numHeaderFields == 6) || (numHeaderFields==7))))
+        if(numHeaderFields < 6)
         {
             return false;
         }
@@ -142,36 +142,39 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
     std::cerr << "Parsing header: " << line <<std::endl;
     std::cerr << "Parsing header: num fields=" << headerFields.size() <<std::endl;
 
-    unsigned int numHeaderFields = headerFields.size();
-    if(!((numHeaderFields == 6) || (numHeaderFields==7)))
+    // The data rows are expected to have the same number columns
+    // as the header row.
+    quotesFormat.numHeaderFields = headerFields.size();
+
+    if(quotesFormat.numHeaderFields < 6)
     {
         // Need either 6 or 7 fields for date,open,high,low,close,volume, and optional adjusted volume column.
-        std::string errorMsg = boost::str(boost::format("Incorrect number of fields in file %s: got %d, expecting 6 or 7")%fileName%numHeaderFields);
+        std::string errorMsg = boost::str(boost::format("Incorrect number of fields in file %s: got %d, expecting at least 6")%fileName%quotesFormat.numHeaderFields);
         std::cerr << errorMsg << std::endl;
         BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
     }
 
     ptime headerTime;
-    if((numHeaderFields==6) && timeHelper::findDateInString(headerFields[0],headerTime))
+    if((quotesFormat.numHeaderFields==6) && timeHelper::findDateInString(headerFields[0],headerTime))
     {
         // There's no CSV header, so we assume the data is formatted as
         // date,open,high,low,close,volume
-        std::cerr << "Parsing header: no CSV header found, using yLoader format"  << std::endl;
         quotesFormat.dateFieldIndex = 0;
         quotesFormat.openFieldIndex = 1;
         quotesFormat.highFieldIndex = 2;
         quotesFormat.lowFieldIndex = 3;
         quotesFormat.closeFieldIndex = 4;
         quotesFormat.volumeFieldIndex = 5;
-        quotesFormat.numHeaderFields = 6;
         quotesFormat.firstLineIsData = true;
     }
     else
     {
-        quotesFormat.numHeaderFields = 6;
-        quotesFormat.firstLineIsData = false;
+
+        // Treat the first line as a header (i.e., don't treat it as data)
+         quotesFormat.firstLineIsData = false;
+
         // CSV File will have header fields indicating which order the data fields are expected.
-        for(unsigned int headerIndex = 0; headerIndex < headerFields.size(); headerIndex++)
+        for(unsigned int headerIndex = 0; headerIndex < quotesFormat.numHeaderFields; headerIndex++)
         {
             std::string headerFieldName = boost::to_upper_copy(headerFields[headerIndex]);
             stripNonHeaderChars(headerFieldName);
@@ -204,7 +207,6 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
             {
                 quotesFormat.adjCloseFieldIndex = headerIndex;
                 quotesFormat.hasAdjustedCloseField = true;
-                quotesFormat.numHeaderFields = 7;
             }
         }
 
