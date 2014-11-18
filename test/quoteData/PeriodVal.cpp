@@ -93,6 +93,17 @@ BOOST_AUTO_TEST_CASE( PeriodValTest_ValidCSV )
     periodData = PeriodVal::readFromFile("./quoteData/GoogleFormatCELG.csv");
     BOOST_TEST_MESSAGE( "Google formatted CSV Data - CELG: number of rows: " << periodData->size() );
     BOOST_CHECK(periodData->size()==252);
+}
+
+BOOST_AUTO_TEST_CASE( PeriodValTest_ValidCSV_yLoader )
+{
+    PeriodValCltnPtr periodData = PeriodVal::readFromFile("./quoteData/yLoaderFormatAAPL.csv");
+    BOOST_TEST_MESSAGE( "yLoader formatted CSV Data - AAPL: number of rows: " << periodData->size() );
+    BOOST_CHECK(periodData->size()==285);
+    PeriodVal lastVal = periodData->back();
+    BOOST_CHECK_EQUAL(lastVal.periodTime(),ptime(date(2014,11,14)));
+    PeriodVal firstVal = periodData->front();
+    BOOST_CHECK_EQUAL(firstVal.periodTime(),ptime(date(2013,10,01)));
 
 }
 

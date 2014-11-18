@@ -66,6 +66,12 @@ static void stripNonHeaderChars(std::string &str)
     str.erase(std::remove_if(str.begin(), str.end(), notCSVHeaderChar), str.end());
 }
 
+static void stripWhiteSpace(std::string &str)
+{
+    str.erase(std::remove_if(str.begin(), str.end(), ::isspace), str.end());
+
+}
+
 struct PeriodValChronologicalSortPred {
     bool operator() (const PeriodVal &first, const PeriodVal &second)
     {
@@ -133,6 +139,9 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
     CSVTokenizer headerTokenizer(line);
     headerFields.assign(headerTokenizer.begin(),headerTokenizer.end());
 
+    std::cerr << "Parsing header: " << line <<std::endl;
+    std::cerr << "Parsing header: num fields=" << headerFields.size() <<std::endl;
+
     unsigned int numHeaderFields = headerFields.size();
     if(!((numHeaderFields == 6) || (numHeaderFields==7)))
     {
@@ -147,6 +156,7 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
     {
         // There's no CSV header, so we assume the data is formatted as
         // date,open,high,low,close,volume
+        std::cerr << "Parsing header: no CSV header found, using yLoader format"  << std::endl;
         quotesFormat.dateFieldIndex = 0;
         quotesFormat.openFieldIndex = 1;
         quotesFormat.highFieldIndex = 2;
@@ -213,59 +223,74 @@ static PeriodVal readOnePeriodVal(const QuotesCSVFormatInfo &quotesFormat, const
                                   unsigned int currLineNum,const std::string &fileName)
 {
     assert(quotesFormat.validFormat());
-    CSVTokenizer csvDataTokenizer(line);
 
-    vector< string > csvDataFields;
-    csvDataFields.assign(csvDataTokenizer.begin(),csvDataTokenizer.end());
-
-    if(csvDataFields.size() != quotesFormat.numHeaderFields)
+    try
     {
-        std::string errorMsg = boost::str(
-                boost::format("Malformed CSV data in file %s on line %d: expecting %d fields, got %d")
-                %fileName%currLineNum%quotesFormat.numHeaderFields%csvDataFields.size());
-        std::cerr << errorMsg << std::endl;
-        BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
-    }
 
-    std::string dateField = csvDataFields[quotesFormat.dateFieldIndex];
-    ptime perTime(timeHelper::parseDateFromString(dateField));
+        CSVTokenizer csvDataTokenizer(line);
 
-    double open = lexical_cast<double>(csvDataFields[quotesFormat.openFieldIndex]);
-    double high = lexical_cast<double>(csvDataFields[quotesFormat.highFieldIndex]);
-    double low = lexical_cast<double>(csvDataFields[quotesFormat.lowFieldIndex]);
-    double close = lexical_cast<double>(csvDataFields[quotesFormat.closeFieldIndex]);
-    unsigned int vol = lexical_cast<unsigned int>(csvDataFields[quotesFormat.volumeFieldIndex]);
+        vector< string > csvDataFields;
+        csvDataFields.assign(csvDataTokenizer.begin(),csvDataTokenizer.end());
 
-    // TODO - Validate high >= low, etc.
-
-    if(quotesFormat.hasAdjustedCloseField)
-    {
-        double adjClose = lexical_cast<double>(csvDataFields[quotesFormat.adjCloseFieldIndex]);
-
-        // "Normalize" the data based upon the adjusted close value. Technical
-        // analysis and back-testing should always used adjusted values.
-        if(close <= 0.0)
+        if(csvDataFields.size() != quotesFormat.numHeaderFields)
         {
             std::string errorMsg = boost::str(
-                        boost::format("Malformed CSV data in file %s on line %d: expecting close >= 0.0, got %f")
-                        %fileName%currLineNum%close);
+                        boost::format("Malformed CSV data in file %s on line %d: expecting %d fields, got %d")
+                        %fileName%currLineNum%quotesFormat.numHeaderFields%csvDataFields.size());
             std::cerr << errorMsg << std::endl;
             BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
         }
 
-        double adjScaleFactor = adjClose/close;
-        low = low*adjScaleFactor;
-        high = high*adjScaleFactor;
-        open = open*adjScaleFactor;
-        close = close*adjScaleFactor;
+        std::string dateField = csvDataFields[quotesFormat.dateFieldIndex];
+        ptime perTime(timeHelper::parseDateFromString(dateField));
 
-        // Note that we *do not* adjust volume like the other fields. For Yahoo Finance EOD data,
-        // in particular, the volume is already adjusted. This was verified with by looking at the
-        // unadjusted and adjusted charts on stockcharts.com. On 2014-06-06, the unadjusted volume was
-        // 12M, or 87M adjusted. By comparison, the EOD from Google adjusts all the columns by default.
+        double open = lexical_cast<double>(csvDataFields[quotesFormat.openFieldIndex]);
+        double high = lexical_cast<double>(csvDataFields[quotesFormat.highFieldIndex]);
+        double low = lexical_cast<double>(csvDataFields[quotesFormat.lowFieldIndex]);
+        double close = lexical_cast<double>(csvDataFields[quotesFormat.closeFieldIndex]);
+        unsigned int vol = lexical_cast<unsigned int>(csvDataFields[quotesFormat.volumeFieldIndex]);
+
+        // TODO - Validate high >= low, etc.
+
+        if(quotesFormat.hasAdjustedCloseField)
+        {
+            double adjClose = lexical_cast<double>(csvDataFields[quotesFormat.adjCloseFieldIndex]);
+
+            // "Normalize" the data based upon the adjusted close value. Technical
+            // analysis and back-testing should always used adjusted values.
+            if(close <= 0.0)
+            {
+                std::string errorMsg = boost::str(
+                            boost::format("Malformed CSV data in file %s on line %d: expecting close >= 0.0, got %f")
+                            %fileName%currLineNum%close);
+                std::cerr << errorMsg << std::endl;
+                BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+            }
+
+            double adjScaleFactor = adjClose/close;
+            low = low*adjScaleFactor;
+            high = high*adjScaleFactor;
+            open = open*adjScaleFactor;
+            close = close*adjScaleFactor;
+
+            // Note that we *do not* adjust volume like the other fields. For Yahoo Finance EOD data,
+            // in particular, the volume is already adjusted. This was verified with by looking at the
+            // unadjusted and adjusted charts on stockcharts.com. On 2014-06-06, the unadjusted volume was
+            // 12M, or 87M adjusted. By comparison, the EOD from Google adjusts all the columns by default.
+        }
+        unsigned int dummyIndexPlaceholderForReassignment = 0;
+        return PeriodVal(perTime,open,high,low,close,vol,dummyIndexPlaceholderForReassignment);
     }
-    unsigned int dummyIndexPlaceholderForReassignment = 0;
-    return PeriodVal(perTime,open,high,low,close,vol,dummyIndexPlaceholderForReassignment);
+
+    catch(const std::exception &e)
+    {
+        std::string errorMsg = boost::str(
+                boost::format("Malformed CSV data in file %s on line %d: %s, csv data =%s")
+                %fileName%currLineNum%e.what()%line);
+        std::cerr << errorMsg << std::endl;
+        BOOST_THROW_EXCEPTION(std::runtime_error(errorMsg));
+    }
+
 
 }
 
@@ -274,8 +299,6 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 {
 
 	ifstream in(fileName.c_str());
-
-	PeriodValCltnPtr perValCltn(new PeriodValCltn());
 
 	if (!in.is_open())
 	{
@@ -304,9 +327,11 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
     // ---------------------------------------------------------------------------------------------
     // Parse the open,high,low,close,volume (OHLC) data
     // ---------------------------------------------------------------------------------------------
+    PeriodValCltnPtr perValCltn(new PeriodValCltn());
 
     if(quotesFormat.firstLineIsData)
     {
+        stripWhiteSpace(line);
         PeriodVal currLinePerVal = readOnePeriodVal(quotesFormat,line,currLineNum,fileName);
         perValCltn->push_front(currLinePerVal);
     }
@@ -314,6 +339,7 @@ PeriodValCltnPtr PeriodVal::readFromFile(const std::string &fileName)
 	while (getline(in,line))
 	{
         currLineNum++;
+        stripWhiteSpace(line);
         PeriodVal currLinePerVal = readOnePeriodVal(quotesFormat,line,currLineNum,fileName);
         perValCltn->push_front(currLinePerVal);
 	}
