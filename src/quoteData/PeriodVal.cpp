@@ -20,6 +20,7 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 #include "TimeHelper.h"
+#include "DebugLog.h"
 
 #define UNDEFINED_CSV_HEADER_INDEX -1
 
@@ -139,8 +140,8 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
     CSVTokenizer headerTokenizer(line);
     headerFields.assign(headerTokenizer.begin(),headerTokenizer.end());
 
-    std::cerr << "Parsing header: " << line <<std::endl;
-    std::cerr << "Parsing header: num fields=" << headerFields.size() <<std::endl;
+    DEBUG_MSG("Parsing header: " << line);
+    DEBUG_MSG("Parsing header: num fields=" << headerFields.size());
 
     // The data rows are expected to have the same number columns
     // as the header row.

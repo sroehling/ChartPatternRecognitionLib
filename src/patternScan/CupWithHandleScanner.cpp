@@ -1,7 +1,6 @@
 #include "CupWithHandleScanner.h"
 #include "CupScanner.h"
 #include "CupWithHandlePatternMatch.h"
-#include <boost/log/trivial.hpp>
 #include "VScanner.h"
 
 #include "SingleSegmentPatternScannerEngine.h"
@@ -12,6 +11,7 @@
 #include "PatternMatchValidatorCreationHelper.h"
 #include "PrevPatternValueRatioValidatorFactory.h"
 #include "ScannerHelper.h"
+#include "DebugLog.h"
 
 
 #define DEFAULT_CUP_WITH_HANDLE_SCANNER_MIN_SEGMENT_LENGTH 2
@@ -53,7 +53,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
 
     PatternMatchListPtr cupMatches = lhsCupScanner.scanPatternMatches(chartVals);
 
-    BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of cup matches: " << cupMatches->size();
+    DEBUG_MSG("CupWithHandleScanner: number of cup matches: " << cupMatches->size());
 
 
     for(PatternMatchList::const_iterator cupMatchIter = cupMatches->begin();
@@ -76,7 +76,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
 
         PatternMatchListPtr uShapedHandleMatches = PatternMatchValidator::filterMatches(handleValidator,
                                            uShapedHandleScanner.scanPatternMatches(valsForHandleScan));
-        BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of U shaped handle matches: " << uShapedHandleMatches->size();
+        DEBUG_MSG("CupWithHandleScanner: number of U shaped handle matches: " << uShapedHandleMatches->size());
 
         for(PatternMatchList::const_iterator uShapedHandleMatchIter = uShapedHandleMatches->begin();
             uShapedHandleMatchIter != uShapedHandleMatches->end(); uShapedHandleMatchIter++)
@@ -96,7 +96,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
                     CUP_WITH_HANDLE_SCANNER_MAX_DEPTH_HANDLE_LHS_CUP));
         PatternMatchListPtr vShapedHandleMatches = PatternMatchValidator::filterMatches(handleValidator,
                                             vShapedHandleScanner.scanPatternMatches(valsForHandleScan));
-        BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of V shaped handle matches: " << vShapedHandleMatches->size();
+        DEBUG_MSG("CupWithHandleScanner: number of V shaped handle matches: " << vShapedHandleMatches->size());
 
         for(PatternMatchList::const_iterator vShapedHandleMatchIter = vShapedHandleMatches->begin();
             vShapedHandleMatchIter != vShapedHandleMatches->end(); vShapedHandleMatchIter++)
@@ -108,7 +108,7 @@ PatternMatchListPtr CupWithHandleScanner::scanPatternMatches(const PeriodValSegm
 
     }
 
-    BOOST_LOG_TRIVIAL(debug) << "CupWithHandleScanner: number of cup with handle matches: " << cupWithHandleMatches->size();
+    DEBUG_MSG("CupWithHandleScanner: number of cup with handle matches: " << cupWithHandleMatches->size());
 
     return cupWithHandleMatches;
 }

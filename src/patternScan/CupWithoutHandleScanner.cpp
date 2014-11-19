@@ -1,5 +1,4 @@
 
-#include <boost/log/trivial.hpp>
 
 #include "CupWithoutHandleScanner.h"
 #include "CloseWithinPercentOfDepthFromFirstHighValidator.h"
@@ -7,6 +6,7 @@
 #include "CupScanner.h"
 #include "CupWithoutHandlePatternMatch.h"
 #include "PatternMatchValidatorCreationHelper.h"
+#include "DebugLog.h"
 
 #define CUP_WITHOUT_HANDLE_SCANNER_CUP_LAST_CLOSE_PERC_ABOVE_DEPTH_FROM_FIRST_CLOSE_THRESHOLD 0.2
 
@@ -44,7 +44,7 @@ PatternMatchListPtr CupWithoutHandleScanner::scanPatternMatches(const PeriodValS
         cupWithHandleMatches->push_back(PatternMatchPtr(new CupWithoutHandlePatternMatch(*cupIter)));
     }
 
-    BOOST_LOG_TRIVIAL(debug) << "CupWithoutHandleScanner: number of cup matches: " << cupWithHandleMatches->size();
+    DEBUG_MSG("CupWithoutHandleScanner: number of cup matches: " << cupWithHandleMatches->size());
 
     return cupWithHandleMatches;
 }

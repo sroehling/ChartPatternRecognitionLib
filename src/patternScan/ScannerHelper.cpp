@@ -8,7 +8,6 @@
 #include <ScannerHelper.h>
 #include "PatternMatch.h"
 #include "TimeHelper.h"
-#include <boost/log/trivial.hpp>
 #include "PatternMatchFilter.h"
 
 #include "SecondPeriodValuePivotsLower.h"
@@ -18,6 +17,7 @@
 #include "ValuesCloseToTrendlineValidator.h"
 #include "PatternMatchValidatorCreationHelper.h"
 #include "RecoverPercentOfDepth.h"
+#include "DebugLog.h"
 
 using namespace timeHelper;
 
@@ -25,12 +25,12 @@ namespace scannerHelper {
 
 void logMatchInfo(const std::string &prefix, const PatternMatch &match)
 {
-	BOOST_LOG_TRIVIAL(debug) << prefix
+    DEBUG_MSG(prefix
             << ": start = " << formatDate(match.firstValue().periodTime())
             << ", end = " << formatDate(match.lastValue().periodTime())
 			<< ", num segments = " << match.numSegments()
 			<< ", depth (pts/%) = " << match.depthPoints() << "/" << match.depthPercent()
-		<< ", last close = " << match.lastValue().close();
+        << ", last close = " << match.lastValue().close());
 }
 
 void logMatchesInfo(const std::string &prefix, const PatternMatchListPtr &matches)

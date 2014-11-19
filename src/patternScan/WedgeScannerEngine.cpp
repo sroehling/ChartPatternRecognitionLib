@@ -5,7 +5,6 @@
  *      Author: sroehling
  */
 
-#include <boost/log/trivial.hpp>
 #include <WedgeScannerEngine.h>
 #include "PeriodValSegment.h"
 #include "PatternMatchFilter.h"
@@ -22,6 +21,7 @@
 #include "WedgeMatchValidationInfo.h"
 #include "PatternMatchFilter.h"
 #include <vector>
+#include "DebugLog.h"
 
 // The slope calculations for wedge and triangle scanning use the validTrendlineSlopePercPerMonth()
 // and these slope ranges. So, since the "valid slope" calculations are based upon calendar days
@@ -167,11 +167,11 @@ bool WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot(const ChartSegmentP
     if(trendlineIntercept.x() > upperTrendLine->lastPeriodVal().pseudoXVal() &&
        trendlineIntercept.x() > lowerTrendLine->lastPeriodVal().pseudoXVal())
     {
-        BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot: "
+        DEBUG_MSG("WedgeScannerEngine::interceptAfter2ndLowerAndUpperPivot: "
                 << " trend line intercept: " << trendlineIntercept.x()
                 << " first pivot high: " << upperTrendLine->firstPeriodVal().pseudoXVal()
                 << " last upper pivot high: " << upperTrendLine->lastPeriodVal().pseudoXVal()
-                << " last upper pivot low:: " << lowerTrendLine->lastPeriodVal().pseudoXVal() << std::endl;
+                << " last upper pivot low:: " << lowerTrendLine->lastPeriodVal().pseudoXVal());
         return true;
     }
     else

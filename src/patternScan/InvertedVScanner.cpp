@@ -8,9 +8,9 @@
 #include <InvertedVScanner.h>
 
 #include "TrendLineScanner.h"
-#include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
 #include "PatternMatchFilter.h"
+#include "DebugLog.h"
 
 using namespace scannerHelper;
 
@@ -29,7 +29,7 @@ PatternMatchListPtr InvertedVScanner::scanPatternMatches(const PeriodValSegmentP
 {
 	PatternScannerPtr uptrendScanner(new TrendLineScanner(TrendLineScanner::UPTREND_SLOPE_RANGE,trendLineMaxDistancePerc_));
 	PatternMatchListPtr uptrendMatches = uptrendScanner->scanPatternMatches(chartVals);
-	BOOST_LOG_TRIVIAL(debug) << "VScanner: number of up-trend matches: " << uptrendMatches->size();
+    DEBUG_MSG("VScanner: number of up-trend matches: " << uptrendMatches->size());
 
 	PatternMatchListPtr invertedVMatches(new PatternMatchList());
 
@@ -62,7 +62,7 @@ PatternMatchListPtr InvertedVScanner::scanPatternMatches(const PeriodValSegmentP
 		} // For each matching up-trend pattern
 	} // for each down-trend match
 
-	BOOST_LOG_TRIVIAL(debug) << "InvertedVScanner: number of overall matches: " <<  invertedVMatches->size();
+    DEBUG_MSG("InvertedVScanner: number of overall matches: " <<  invertedVMatches->size());
 
 
 	// For purposes of pattern matching, there's no need to return duplicate patterns with

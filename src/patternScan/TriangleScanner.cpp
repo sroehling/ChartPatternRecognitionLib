@@ -5,10 +5,9 @@
  *      Author: sroehling
  */
 
-#include <boost/log/trivial.hpp>
-
 #include <TriangleScanner.h>
 #include "ChartSegment.h"
+#include "DebugLog.h"
 
 
 
@@ -42,17 +41,17 @@ bool TriangleScanner::pivotsSpacedOut(const ChartSegmentPtr &upperTrendLine,
     double pivotHighSpacing = upperTrendLine->lastPeriodVal().pseudoXVal()-upperTrendLine->firstPeriodVal().pseudoXVal();
     if(pivotHighSpacing >= numPerToIntercept)
     {
-        BOOST_LOG_TRIVIAL(debug) << "ERROR: WedgeScanner: "
+        DEBUG_MSG("ERROR: WedgeScanner: "
                 << " pivot high space: " << pivotHighSpacing
-                << " intercept periods: " << numPerToIntercept << std::endl;
+                << " intercept periods: " << numPerToIntercept);
 
     }
     assert(pivotHighSpacing <= numPerToIntercept);
     if(pivotHighSpacing > numPerToIntercept)
     {
-        BOOST_LOG_TRIVIAL(debug) << "WedgeScanner: "
+        DEBUG_MSG("WedgeScanner: "
                 << " pivot high space: " << pivotHighSpacing
-                << " intercept periods: " << numPerToIntercept << std::endl;
+                << " intercept periods: " << numPerToIntercept);
 
     }
     if((pivotHighSpacing/numPerToIntercept) < MIN_SPACING_PERC)
@@ -130,8 +129,8 @@ unsigned int TriangleScanner::maxPatternPeriods(const ChartSegmentPtr &upperTren
 	assert(validTrendLines(upperTrendLine,lowerTrendLine));
 
 	unsigned int maxPeriods = floor(this->numPeriodsToIntercept(upperTrendLine,lowerTrendLine));
-	BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: num periods to intercept: "
-			<< maxPeriods << std::endl;
+    DEBUG_MSG("WedgeScannerEngine: num periods to intercept: "
+            << maxPeriods);
 
 	return maxPeriods;
 }

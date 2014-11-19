@@ -1,5 +1,5 @@
 #include "HighestHighLessThanFirstHigh.h"
-#include <boost/log/trivial.hpp>
+#include "DebugLog.h"
 
 HighestHighLessThanFirstHigh::HighestHighLessThanFirstHigh()
 {
@@ -16,8 +16,8 @@ bool HighestHighLessThanFirstHigh::validPattern(const PatternMatch &candidateMat
 
     double highestHigh = candidateMatch.highestHigh();
 
-    BOOST_LOG_TRIVIAL(debug) << "HighestHighLessThanFirstHigh: first high: " << firstHigh
-                                << " highest high: " << highestHigh;
+    DEBUG_MSG("HighestHighLessThanFirstHigh: first high: " << firstHigh
+                                << " highest high: " << highestHigh);
 
 
     return (highestHigh <= firstHighWithTolerance)? true : false;

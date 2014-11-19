@@ -7,10 +7,10 @@
 
 #include <PivotHighScanner.h>
 #include "InvertedVScanner.h"
-#include <boost/log/trivial.hpp>
 #include "MultiPatternScanner.h"
 #include "PatternMatchFilter.h"
 #include "PerValCltnSlidingWindow.h"
+#include "DebugLog.h"
 
 
 PivotHighScanner::PivotHighScanner() {
@@ -43,10 +43,10 @@ PatternMatchListPtr PivotHighScanner::scanPatternMatches(const PeriodValSegmentP
                    )
              {
 
-                BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: pivot high: "
+                DEBUG_MSG("PivotHighScanner: pivot high: "
                         << "LHS=" << slidingPivotTestWindow.firstVal()
                         << "Middle (pivot)=" << slidingPivotTestWindow.middleVal()
-                        << "RHS=" << slidingPivotTestWindow.lastVal() << std::endl;
+                        << "RHS=" << slidingPivotTestWindow.lastVal());
                 ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
                         slidingPivotTestWindow.windowFirst(),slidingPivotTestWindow.windowLast(),
                         PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
@@ -61,13 +61,13 @@ PatternMatchListPtr PivotHighScanner::scanPatternMatches(const PeriodValSegmentP
     PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestHighestHigh(allPivots);
 
 
-	BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: num pivot highs: " << sortedUniquePivots->size() << std::endl;
+    DEBUG_MSG("PivotHighScanner: num pivot highs: " << sortedUniquePivots->size());
 	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
 	{
-		BOOST_LOG_TRIVIAL(debug) << "PivotHighScanner: pivot high:"
+        DEBUG_MSG("PivotHighScanner: pivot high:"
 				<< " time=" << (*matchIter)->highestHighVal().periodTime()
 				<< " (psuedo) x val=" << (*matchIter)->highestHighVal().pseudoXVal()
-				<< ", highest high=" << (*matchIter)->highestHigh() << std::endl;
+                << ", highest high=" << (*matchIter)->highestHigh());
 	}
 
 	return sortedUniquePivots;

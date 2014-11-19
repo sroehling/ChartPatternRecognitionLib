@@ -126,6 +126,7 @@ INCLUDEPATH += segmentContraint\
     chartSegment\
     chartSegmentList\
     date\
+    log\
     math\
     patternMatch\
     patternMatchFilter\
@@ -242,7 +243,8 @@ HEADERS += patternrecognitionlib.h \
     patternMatch/WedgePatternMatch.h \
     patternMatch/RisingWedgePatternMatch.h \
     patternScan/FallingWedgeScanner.h \
-    patternMatch/FallingWedgePatternMatch.h
+    patternMatch/FallingWedgePatternMatch.h \
+    log/DebugLog.h
 unix {
     target.path = /usr/local/lib
     INSTALLS += target

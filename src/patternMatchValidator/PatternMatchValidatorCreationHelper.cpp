@@ -5,12 +5,12 @@
  *      Author: sroehling
  */
 
-#include <boost/log/trivial.hpp>
 #include <PatternMatchValidatorCreationHelper.h>
 #include "ANDPatternMatchValidator.h"
 #include "PatternMatchValueRef.h"
 #include "PeriodValueRef.h"
 #include "DoubleRange.h"
+#include "DebugLog.h"
 
 namespace patternMatchValidatorCreationHelper
 {
@@ -154,7 +154,7 @@ PatternMatchValidatorPtr lowAbovePercDepthOfOtherPattern(const PatternMatchPtr &
     double thresholdValue = firstHigh-(depth * percDepthOther);
     PatternMatchValueRefPtr thresholdValRef(new FixedPatternMatchValueRef(thresholdValue));
 
-    BOOST_LOG_TRIVIAL(debug) << "lowAbovePercDepthOfOtherPattern: low threshold: " << thresholdValue;
+    DEBUG_MSG("lowAbovePercDepthOfOtherPattern: low threshold: " << thresholdValue);
 
 
     PatternMatchValidatorPtr aboveDepthOther(

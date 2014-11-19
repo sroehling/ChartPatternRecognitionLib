@@ -5,9 +5,6 @@
  *      Author: sroehling
  */
 
-#include <boost/log/trivial.hpp>
-
-
 #include "EndWithinPercentOfStart.h"
 #include "ORPatternMatchValidator.h"
 #include "CupScanner.h"
@@ -29,6 +26,7 @@
 #include "PatternSlopeWithinRange.h"
 #include "PercentIntersectingPatternLineValidator.h"
 #include "PrevPatternValueRatioValidatorFactory.h"
+#include "DebugLog.h"
 
 #define FLAT_BOTTOM_MAX_MULTIPLE_DOWNTREND 3
 #define UPTREND_MAX_MULTIPLE_DOWNTREND 3
@@ -126,7 +124,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
                        downTrendScanner.scanPatternMatches(chartVals));
     PatternMatchListPtr downtrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedDowntrendMatches);
 
-    BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of downtrend matches: " << downtrendMatches->size();
+    DEBUG_MSG("CupScanner: number of downtrend matches: " << downtrendMatches->size());
 
 
 	for(PatternMatchList::const_iterator dtMatchIter = downtrendMatches->begin();
@@ -143,7 +141,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
         PatternMatchListPtr validatedFlatMatches = PatternMatchValidator::filterMatches(flatValidator,flatScanner.scanPatternMatches(valsForFlatScan));
         PatternMatchListPtr flatMatches = patternMatchFilter::filterUniqueStartEndTime(validatedFlatMatches);
 
-        BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of flat matches: " << flatMatches->size();
+        DEBUG_MSG("CupScanner: number of flat matches: " << flatMatches->size());
 
 		for(PatternMatchList::const_iterator ftMatchIter = flatMatches->begin();
 				ftMatchIter!=flatMatches->end();ftMatchIter++)
@@ -156,7 +154,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
             unsigned int maxVsDownTrend = UPTREND_MAX_MULTIPLE_DOWNTREND * (*dtMatchIter)->numPeriods();
             unsigned int overallUpTrendMaxPeriods = std::min(maxVsFlatTrend,maxVsDownTrend);
             assert(overallUpTrendMaxPeriods >= minTrendLineSegmentLength_);
-            BOOST_LOG_TRIVIAL(debug) << "CupScanner: max uptrend periods:  " << overallUpTrendMaxPeriods;
+            DEBUG_MSG("CupScanner: max uptrend periods:  " << overallUpTrendMaxPeriods);
 
             UnsignedIntRange upTrendSegmentLengthRange(minTrendLineSegmentLength_,overallUpTrendMaxPeriods);
             PeriodValSegmentPtr valsForUptrendScan = (*ftMatchIter)->trailingValsWithLastVal(upTrendSegmentLengthRange.maxVal());
@@ -170,7 +168,7 @@ PatternMatchListPtr CupScanner::scanPatternMatches(const PeriodValSegmentPtr &ch
                                   upTrendScanner.scanPatternMatches(valsForUptrendScan));
             PatternMatchListPtr upTrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedUpTrendMatches);
 
-            BOOST_LOG_TRIVIAL(debug) << "CupScanner: number of uptrend matches: " << upTrendMatches->size();
+            DEBUG_MSG("CupScanner: number of uptrend matches: " << upTrendMatches->size());
 
 			PatternMatchValidatorPtr uptrendValidator =
 					upTrendValidatorFactory_.createValidator2(*dtMatchIter,*ftMatchIter);

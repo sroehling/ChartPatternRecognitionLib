@@ -8,7 +8,6 @@
 #include <PivotLowScanner.h>
 #include "VScanner.h"
 #include "MultiPatternScanner.h"
-#include <boost/log/trivial.hpp>
 #include "PatternMatchFilter.h"
 #include "CupScanner.h"
 #include "PatternMatchValidator.h"
@@ -17,6 +16,7 @@
 #include "PeriodValueRef.h"
 #include "ChartSegment.h"
 #include "PerValCltnSlidingWindow.h"
+#include "DebugLog.h"
 
 PivotLowScanner::PivotLowScanner() {
 	pivotLowMaxTrendLineDistancePerc_ = 3.0;
@@ -70,10 +70,10 @@ PatternMatchListPtr PivotLowScanner::scanPatternMatches(const PeriodValSegmentPt
                    )
              {
 
-                BOOST_LOG_TRIVIAL(debug) << "PivotLowScanner: found pivot low: "
+                DEBUG_MSG("PivotLowScanner: found pivot low: "
                         << "LHS=" << slidingPivotTestWindow.firstVal()
                         << "Middle (pivot)=" << slidingPivotTestWindow.middleVal()
-                        << "RHS=" << slidingPivotTestWindow.lastVal() << std::endl;
+                        << "RHS=" << slidingPivotTestWindow.lastVal());
                 ChartSegmentPtr pivotSeg(new ChartSegment(chartVals->perValCltn(),
                         slidingPivotTestWindow.windowFirst(),slidingPivotTestWindow.windowLast(),
                         PeriodValueRefPtr(new TypicalPricePeriodValueRef())));
@@ -88,13 +88,13 @@ PatternMatchListPtr PivotLowScanner::scanPatternMatches(const PeriodValSegmentPt
 
     PatternMatchListPtr sortedUniquePivots = patternMatchFilter::filterUniqueAndLongestLowestLow(allPivots);
 
-    BOOST_LOG_TRIVIAL(debug) << "PivotLowScanner: num pivot lows: " << sortedUniquePivots->size() << std::endl;
+    DEBUG_MSG("PivotLowScanner: num pivot lows: " << sortedUniquePivots->size());
 	for(PatternMatchList::iterator matchIter = sortedUniquePivots->begin(); matchIter != sortedUniquePivots->end(); matchIter++)
 	{
-		BOOST_LOG_TRIVIAL(debug) << "PivotLowScanner: pivot low: "
+        DEBUG_MSG("PivotLowScanner: pivot low: "
 				<< "time=" << (*matchIter)->lowestLowVal().periodTime()
 				<< "(psuedo) x val=" << (*matchIter)->lowestLowVal().pseudoXVal()
-				<< ", lowest low=" << (*matchIter)->lowestLow() << std::endl;
+                << ", lowest low=" << (*matchIter)->lowestLow());
 	}
 
 	return sortedUniquePivots;

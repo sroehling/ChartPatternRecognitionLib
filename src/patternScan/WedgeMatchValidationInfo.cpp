@@ -1,7 +1,7 @@
 #include "WedgeMatchValidationInfo.h"
-#include <boost/log/trivial.hpp>
 #include <assert.h>
 #include <cmath>
+#include "DebugLog.h"
 
 WedgeMatchValidationInfo::WedgeMatchValidationInfo(const PeriodValSegmentPtr &chartVals,
         const ChartSegmentPtr &upperTrendLine,
@@ -82,10 +82,10 @@ PatternMatchBreakoutInfoPtr WedgeMatchValidationInfo::upperTrendLineBreakout() c
     if (upperTrendLine_->segmentEq()->belowLine((*prevPerValIter).closeCoord()) &&
             upperTrendLine_->segmentEq()->aboveLine((*currPerValIter_).closeCoord()))
     {
-        BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: upper trend line breakout: "
+        DEBUG_MSG("WedgeScannerEngine: upper trend line breakout: "
                     << "prev val=" << (*prevPerValIter).closeCoord()
                     << ", curr val=" << (*currPerValIter_).closeCoord()
-                    << ", curr period val=" << (*currPerValIter_) << std::endl;
+                    << ", curr period val=" << (*currPerValIter_));
         return PatternMatchBreakoutInfoPtr(new PatternMatchBreakoutInfo(currXVal,breakoutYVal));
     }
     else
@@ -109,10 +109,10 @@ PatternMatchBreakoutInfoPtr WedgeMatchValidationInfo::lowerTrendLineBreakdown() 
     if (lowerTrendLine_->segmentEq()->aboveLine((*prevPerValIter).closeCoord()) &&
             lowerTrendLine_->segmentEq()->belowLine((*currPerValIter_).closeCoord()))
     {
-        BOOST_LOG_TRIVIAL(debug) << "WedgeScannerEngine: lower trend line breakdown: "
+        DEBUG_MSG("WedgeScannerEngine: lower trend line breakdown: "
                     << "prev val=" << (*prevPerValIter).closeCoord()
                     << ", curr val=" << (*currPerValIter_).closeCoord()
-                    << ", curr period val=" << (*currPerValIter_) << std::endl;
+                    << ", curr period val=" << (*currPerValIter_));
         return PatternMatchBreakoutInfoPtr(new PatternMatchBreakoutInfo(currXVal,breakoutYVal));
     }
     else

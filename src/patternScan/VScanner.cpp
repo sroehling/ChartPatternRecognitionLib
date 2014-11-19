@@ -11,7 +11,6 @@
 #include "ORPatternMatchValidator.h"
 #include "LastValueAbovePointValue.h"
 #include "AnyPatternMatchValidator.h"
-#include <boost/log/trivial.hpp>
 #include "ScannerHelper.h"
 #include "PatternMatchFilter.h"
 #include "ANDPatternMatchValidator.h"
@@ -23,6 +22,7 @@
 #include "ValuesCloseToTrendlineValidator.h"
 #include "LowestLowGreaterThanLastLow.h"
 #include "PatternMatchValidatorCreationHelper.h"
+#include "DebugLog.h"
 
 using namespace scannerHelper;
 using namespace patternMatchValidatorCreationHelper;
@@ -71,7 +71,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
     PatternMatchListPtr validatedDownTrendMatches = PatternMatchValidator::filterMatches(downTrendValidator,downTrendScanner.scanPatternMatches(chartVals));
     PatternMatchListPtr downtrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedDownTrendMatches);
 
-    BOOST_LOG_TRIVIAL(debug) << "VScanner: number of downtrend matches: " << downtrendMatches->size();
+    DEBUG_MSG("VScanner: number of downtrend matches: " << downtrendMatches->size());
 
 	PatternMatchListPtr vMatches(new PatternMatchList());
 
@@ -97,7 +97,7 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
                                                                         upTrendScanner.scanPatternMatches(valsForUptrendScan));
         PatternMatchListPtr upTrendMatches = patternMatchFilter::filterUniqueStartEndTime(validatedUpTrendMatches);
 
-        BOOST_LOG_TRIVIAL(debug) << "VScanner: number of uptrend matches: " << upTrendMatches->size();
+        DEBUG_MSG("VScanner: number of uptrend matches: " << upTrendMatches->size());
 
         for(PatternMatchList::iterator utMatchIter = upTrendMatches->begin();
                 utMatchIter!=upTrendMatches->end();utMatchIter++)
@@ -119,12 +119,12 @@ PatternMatchListPtr VScanner::scanPatternMatches(const PeriodValSegmentPtr &char
 		} // For each matching up-trend pattern
 	} // for each down-trend match
 
-    BOOST_LOG_TRIVIAL(debug) << "VScanner: number of overall matches (unfiltered): " <<  vMatches->size();
+    DEBUG_MSG("VScanner: number of overall matches (unfiltered): " <<  vMatches->size());
 
     // For purposes of pattern matching, there's no need to return duplicate patterns with
     // the same start and end date.
     PatternMatchListPtr filteredOverallMatches = patternMatchFilter::filterUniqueStartEndTime(vMatches);
-    BOOST_LOG_TRIVIAL(debug) << "VScanner: number of overall matches (filtered): " <<  filteredOverallMatches->size();
+    DEBUG_MSG("VScanner: number of overall matches (filtered): " <<  filteredOverallMatches->size());
     logMatchesInfo("VScanner: overall matches (filtered)",filteredOverallMatches);
 
     return filteredOverallMatches;

@@ -7,7 +7,6 @@
 
 #include <RecoverPercentOfDepth.h>
 #include "PeriodValueRef.h"
-#include <boost/log/trivial.hpp>
 #include "DoubleRange.h"
 #include "LastValueAbovePointValue.h"
 #include "PeriodValueRef.h"
