@@ -45,9 +45,20 @@ DEFINES += BOOST_LOG_DYN_LINK
 macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
 macx: LIBS += -L/usr/local/boost156/lib -lboost_date_time-mt -lboost_log-mt -lboost_log_setup-mt -lboost_unit_test_framework-mt
 
+CONFIG(debug, debug|release) {
+macx: PATTERNRECOGLIBDIR = build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug
+win32: PATTERNRECOGLIBDIR = build-PatternRecognitionLib-Desktop_Qt_5_3_MinGW_32bit-Debug\debug
+} else {
+macx: PATTERNRECOGLIBDIR = build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Release
+win32: PATTERNRECOGLIBDIR = build-PatternRecognitionLib-Desktop_Qt_5_3_MinGW_32bit-Release\release
+DEFINES += QT_NO_DEBUG_OUTPUT
+DEFINES += NDEBUG
+}
+
+
 # Link with the PatternRecognitionLib and establish a build dependency to re-link if the library changes.
-macx: LIBS += -L$$PWD/../build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug/ -lPatternRecognitionLib
-macx: PRE_TARGETDEPS += $$PWD/../build-PatternRecognitionLib-Desktop_Qt_5_3_clang_64bit-Debug/libPatternRecognitionLib.a
+LIBS += -L$$PWD/../$$PATTERNRECOGLIBDIR -lPatternRecognitionLib
+PRE_TARGETDEPS += $$PWD/../$$PATTERNRECOGLIBDIR/libPatternRecognitionLib.a
 
 macx: INCLUDEPATH += $$PWD/../src/chartSegment\
     $$PWD/../src/chartSegmentList\
