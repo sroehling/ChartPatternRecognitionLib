@@ -44,8 +44,8 @@ DEFINES += BOOST_ALL_DYN_LINK
 DEFINES += BOOST_LOG_DYN_LINK
 macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
 win32: QMAKE_CXXFLAGS += -isystem c:/boost_1_56_0
-macx: LIBS += -L/usr/local/boost156/lib -lboost_date_time-mt -lboost_log-mt -lboost_log_setup-mt -lboost_unit_test_framework-mt
-win32:LIBS += -L"C:/boost_1_56_0/stage/lib/" -lboost_date_time-mgw48-mt-1_56 -lboost_log-mgw48-mt-1_56 -lboost_log_setup-mgw48-mt-1_56 -llibboost_unit_test_framework-mgw48-1_56
+macx: LIBS += -L/usr/local/boost156/lib -lboost_date_time-mt -lboost_unit_test_framework-mt
+win32:LIBS += -L"C:/boost_1_56_0/stage/lib/" -lboost_date_time-mgw48-mt-1_56 -llibboost_unit_test_framework-mgw48-1_56
 
 
 CONFIG(debug, debug|release) {
