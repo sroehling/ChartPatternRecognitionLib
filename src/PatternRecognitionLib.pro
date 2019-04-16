@@ -137,7 +137,7 @@ INCLUDEPATH += segmentContraint\
 
 # Include the boost headers using the -system flag, suppressing warnings
 # from these files.
-macx: QMAKE_CXXFLAGS += -isystem /usr/local/boost156/include
+macx: QMAKE_CXXFLAGS += -isystem /usr/local/include
 win32: QMAKE_CXXFLAGS += -isystem c:/boost_1_56_0
 # win32: DEPENDPATH += c:/boost_1_47_0/
 

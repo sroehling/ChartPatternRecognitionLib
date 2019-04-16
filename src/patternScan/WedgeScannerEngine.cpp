@@ -14,7 +14,7 @@
 #include "PeriodValueRef.h"
 #include "PivotLowScanner.h"
 #include "PivotHighScanner.h"
-#include "Math.h"
+#include <math.h>
 #include "UnsignedIntRange.h"
 #include "TimeHelper.h"
 #include "MathHelper.h"

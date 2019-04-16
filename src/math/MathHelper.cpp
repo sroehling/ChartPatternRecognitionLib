@@ -8,6 +8,7 @@
 #include <MathHelper.h>
 #include <limits>
 #include <assert.h>
+#include <math.h>
 
 MathHelper::MathHelper() {
 }
