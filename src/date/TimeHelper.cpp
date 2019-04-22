@@ -37,9 +37,11 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
 {
     namespace bt = boost::posix_time;
 
+
     // The following is a work-around for limitations of Boost date parsing. In particular,
     // the %d format requires a leading zero. We accommodate this by padding the date string with
     // a leading zero if the first part of the date only has 1 character.
+
     std::vector<std::string> dateParts;
     boost::split(dateParts, dateStr, boost::is_any_of("-/"));
     if(dateParts.size() != 3)
@@ -68,7 +70,8 @@ boost::posix_time::ptime parseDateFromString(const std::string &dateStr)
         std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%Y")), // e.g.: 07-Nov-2012 (note the leading zero)
         std::locale(std::locale::classic(),new bt::time_input_facet("%m-%d-%Y")), // e.g. 01-12-2012 (note the leading zero on the month)
         std::locale(std::locale::classic(),new bt::time_input_facet("%d-%b-%y")), // e.g.: 11-Nov-12, 07-Nov-12 (note the leading zero)
-        std::locale(std::locale::classic(),new bt::time_input_facet("%Y-%m-%d")) // e.g. 2012-11-12
+        std::locale(std::locale::classic(),new bt::time_input_facet("%Y-%m-%d")), // e.g. 2012-11-12
+        std::locale(std::locale::classic(),new bt::time_input_facet("%Y-%m-%d %H:%M")) // e.g. 2012-11-12 22:59
     };
 
     const size_t numFormats = sizeof(formats)/sizeof(formats[0]);

@@ -69,8 +69,7 @@ static void stripNonHeaderChars(std::string &str)
 
 static void stripWhiteSpace(std::string &str)
 {
-    str.erase(std::remove_if(str.begin(), str.end(), ::isspace), str.end());
-
+    boost::algorithm::trim(str);
 }
 
 struct PeriodValChronologicalSortPred {
@@ -184,6 +183,10 @@ void parseHeaderFormat(QuotesCSVFormatInfo &quotesFormat, const std::string &lin
             {
                 quotesFormat.dateFieldIndex = headerIndex;
             }
+            if(headerFieldName == std::string("DATETIME"))
+            {
+                quotesFormat.dateFieldIndex = headerIndex;
+            }
             else if(headerFieldName == "OPEN")
             {
                 quotesFormat.openFieldIndex = headerIndex;
@@ -251,7 +254,7 @@ static PeriodVal readOnePeriodVal(const QuotesCSVFormatInfo &quotesFormat, const
         double high = lexical_cast<double>(csvDataFields[quotesFormat.highFieldIndex]);
         double low = lexical_cast<double>(csvDataFields[quotesFormat.lowFieldIndex]);
         double close = lexical_cast<double>(csvDataFields[quotesFormat.closeFieldIndex]);
-        unsigned int vol = lexical_cast<unsigned int>(csvDataFields[quotesFormat.volumeFieldIndex]);
+        double vol = lexical_cast<double>(csvDataFields[quotesFormat.volumeFieldIndex]);
 
         // TODO - Validate high >= low, etc.
 
